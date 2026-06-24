@@ -227,6 +227,9 @@ nav.tabs{display:flex;gap:7px;flex-wrap:wrap;margin:20px 0 14px;padding-bottom:2
 .modal .mbtn.sec{background:var(--panel);color:var(--muted);border:1px solid var(--line)}
 .modal .mbtn.danger{background:transparent;color:var(--red);border:1px solid rgba(200,105,74,.4);flex:0 0 auto;padding:11px 16px}
 .cloudnote{font-size:11px;color:var(--muted2);margin-top:14px;line-height:1.45}
+.aromarow{display:flex;flex-wrap:wrap;gap:6px;margin-top:4px}
+.aroma{font-size:12px;padding:5px 11px;border-radius:20px;background:var(--bg2);border:1px solid var(--line);color:var(--muted);cursor:pointer;user-select:none}
+.aroma.on{background:var(--amber);color:#1a1208;border-color:var(--amber);font-weight:700}
 ::-webkit-scrollbar{width:10px;height:10px}::-webkit-scrollbar-thumb{background:var(--line);border-radius:6px}
 @media(max-width:760px){.katcols{grid-template-columns:1fr}.listcol{grid-template-columns:1fr}.bottle{flex-wrap:wrap}.bottle .acts{margin-left:auto}}
 </style>
@@ -392,6 +395,8 @@ nav.tabs{display:flex;gap:7px;flex-wrap:wrap;margin:20px 0 14px;padding-bottom:2
     <input type="number" id="tastePuan" min="0" max="100" placeholder="örn. 88">
     <label>Tadım notun</label>
     <textarea id="tasteNot" rows="4" style="width:100%;background:var(--bg2);border:1px solid var(--line);color:var(--txt);padding:10px 12px;border-radius:9px;font-size:14px;resize:vertical;font-family:inherit" placeholder="Burun, damak, bitiş… kendi deneyimin"></textarea>
+    <label>Aroma etiketleri</label>
+    <div id="tasteTags" class="aromarow"></div>
     <div class="mrow">
       <button class="mbtn" id="tasteSave">Kaydet</button>
       <button class="mbtn sec" id="tasteCancel">İptal</button>
@@ -1132,12 +1137,12 @@ const DATA = [
 {id:"tamnavulin-sauternes",ad:"Tamnavulin Sauternes Cask",dam:"Tamnavulin",ulke:"İskoçya",bolge:"Speyside",sev:"3",tur:"Single Malt",abv:40,yas:"NAS",tl:2100,bul:"zor",puan:81,uz:"",ai:0,kat:0,not:"Tatlı Sauternes şarabı fıçısı"},
 {id:"tamnavulin-pinotnoir",ad:"Tamnavulin Pinot Noir Cask",dam:"Tamnavulin",ulke:"İskoçya",bolge:"Speyside",sev:"3",tur:"Single Malt",abv:40,yas:"NAS",tl:2100,bul:"zor",puan:80,uz:"",ai:0,kat:0,not:"Pinot Noir kırmızı şarap fıçısı"},
 {id:"tamnavulin-germanoak",ad:"Tamnavulin German Oak Edition",dam:"Tamnavulin",ulke:"İskoçya",bolge:"Speyside",sev:"3",tur:"Single Malt",abv:40,yas:"NAS",tl:2200,bul:"zor",puan:81,uz:"",ai:0,kat:0,not:"Alman meşesi fıçı bitiş"},
-{id:"whitehorse",ad:"White Horse",dam:"White Horse",ulke:"İskoçya",bolge:"Harman (Blend)",sev:"3",tur:"Blend",abv:40,yas:"NAS",tl:1000,bul:"kolay",puan:76,uz:"",ai:0,kat:0,not:"Lagavulin/Craigellachie çekirdekli klasik harman"},
+{id:"whitehorse",ad:"White Horse Fine Old",dam:"White Horse",ulke:"İskoçya",bolge:"Harman (Blend)",sev:"3",tur:"Blend",abv:40,yas:"NAS",tl:1000,bul:"kolay",puan:76,uz:"",ai:0,kat:0,not:"Lagavulin/Craigellachie çekirdekli klasik harman"},
 {id:"whitehorse-12",ad:"White Horse 12",dam:"White Horse",ulke:"İskoçya",bolge:"Harman (Blend)",sev:"3",tur:"Blend",abv:40,yas:"12",tl:1900,bul:"zor",puan:80,uz:"",ai:0,kat:0,not:"Daha yıllı White Horse (Asya pazarı)"},
-{id:"blackandwhite",ad:"Black & White",dam:"Black & White",ulke:"İskoçya",bolge:"Harman (Blend)",sev:"3",tur:"Blend",abv:40,yas:"NAS",tl:950,bul:"kolay",puan:74,uz:"",ai:0,kat:0,not:"Buchanan’s; klasik uygun harman"},
-{id:"vat69",ad:"VAT 69",dam:"VAT 69",ulke:"İskoçya",bolge:"Harman (Blend)",sev:"3",tur:"Blend",abv:40,yas:"NAS",tl:900,bul:"kolay",puan:73,uz:"",ai:0,kat:0,not:"Sandeman; tarihi uygun harman"},
+{id:"blackandwhite",ad:"Black & White Choice Old",dam:"Black & White",ulke:"İskoçya",bolge:"Harman (Blend)",sev:"3",tur:"Blend",abv:40,yas:"NAS",tl:950,bul:"kolay",puan:74,uz:"",ai:0,kat:0,not:"Buchanan’s; klasik uygun harman"},
+{id:"vat69",ad:"VAT 69 Finest",dam:"VAT 69",ulke:"İskoçya",bolge:"Harman (Blend)",sev:"3",tur:"Blend",abv:40,yas:"NAS",tl:900,bul:"kolay",puan:73,uz:"",ai:0,kat:0,not:"Sandeman; tarihi uygun harman"},
 {id:"bells-original",ad:"Bell's Original",dam:"Bell's",ulke:"İskoçya",bolge:"Harman (Blend)",sev:"3",tur:"Blend",abv:40,yas:"NAS",tl:900,bul:"kolay",puan:73,uz:"",ai:0,kat:0,not:"İngiltere’nin en çok satan harmanlarından"},
-{id:"williamlawsons",ad:"William Lawson's",dam:"William Lawson's",ulke:"İskoçya",bolge:"Harman (Blend)",sev:"3",tur:"Blend",abv:40,yas:"NAS",tl:850,bul:"kolay",puan:72,uz:"",ai:0,kat:0,not:"Uygun günlük harman"},
+{id:"williamlawsons",ad:"William Lawson's Finest Blended",dam:"William Lawson's",ulke:"İskoçya",bolge:"Harman (Blend)",sev:"3",tur:"Blend",abv:40,yas:"NAS",tl:850,bul:"kolay",puan:72,uz:"",ai:0,kat:0,not:"Uygun günlük harman"},
 {id:"hankeybannister",ad:"Hankey Bannister Original",dam:"Hankey Bannister",ulke:"İskoçya",bolge:"Harman (Blend)",sev:"3",tur:"Blend",abv:40,yas:"NAS",tl:950,bul:"tekel",puan:74,uz:"",ai:0,kat:0,not:"Tarihi İskoç harmanı"},
 {id:"macallan-fineoak15",ad:"The Macallan Fine Oak 15",dam:"The Macallan",ulke:"İskoçya",bolge:"Speyside",sev:"Premium",tur:"Single Malt",abv:43,yas:"15",tl:9000,bul:"zor",puan:88,uz:"",ai:0,kat:0,not:"Üç fıçı; daha hafif Macallan"},
 {id:"macallan-fineoak18",ad:"The Macallan Fine Oak 18",dam:"The Macallan",ulke:"İskoçya",bolge:"Speyside",sev:"Premium",tur:"Single Malt",abv:43,yas:"18",tl:20000,bul:"dutyfree",puan:90,uz:"",ai:0,kat:0,not:"Bourbon+şeri; narenciyeli olgun"},
@@ -1187,7 +1192,45 @@ const DATA = [
 {id:"mackmyra-intelligens",ad:"Mackmyra Intelligens",dam:"Mackmyra",ulke:"İsveç",bolge:"İsveç",sev:"3",tur:"Single Malt",abv:46.1,yas:"NAS",tl:5000,bul:"zor",puan:83,uz:"",ai:0,kat:0,not:"AI ile geliştirilen resept"},
 {id:"kavalan-distillery",ad:"Kavalan Distillery Select",dam:"Kavalan",ulke:"Tayvan",bolge:"Tayvan",sev:"Premium",tur:"Single Malt",abv:40,yas:"NAS",tl:4500,bul:"zor",puan:84,uz:"",ai:0,kat:0,not:"Giriş Kavalan; tropikal"},
 {id:"rampur-jugalbandi",ad:"Rampur Jugalbandi",dam:"Rampur",ulke:"Hindistan",bolge:"Hindistan",sev:"3",tur:"Single Malt",abv:45,yas:"NAS",tl:4500,bul:"zor",puan:85,uz:"",ai:0,kat:0,not:"PX + bourbon; Hint maltı"},
-{id:"milkhoney-apex",ad:"Milk & Honey Apex",dam:"Milk & Honey",ulke:"İsrail",bolge:"İsrail",sev:"3",tur:"Single Malt",abv:56,yas:"NAS",tl:7000,bul:"zor",puan:86,uz:"",ai:0,kat:0,ncf:1,not:"Üst seri; tek fıçı"}
+{id:"milkhoney-apex",ad:"Milk & Honey Apex",dam:"Milk & Honey",ulke:"İsrail",bolge:"İsrail",sev:"3",tur:"Single Malt",abv:56,yas:"NAS",tl:7000,bul:"zor",puan:86,uz:"",ai:0,kat:0,ncf:1,not:"Üst seri; tek fıçı"},
+{id:"compass-hedonism",ad:"Compass Box Hedonism",dam:"Compass Box",ulke:"İskoçya",bolge:"Harman (Grain)",sev:"2",tur:"Grain",abv:43,yas:"NAS",tl:6000,bul:"zor",puan:87,uz:"",ai:0,kat:0,ncf:1,not:"Tahıl viskisinin vitrini; vanilya-hindistan cevizi"},
+{id:"compass-peatmonster",ad:"Compass Box The Peat Monster",dam:"Compass Box",ulke:"İskoçya",bolge:"Harman (Blended Malt)",sev:"2",tur:"Blend",abv:46,yas:"NAS",tl:4500,bul:"zor",puan:87,uz:"",ai:0,kat:0,ncf:1,not:"Islay ağırlıklı isli blended malt"},
+{id:"compass-orchardhouse",ad:"Compass Box Orchard House",dam:"Compass Box",ulke:"İskoçya",bolge:"Harman (Blended Malt)",sev:"2",tur:"Blend",abv:46,yas:"NAS",tl:4200,bul:"zor",puan:85,uz:"",ai:0,kat:0,ncf:1,not:"Elma-armut; meyveli harman"},
+{id:"compass-glasgow",ad:"Compass Box Glasgow Blend",dam:"Compass Box",ulke:"İskoçya",bolge:"Harman (Blend)",sev:"2",tur:"Blend",abv:43,yas:"NAS",tl:3800,bul:"zor",puan:84,uz:"",ai:0,kat:0,ncf:1,not:"Hafif isli, baharatlı şehir harmanı"},
+{id:"haigclub",ad:"Haig Club Clubman",dam:"Haig Club",ulke:"İskoçya",bolge:"Harman (Grain)",sev:"3",tur:"Grain",abv:40,yas:"NAS",tl:1800,bul:"tekel",puan:76,uz:"David Beckham’ın markası",ai:0,kat:0,not:"Tek tahıl; yumuşak, kokteyl dostu"},
+{id:"glenglassaugh-revival",ad:"Glenglassaugh Revival",dam:"Glenglassaugh",ulke:"İskoçya",bolge:"Highland",sev:"2",tur:"Single Malt",abv:46,yas:"NAS",tl:4000,bul:"zor",puan:84,uz:"",ai:0,kat:0,ncf:1,not:"Şeri fıçı; sahil maltı"},
+{id:"glenglassaugh-torfa",ad:"Glenglassaugh Torfa",dam:"Glenglassaugh",ulke:"İskoçya",bolge:"Highland",sev:"2",tur:"Single Malt",abv:50,yas:"NAS",tl:4500,bul:"zor",puan:85,uz:"",ai:0,kat:0,ncf:1,not:"İsli sahil maltı"},
+{id:"glenglassaugh-evolution",ad:"Glenglassaugh Evolution",dam:"Glenglassaugh",ulke:"İskoçya",bolge:"Highland",sev:"2",tur:"Single Malt",abv:50,yas:"NAS",tl:4200,bul:"zor",puan:84,uz:"",ai:0,kat:0,ncf:1,not:"Tennessee fıçısı; tatlı"},
+{id:"knockando-18",ad:"Knockando 18",dam:"Knockando",ulke:"İskoçya",bolge:"Speyside",sev:"3",tur:"Single Malt",abv:43,yas:"18",tl:5500,bul:"zor",puan:84,uz:"",ai:0,kat:0,not:"Hafif, zarif olgun Speyside"},
+{id:"linkwood-15",ad:"Linkwood 15 (Gordon & MacPhail)",dam:"Linkwood",ulke:"İskoçya",bolge:"Speyside",sev:"3",tur:"Single Malt",abv:46,yas:"15",tl:5000,bul:"zor",puan:86,uz:"",ai:0,kat:0,ncf:1,not:"Çiçeksi, bağımsız şişeleme"},
+{id:"longmorn-23",ad:"Longmorn 23 (Distillery Labels)",dam:"Longmorn",ulke:"İskoçya",bolge:"Speyside",sev:"2",tur:"Single Malt",abv:48,yas:"23",tl:13000,bul:"muzayede",puan:90,uz:"",ai:0,kat:0,ncf:1,not:"Bal-meşe; yıllanmış usta maltı"},
+{id:"glenfarclas-40",ad:"Glenfarclas 40",dam:"Glenfarclas",ulke:"İskoçya",bolge:"Speyside",sev:"2",tur:"Single Malt",abv:46,yas:"40",tl:0,bul:"muzayede",puan:93,uz:"",ai:0,kat:0,not:"Çok yıllanmış şeri; koleksiyon"},
+{id:"cardhu-amber",ad:"Cardhu Amber Rock",dam:"Cardhu",ulke:"İskoçya",bolge:"Speyside",sev:"3",tur:"Single Malt",abv:40,yas:"NAS",tl:2600,bul:"zor",puan:80,uz:"",ai:0,kat:0,not:"Hafif, baharatlı yaşsız"},
+{id:"glencadam-13",ad:"Glencadam 13 Reserva Andalucia",dam:"Glencadam",ulke:"İskoçya",bolge:"Highland",sev:"3",tur:"Single Malt",abv:46,yas:"13",tl:5000,bul:"zor",puan:86,uz:"",ai:0,kat:0,ncf:1,not:"Oloroso bitiş; kremamsı"},
+{id:"tomatin-30",ad:"Tomatin 30",dam:"Tomatin",ulke:"İskoçya",bolge:"Highland",sev:"3",tur:"Single Malt",abv:46,yas:"30",tl:18000,bul:"muzayede",puan:89,uz:"",ai:0,kat:0,ncf:1,not:"Yıllanmış; şeri-meşe"},
+{id:"ardmore-12",ad:"Ardmore 12 Port Wood",dam:"Ardmore",ulke:"İskoçya",bolge:"Highland",sev:"3",tur:"Single Malt",abv:46,yas:"12",tl:4500,bul:"zor",puan:86,uz:"",ai:0,kat:0,ncf:1,not:"İsli Highland + porto fıçısı"},
+{id:"glenturret-15",ad:"Glenturret 15",dam:"Glenturret",ulke:"İskoçya",bolge:"Highland",sev:"2",tur:"Single Malt",abv:53,yas:"15",tl:9000,bul:"zor",puan:88,uz:"",ai:0,kat:0,ncf:1,not:"En eski damıtımevi; yüksek dereceli"},
+{id:"loch-lomond-inchmoan12",ad:"Inchmoan 12",dam:"Loch Lomond",ulke:"İskoçya",bolge:"Highland",sev:"3",tur:"Single Malt",abv:46,yas:"12",tl:4000,bul:"zor",puan:84,uz:"",ai:0,kat:0,ncf:1,not:"Loch Lomond’un isli stili"},
+{id:"portcharlotte-18",ad:"Port Charlotte 18",dam:"Bruichladdich",ulke:"İskoçya",bolge:"Islay",sev:"2",tur:"Single Malt",abv:46,yas:"18",tl:0,bul:"muzayede",puan:90,uz:"",ai:0,kat:0,ncf:1,not:"Yıllanmış ağır turba"},
+{id:"caolila-15unpeated",ad:"Caol Ila 15 Unpeated",dam:"Caol Ila",ulke:"İskoçya",bolge:"Islay",sev:"2",tur:"Single Malt",abv:46,yas:"15",tl:6000,bul:"zor",puan:86,uz:"",ai:0,kat:0,ncf:1,not:"Turbasız Caol Ila; nadir"},
+{id:"laphroaig-18",ad:"Laphroaig 18",dam:"Laphroaig",ulke:"İskoçya",bolge:"Islay",sev:"Premium",tur:"Single Malt",abv:48,yas:"18",tl:0,bul:"muzayede",puan:91,uz:"",ai:0,kat:0,ncf:1,not:"Yıllanmış, yumuşamış klasik (kapandı)"},
+{id:"bunna-toiteach-orig",ad:"Bunnahabhain Toiteach",dam:"Bunnahabhain",ulke:"İskoçya",bolge:"Islay",sev:"2",tur:"Single Malt",abv:46,yas:"NAS",tl:4000,bul:"zor",puan:85,uz:"",ai:0,kat:0,ncf:1,not:"İsli Bunnahabhain"},
+{id:"saburomaru-0",ad:"Saburomaru 0 The Fool",dam:"Saburomaru",ulke:"Japonya",bolge:"Japonya",sev:"3",tur:"Single Malt",abv:50,yas:"NAS",tl:7000,bul:"muzayede",puan:85,uz:"",ai:0,kat:0,ncf:1,not:"Küçük kült Japon damıtımevi; isli"},
+{id:"sakurao-single",ad:"Sakurao Single Malt",dam:"Sakurao",ulke:"Japonya",bolge:"Japonya",sev:"3",tur:"Single Malt",abv:43,yas:"NAS",tl:6500,bul:"zor",puan:83,uz:"",ai:0,kat:0,not:"Hiroşima; deniz etkisi"},
+{id:"asaka-single",ad:"Asaka The First Peated",dam:"Sasanokawa (Asaka)",ulke:"Japonya",bolge:"Japonya",sev:"3",tur:"Single Malt",abv:50,yas:"NAS",tl:6500,bul:"zor",puan:84,uz:"",ai:0,kat:0,ncf:1,not:"Fukushima; isli"},
+{id:"oldfitzgerald-bib",ad:"Old Fitzgerald Bottled-in-Bond",dam:"Heaven Hill",ulke:"ABD",bolge:"Bourbon (Kentucky)",sev:"2",tur:"Bourbon",abv:50,yas:"NAS",tl:7000,bul:"zor",puan:88,uz:"",ai:0,kat:0,not:"Buğdaylı; dekanter şişe, yarı yıllık"},
+{id:"weller-cypb",ad:"W.L. Weller C.Y.P.B.",dam:"Buffalo Trace",ulke:"ABD",bolge:"Bourbon (Kentucky)",sev:"2",tur:"Bourbon",abv:47.5,yas:"NAS",tl:0,bul:"muzayede",puan:88,uz:"",ai:0,kat:0,not:"“Craft Your Perfect Bourbon”; aranan"},
+{id:"ehtaylor-singlebarrel",ad:"E.H. Taylor Single Barrel",dam:"Buffalo Trace",ulke:"ABD",bolge:"Bourbon (Kentucky)",sev:"2",tur:"Bourbon",abv:50,yas:"NAS",tl:6000,bul:"zor",puan:88,uz:"",ai:0,kat:0,not:"Bottled-in-bond tek fıçı"},
+{id:"barrell-bourbon",ad:"Barrell Bourbon (Batch)",dam:"Barrell Craft",ulke:"ABD",bolge:"Bourbon (Kentucky)",sev:"2",tur:"Bourbon",abv:57,yas:"NAS",tl:5000,bul:"zor",puan:87,uz:"",ai:0,kat:0,ncf:1,not:"Bağımsız harmancı; fıçı gücü"},
+{id:"smoothambler-oldscout",ad:"Smooth Ambler Old Scout",dam:"Smooth Ambler",ulke:"ABD",bolge:"Bourbon (West Virginia)",sev:"3",tur:"Bourbon",abv:49.5,yas:"NAS",tl:4000,bul:"zor",puan:85,uz:"",ai:0,kat:0,not:"Seçilmiş fıçı craft bourbon"},
+{id:"wildernesstrail-bourbon",ad:"Wilderness Trail Bottled-in-Bond",dam:"Wilderness Trail",ulke:"ABD",bolge:"Bourbon (Kentucky)",sev:"3",tur:"Bourbon",abv:50,yas:"NAS",tl:4500,bul:"zor",puan:86,uz:"",ai:0,kat:0,not:"Tatlı mısır; bilimsel craft"},
+{id:"canadianclub-100",ad:"Canadian Club 100% Rye",dam:"Hiram Walker",ulke:"Kanada",bolge:"Kanada Çavdar",sev:"3",tur:"Rye",abv:40,yas:"NAS",tl:1800,bul:"tekel",puan:79,uz:"",ai:0,kat:0,not:"Uygun günlük çavdar"},
+{id:"threeships-10",ad:"Three Ships 10 Single Malt",dam:"James Sedgwick",ulke:"Güney Afrika",bolge:"Güney Afrika",sev:"3",tur:"Single Malt",abv:43,yas:"10",tl:5000,bul:"zor",puan:85,uz:"",ai:0,kat:0,not:"Güney Afrika; ödüllü malt"},
+{id:"bains-grain",ad:"Bain’s Cape Mountain Whisky",dam:"James Sedgwick",ulke:"Güney Afrika",bolge:"Güney Afrika",sev:"3",tur:"Grain",abv:43,yas:"NAS",tl:2400,bul:"zor",puan:81,uz:"",ai:0,kat:0,not:"Tek tahıl; ödüllü, uygun"},
+{id:"santis-edition",ad:"Säntis Malt Edition Sigel",dam:"Säntis",ulke:"İsviçre",bolge:"İsviçre",sev:"3",tur:"Single Malt",abv:40,yas:"NAS",tl:4500,bul:"zor",puan:83,uz:"",ai:0,kat:0,not:"Eski bira fıçılarında; İsviçre"},
+{id:"penderyn-peated",ad:"Penderyn Peated",dam:"Penderyn",ulke:"Galler",bolge:"Galler",sev:"3",tur:"Single Malt",abv:46,yas:"NAS",tl:4500,bul:"zor",puan:85,uz:"",ai:0,kat:0,not:"İsli Galler maltı"},
+{id:"kavalan-sherryoakstr",ad:"Kavalan Solist Fino",dam:"Kavalan",ulke:"Tayvan",bolge:"Tayvan",sev:"Premium",tur:"Single Malt",abv:57,yas:"NAS",tl:0,bul:"muzayede",puan:92,uz:"WWA övgülü; nadir Fino fıçı",ai:0,kat:0,ncf:1,not:"Aşırı nadir Fino şeri tek fıçı"},
+{id:"pauljohn-kanya",ad:"Paul John Kanya",dam:"Paul John",ulke:"Hindistan",bolge:"Hindistan",sev:"2",tur:"Single Malt",abv:50,yas:"NAS",tl:6000,bul:"zor",puan:87,uz:"",ai:0,kat:0,ncf:1,not:"Sınırlı; turbalı ve zengin"}
 ];
 const AI_GROUPS = {
  'lagavulin-16':'Islay / İsli','ardbeg-uigeadail':'Islay / İsli','laphroaig-10':'Islay / İsli','caolila-18':'Islay / İsli','bruichladdich-octomore':'Islay / İsli',
@@ -1598,6 +1641,7 @@ function renderGurme(){
   }
   box.innerHTML=html;
 }
+const AROMA=['İsli','Turba','Şeri','Meyveli','Bal','Baharat','Vanilya','Çikolata','Tuzlu','Çiçeksi','Narenciye','Kuruyemiş','Karamel','Tütsü'];
 let tasteId=null;
 function openTaste(id){
   tasteId=id;const b=allBottles().find(x=>x.id===id);if(!b)return;
@@ -1606,6 +1650,7 @@ function openTaste(id){
   document.getElementById('tasteSub').textContent=b.dam+' · '+b.bolge+(b.puan?' · eleştirmen '+b.puan:'');
   document.getElementById('tastePuan').value=nt.p||'';
   document.getElementById('tasteNot').value=nt.n||'';
+  document.getElementById('tasteTags').innerHTML=AROMA.map(a=>'<span class="aroma'+((nt.tags||[]).includes(a)?' on':'')+'" data-aroma="'+a+'">'+a+'</span>').join('');
   document.getElementById('tasteModal').classList.add('on');
 }
 function closeTaste(){document.getElementById('tasteModal').classList.remove('on');tasteId=null;}
@@ -1614,7 +1659,7 @@ function saveTaste(){
   const p=parseInt(document.getElementById('tastePuan').value)||0;
   const n=document.getElementById('tasteNot').value.trim();
   if(!p&&!n)delete state.notes[tasteId];
-  else state.notes[tasteId]={p:Math.max(0,Math.min(100,p)),n:n};
+  else {const tags=[...document.querySelectorAll('#tasteTags .aroma.on')].map(x=>x.dataset.aroma); state.notes[tasteId]={p:Math.max(0,Math.min(100,p)),n:n,tags:tags};}
   save();closeTaste();renderAll();
 }
 function delTaste(){if(tasteId){delete state.notes[tasteId];save();closeTaste();renderAll();}}
@@ -1628,7 +1673,7 @@ function renderNotes(){
   if(!rated.length)html+='<div class="empty">Henüz tadım notu yok. Keşfet, Listem veya herhangi bir karttaki 📝 düğmesiyle kendi puanını (0-100) ve tadım notunu ekle.</div>';
   else{html+='<div class="grid">';
     rated.forEach(b=>{const nt=state.notes[b.id];
-      html+='<div class="card"><div class="top">'+thumb(b)+'<div><div class="nm">'+b.ad+'</div><div class="meta">'+b.dam+' · '+b.bolge+'</div>'+(nt.p?'<div class="src" style="color:#9fd68c;font-style:normal">⭐ Senin puanın: '+nt.p+'/100</div>':'')+'</div></div>'+(nt.n?'<div class="meta" style="line-height:1.5">“'+nt.n+'”</div>':'')+'<div class="row"><button class="btn" data-taste="'+b.id+'">✏️ Düzenle</button></div></div>';});
+      html+='<div class="card"><div class="top">'+thumb(b)+'<div><div class="nm">'+b.ad+'</div><div class="meta">'+b.dam+' · '+b.bolge+'</div>'+(nt.p?'<div class="src" style="color:#9fd68c;font-style:normal">⭐ Senin puanın: '+nt.p+'/100</div>':'')+'</div></div>'+(nt.tags&&nt.tags.length?'<div class="meta" style="color:var(--amber-soft)">'+nt.tags.map(t=>'#'+t).join(' ')+'</div>':'')+(nt.n?'<div class="meta" style="line-height:1.5">“'+nt.n+'”</div>':'')+'<div class="row"><button class="btn" data-taste="'+b.id+'">✏️ Düzenle</button></div></div>';});
     html+='</div>';}
   box.innerHTML=html;
 }
@@ -1707,6 +1752,8 @@ document.addEventListener('click',e=>{
       save();renderAll();
     } else setQty(id,qtyOf(id)-1);
     return;}
+  const ar=e.target.closest('.aroma');
+  if(ar){ar.classList.toggle('on');return;}
   const tt=e.target.closest('[data-taste]');
   if(tt){openTaste(tt.dataset.taste);return;}
   const tb=e.target.closest('[data-page]');

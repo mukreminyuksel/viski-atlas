@@ -244,7 +244,7 @@ nav.tabs{display:flex;gap:7px;flex-wrap:wrap;margin:20px 0 14px;padding-bottom:2
 <header><div class="wrap">
   <div class="brand">
     <div style="font-size:34px">🥃</div>
-    <div><h1 onclick="location.href='./'" style="cursor:pointer" title="Ana sayfaya dön">Viski Atlası <span style="font-size:13px;color:var(--muted2);font-weight:600;vertical-align:middle">v1.3</span></h1>
+    <div><h1 onclick="location.href='./'" style="cursor:pointer" title="Ana sayfaya dön">Viski Atlası <span style="font-size:13px;color:var(--muted2);font-weight:600;vertical-align:middle">v1.4</span></h1>
       <div class="sub">Bölge → Damıtımevi → Şişe · Uzman & AI tercihleri · Türkiye katmanları · Kişisel koleksiyon</div></div>
   </div>
   <div class="stats">
@@ -397,6 +397,11 @@ nav.tabs{display:flex;gap:7px;flex-wrap:wrap;margin:20px 0 14px;padding-bottom:2
         <div id="targetList"></div><div class="tot"><span>Tahmini Maliyet</span><span id="targetTot" style="color:var(--target)">0 TL</span></div></div>
     </div>
     <div class="addbox"><h3>➕ Kendi şişeni ekle</h3>
+      <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:8px">
+        <input id="naLink" placeholder="🔗 Ürün/site linki yapıştır (Whiskybase, Master of Malt, market…)" style="flex:1;min-width:220px">
+        <button class="addbtn" id="fetchLinkBtn" style="flex:0 0 auto;width:auto;padding:9px 16px">🔗 Linkten çek</button>
+      </div>
+      <div id="naFetchStat" style="font-size:12px;color:var(--muted2);margin-bottom:6px"></div>
       <div class="addgrid">
         <input id="naAd" placeholder="Şişe adı (ör. Springbank 18)">
         <input id="naDam" placeholder="Damıtımevi">
@@ -1567,7 +1572,7 @@ function priceOf(b){return state.prices[b.id]!==undefined?state.prices[b.id]:b.t
 function fmt(n){return n>0?n.toLocaleString('tr-TR')+' TL':'—'}
 function esc(s){return String(s).replace(/&/g,'&amp;').replace(/"/g,'&quot;')}
 function imgURL(b){return 'https://www.google.com/search?tbm=isch&q='+encodeURIComponent(b.ad+' whisky bottle')}
-function pageURL(b){return 'https://www.whiskybase.com/search?q='+encodeURIComponent(b.ad)}
+function pageURL(b){return b.link?b.link:'https://www.whiskybase.com/search?q='+encodeURIComponent(b.ad)}
 function colorFor(b){
   const r=b.bolge||'';
   if(r.includes('Islay'))return '#5d6f7d';
@@ -1593,6 +1598,7 @@ function initials(b){
   return d.slice(0,3).toUpperCase();
 }
 function thumb(b){
+  if(b.img)return `<div class="thumb" data-page="${esc(pageURL(b))}" style="background:#f4ead6 center/cover no-repeat url('${esc(b.img)}')" title="Şişenin sayfasını aç"></div>`;
   return `<div class="thumb" data-page="${esc(pageURL(b))}" style="--c:${colorFor(b)}" title="Şişenin sayfasını aç (fotoğraf + bilgi)"><div class="lab">${initials(b)}</div></div>`;
 }
 function damKey(b){return b.ulke+'|||'+b.bolge+'|||'+b.dam}
@@ -2474,14 +2480,48 @@ document.querySelectorAll('.tab').forEach(t=>t.onclick=()=>{
   if(t.dataset.view==='notes')renderNotes();
   if(t.dataset.view==='mylist')renderMyList();
 });
+let NA_IMG='', NA_ABV='';
+async function fetchViaProxy(url){
+  const proxies=[u=>'https://api.allorigins.win/raw?url='+encodeURIComponent(u), u=>'https://corsproxy.io/?url='+encodeURIComponent(u)];
+  for(const p of proxies){ try{ const r=await fetch(p(url),{redirect:'follow'}); if(r.ok){const t=await r.text(); if(t&&t.length>200) return t;} }catch(e){} }
+  return null;
+}
+function metaOf(doc,prop){const el=doc.querySelector('meta[property="'+prop+'"]')||doc.querySelector('meta[name="'+prop+'"]');return el?el.getAttribute('content'):'';}
+document.getElementById('fetchLinkBtn').onclick=async ()=>{
+  const url=document.getElementById('naLink').value.trim();
+  const stat=document.getElementById('naFetchStat');
+  if(!/^https?:\/\//.test(url)){stat.style.color='var(--red)';stat.textContent='Geçerli bir link yapıştır (https:// ile başlamalı).';return;}
+  stat.style.color='var(--muted2)';stat.textContent='⏳ Sayfa çekiliyor…';
+  const html=await fetchViaProxy(url);
+  if(!html){stat.style.color='var(--red)';stat.textContent='Çekilemedi (site engellemiş ya da proxy yanıt vermedi olabilir). Bilgileri elle girebilirsin.';return;}
+  const doc=new DOMParser().parseFromString(html,'text/html');
+  let title=metaOf(doc,'og:title')||(doc.querySelector('title')?doc.querySelector('title').textContent:'');
+  const desc=metaOf(doc,'og:description')||metaOf(doc,'description')||'';
+  const img=metaOf(doc,'og:image')||'';
+  if(!title){stat.style.color='var(--red)';stat.textContent='Sayfada başlık bilgisi bulunamadı. Elle girebilirsin.';return;}
+  // başlık temizliği: " - Whiskybase", " | Master of Malt" gibi son ekleri at
+  let name=title.split(/\s[\|–-]\s/)[0].trim();
+  document.getElementById('naAd').value=name;
+  // ABV yakala
+  const m=(title+' '+desc).match(/(\d{1,2}(?:[.,]\d)?)\s*%/);
+  NA_ABV=m?parseFloat(m[1].replace(',','.')):'';
+  NA_IMG=img||'';
+  let parts=['✓ '+name];
+  if(NA_ABV)parts.push(NA_ABV+'%');
+  if(NA_IMG)parts.push('görsel ✓');
+  parts.push('— eksikleri tamamlayıp ekle');
+  stat.style.color='var(--have)';stat.textContent=parts.join('  ·  ');
+};
 document.getElementById('addBtn').onclick=()=>{
   const ad=document.getElementById('naAd').value.trim();if(!ad){alert('Şişe adı gerekli');return;}
   const id='custom-'+Date.now();
   state.custom.push({id,ad,dam:document.getElementById('naDam').value.trim()||'Diğer',ulke:'İskoçya',
-    bolge:document.getElementById('naBolge').value.trim()||'Diğer',sev:'3',tur:'Single Malt',abv:'',yas:'NAS',
-    tl:parseInt(document.getElementById('naTl').value)||0,bul:'tekel',puan:0,uz:'',ai:0,kat:0,not:'Kendi eklediğin şişe'});
+    bolge:document.getElementById('naBolge').value.trim()||'Diğer',sev:'3',tur:'Single Malt',abv:NA_ABV||'',yas:'NAS',
+    tl:parseInt(document.getElementById('naTl').value)||0,bul:'tekel',puan:0,uz:'',ai:0,kat:0,
+    link:document.getElementById('naLink').value.trim()||'',img:NA_IMG||'',not:'Kendi eklediğin şişe'});
   state.have.push(id);state.qty[id]=1;
-  ['naAd','naDam','naBolge','naTl'].forEach(x=>document.getElementById(x).value='');
+  ['naAd','naDam','naBolge','naTl','naLink'].forEach(x=>document.getElementById(x).value='');
+  NA_IMG='';NA_ABV='';document.getElementById('naFetchStat').textContent='';
   save();renderAll();renderMyList();
 };
 document.getElementById('backupBtn').onclick=()=>{

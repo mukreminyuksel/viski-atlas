@@ -265,6 +265,7 @@ nav.tabs{display:flex;gap:7px;flex-wrap:wrap;margin:20px 0 14px;padding-bottom:2
     <div class="tab" data-view="katman">🇹🇷 Türkiye Katmanları</div>
     <div class="tab" data-view="kaynak">📚 Kaynaklar</div>
     <div class="tab" data-view="gurme">🎖️ Gurme Seviyem</div>
+    <div class="tab" data-view="personal">🧭 Bana Özel</div>
     <div class="tab" data-view="notes">📝 Tadım Notlarım</div>
     <div class="tab" data-view="mylist">📋 Listem</div>
   </nav>
@@ -357,6 +358,11 @@ nav.tabs{display:flex;gap:7px;flex-wrap:wrap;margin:20px 0 14px;padding-bottom:2
   <section id="view-gurme" class="hidden">
     <p class="intro">Elindeki şişelere göre <b>Gurme Puanın</b> (100 üzerinden) ve unvanın. Puan; bölge kapsama, stil dengesi, kalite, prestij, nadirlik ve koleksiyon büyüklüğünden hesaplanır. Hedeflerini alırsan çıkacağın seviyeyi ve bir üst seviye için ne almanın en mantıklı olduğunu da görürsün.</p>
     <div id="gurmeBox"></div>
+  </section>
+
+  <section id="view-personal" class="hidden">
+    <p class="intro">Sana özel: damağının <b>tat radarı</b>, eldekilere göre <b>akıllı “Sıradaki Şişe” önerisi</b> ve ruh haline göre <b>“bu akşam ne içsem?”</b>. Hepsi senin koleksiyonun ve tadım puanlarından hesaplanır.</p>
+    <div id="personalBox"></div>
   </section>
 
   <section id="view-notes" class="hidden">
@@ -1263,7 +1269,29 @@ const DATA = [
 {id:"tamnavulin-redwine",ad:"Tamnavulin Red Wine Cask Edition",dam:"Tamnavulin",ulke:"İskoçya",bolge:"Speyside",sev:"3",tur:"Single Malt",abv:40,yas:"NAS",tl:2000,bul:"tekel",puan:81,uz:"",ai:0,kat:0,not:"Bourbon + Cabernet Sauvignon kırmızı şarap fıçısı finiş"},
 {id:"tamnavulin-whitewine",ad:"Tamnavulin White Wine Cask Edition",dam:"Tamnavulin",ulke:"İskoçya",bolge:"Speyside",sev:"3",tur:"Single Malt",abv:40,yas:"NAS",tl:2000,bul:"zor",puan:80,uz:"",ai:0,kat:0,not:"Bourbon + Sauvignon Blanc beyaz şarap fıçısı finiş"},
 {id:"tamnavulin-amcabsauv",ad:"Tamnavulin American Cabernet Sauvignon",dam:"Tamnavulin",ulke:"İskoçya",bolge:"Speyside",sev:"3",tur:"Single Malt",abv:40,yas:"NAS",tl:2100,bul:"zor",puan:81,uz:"",ai:0,kat:0,not:"Amerikan Cabernet Sauvignon kırmızı şarap fıçısı"},
-{id:"tamnavulin-port",ad:"Tamnavulin Port Cask Edition",dam:"Tamnavulin",ulke:"İskoçya",bolge:"Speyside",sev:"3",tur:"Single Malt",abv:40,yas:"NAS",tl:2100,bul:"zor",puan:81,uz:"",ai:0,kat:0,not:"2024 sürümü; porto fıçısı finiş"}
+{id:"tamnavulin-port",ad:"Tamnavulin Port Cask Edition",dam:"Tamnavulin",ulke:"İskoçya",bolge:"Speyside",sev:"3",tur:"Single Malt",abv:40,yas:"NAS",tl:2100,bul:"zor",puan:81,uz:"",ai:0,kat:0,not:"2024 sürümü; porto fıçısı finiş"},
+{id:"glenfarclas-18",ad:"Glenfarclas 18",dam:"Glenfarclas",ulke:"İskoçya",bolge:"Speyside",sev:"2",tur:"Single Malt",abv:43,yas:"18",tl:6500,bul:"zor",puan:89,uz:"",ai:0,kat:0,not:"Klasik old-style şeri; dengeli"},
+{id:"mortlach-18b",ad:"Mortlach 18",dam:"Mortlach",ulke:"İskoçya",bolge:"Speyside",sev:"2",tur:"Single Malt",abv:43.4,yas:"18",tl:11000,bul:"zor",puan:89,uz:"",ai:0,kat:0,not:"Etli, zengin; “Dufftown canavarı”"},
+{id:"benriach-30",ad:"BenRiach 30",dam:"BenRiach",ulke:"İskoçya",bolge:"Speyside",sev:"3",tur:"Single Malt",abv:46,yas:"30",tl:22000,bul:"muzayede",puan:90,uz:"",ai:0,kat:0,ncf:1,not:"Yıllanmış çok fıçılı"},
+{id:"lochlomond-21",ad:"Loch Lomond 21",dam:"Loch Lomond",ulke:"İskoçya",bolge:"Highland",sev:"3",tur:"Single Malt",abv:46,yas:"21",tl:9000,bul:"zor",puan:87,uz:"",ai:0,kat:0,ncf:1,not:"Yıllanmış; The Open viskisi"},
+{id:"glengoyne-15",ad:"Glengoyne 15",dam:"Glengoyne",ulke:"İskoçya",bolge:"Highland",sev:"2",tur:"Single Malt",abv:43,yas:"15",tl:4500,bul:"zor",puan:86,uz:"",ai:0,kat:0,not:"Şeri etkili, yavaş damıtım"},
+{id:"deanston-15",ad:"Deanston 15 Organic",dam:"Deanston",ulke:"İskoçya",bolge:"Highland",sev:"3",tur:"Single Malt",abv:46.3,yas:"15",tl:5000,bul:"zor",puan:85,uz:"",ai:0,kat:0,ncf:1,not:"Organik; ballı, malt yoğun"},
+{id:"caolila-cs",ad:"Caol Ila Cask Strength",dam:"Caol Ila",ulke:"İskoçya",bolge:"Islay",sev:"2",tur:"Single Malt",abv:59.4,yas:"NAS",tl:5000,bul:"zor",puan:87,uz:"",ai:0,kat:0,ncf:1,not:"Tam güçte; yoğun is"},
+{id:"laphroaig-cairdeas",ad:"Laphroaig Cairdeas (yıllık)",dam:"Laphroaig",ulke:"İskoçya",bolge:"Islay",sev:"Premium",tur:"Single Malt",abv:52,yas:"NAS",tl:6500,bul:"zor",puan:88,uz:"",ai:0,kat:0,ncf:1,not:"Feis Ile yıllık sınırlı sürüm"},
+{id:"glenglassaugh-30",ad:"Glenglassaugh 30",dam:"Glenglassaugh",ulke:"İskoçya",bolge:"Highland",sev:"2",tur:"Single Malt",abv:45.6,yas:"30",tl:30000,bul:"muzayede",puan:90,uz:"",ai:0,kat:0,not:"Yıllanmış sahil maltı"},
+{id:"bushmills-25",ad:"Bushmills 25",dam:"Bushmills",ulke:"İrlanda",bolge:"İrlanda",sev:"2",tur:"Single Malt",abv:46,yas:"25",tl:0,bul:"muzayede",puan:90,uz:"",ai:0,kat:0,not:"Çok nadir yıllanmış İrlanda maltı"},
+{id:"teeling-brabazon",ad:"Teeling Brabazon Series",dam:"Teeling",ulke:"İrlanda",bolge:"İrlanda",sev:"3",tur:"Single Malt",abv:49.5,yas:"NAS",tl:6500,bul:"zor",puan:87,uz:"",ai:0,kat:0,ncf:1,not:"Takviyeli şarap fıçısı serisi"},
+{id:"waterford-cuvee",ad:"Waterford Cuvée",dam:"Waterford",ulke:"İrlanda",bolge:"İrlanda",sev:"2",tur:"Single Malt",abv:50,yas:"NAS",tl:7000,bul:"zor",puan:88,uz:"",ai:0,kat:0,ncf:1,not:"Çok çiftlikli terroir harmanı"},
+{id:"pappy-20",ad:"Pappy Van Winkle 20",dam:"Buffalo Trace",ulke:"ABD",bolge:"Bourbon (Kentucky)",sev:"Premium",tur:"Bourbon",abv:45.2,yas:"20",tl:0,bul:"muzayede",puan:93,uz:"",ai:0,kat:0,not:"Efsane; neredeyse imkânsız"},
+{id:"jeffersons-ocean",ad:"Jefferson’s Ocean Aged at Sea",dam:"Jefferson’s",ulke:"ABD",bolge:"Bourbon (Kentucky)",sev:"3",tur:"Bourbon",abv:45,yas:"NAS",tl:6000,bul:"zor",puan:85,uz:"",ai:0,kat:0,not:"Okyanusta yıllandırılan; tuzlu nüans"},
+{id:"angelsenvy-rye",ad:"Angel’s Envy Rye",dam:"Angel's Envy",ulke:"ABD",bolge:"Rye (Çavdar)",sev:"2",tur:"Rye",abv:50,yas:"NAS",tl:7000,bul:"zor",puan:88,uz:"",ai:0,kat:0,not:"Rom fıçısı bitiş; sıra dışı çavdar"},
+{id:"penderyn-portwood",ad:"Penderyn Portwood",dam:"Penderyn",ulke:"Galler",bolge:"Galler",sev:"3",tur:"Single Malt",abv:46,yas:"NAS",tl:4500,bul:"zor",puan:84,uz:"",ai:0,kat:0,not:"Porto fıçısı; kırmızı meyve"},
+{id:"amrut-twocontinents",ad:"Amrut Two Continents",dam:"Amrut",ulke:"Hindistan",bolge:"Hindistan",sev:"2",tur:"Single Malt",abv:46,yas:"NAS",tl:6000,bul:"zor",puan:88,uz:"",ai:0,kat:0,ncf:1,not:"Hindistan + Avrupa’da olgunlaşma"},
+{id:"pauljohn-peated",ad:"Paul John Peated Select Cask",dam:"Paul John",ulke:"Hindistan",bolge:"Hindistan",sev:"2",tur:"Single Malt",abv:55.5,yas:"NAS",tl:5500,bul:"zor",puan:88,uz:"",ai:0,kat:0,ncf:1,not:"Fıçı gücü; tropikal turba"},
+{id:"kurayoshi-8",ad:"Kurayoshi 8 Sherry Cask",dam:"Matsui",ulke:"Japonya",bolge:"Japonya",sev:"3",tur:"Blend",abv:43,yas:"8",tl:4500,bul:"zor",puan:82,uz:"",ai:0,kat:0,not:"Şeri fıçı Japon pure malt"},
+{id:"akkeshi-blended",ad:"Akkeshi Blended Whisky",dam:"Akkeshi",ulke:"Japonya",bolge:"Japonya",sev:"Premium",tur:"Blend",abv:48,yas:"NAS",tl:7000,bul:"zor",puan:86,uz:"",ai:0,kat:0,ncf:1,not:"Hokkaido; hafif isli harman"},
+{id:"highcoast-alvsborg",ad:"High Coast Älvsborg Rök",dam:"High Coast",ulke:"İsveç",bolge:"İsveç",sev:"3",tur:"Single Malt",abv:50,yas:"NAS",tl:5500,bul:"zor",puan:86,uz:"",ai:0,kat:0,ncf:1,not:"İsveç; isli sürüm"},
+{id:"ancnoc-peterarkle",ad:"anCnoc Peter Arkle",dam:"anCnoc",ulke:"İskoçya",bolge:"Highland",sev:"3",tur:"Single Malt",abv:46,yas:"NAS",tl:4000,bul:"zor",puan:84,uz:"",ai:0,kat:0,ncf:1,not:"Sınırlı sürüm; temiz, modern"}
 ];
 const AI_GROUPS = {
  'lagavulin-16':'Islay / İsli','ardbeg-uigeadail':'Islay / İsli','laphroaig-10':'Islay / İsli','caolila-18':'Islay / İsli','bruichladdich-octomore':'Islay / İsli',
@@ -1746,6 +1774,86 @@ function renderNotes(){
   box.innerHTML=html;
 }
 
+const RADAR=['İsli','Şeri','Meyveli','Bal','Vanilya','Karamel','Baharatlı','Tuzlu/Deniz'];
+const MOODS={
+ hafif:{e:'🌙',t:'Hafif akşam',f:b=>!flavorsOf(b).has('İsli')&&['Çiçeksi','Meyveli','Bal','Narenciye','Vanilya','Tatlı'].some(x=>flavorsOf(b).has(x))},
+ isli:{e:'🔥',t:'Ağır isli',f:b=>flavorsOf(b).has('İsli')||flavorsOf(b).has('Turba')},
+ seri:{e:'🍫',t:'Şeri / tatlı',f:b=>['Şeri','Tatlı','Çikolata','Kuru Meyve','Karamel'].some(x=>flavorsOf(b).has(x))},
+ kutlama:{e:'🥂',t:'Kutlama',f:b=>(b.puan||0)>=88||priceOf(b)>=8000},
+ misafir:{e:'👥',t:'Misafir / kolay',f:b=>b.tur==='Blend'||b.bul==='kolay'},
+ kesif:{e:'🎯',t:'Keşif (puanlamadığın)',f:b=>!(state.notes[b.id]&&((state.notes[b.id].p||0)||(state.notes[b.id].n||'').trim()))}
+};
+let personalMood='kutlama';
+function userFlavorProfile(){
+  const bs=allBottles().filter(b=>state.have.includes(b.id)); const w={};
+  bs.forEach(b=>{const r=state.notes[b.id]&&state.notes[b.id].p; const boost=r?Math.max(0.4,1+(r-80)/30):1;
+    flavorsOf(b).forEach(fl=>{w[fl]=(w[fl]||0)+boost;});});
+  return w;
+}
+function recommendations(){
+  const have=new Set(state.have), prof=userFlavorProfile();
+  const myRegions=new Set(allBottles().filter(b=>have.has(b.id)).map(regionCat));
+  const myFlavors=new Set(); allBottles().filter(b=>have.has(b.id)).forEach(b=>flavorsOf(b).forEach(f=>myFlavors.add(f)));
+  const avail={kolay:3,tekel:2,dutyfree:1,zor:-1,muzayede:-5};
+  return allBottles().filter(b=>!have.has(b.id)).map(b=>{
+    const fl=[...flavorsOf(b)];
+    const affN=Math.min(8,fl.reduce((s,f)=>s+(prof[f]||0),0)*0.5);
+    let gap=0; const newReg=!myRegions.has(regionCat(b)); if(newReg)gap+=3.5; const newFl=fl.filter(f=>!myFlavors.has(f)); gap+=Math.min(3,newFl.length*0.7);
+    const qual=Math.max(0,((b.puan||0)-82))*0.7;
+    const av=avail[b.bul]||0;
+    const price=(b.tl===0?-5:(b.tl<=5000?1.5:(b.tl>15000?-3:0)));
+    const tgt=state.target.includes(b.id)?2:0;
+    const score=affN+gap+qual+av+price+tgt;
+    const why=[]; if(affN>3)why.push('damağına uygun'); if(newReg)why.push('<b>'+regionCat(b)+'</b> bölgesi eksik'); if(newFl.length)why.push(newFl.slice(0,2).map(x=>'#'+x).join(' ')+' yeni'); if((b.puan||0)>=89)why.push('yüksek puan '+b.puan); if(b.bul==='kolay'||b.bul==='tekel')why.push(b.bul==='kolay'?'markette':'Tekel’de'); if(tgt)why.push('hedefinde');
+    return {b,score,why:why.slice(0,3).join(' · ')};
+  }).sort((a,b)=>b.score-a.score).slice(0,6);
+}
+function renderPersonal(){
+  const box=document.getElementById('personalBox');
+  const have=allBottles().filter(b=>state.have.includes(b.id));
+  if(!have.length){box.innerHTML='<div class="empty">Önce birkaç şişeyi “Elimde Var” işaretle — sana özel radar, öneri ve “bu akşam ne içsem” buradan çıkacak.</div>';return;}
+  const prof=userFlavorProfile();
+  const maxV=Math.max(1,...RADAR.map(a=>prof[a]||0));
+  // radar SVG
+  const cx=140,cy=140,R=100,N=RADAR.length;
+  let grid='';for(let g=1;g<=4;g++){let pts=[];for(let i=0;i<N;i++){const an=-Math.PI/2+i*2*Math.PI/N;pts.push((cx+Math.cos(an)*R*g/4)+','+(cy+Math.sin(an)*R*g/4));}grid+='<polygon points="'+pts.join(' ')+'" fill="none" stroke="rgba(224,168,60,.15)"/>';}
+  let axes='',labels='',dataPts=[];
+  for(let i=0;i<N;i++){const an=-Math.PI/2+i*2*Math.PI/N;const x=cx+Math.cos(an)*R,y=cy+Math.sin(an)*R;
+    axes+='<line x1="'+cx+'" y1="'+cy+'" x2="'+x+'" y2="'+y+'" stroke="rgba(224,168,60,.15)"/>';
+    const lx=cx+Math.cos(an)*(R+18),ly=cy+Math.sin(an)*(R+14);
+    labels+='<text x="'+lx+'" y="'+ly+'" fill="#b9a888" font-size="10" text-anchor="middle">'+RADAR[i]+'</text>';
+    const v=(prof[RADAR[i]]||0)/maxV;dataPts.push((cx+Math.cos(an)*R*v)+','+(cy+Math.sin(an)*R*v));}
+  const radar='<svg width="280" height="280" viewBox="0 0 280 280">'+grid+axes+'<polygon points="'+dataPts.join(' ')+'" fill="rgba(242,193,78,.25)" stroke="#f2c14e" stroke-width="2"/>'+labels+'</svg>';
+  // istatistik
+  const dams=new Set(have.map(b=>b.dam)).size, regs=new Set(have.map(b=>regionCat(b))).size;
+  const avg=have.reduce((s,b)=>s+(b.puan||0),0)/have.length;
+  const rated=have.filter(b=>state.notes[b.id]&&state.notes[b.id].p);
+  const myAvg=rated.length?Math.round(rated.reduce((s,b)=>s+state.notes[b.id].p,0)/rated.length):0;
+  const fc={};have.forEach(b=>flavorsOf(b).forEach(f=>fc[f]=(fc[f]||0)+1));
+  const topFl=Object.entries(fc).sort((a,b)=>b[1]-a[1]).slice(0,3).map(x=>x[0]).join(', ');
+  const rc={};have.forEach(b=>{const c=regionCat(b);rc[c]=(rc[c]||0)+1;});
+  const topReg=Object.entries(rc).sort((a,b)=>b[1]-a[1])[0];
+  let html='<div class="ghero" style="align-items:stretch"><div style="flex-shrink:0">'+radar+'</div><div class="who"><div class="title" style="font-size:20px">Damağının Profili</div><div class="char" style="margin-top:8px">Baskın tatların: <b>'+(topFl||'—')+'</b></div><div class="char">Ağırlık bölgen: <b>'+(topReg?topReg[0]:'—')+'</b></div><div class="char">'+have.length+' farklı şişe · '+dams+' damıtımevi · '+regs+' bölge</div><div class="char">Eleştirmen ort. <b>'+(avg?avg.toFixed(1):'—')+'</b>'+(myAvg?' · senin ort. puanın <b>'+myAvg+'</b>':'')+'</div></div></div>';
+  // ÖNERİ
+  html+='<div class="sugg"><h3>🧭 Sıradaki Şişe — sana özel öneri</h3><p class="note" style="margin:0 0 6px">Elindekiler, tadım puanların, sevdiğin profiller, eksik bölgeler ve Türkiye’de bulunabilirliğe göre sıralı.</p>';
+  recommendations().forEach((r,i)=>{const t=state.target.includes(r.b.id);
+    html+='<div class="si">'+thumb(r.b)+'<div class="why"><b>'+(i+1)+'.</b> '+r.b.ad+' <span style="color:var(--muted)">— '+(r.why||'iyi seçim')+'</span></div><span class="price">'+fmt(priceOf(r.b))+'</span><button class="btn" data-taste="'+r.b.id+'">📝</button><button class="btn '+(t?'target-on':'')+'" data-act="target" data-id="'+r.b.id+'">'+(t?'★':'☆')+'</button></div>';});
+  html+='</div>';
+  // BU AKŞAM
+  html+='<div class="sugg" style="margin-top:18px"><h3>🥃 Bu akşam ne içsem?</h3><div class="aromarow" style="margin-bottom:10px">';
+  Object.keys(MOODS).forEach(m=>{html+='<span class="aroma'+(personalMood===m?' on':'')+'" data-mood="'+m+'">'+MOODS[m].e+' '+MOODS[m].t+'</span>';});
+  html+='</div><div id="moodResult"></div></div>';
+  box.innerHTML=html;
+  renderMood();
+}
+function renderMood(){
+  const el=document.getElementById('moodResult'); if(!el)return;
+  const M=MOODS[personalMood];
+  const list=allBottles().filter(b=>state.have.includes(b.id)&&M.f(b)).sort((a,b)=>(b.puan||0)-(a.puan||0)).slice(0,3);
+  if(!list.length){el.innerHTML='<div class="empty">Bu ruh haline uygun, elinde olan bir şişe yok — “Sıradaki Şişe” önerisinden bir tane edinebilirsin.</div>';return;}
+  el.innerHTML='<div class="grid">'+list.map(b=>'<div class="card"><div class="top">'+thumb(b)+'<div><div class="nm">'+b.ad+'</div><div class="meta">'+b.dam+' · '+b.bolge+' · '+(b.puan||'')+' puan</div></div></div><div class="row"><button class="btn" data-taste="'+b.id+'">📝 Not</button><span class="price">'+fmt(priceOf(b))+'</span></div></div>').join('')+'</div>';
+}
+
 function renderMyList(){
   const have=allBottles().filter(b=>state.have.includes(b.id));
   const target=allBottles().filter(b=>state.target.includes(b.id));
@@ -1822,6 +1930,8 @@ document.addEventListener('click',e=>{
       save();renderAll();
     } else setQty(id,qtyOf(id)-1);
     return;}
+  const md=e.target.closest('[data-mood]');
+  if(md){personalMood=md.dataset.mood;renderMood();return;}
   const ar=e.target.closest('.aroma');
   if(ar){ar.classList.toggle('on');return;}
   const tt=e.target.closest('[data-taste]');
@@ -1856,7 +1966,7 @@ document.getElementById('expandAll').onclick=()=>{
 document.getElementById('collapseAll').onclick=()=>{openDams.clear();renderTree();};
 document.querySelectorAll('.tab').forEach(t=>t.onclick=()=>{
   document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));t.classList.add('active');
-  ['explore','experts','ai','magazin','ncf','katman','kaynak','gurme','notes','mylist'].forEach(v=>document.getElementById('view-'+v).classList.add('hidden'));
+  ['explore','experts','ai','magazin','ncf','katman','kaynak','gurme','personal','notes','mylist'].forEach(v=>document.getElementById('view-'+v).classList.add('hidden'));
   document.getElementById('view-'+t.dataset.view).classList.remove('hidden');
   if(t.dataset.view==='experts')renderExperts();
   if(t.dataset.view==='magazin')renderMagazin();
@@ -1864,6 +1974,7 @@ document.querySelectorAll('.tab').forEach(t=>t.onclick=()=>{
   if(t.dataset.view==='ncf')renderNCF();
   if(t.dataset.view==='katman')renderKatman();
   if(t.dataset.view==='gurme')renderGurme();
+  if(t.dataset.view==='personal')renderPersonal();
   if(t.dataset.view==='notes')renderNotes();
   if(t.dataset.view==='mylist')renderMyList();
 });
@@ -1907,7 +2018,7 @@ document.getElementById('resetBtn').onclick=(e)=>{e.preventDefault();
 function renderAll(){
   // Her işaretlemede TÜM sekmeler güncellenir (gizli olanlar dahil) — böylece
   // bir sayfada seçtiğin viski diğer tüm sayfalarda da işaretli görünür.
-  renderStats();renderTree();renderExperts();renderAI();renderMagazin();renderNCF();renderKatman();renderGurme();renderNotes();renderMyList();
+  renderStats();renderTree();renderExperts();renderAI();renderMagazin();renderNCF();renderKatman();renderGurme();renderPersonal();renderNotes();renderMyList();
 }
 renderAll();
 </script>

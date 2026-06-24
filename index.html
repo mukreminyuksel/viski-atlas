@@ -277,6 +277,7 @@ nav.tabs{display:flex;gap:7px;flex-wrap:wrap;margin:20px 0 14px;padding-bottom:2
       <select id="fTier"><option value="">Tüm seviyeler</option><option value="Premium">Premium</option><option value="2">2. Düzey</option><option value="3">3. Düzey</option></select>
       <select id="fType"><option value="">Tüm türler</option><option>Single Malt</option><option>Blend</option><option>Bourbon</option><option>Rye</option><option>Single Pot Still</option><option>Tennessee</option><option>Grain</option></select>
       <select id="fSort"><option value="puan">Sırala: Puan</option><option value="fiyat">Fiyat (yüksek)</option><option value="fiyatA">Fiyat (düşük)</option></select>
+      <select id="fFlavor"><option value="">🍯 Tat profili (hepsi)</option><option>İsli</option><option>Turba</option><option>Şeri</option><option>Meyveli</option><option>Kuru Meyve</option><option>Narenciye</option><option>Bal</option><option>Vanilya</option><option>Karamel</option><option>Çikolata</option><option>Kahve</option><option>Baharatlı</option><option>Çiçeksi</option><option>Kuruyemiş</option><option>Malt/Tahıl</option><option>Meşe</option><option>Tuzlu/Deniz</option><option>Tatlı</option><option>Yağlı/Gövdeli</option></select>
     </div>
     <div class="pillrow">
       <span class="chip" data-avail="kolay">Markette/Kolay</span>
@@ -395,7 +396,7 @@ nav.tabs{display:flex;gap:7px;flex-wrap:wrap;margin:20px 0 14px;padding-bottom:2
     <input type="number" id="tastePuan" min="0" max="100" placeholder="örn. 88">
     <label>Tadım notun</label>
     <textarea id="tasteNot" rows="4" style="width:100%;background:var(--bg2);border:1px solid var(--line);color:var(--txt);padding:10px 12px;border-radius:9px;font-size:14px;resize:vertical;font-family:inherit" placeholder="Burun, damak, bitiş… kendi deneyimin"></textarea>
-    <label>Aroma etiketleri</label>
+    <label>Aroma & deneyim etiketleri (birden çok seçebilirsin)</label>
     <div id="tasteTags" class="aromarow"></div>
     <div class="mrow">
       <button class="mbtn" id="tasteSave">Kaydet</button>
@@ -1333,6 +1334,8 @@ function passFilters(b){
   const tier=document.getElementById('fTier').value;
   if(tier && b.sev!==tier) return false;
   const typ=document.getElementById('fType').value;
+  const flav=document.getElementById('fFlavor')?document.getElementById('fFlavor').value:'';
+  if(flav && !flavorsOf(b).has(flav)) return false;
   if(typ && b.tur!==typ) return false;
   if(activeAvail.size && !activeAvail.has(b.bul)) return false;
   if(ncfOnly && !b.ncf) return false;
@@ -1554,6 +1557,34 @@ function regionCat(b){
 }
 const CORE_PROFILES=['Şeri','İsli / Turba','Bourbon / Tahıl','Çavdar','Single Pot Still','Harman','Fıçı Gücü / NCF'];
 const SHERRY_DAMS=['GlenDronach','Aberlour','Glenfarclas','The Macallan','Tamdhu','Glengoyne','Mortlach'];
+function flavorsOf(b){
+  const t=(b.ad+' '+(b.not||'')).toLowerCase(), r=b.bolge||'', s=new Set();
+  if(r.includes('Islay')||/isli|is,|dumanl|duman|turba|peat|smok|ledaig|octomore|port charlotte|tütsü|kömür|tentürdiyot|tıbbi/.test(t))s.add('İsli');
+  if(/turba|peat/.test(t))s.add('Turba');
+  if(/şeri|sherry|oloroso|px|pedro|amoroso|moscatel/.test(t)||['GlenDronach','Aberlour','Glenfarclas','The Macallan','Tamdhu','Glengoyne','Mortlach','GlenAllachie'].includes(b.dam))s.add('Şeri');
+  if(/meyve|elma|armut|şeftali|kayısı|üzüm|tropik|muz|ananas|erik|kiraz|böğürtlen|frenk/.test(t))s.add('Meyveli');
+  if(/kuru meyve|kuru üzüm|incir|hurma|kuru kayısı|pekmez|pestil/.test(t))s.add('Kuru Meyve');
+  if(/narenciye|portakal|limon|misket|greyfurt|mandalina|marmelat/.test(t))s.add('Narenciye');
+  if(/\bbal\b|ballı|funda bal/.test(t))s.add('Bal');
+  if(/vanilya/.test(t)||b.tur==='Bourbon')s.add('Vanilya');
+  if(/karamel|toffee|krem|butterscotch/.test(t)||b.tur==='Bourbon')s.add('Karamel');
+  if(/çikolata|kakao|kahve|espresso/.test(t))s.add('Çikolata');
+  if(/kahve|espresso/.test(t))s.add('Kahve');
+  if(/baharat|tarçın|biber|karabiber|zencefil|baharatlı|muskat/.test(t)||b.tur==='Rye')s.add('Baharatlı');
+  if(/çiçek|çiçeksi|funda|lavanta|gül/.test(t))s.add('Çiçeksi');
+  if(/kuruyemiş|fındık|badem|ceviz|antep|çerez/.test(t))s.add('Kuruyemiş');
+  if(/malt|arpa|tahıl|kek|bisküvi|maltlı/.test(t)||b.tur==='Grain')s.add('Malt/Tahıl');
+  if(/meşe|odun|tanen|kuru meşe/.test(t))s.add('Meşe');
+  if(/tuz|deniz|tuzlu|sahil|maden|mineral/.test(t))s.add('Tuzlu/Deniz');
+  if(/tatlı|şekerli|tatl/.test(t))s.add('Tatlı');
+  if(/yağlı|gövdeli|dolgun|balmumu|kremamsı|kremsi|zengin/.test(t))s.add('Yağlı/Gövdeli');
+  // bölgesel varsayılanlar (boş kalmasın)
+  if(s.size===0){ if(r.includes('Speyside'))s.add('Meyveli'); else if(r.includes('Highland'))s.add('Bal'); else if(b.tur==='Bourbon')s.add('Vanilya'); else if(b.tur==='Blend')s.add('Tatlı'); else s.add('Meyveli'); }
+  // kullanıcı kendi tadım etiketleri eklediyse onları da kat
+  const nt=(state.notes&&state.notes[b.id]&&state.notes[b.id].tags)||[];
+  nt.forEach(x=>s.add(x));
+  return s;
+}
 function profilesOf(b){
   const t=(b.ad+' '+b.not).toLowerCase(), p=[];
   if(SHERRY_DAMS.includes(b.dam)||/şeri|sherry|oloroso|pedro|a'bunadh|px|şarap/.test(t))p.push('Şeri');
@@ -1678,7 +1709,7 @@ function renderGurme(){
   }
   box.innerHTML=html;
 }
-const AROMA=['İsli','Turba','Şeri','Meyveli','Bal','Baharat','Vanilya','Çikolata','Tuzlu','Çiçeksi','Narenciye','Kuruyemiş','Karamel','Tütsü'];
+const AROMA=['İsli','Turba','Şeri','Meyveli','Kuru Meyve','Narenciye','Bal','Vanilya','Karamel','Çikolata','Kahve','Baharat','Tarçın','Biberli','Çiçeksi','Kuruyemiş','Malt/Tahıl','Meşe/Odunsu','Kavrulmuş','Deri/Tütün','Tütsü','Tuzlu/Deniz','Mineral','Yumuşak içim','Sert/Alkollü','Aşırı keskin','Ekşimsi','Genizde acılık','Tatlı','Kuru (Dry)','Gövdeli/Dolgun','Hafif gövde','Yağlı doku','Uzun bitiş','Kısa bitiş','Güçlü burun'];
 let tasteId=null;
 function openTaste(id){
   tasteId=id;const b=allBottles().find(x=>x.id===id);if(!b)return;
@@ -1810,7 +1841,7 @@ document.addEventListener('click',e=>{
     const v=prompt(`${b.ad} için güncel fiyat (TL):`, priceOf(b)||'');
     if(v!==null){state.prices[id]=parseInt(v.replace(/[^0-9]/g,''))||0;save();renderAll();}}
 });
-['search','fStatus','fTier','fType','fSort'].forEach(id=>{
+['search','fStatus','fTier','fType','fSort','fFlavor'].forEach(id=>{
   document.getElementById(id).addEventListener('input',renderTree);
   document.getElementById(id).addEventListener('change',renderTree);
 });

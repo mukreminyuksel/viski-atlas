@@ -4,6 +4,12 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Viski Atlası · Koleksiyon Takibi</title>
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#1a1208">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Viski Atlası">
+<link rel="apple-touch-icon" href="icon-192.png">
 <style>
 :root{
   --bg:#1a1208; --bg2:#22180c; --panel:#2b2012; --panel2:#332714;
@@ -264,6 +270,7 @@ nav.tabs{display:flex;gap:7px;flex-wrap:wrap;margin:20px 0 14px;padding-bottom:2
     <div class="tab" data-view="ncf">❄️ Filtresizler Top 50</div>
     <div class="tab" data-view="katman">🇹🇷 Türkiye Katmanları</div>
     <div class="tab" data-view="kaynak">📚 Kaynaklar</div>
+    <div class="tab" data-view="stats">📊 İstatistik</div>
     <div class="tab" data-view="gurme">🎖️ Gurme Seviyem</div>
     <div class="tab" data-view="personal">🧭 Bana Özel</div>
     <div class="tab" data-view="notes">📝 Tadım Notlarım</div>
@@ -353,6 +360,11 @@ nav.tabs{display:flex;gap:7px;flex-wrap:wrap;margin:20px 0 14px;padding-bottom:2
       <a class="card srccard" href="https://flaskfinewines.com/" target="_blank" rel="noopener"><div class="nm">Flask Fine Wines 🔗</div><div class="meta">Geniş kataloglu perakendeci; uluslararası fiyat ve bulunabilirlik fikri için referans (ABD).</div></a>
     </div>
     <p class="note">Her şişenin solundaki mini görsele tıklayınca <b>Whiskybase</b> sayfası (gerçek fotoğraf + bilgi), 📷 ile Google Görseller açılır.</p>
+  </section>
+
+  <section id="view-stats" class="hidden">
+    <p class="intro">Koleksiyonunun rakamlarla portresi: değer, dağılımlar ve öne çıkanlar. <b>Elimde olanlar</b> üzerinden hesaplanır.</p>
+    <div id="statsBox"></div>
   </section>
 
   <section id="view-gurme" class="hidden">
@@ -2136,6 +2148,91 @@ function renderStats(){
   document.getElementById('kTargetVal').textContent=allBottles().filter(b=>state.target.includes(b.id)).reduce((s,b)=>s+(priceOf(b)||0),0).toLocaleString('tr-TR');
 }
 
+
+function renderStats2(){
+  const box=document.getElementById('statsBox'); if(!box) return;
+  const all=allBottles();
+  const haveIds=[...new Set(state.have)];
+  const have=haveIds.map(id=>all.find(b=>b.id===id)).filter(Boolean);
+  if(!have.length){ box.innerHTML='<div class="note" style="padding:24px;text-align:center">Henüz <b>Elimde Var</b> işaretli şişen yok. Keşfet sekmesinden ekledikçe burada koleksiyonunun istatistikleri oluşur. 🥃</div>'; return; }
+  const units=have.reduce((s,b)=>s+qtyOf(b.id),0);
+  const value=have.reduce((s,b)=>s+(priceOf(b)||0)*qtyOf(b.id),0);
+  const targets=[...new Set(state.target)].map(id=>all.find(b=>b.id===id)).filter(Boolean);
+  const targetVal=targets.reduce((s,b)=>s+(priceOf(b)||0),0);
+  const dams=new Set(have.map(b=>b.dam)).size;
+  const countries=new Set(have.map(b=>b.ulke)).size;
+  const regions=new Set(have.map(b=>b.bolge).filter(Boolean)).size;
+  const puans=have.map(b=>b.puan||0).filter(Boolean);
+  const avg=puans.length?Math.round(puans.reduce((s,x)=>s+x,0)/puans.length*10)/10:0;
+  const priced=have.filter(b=>priceOf(b)>0);
+  const pricey=priced.slice().sort((a,b)=>priceOf(b)-priceOf(a))[0];
+  const best=have.slice().sort((a,b)=>(b.puan||0)-(a.puan||0))[0];
+  const mostQty=have.slice().sort((a,b)=>qtyOf(b.id)-qtyOf(a.id))[0];
+  const avgBottle=priced.length?Math.round(value/units):0;
+
+  const card=(lbl,val,sub)=>'<div style="background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:12px 14px;min-width:0">'
+    +'<div style="color:var(--muted);font-size:12px;font-weight:700">'+lbl+'</div>'
+    +'<div style="color:var(--amber2);font-size:22px;font-weight:800;line-height:1.2;margin-top:2px">'+val+'</div>'
+    +(sub?'<div style="color:var(--muted2);font-size:11px;margin-top:2px">'+sub+'</div>':'')+'</div>';
+
+  // bar list builder
+  function bars(title,pairs,unit){
+    if(!pairs.length) return '';
+    const max=Math.max(...pairs.map(p=>p[1]))||1;
+    let rows=pairs.map(p=>{
+      const w=Math.round(p[1]/max*100);
+      return '<div style="display:flex;align-items:center;gap:8px;margin:4px 0">'
+        +'<div style="width:120px;flex:0 0 120px;font-size:12px;color:var(--txt);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">'+p[0]+'</div>'
+        +'<div style="flex:1;background:var(--bg2);border-radius:6px;overflow:hidden;height:16px"><div style="height:100%;width:'+w+'%;background:linear-gradient(90deg,#d8a13a,#f2c14e);border-radius:6px"></div></div>'
+        +'<div style="width:64px;flex:0 0 64px;text-align:right;font-size:12px;color:var(--muted);font-weight:700">'+p[1].toLocaleString('tr-TR')+(unit||'')+'</div></div>';
+    }).join('');
+    return '<div style="background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:12px 14px;margin-top:12px">'
+      +'<div style="font-weight:800;color:var(--amber2);font-size:14px;margin-bottom:6px">'+title+'</div>'+rows+'</div>';
+  }
+  // count helper (by units)
+  function tally(keyFn){const m={};have.forEach(b=>{const k=keyFn(b);if(k==null||k==='')return;m[k]=(m[k]||0)+qtyOf(b.id);});return Object.entries(m).sort((a,b)=>b[1]-a[1]);}
+  function tallyVal(keyFn){const m={};have.forEach(b=>{const k=keyFn(b);if(k==null||k==='')return;m[k]=(m[k]||0)+(priceOf(b)||0)*qtyOf(b.id);});return Object.entries(m).sort((a,b)=>b[1]-a[1]);}
+
+  const byCountry=tally(b=>b.ulke).slice(0,8);
+  const byType=tally(b=>b.tur);
+  const byRegion=tally(b=>b.bolge).slice(0,8);
+  const sevMap={'Premium':'Premium','2':'2. Düzey','3':'3. Düzey'};
+  const bySev=tally(b=>sevMap[b.sev]||b.sev);
+  const valByCountry=tallyVal(b=>b.ulke).slice(0,8).map(p=>[p[0],Math.round(p[1])]);
+
+  // flavor tally
+  const fm={};
+  have.forEach(b=>{const fl=flavorsOf(b);fl.forEach(x=>{fm[x]=(fm[x]||0)+qtyOf(b.id);});});
+  const byFlavor=Object.entries(fm).sort((a,b)=>b[1]-a[1]).slice(0,10);
+
+  // price buckets
+  const buckets=[['< 2.500 TL',0,2500],['2.500–5.000',2500,5000],['5.000–10.000',5000,10000],['10.000–20.000',10000,20000],['20.000+',20000,1e12]];
+  const pb=buckets.map(bk=>{let c=0;have.forEach(b=>{const p=priceOf(b)||0;if(p>=bk[1]&&p<bk[2])c+=qtyOf(b.id);});return [bk[0],c];}).filter(x=>x[1]>0);
+
+  const cards='<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px">'
+    +card('Kasa Değeri', value.toLocaleString('tr-TR')+' TL', units+' şişe (adetli)')
+    +card('Benzersiz Şişe', have.length, dams+' damıtımevi · '+countries+' ülke')
+    +card('Ortalama Puan', avg||'—', best?('En yüksek: '+(best.puan||'—')):'')
+    +card('Şişe Başı Ort.', avgBottle?avgBottle.toLocaleString('tr-TR')+' TL':'—', regions+' bölge')
+    +card('Hedef Maliyeti', targetVal.toLocaleString('tr-TR')+' TL', targets.length+' hedef şişe')
+    +'</div>';
+
+  const hi='<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px;margin-top:12px">'
+    +(pricey?card('💎 En Pahalı', pricey.ad, fmt(priceOf(pricey))):'')
+    +(best?card('🏆 En Yüksek Puan', best.ad, (best.puan||'—')+' / 100'):'')
+    +(mostQty&&qtyOf(mostQty.id)>1?card('📦 En Çok Adet', mostQty.ad, qtyOf(mostQty.id)+' adet'):'')
+    +'</div>';
+
+  box.innerHTML = cards + hi
+    + bars('🌍 Ülke dağılımı (adet)', byCountry)
+    + bars('🥃 Tür dağılımı (adet)', byType)
+    + bars('📍 Bölge dağılımı (adet)', byRegion)
+    + bars('🎖️ Seviye dağılımı (adet)', bySev)
+    + bars('🍯 Tat profili (adet)', byFlavor)
+    + bars('💰 Fiyat aralığı (adet)', pb)
+    + bars('💵 Ülkeye göre değer (TL)', valByCountry, ' TL');
+}
+
 function toggle(act,id){
   if(act==='have'){
     const i=state.have.indexOf(id);
@@ -2197,13 +2294,14 @@ document.getElementById('expandAll').onclick=()=>{
 document.getElementById('collapseAll').onclick=()=>{openDams.clear();renderTree();};
 document.querySelectorAll('.tab').forEach(t=>t.onclick=()=>{
   document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));t.classList.add('active');
-  ['explore','experts','ai','magazin','ncf','katman','kaynak','gurme','personal','notes','mylist'].forEach(v=>document.getElementById('view-'+v).classList.add('hidden'));
+  ['explore','experts','ai','magazin','ncf','katman','kaynak','stats','gurme','personal','notes','mylist'].forEach(v=>document.getElementById('view-'+v).classList.add('hidden'));
   document.getElementById('view-'+t.dataset.view).classList.remove('hidden');
   if(t.dataset.view==='experts')renderExperts();
   if(t.dataset.view==='magazin')renderMagazin();
   if(t.dataset.view==='ai')renderAI();
   if(t.dataset.view==='ncf')renderNCF();
   if(t.dataset.view==='katman')renderKatman();
+  if(t.dataset.view==='stats')renderStats2();
   if(t.dataset.view==='gurme')renderGurme();
   if(t.dataset.view==='personal')renderPersonal();
   if(t.dataset.view==='notes')renderNotes();
@@ -2249,9 +2347,10 @@ document.getElementById('resetBtn').onclick=(e)=>{e.preventDefault();
 function renderAll(){
   // Her işaretlemede TÜM sekmeler güncellenir (gizli olanlar dahil) — böylece
   // bir sayfada seçtiğin viski diğer tüm sayfalarda da işaretli görünür.
-  renderStats();renderTree();renderExperts();renderAI();renderMagazin();renderNCF();renderKatman();renderGurme();renderPersonal();renderNotes();renderMyList();
+  renderStats();renderTree();renderExperts();renderAI();renderMagazin();renderNCF();renderKatman();renderGurme();renderStats2();renderPersonal();renderNotes();renderMyList();
 }
 renderAll();
+if('serviceWorker' in navigator){window.addEventListener('load',()=>{navigator.serviceWorker.register('sw.js').catch(()=>{});});}
 </script>
 </body>
 </html>

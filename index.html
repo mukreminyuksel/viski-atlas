@@ -2481,9 +2481,19 @@ document.querySelectorAll('.tab').forEach(t=>t.onclick=()=>{
   if(t.dataset.view==='mylist')renderMyList();
 });
 let NA_IMG='', NA_ABV='';
-async function fetchViaProxy(url){
-  const proxies=[u=>'https://api.allorigins.win/raw?url='+encodeURIComponent(u), u=>'https://corsproxy.io/?url='+encodeURIComponent(u)];
-  for(const p of proxies){ try{ const r=await fetch(p(url),{redirect:'follow'}); if(r.ok){const t=await r.text(); if(t&&t.length>200) return t;} }catch(e){} }
+async function fetchPage(url){
+  // 1) jina.ai okuyucu — Cloudflare'i aşar, temiz metin döner {type:'text'}
+  try{ const r=await fetch('https://r.jina.ai/'+url,{headers:{'X-Return-Format':'markdown'}});
+    if(r.ok){const t=await r.text(); if(t&&/Title:/i.test(t)) return {type:'text',body:t};} }catch(e){}
+  // 2) HTML proxy zinciri — og etiketleri için {type:'html'}
+  const proxies=[
+    u=>'https://api.codetabs.com/v1/proxy/?quest='+encodeURIComponent(u),
+    u=>'https://api.allorigins.win/raw?url='+encodeURIComponent(u),
+    u=>'https://thingproxy.freeboard.io/fetch/'+u,
+    u=>'https://corsproxy.io/?url='+encodeURIComponent(u)
+  ];
+  for(const p of proxies){ try{ const r=await fetch(p(url),{redirect:'follow'});
+    if(r.ok){const t=await r.text(); if(t&&t.length>200&&/<meta|<title|og:title/i.test(t)) return {type:'html',body:t};} }catch(e){} }
   return null;
 }
 function metaOf(doc,prop){const el=doc.querySelector('meta[property="'+prop+'"]')||doc.querySelector('meta[name="'+prop+'"]');return el?el.getAttribute('content'):'';}
@@ -2491,13 +2501,21 @@ document.getElementById('fetchLinkBtn').onclick=async ()=>{
   const url=document.getElementById('naLink').value.trim();
   const stat=document.getElementById('naFetchStat');
   if(!/^https?:\/\//.test(url)){stat.style.color='var(--red)';stat.textContent='Geçerli bir link yapıştır (https:// ile başlamalı).';return;}
-  stat.style.color='var(--muted2)';stat.textContent='⏳ Sayfa çekiliyor…';
-  const html=await fetchViaProxy(url);
-  if(!html){stat.style.color='var(--red)';stat.textContent='Çekilemedi (site engellemiş ya da proxy yanıt vermedi olabilir). Bilgileri elle girebilirsin.';return;}
-  const doc=new DOMParser().parseFromString(html,'text/html');
-  let title=metaOf(doc,'og:title')||(doc.querySelector('title')?doc.querySelector('title').textContent:'');
-  const desc=metaOf(doc,'og:description')||metaOf(doc,'description')||'';
-  const img=metaOf(doc,'og:image')||'';
+  stat.style.color='var(--muted2)';stat.textContent='⏳ Sayfa çekiliyor… (birkaç saniye sürebilir)';
+  const res=await fetchPage(url);
+  if(!res){stat.style.color='var(--red)';stat.textContent='Çekilemedi (site engellemiş ya da proxy yanıt vermedi olabilir). Bilgileri elle girebilirsin.';return;}
+  let title='',desc='',img='';
+  if(res.type==='html'){
+    const doc=new DOMParser().parseFromString(res.body,'text/html');
+    title=metaOf(doc,'og:title')||(doc.querySelector('title')?doc.querySelector('title').textContent:'');
+    desc=metaOf(doc,'og:description')||metaOf(doc,'description')||'';
+    img=metaOf(doc,'og:image')||'';
+  }else{
+    const t=res.body;
+    const mt=t.match(/Title:\s*(.+)/i); title=mt?mt[1].trim():'';
+    const mi=t.match(/!\[[^\]]*\]\((https?:[^)]+\.(?:jpg|jpeg|png|webp)[^)]*)\)/i); img=mi?mi[1]:'';
+    desc=t.slice(0,800);
+  }
   if(!title){stat.style.color='var(--red)';stat.textContent='Sayfada başlık bilgisi bulunamadı. Elle girebilirsin.';return;}
   // başlık temizliği: " - Whiskybase", " | Master of Malt" gibi son ekleri at
   let name=title.split(/\s[\|–-]\s/)[0].trim();

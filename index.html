@@ -244,7 +244,7 @@ nav.tabs{display:flex;gap:7px;flex-wrap:wrap;margin:20px 0 14px;padding-bottom:2
 <header><div class="wrap">
   <div class="brand">
     <div style="font-size:34px">🥃</div>
-    <div><h1 onclick="location.href='./'" style="cursor:pointer" title="Ana sayfaya dön">Viski Atlası <span style="font-size:13px;color:var(--muted2);font-weight:600;vertical-align:middle">v1.4</span></h1>
+    <div><h1 onclick="location.href='./'" style="cursor:pointer" title="Ana sayfaya dön">Viski Atlası <span style="font-size:13px;color:var(--muted2);font-weight:600;vertical-align:middle">v1.5</span></h1>
       <div class="sub">Bölge → Damıtımevi → Şişe · Uzman & AI tercihleri · Türkiye katmanları · Kişisel koleksiyon</div></div>
   </div>
   <div class="stats">
@@ -557,7 +557,6 @@ const DATA = [
 {id:'oban-18',ad:'Oban 18',dam:'Oban',ulke:'İskoçya',bolge:'Highland',sev:'2',tur:'Single Malt',abv:43,yas:'18',tl:10400,bul:'zor',puan:88,uz:'',ai:0,kat:0,not:'Sınırlı; olgun, dengeli'},
 {id:'oban-14',ad:'Oban 14',dam:'Oban',ulke:'İskoçya',bolge:'Highland',sev:'2',tur:'Single Malt',abv:43,yas:'14',tl:4800,bul:'tekel',puan:87,uz:'',ai:31,kat:0,not:'Sessiz, dengeli, hafif tuzlu'},
 {id:'oban-littlebay',ad:'Oban Little Bay',dam:'Oban',ulke:'İskoçya',bolge:'Highland',sev:'2',tur:'Single Malt',abv:43,yas:'NAS',tl:4400,bul:'tekel',puan:85,uz:'',ai:0,kat:0,not:'Küçük fıçı; daha yoğun'},
-{id:'tomatin-36',ad:'Tomatin 36',dam:'Tomatin',ulke:'İskoçya',bolge:'Highland',sev:'3',tur:'Single Malt',abv:43,yas:'36',tl:0,bul:'muzayede',puan:92,uz:'Meleklerin Payı 2018 (ikinci, paylaşımlı)',ai:0,kat:0,not:'Yıllanmış zarafet'},
 {id:'tomatin-18',ad:'Tomatin 18',dam:'Tomatin',ulke:'İskoçya',bolge:'Highland',sev:'3',tur:'Single Malt',abv:46,yas:'18',tl:6300,bul:'zor',puan:87,uz:'',ai:0,kat:0,ncf:1,not:'Oloroso bitiş; zengin'},
 {id:'tomatin-12',ad:'Tomatin 12',dam:'Tomatin',ulke:'İskoçya',bolge:'Highland',sev:'3',tur:'Single Malt',abv:43,yas:'12',tl:3200,bul:'tekel',puan:84,uz:'',ai:0,kat:0,not:'Yumuşak, meyveli, uygun'},
 {id:'aberfeldy-18',ad:'Aberfeldy 18',dam:'Aberfeldy',ulke:'İskoçya',bolge:'Highland',sev:'3',tur:'Single Malt',abv:43,yas:'18',tl:7500,bul:'zor',puan:87,uz:'',ai:0,kat:0,not:'Bal + şeri fıçısı'},
@@ -619,12 +618,12 @@ const DATA = [
 
 // ===== İSKOÇYA — CAMPBELTOWN =====
 {id:'springbank-21',ad:'Springbank 21',dam:'Springbank',ulke:'İskoçya',bolge:'Campbeltown',sev:'Premium',tur:'Single Malt',abv:46,yas:'21',tl:0,bul:'muzayede',puan:92,uz:'',ai:0,kat:0,ncf:1,not:'Aşırı talep gören kült şişe'},
-{id:'springbank-18',ad:'Springbank 18',dam:'Springbank',ulke:'İskoçya',bolge:'Campbeltown',sev:'Premium',tur:'Single Malt',abv:46,yas:'18',tl:0,bul:'zor',puan:91,uz:'',ai:0,kat:0,ncf:1,not:'Kült damıtımevi; bulunması çok zor'},
-{id:'springbank-15',ad:'Springbank 15',dam:'Springbank',ulke:'İskoçya',bolge:'Campbeltown',sev:'Premium',tur:'Single Malt',abv:46,yas:'15',tl:0,bul:'zor',puan:90,uz:'Çok-kaynaklı kült (Whiskyfun · WhiskyNotes · topluluk)',ai:15,kat:0,ncf:1,not:'Tuzlu-yağlı-isli kendine has profil'},
-{id:'springbank-12cs',ad:'Springbank 12 Cask Strength',dam:'Springbank',ulke:'İskoçya',bolge:'Campbeltown',sev:'Premium',tur:'Single Malt',abv:56,yas:'12',tl:0,bul:'zor',puan:90,uz:'',ai:0,kat:0,ncf:1,not:'Fıçı gücü; her batch farklı'},
-{id:'springbank-10',ad:'Springbank 10',dam:'Springbank',ulke:'İskoçya',bolge:'Campbeltown',sev:'Premium',tur:'Single Malt',abv:46,yas:'10',tl:0,bul:'zor',puan:89,uz:'',ai:36,kat:0,ncf:1,not:'“İçeriden” old-money favorisi'},
-{id:'longrow-peated',ad:'Longrow Peated',dam:'Springbank (Longrow)',ulke:'İskoçya',bolge:'Campbeltown',sev:'Premium',tur:'Single Malt',abv:46,yas:'NAS',tl:0,bul:'zor',puan:88,uz:'',ai:0,kat:0,ncf:1,not:'Springbank’in ağır isli markası'},
-{id:'hazelburn-10',ad:'Hazelburn 10',dam:'Springbank (Hazelburn)',ulke:'İskoçya',bolge:'Campbeltown',sev:'Premium',tur:'Single Malt',abv:46,yas:'10',tl:0,bul:'zor',puan:87,uz:'',ai:0,kat:0,ncf:1,not:'Üçlü damıtım, turbasız Springbank'},
+{id:'springbank-18',ad:'Springbank 18',dam:'Springbank',ulke:'İskoçya',bolge:'Campbeltown',sev:'Premium',tur:'Single Malt',abv:46,yas:'18',tl:28000,bul:'zor',puan:91,uz:'',ai:0,kat:0,ncf:1,not:'Kült damıtımevi; bulunması çok zor'},
+{id:'springbank-15',ad:'Springbank 15',dam:'Springbank',ulke:'İskoçya',bolge:'Campbeltown',sev:'Premium',tur:'Single Malt',abv:46,yas:'15',tl:18000,bul:'zor',puan:90,uz:'Çok-kaynaklı kült (Whiskyfun · WhiskyNotes · topluluk)',ai:15,kat:0,ncf:1,not:'Tuzlu-yağlı-isli kendine has profil'},
+{id:'springbank-12cs',ad:'Springbank 12 Cask Strength',dam:'Springbank',ulke:'İskoçya',bolge:'Campbeltown',sev:'Premium',tur:'Single Malt',abv:56,yas:'12',tl:13000,bul:'zor',puan:90,uz:'',ai:0,kat:0,ncf:1,not:'Fıçı gücü; her batch farklı'},
+{id:'springbank-10',ad:'Springbank 10',dam:'Springbank',ulke:'İskoçya',bolge:'Campbeltown',sev:'Premium',tur:'Single Malt',abv:46,yas:'10',tl:9500,bul:'zor',puan:89,uz:'',ai:36,kat:0,ncf:1,not:'“İçeriden” old-money favorisi'},
+{id:'longrow-peated',ad:'Longrow Peated',dam:'Springbank (Longrow)',ulke:'İskoçya',bolge:'Campbeltown',sev:'Premium',tur:'Single Malt',abv:46,yas:'NAS',tl:8500,bul:'zor',puan:88,uz:'',ai:0,kat:0,ncf:1,not:'Springbank’in ağır isli markası'},
+{id:'hazelburn-10',ad:'Hazelburn 10',dam:'Springbank (Hazelburn)',ulke:'İskoçya',bolge:'Campbeltown',sev:'Premium',tur:'Single Malt',abv:46,yas:'10',tl:7500,bul:'zor',puan:87,uz:'',ai:0,kat:0,ncf:1,not:'Üçlü damıtım, turbasız Springbank'},
 {id:'kilkerran-16',ad:'Kilkerran 16',dam:'Glengyle',ulke:'İskoçya',bolge:'Campbeltown',sev:'3',tur:'Single Malt',abv:46,yas:'16',tl:7500,bul:'zor',puan:89,uz:'',ai:0,kat:0,ncf:1,not:'Olgun, dengeli Campbeltown'},
 {id:'kilkerran-12',ad:'Kilkerran 12',dam:'Glengyle',ulke:'İskoçya',bolge:'Campbeltown',sev:'3',tur:'Single Malt',abv:46,yas:'12',tl:5200,bul:'zor',puan:88,uz:'',ai:46,kat:0,ncf:1,not:'Hafif isli, mineralli Campbeltown'},
 {id:'kilkerran-8cs',ad:'Kilkerran 8 Cask Strength',dam:'Glengyle',ulke:'İskoçya',bolge:'Campbeltown',sev:'3',tur:'Single Malt',abv:57,yas:'8',tl:5800,bul:'zor',puan:87,uz:'',ai:0,kat:0,ncf:1,not:'Fıçı gücü; canlı'},
@@ -647,7 +646,7 @@ const DATA = [
 {id:'talisker-10',ad:'Talisker 10',dam:'Talisker',ulke:'İskoçya',bolge:'Islands (Skye)',sev:'Premium',tur:'Single Malt',abv:45.8,yas:'10',tl:3100,bul:'kolay',puan:89,uz:'Klasik referans; çok-kaynaklı yüksek puan',ai:13,kat:1,not:'Biberli, tuzlu, denizci; bu paraya en çok karakter'},
 {id:'talisker-storm',ad:'Talisker Storm',dam:'Talisker',ulke:'İskoçya',bolge:'Islands (Skye)',sev:'Premium',tur:'Single Malt',abv:45.8,yas:'NAS',tl:3700,bul:'tekel',puan:86,uz:'',ai:0,kat:0,not:'Daha dumanlı, yoğun versiyon'},
 {id:'talisker-portruighe',ad:'Talisker Port Ruighe',dam:'Talisker',ulke:'İskoçya',bolge:'Islands (Skye)',sev:'Premium',tur:'Single Malt',abv:45.8,yas:'NAS',tl:3900,bul:'tekel',puan:85,uz:'',ai:0,kat:0,not:'Porto fıçısı bitiş; is + tatlı'},
-{id:'ledaig-16',ad:'Ledaig 16 (G&M Connoisseurs Choice)',dam:'Tobermory',ulke:'İskoçya',bolge:'Islands (Mull)',sev:'3',tur:'Single Malt',abv:46,yas:'16',tl:0,bul:'zor',puan:93,uz:'Meleklerin Payı (93) — yılın en iyi şişelerinden',ai:0,kat:0,ncf:1,not:'Uzun, isli bitiş'},
+{id:'ledaig-16',ad:'Ledaig 16 (G&M Connoisseurs Choice)',dam:'Tobermory',ulke:'İskoçya',bolge:'Islands (Mull)',sev:'3',tur:'Single Malt',abv:46,yas:'16',tl:9000,bul:'zor',puan:93,uz:'Meleklerin Payı (93) — yılın en iyi şişelerinden',ai:0,kat:0,ncf:1,not:'Uzun, isli bitiş'},
 {id:'ledaig-18',ad:'Ledaig 18',dam:'Tobermory',ulke:'İskoçya',bolge:'Islands (Mull)',sev:'3',tur:'Single Malt',abv:46.3,yas:'18',tl:8600,bul:'zor',puan:89,uz:'',ai:0,kat:0,ncf:1,not:'Şeri bitiş; yoğun is'},
 {id:'ledaig-10',ad:'Ledaig 10',dam:'Tobermory',ulke:'İskoçya',bolge:'Islands (Mull)',sev:'3',tur:'Single Malt',abv:46.3,yas:'10',tl:4100,bul:'zor',puan:86,uz:'',ai:0,kat:0,ncf:1,not:'Genç, canlı, isli Mull maltı'},
 {id:'tobermory-12',ad:'Tobermory 12',dam:'Tobermory',ulke:'İskoçya',bolge:'Islands (Mull)',sev:'3',tur:'Single Malt',abv:46.3,yas:'12',tl:4400,bul:'zor',puan:85,uz:'',ai:0,kat:0,ncf:1,not:'Turbasız, meyveli, yağlı'},
@@ -677,7 +676,7 @@ const DATA = [
 {id:'royalsalute-21',ad:'Royal Salute 21',dam:'Chivas Brothers',ulke:'İskoçya',bolge:'Harman (Blend)',sev:'Premium',tur:'Blend',abv:40,yas:'21',tl:13800,bul:'tekel',puan:87,uz:'II. Elizabeth’in taç giyme töreni için yapıldı',ai:0,kat:3,not:'Pürüzsüz, prestijli harman'},
 {id:'chivas-18',ad:'Chivas Regal 18',dam:'Chivas Brothers',ulke:'İskoçya',bolge:'Harman (Blend)',sev:'2',tur:'Blend',abv:40,yas:'18',tl:5200,bul:'tekel',puan:86,uz:'',ai:0,kat:0,not:'Zengin, çok katmanlı harman'},
 {id:'chivas-12',ad:'Chivas Regal 12',dam:'Chivas Brothers',ulke:'İskoçya',bolge:'Harman (Blend)',sev:'2',tur:'Blend',abv:40,yas:'12',tl:2000,bul:'kolay',puan:81,uz:'',ai:0,kat:0,not:'Yumuşak, klasik misafir harmanı'},
-{id:'ballantines-30',ad:"Ballantine's 30",dam:"Ballantine's",ulke:'İskoçya',bolge:'Harman (Blend)',sev:'2',tur:'Blend',abv:40,yas:'30',tl:0,bul:'zor',puan:90,uz:'Jim Murray 2021 — Yılın İskoç Harmanı',ai:0,kat:0,not:'Yıllanmış lüks harman'},
+{id:'ballantines-30',ad:"Ballantine's 30",dam:"Ballantine's",ulke:'İskoçya',bolge:'Harman (Blend)',sev:'2',tur:'Blend',abv:40,yas:'30',tl:30000,bul:'zor',puan:90,uz:'Jim Murray 2021 — Yılın İskoç Harmanı',ai:0,kat:0,not:'Yıllanmış lüks harman'},
 {id:'dewars-18',ad:"Dewar's 18",dam:"Dewar's",ulke:'İskoçya',bolge:'Harman (Blend)',sev:'3',tur:'Blend',abv:40,yas:'18',tl:4400,bul:'tekel',puan:85,uz:'',ai:0,kat:0,not:'Çifte yaşlandırma; pürüzsüz'},
 {id:'dewars-12',ad:"Dewar's 12",dam:"Dewar's",ulke:'İskoçya',bolge:'Harman (Blend)',sev:'3',tur:'Blend',abv:40,yas:'12',tl:2000,bul:'kolay',puan:81,uz:'',ai:0,kat:0,not:'Uygun, kolay içim'},
 {id:'compass-spicetree',ad:'Compass Box The Spice Tree',dam:'Compass Box',ulke:'İskoçya',bolge:'Harman (Blended Malt)',sev:'2',tur:'Blend',abv:46,yas:'NAS',tl:5200,bul:'zor',puan:88,uz:'Jim Murray 2021 — Yılın Vatted Malt’ı',ai:0,kat:0,ncf:1,not:'Baharatlı, yenilikçi harman'},
@@ -693,7 +692,7 @@ const DATA = [
 {id:'redbreast-lustau',ad:'Redbreast Lustau',dam:'Midleton',ulke:'İrlanda',bolge:'İrlanda',sev:'Premium',tur:'Single Pot Still',abv:46,yas:'NAS',tl:5200,bul:'zor',puan:88,uz:'',ai:0,kat:0,ncf:1,not:'Lustau şeri fıçısı bitiş'},
 {id:'redbreast-12',ad:'Redbreast 12',dam:'Midleton',ulke:'İrlanda',bolge:'İrlanda',sev:'Premium',tur:'Single Pot Still',abv:40,yas:'12',tl:4600,bul:'tekel',puan:89,uz:'Çok-kaynaklı İrlanda referansı',ai:19,kat:3,not:'Single pot still türünün bayrağı'},
 {id:'midleton-vr',ad:'Midleton Very Rare',dam:'Midleton',ulke:'İrlanda',bolge:'İrlanda',sev:'Premium',tur:'Blend',abv:40,yas:'NAS',tl:12600,bul:'zor',puan:90,uz:'',ai:0,kat:0,not:'İrlanda prestij harmanı'},
-{id:'midleton-crockett',ad:'Midleton Barry Crockett Legacy',dam:'Midleton',ulke:'İrlanda',bolge:'İrlanda',sev:'Premium',tur:'Single Pot Still',abv:46,yas:'NAS',tl:0,bul:'zor',puan:91,uz:'Jim Murray 2021 — Yılın İrlanda Viskisi',ai:0,kat:0,ncf:1,not:'Usta damıtıcıya saygı şişesi'},
+{id:'midleton-crockett',ad:'Midleton Barry Crockett Legacy',dam:'Midleton',ulke:'İrlanda',bolge:'İrlanda',sev:'Premium',tur:'Single Pot Still',abv:46,yas:'NAS',tl:22000,bul:'zor',puan:91,uz:'Jim Murray 2021 — Yılın İrlanda Viskisi',ai:0,kat:0,ncf:1,not:'Usta damıtıcıya saygı şişesi'},
 {id:'greenspot-yellow',ad:'Yellow Spot 12',dam:'Spot (Mitchell & Son)',ulke:'İrlanda',bolge:'İrlanda',sev:'2',tur:'Single Pot Still',abv:46,yas:'12',tl:5800,bul:'zor',puan:89,uz:'',ai:0,kat:0,ncf:1,not:'Malaga fıçı; bal-baharat'},
 {id:'greenspot-red',ad:'Red Spot 15',dam:'Spot (Mitchell & Son)',ulke:'İrlanda',bolge:'İrlanda',sev:'2',tur:'Single Pot Still',abv:46,yas:'15',tl:7500,bul:'zor',puan:90,uz:'',ai:0,kat:0,ncf:1,not:'Marsala fıçı bitiş; en üst Spot'},
 {id:'greenspot',ad:'Green Spot',dam:'Spot (Mitchell & Son)',ulke:'İrlanda',bolge:'İrlanda',sev:'2',tur:'Single Pot Still',abv:40,yas:'NAS',tl:4100,bul:'zor',puan:88,uz:'',ai:20,kat:0,not:'Taze, baharatlı, çok içilebilir'},
@@ -707,7 +706,7 @@ const DATA = [
 {id:'jameson-blackbarrel',ad:'Jameson Black Barrel',dam:'Jameson',ulke:'İrlanda',bolge:'İrlanda',sev:'3',tur:'Blend',abv:40,yas:'NAS',tl:2800,bul:'kolay',puan:84,uz:'',ai:0,kat:0,not:'Çift kavrulmuş fıçı'},
 {id:'jameson-caskmates',ad:'Jameson Caskmates Stout',dam:'Jameson',ulke:'İrlanda',bolge:'İrlanda',sev:'3',tur:'Blend',abv:40,yas:'NAS',tl:2300,bul:'tekel',puan:82,uz:'',ai:0,kat:0,not:'Stout bira fıçısı bitiş'},
 {id:'jameson',ad:'Jameson Original',dam:'Jameson',ulke:'İrlanda',bolge:'İrlanda',sev:'3',tur:'Blend',abv:40,yas:'NAS',tl:1700,bul:'kolay',puan:80,uz:'',ai:0,kat:0,not:'Dünyanın en çok satan İrlanda viskisi'},
-{id:'teeling-revival',ad:'Teeling Revival V',dam:'Teeling',ulke:'İrlanda',bolge:'İrlanda',sev:'3',tur:'Single Malt',abv:46,yas:'NAS',tl:0,bul:'zor',puan:88,uz:'Meleklerin Payı 2018 — dikkate değer',ai:0,kat:0,ncf:1,not:'Modern Dublin damıtımevi'},
+{id:'teeling-revival',ad:'Teeling Revival V',dam:'Teeling',ulke:'İrlanda',bolge:'İrlanda',sev:'3',tur:'Single Malt',abv:46,yas:'NAS',tl:11000,bul:'zor',puan:88,uz:'Meleklerin Payı 2018 — dikkate değer',ai:0,kat:0,ncf:1,not:'Modern Dublin damıtımevi'},
 {id:'teeling-singlemalt',ad:'Teeling Single Malt',dam:'Teeling',ulke:'İrlanda',bolge:'İrlanda',sev:'3',tur:'Single Malt',abv:46,yas:'NAS',tl:4100,bul:'tekel',puan:86,uz:'',ai:0,kat:0,ncf:1,not:'Beş fıçı; meyveli'},
 {id:'teeling-smallbatch',ad:'Teeling Small Batch',dam:'Teeling',ulke:'İrlanda',bolge:'İrlanda',sev:'3',tur:'Blend',abv:46,yas:'NAS',tl:2800,bul:'tekel',puan:84,uz:'',ai:0,kat:0,ncf:1,not:'Rom fıçısı; modern harman'},
 {id:'connemara-peated',ad:'Connemara Peated Single Malt',dam:'Cooley (Connemara)',ulke:'İrlanda',bolge:'İrlanda',sev:'3',tur:'Single Malt',abv:40,yas:'NAS',tl:3200,bul:'tekel',puan:84,uz:'',ai:0,kat:0,not:'Nadir isli İrlanda maltı'},
@@ -748,7 +747,7 @@ const DATA = [
 {id:'bulleit-bourbon',ad:'Bulleit Bourbon',dam:'Bulleit',ulke:'ABD',bolge:'Bourbon (Kentucky)',sev:'3',tur:'Bourbon',abv:45,yas:'NAS',tl:2300,bul:'tekel',puan:83,uz:'',ai:0,kat:0,not:'Yüksek çavdarlı; kokteyl dostu'},
 
 // ===== ABD — RYE =====
-{id:'whistlepig-15',ad:'WhistlePig 15',dam:'WhistlePig',ulke:'ABD',bolge:'Rye (Çavdar)',sev:'Premium',tur:'Rye',abv:46,yas:'15',tl:0,bul:'zor',puan:91,uz:'',ai:0,kat:0,not:'Vermont çavdarının vitrini'},
+{id:'whistlepig-15',ad:'WhistlePig 15',dam:'WhistlePig',ulke:'ABD',bolge:'Rye (Çavdar)',sev:'Premium',tur:'Rye',abv:46,yas:'15',tl:17000,bul:'zor',puan:91,uz:'',ai:0,kat:0,not:'Vermont çavdarının vitrini'},
 {id:'whistlepig-12',ad:'WhistlePig 12',dam:'WhistlePig',ulke:'ABD',bolge:'Rye (Çavdar)',sev:'Premium',tur:'Rye',abv:43.92,yas:'12',tl:9800,bul:'zor',puan:89,uz:'',ai:0,kat:0,not:'Üç şarap fıçısı bitiş'},
 {id:'whistlepig-10',ad:'WhistlePig 10',dam:'WhistlePig',ulke:'ABD',bolge:'Rye (Çavdar)',sev:'Premium',tur:'Rye',abv:50,yas:'10',tl:7500,bul:'zor',puan:89,uz:'',ai:0,kat:0,not:'%100 çavdar; baharatlı'},
 {id:'bookersrye-13',ad:"Booker's Rye 13",dam:'Jim Beam',ulke:'ABD',bolge:'Rye (Çavdar)',sev:'Premium',tur:'Rye',abv:68.1,yas:'13',tl:0,bul:'muzayede',puan:97,uz:'Jim Murray 2017 Dünya Birincisi (97.5)',ai:0,kat:0,ncf:1,not:'Efsanevi sınırlı çavdar'},
@@ -768,15 +767,15 @@ const DATA = [
 
 // ===== KANADA =====
 {id:'crownroyal-harvest',ad:'Crown Royal Northern Harvest Rye',dam:'Crown Royal',ulke:'Kanada',bolge:'Kanada Çavdar',sev:'2',tur:'Rye',abv:45,yas:'NAS',tl:2800,bul:'zor',puan:96,uz:'Jim Murray 2016 Dünya Birincisi (97.5)',ai:0,kat:0,not:'Erişilebilir ama ödüllü çavdar'},
-{id:'alberta-cs',ad:'Alberta Premium Cask Strength Rye',dam:'Alberta Distillers',ulke:'Kanada',bolge:'Kanada Çavdar',sev:'2',tur:'Rye',abv:65.1,yas:'NAS',tl:0,bul:'zor',puan:97,uz:'Jim Murray 2021 Dünya Birincisi',ai:0,kat:0,ncf:1,not:'%100 çavdar fıçı gücü'},
+{id:'alberta-cs',ad:'Alberta Premium Cask Strength Rye',dam:'Alberta Distillers',ulke:'Kanada',bolge:'Kanada Çavdar',sev:'2',tur:'Rye',abv:65.1,yas:'NAS',tl:6500,bul:'zor',puan:97,uz:'Jim Murray 2021 Dünya Birincisi',ai:0,kat:0,ncf:1,not:'%100 çavdar fıçı gücü'},
 
 // ===== JAPONYA =====
 {id:'yamazaki-sherry13',ad:'Yamazaki Sherry Cask 2013',dam:'Yamazaki (Suntory)',ulke:'Japonya',bolge:'Japonya',sev:'Premium',tur:'Single Malt',abv:48,yas:'NAS',tl:0,bul:'muzayede',puan:97,uz:'Jim Murray 2015 Dünya Birincisi (97.5) — ilk Japon',ai:0,kat:0,ncf:1,not:'Tarihi şeri fıçı sürümü'},
 {id:'yamazaki-25',ad:'Yamazaki 25',dam:'Yamazaki (Suntory)',ulke:'Japonya',bolge:'Japonya',sev:'Premium',tur:'Single Malt',abv:43,yas:'25',tl:0,bul:'muzayede',puan:95,uz:'',ai:0,kat:0,not:'Aşırı nadir Japon kupası'},
-{id:'yamazaki-18',ad:'Yamazaki 18',dam:'Yamazaki (Suntory)',ulke:'Japonya',bolge:'Japonya',sev:'Premium',tur:'Single Malt',abv:43,yas:'18',tl:0,bul:'zor',puan:93,uz:'WWA & Jim Murray; Japon zirvesi',ai:16,kat:0,not:'Japon tek maltının tacı (artık çok pahalı)'},
+{id:'yamazaki-18',ad:'Yamazaki 18',dam:'Yamazaki (Suntory)',ulke:'Japonya',bolge:'Japonya',sev:'Premium',tur:'Single Malt',abv:43,yas:'18',tl:78000,bul:'zor',puan:93,uz:'WWA & Jim Murray; Japon zirvesi',ai:16,kat:0,not:'Japon tek maltının tacı (artık çok pahalı)'},
 {id:'yamazaki-12',ad:'Yamazaki 12',dam:'Yamazaki (Suntory)',ulke:'Japonya',bolge:'Japonya',sev:'Premium',tur:'Single Malt',abv:43,yas:'12',tl:10900,bul:'dutyfree',puan:90,uz:'',ai:38,kat:3,not:'Şeri-meyve; ikonik giriş'},
 {id:'hakushu-25',ad:'Hakushu 25',dam:'Hakushu (Suntory)',ulke:'Japonya',bolge:'Japonya',sev:'Premium',tur:'Single Malt',abv:43,yas:'25',tl:0,bul:'muzayede',puan:94,uz:'Meleklerin Payı 2017 Yılın Viskisi (94)',ai:0,kat:0,not:'WWA En İyi Japon Single Malt'},
-{id:'hakushu-18',ad:'Hakushu 18',dam:'Hakushu (Suntory)',ulke:'Japonya',bolge:'Japonya',sev:'Premium',tur:'Single Malt',abv:43,yas:'18',tl:0,bul:'zor',puan:92,uz:'',ai:0,kat:0,not:'Yeşil, isli, zarif'},
+{id:'hakushu-18',ad:'Hakushu 18',dam:'Hakushu (Suntory)',ulke:'Japonya',bolge:'Japonya',sev:'Premium',tur:'Single Malt',abv:43,yas:'18',tl:72000,bul:'zor',puan:92,uz:'',ai:0,kat:0,not:'Yeşil, isli, zarif'},
 {id:'hakushu-12',ad:'Hakushu 12',dam:'Hakushu (Suntory)',ulke:'Japonya',bolge:'Japonya',sev:'Premium',tur:'Single Malt',abv:43,yas:'12',tl:10400,bul:'dutyfree',puan:90,uz:'',ai:17,kat:3,not:'Yeşil, ferah, hafif isli'},
 {id:'hibiki-21',ad:'Hibiki 21',dam:'Suntory',ulke:'Japonya',bolge:'Japonya',sev:'Premium',tur:'Blend',abv:43,yas:'21',tl:0,bul:'muzayede',puan:94,uz:'WWA Dünyanın En İyi Harmanı (defalarca)',ai:0,kat:0,not:'Defalarca “dünyanın en iyi harmanı”'},
 {id:'hibiki-harmony',ad:'Hibiki Harmony',dam:'Suntory',ulke:'Japonya',bolge:'Japonya',sev:'Premium',tur:'Blend',abv:43,yas:'NAS',tl:9200,bul:'dutyfree',puan:88,uz:'',ai:39,kat:3,not:'Zarif, çiçeksi Japon harmanı'},
@@ -792,7 +791,7 @@ const DATA = [
 {id:'akashi-whiteoak',ad:'Akashi White Oak',dam:'White Oak (Eigashima)',ulke:'Japonya',bolge:'Japonya',sev:'3',tur:'Blend',abv:40,yas:'NAS',tl:3400,bul:'zor',puan:82,uz:'',ai:0,kat:0,not:'Küçük damıtımevi; tahıllı'},
 
 // ===== HİNDİSTAN =====
-{id:'amrut-greedyangels',ad:'Amrut Greedy Angels',dam:'Amrut',ulke:'Hindistan',bolge:'Hindistan',sev:'2',tur:'Single Malt',abv:50,yas:'8+',tl:0,bul:'zor',puan:91,uz:'',ai:0,kat:0,ncf:1,not:'Amrut’un üst sınıf sürümü'},
+{id:'amrut-greedyangels',ad:'Amrut Greedy Angels',dam:'Amrut',ulke:'Hindistan',bolge:'Hindistan',sev:'2',tur:'Single Malt',abv:50,yas:'8+',tl:24000,bul:'zor',puan:91,uz:'',ai:0,kat:0,ncf:1,not:'Amrut’un üst sınıf sürümü'},
 {id:'amrut-fusion',ad:'Amrut Fusion',dam:'Amrut',ulke:'Hindistan',bolge:'Hindistan',sev:'2',tur:'Single Malt',abv:50,yas:'NAS',tl:5200,bul:'zor',puan:89,uz:'Jim Murray — dünyanın en iyi 3.’sü (2010)',ai:25,kat:0,ncf:1,not:'Turbalı/turbasız arpa füzyonu; çok övülen'},
 {id:'amrut-cs',ad:'Amrut Cask Strength',dam:'Amrut',ulke:'Hindistan',bolge:'Hindistan',sev:'2',tur:'Single Malt',abv:61.8,yas:'NAS',tl:5800,bul:'zor',puan:88,uz:'',ai:0,kat:0,ncf:1,not:'Tam güçte; yoğun'},
 {id:'amrut-peated',ad:'Amrut Peated Single Malt',dam:'Amrut',ulke:'Hindistan',bolge:'Hindistan',sev:'2',tur:'Single Malt',abv:46,yas:'NAS',tl:4600,bul:'zor',puan:87,uz:'',ai:0,kat:0,ncf:1,not:'Tropikal olgunlukta turba'},
@@ -806,14 +805,14 @@ const DATA = [
 {id:'kavalan-solist',ad:'Kavalan Solist (Vinho/Sherry)',dam:'Kavalan',ulke:'Tayvan',bolge:'Tayvan',sev:'Premium',tur:'Single Malt',abv:57,yas:'NAS',tl:10400,bul:'zor',puan:91,uz:'WWA Dünyanın En İyi Single Malt’ı (2015)',ai:24,kat:0,ncf:1,not:'Sıcak iklimin yoğunlaştırdığı ödüllü tek malt'},
 {id:'kavalan-sherryoak',ad:'Kavalan Sherry Oak',dam:'Kavalan',ulke:'Tayvan',bolge:'Tayvan',sev:'Premium',tur:'Single Malt',abv:46,yas:'NAS',tl:8000,bul:'zor',puan:88,uz:'',ai:0,kat:0,not:'Zengin şeri; tropikal'},
 {id:'kavalan-classic',ad:'Kavalan Classic',dam:'Kavalan',ulke:'Tayvan',bolge:'Tayvan',sev:'Premium',tur:'Single Malt',abv:40,yas:'NAS',tl:6300,bul:'zor',puan:87,uz:'',ai:48,kat:0,not:'Tropikal meyveli giriş'},
-{id:'penderyn-rhiannon',ad:'Penderyn Rhiannon',dam:'Penderyn',ulke:'Galler',bolge:'Galler',sev:'3',tur:'Single Malt',abv:46,yas:'NAS',tl:0,bul:'zor',puan:89,uz:'Jim Murray 2021 — Yılın Galler Viskisi',ai:0,kat:0,not:'Sınırlı sürüm Galler maltı'},
+{id:'penderyn-rhiannon',ad:'Penderyn Rhiannon',dam:'Penderyn',ulke:'Galler',bolge:'Galler',sev:'3',tur:'Single Malt',abv:46,yas:'NAS',tl:9000,bul:'zor',puan:89,uz:'Jim Murray 2021 — Yılın Galler Viskisi',ai:0,kat:0,not:'Sınırlı sürüm Galler maltı'},
 {id:'penderyn-madeira',ad:'Penderyn Madeira',dam:'Penderyn',ulke:'Galler',bolge:'Galler',sev:'3',tur:'Single Malt',abv:46,yas:'NAS',tl:5200,bul:'zor',puan:85,uz:'',ai:0,kat:0,not:'Madeira fıçı; narin'},
 {id:'penderyn-legend',ad:'Penderyn Legend',dam:'Penderyn',ulke:'Galler',bolge:'Galler',sev:'3',tur:'Single Malt',abv:41,yas:'NAS',tl:4400,bul:'zor',puan:83,uz:'',ai:0,kat:0,not:'Hafif, deniz esintili giriş'},
 {id:'box-quercus',ad:'Box Quercus I Robur',dam:'Box (High Coast)',ulke:'İsveç',bolge:'İsveç',sev:'3',tur:'Single Malt',abv:50,yas:'NAS',tl:0,bul:'muzayede',puan:90,uz:'Meleklerin Payı 2018 — dikkate değer',ai:0,kat:0,ncf:1,not:'İsveç meşesi deneyi'},
-{id:'mackmyra-cask',ad:'Mackmyra Svensk Single Cask',dam:'Mackmyra',ulke:'İsveç',bolge:'İsveç',sev:'3',tur:'Single Malt',abv:46,yas:'NAS',tl:0,bul:'zor',puan:88,uz:'Jim Murray 2021 — Yılın İsveç Viskisi',ai:0,kat:0,ncf:1,not:'İskandinav meşe karakteri'},
+{id:'mackmyra-cask',ad:'Mackmyra Svensk Single Cask',dam:'Mackmyra',ulke:'İsveç',bolge:'İsveç',sev:'3',tur:'Single Malt',abv:46,yas:'NAS',tl:12000,bul:'zor',puan:88,uz:'Jim Murray 2021 — Yılın İsveç Viskisi',ai:0,kat:0,ncf:1,not:'İskandinav meşe karakteri'},
 {id:'mackmyra-bruks',ad:'Mackmyra Brukswhisky',dam:'Mackmyra',ulke:'İsveç',bolge:'İsveç',sev:'3',tur:'Single Malt',abv:41.4,yas:'NAS',tl:4400,bul:'zor',puan:84,uz:'',ai:0,kat:0,not:'Günlük İsveç maltı'},
 {id:'starward-nova',ad:'Starward Nova',dam:'Starward',ulke:'Avustralya',bolge:'Avustralya',sev:'3',tur:'Single Malt',abv:41,yas:'NAS',tl:4600,bul:'zor',puan:86,uz:'',ai:49,kat:0,ncf:1,not:'Kırmızı şarap fıçısı; meyveli'},
-{id:'english-11',ad:'The English 11 Year Old',dam:'The English Whisky Co.',ulke:'İngiltere',bolge:'İngiltere',sev:'3',tur:'Single Malt',abv:46,yas:'11',tl:0,bul:'zor',puan:88,uz:'Jim Murray 2021 — Yılın İngiliz Viskisi',ai:0,kat:0,ncf:1,not:'Norfolk damıtımevi'},
+{id:'english-11',ad:'The English 11 Year Old',dam:'The English Whisky Co.',ulke:'İngiltere',bolge:'İngiltere',sev:'3',tur:'Single Malt',abv:46,yas:'11',tl:9000,bul:'zor',puan:88,uz:'Jim Murray 2021 — Yılın İngiliz Viskisi',ai:0,kat:0,ncf:1,not:'Norfolk damıtımevi'},
 {id:'bimber-original',ad:'Bimber Original',dam:'Bimber',ulke:'İngiltere',bolge:'İngiltere',sev:'3',tur:'Single Malt',abv:51.5,yas:'NAS',tl:7500,bul:'zor',puan:88,uz:'',ai:0,kat:0,ncf:1,not:'Londra butik; kült'},
 {id:'stauning-rye',ad:'Stauning Rye',dam:'Stauning',ulke:'Danimarka',bolge:'Danimarka',sev:'3',tur:'Rye',abv:48,yas:'NAS',tl:5800,bul:'zor',puan:86,uz:'',ai:0,kat:0,ncf:1,not:'Danimarka çavdarı; isli'},
 {id:'mh-classic',ad:'Milk & Honey Classic',dam:'Milk & Honey',ulke:'İsrail',bolge:'İsrail',sev:'3',tur:'Single Malt',abv:46,yas:'NAS',tl:5200,bul:'zor',puan:85,uz:'',ai:0,kat:0,ncf:1,not:'Tel Aviv; sıcak iklim olgunlaşması'},
@@ -910,7 +909,7 @@ const DATA = [
 {id:'gtstagg',ad:'George T. Stagg (BTAC)',dam:'Buffalo Trace',ulke:'ABD',bolge:'Bourbon (Kentucky)',sev:'Premium',tur:'Bourbon',abv:65,yas:'NAS',tl:0,bul:'muzayede',puan:95,uz:'',ai:0,kat:0,ncf:1,not:'Antique Collection; kült fıçı gücü'},
 {id:'sazerac-18',ad:'Sazerac 18 (BTAC)',dam:'Buffalo Trace',ulke:'ABD',bolge:'Rye (Çavdar)',sev:'Premium',tur:'Rye',abv:45,yas:'18',tl:0,bul:'muzayede',puan:93,uz:'',ai:0,kat:0,not:'Yıllanmış prestij çavdar'},
 {id:'ehtaylor-bp',ad:'E.H. Taylor Barrel Proof',dam:'Buffalo Trace',ulke:'ABD',bolge:'Bourbon (Kentucky)',sev:'2',tur:'Bourbon',abv:64.5,yas:'NAS',tl:0,bul:'muzayede',puan:90,uz:'',ai:0,kat:0,ncf:1,not:'Tam güçte bottled-in-bond'},
-{id:'weller-fullproof',ad:'W.L. Weller Full Proof',dam:'Buffalo Trace',ulke:'ABD',bolge:'Bourbon (Kentucky)',sev:'2',tur:'Bourbon',abv:57,yas:'NAS',tl:0,bul:'zor',puan:89,uz:'',ai:0,kat:0,ncf:1,not:'Buğdaylı, tam güçte'},
+{id:'weller-fullproof',ad:'W.L. Weller Full Proof',dam:'Buffalo Trace',ulke:'ABD',bolge:'Bourbon (Kentucky)',sev:'2',tur:'Bourbon',abv:57,yas:'NAS',tl:14000,bul:'zor',puan:89,uz:'',ai:0,kat:0,ncf:1,not:'Buğdaylı, tam güçte'},
 {id:'oldforester-1920',ad:'Old Forester 1920',dam:'Old Forester',ulke:'ABD',bolge:'Bourbon (Kentucky)',sev:'2',tur:'Bourbon',abv:57.5,yas:'NAS',tl:4400,bul:'zor',puan:88,uz:'',ai:0,kat:0,not:'Yüksek dereceli, zengin'},
 {id:'oldforester-1910',ad:'Old Forester 1910 Old Fine',dam:'Old Forester',ulke:'ABD',bolge:'Bourbon (Kentucky)',sev:'2',tur:'Bourbon',abv:46.5,yas:'NAS',tl:3900,bul:'zor',puan:87,uz:'',ai:0,kat:0,not:'İkinci fıçı; tatlı, çikolatamsı'},
 {id:'michters-10bourbon',ad:"Michter's 10 Year Bourbon",dam:"Michter's",ulke:'ABD',bolge:'Bourbon (Kentucky)',sev:'2',tur:'Bourbon',abv:47.2,yas:'10',tl:10400,bul:'zor',puan:90,uz:'',ai:43,kat:0,not:'Olgun, çok aranan tek fıçı'},
@@ -1074,8 +1073,8 @@ const DATA = [
 {id:'talisker-darkstorm',ad:'Talisker Dark Storm',dam:'Talisker',ulke:'İskoçya',bolge:'Islands (Skye)',sev:'Premium',tur:'Single Malt',abv:45.8,yas:'NAS',tl:4400,bul:'zor',puan:85,uz:'',ai:0,kat:0,not:'Ağır kavrulmuş fıçı; en isli Talisker'},
 {id:'jura-sevenwood',ad:'Jura Seven Wood',dam:'Jura',ulke:'İskoçya',bolge:'Islands (Jura)',sev:'3',tur:'Single Malt',abv:42,yas:'NAS',tl:4600,bul:'zor',puan:84,uz:'',ai:0,kat:0,not:'Yedi farklı Fransız meşesi'},
 {id:'tobermory-23',ad:'Tobermory 23',dam:'Tobermory',ulke:'İskoçya',bolge:'Islands (Mull)',sev:'3',tur:'Single Malt',abv:46.3,yas:'23',tl:13800,bul:'muzayede',puan:89,uz:'',ai:0,kat:0,ncf:1,not:'Yıllanmış turbasız Mull maltı'},
-{id:'longrow-18',ad:'Longrow 18',dam:'Springbank (Longrow)',ulke:'İskoçya',bolge:'Campbeltown',sev:'Premium',tur:'Single Malt',abv:46,yas:'18',tl:0,bul:'zor',puan:90,uz:'',ai:0,kat:0,ncf:1,not:'Yıllanmış isli Springbank kardeşi'},
-{id:'hazelburn-13',ad:'Hazelburn 13 Oloroso',dam:'Springbank (Hazelburn)',ulke:'İskoçya',bolge:'Campbeltown',sev:'Premium',tur:'Single Malt',abv:47.1,yas:'13',tl:0,bul:'zor',puan:89,uz:'',ai:0,kat:0,ncf:1,not:'Tam oloroso; turbasız'},
+{id:'longrow-18',ad:'Longrow 18',dam:'Springbank (Longrow)',ulke:'İskoçya',bolge:'Campbeltown',sev:'Premium',tur:'Single Malt',abv:46,yas:'18',tl:22000,bul:'zor',puan:90,uz:'',ai:0,kat:0,ncf:1,not:'Yıllanmış isli Springbank kardeşi'},
+{id:'hazelburn-13',ad:'Hazelburn 13 Oloroso',dam:'Springbank (Hazelburn)',ulke:'İskoçya',bolge:'Campbeltown',sev:'Premium',tur:'Single Malt',abv:47.1,yas:'13',tl:11000,bul:'zor',puan:89,uz:'',ai:0,kat:0,ncf:1,not:'Tam oloroso; turbasız'},
 {id:'kilkerran-heavypeat',ad:'Kilkerran Heavily Peated',dam:'Glengyle',ulke:'İskoçya',bolge:'Campbeltown',sev:'3',tur:'Single Malt',abv:57,yas:'NAS',tl:6300,bul:'zor',puan:87,uz:'',ai:0,kat:0,ncf:1,not:'Yoğun isli Kilkerran sürümü'},
 
 // --- Lowland ek ---
@@ -1277,12 +1276,10 @@ const DATA = [
 {id:"clonakilty-port",ad:"Clonakilty Port Cask",dam:"Clonakilty",ulke:"İrlanda",bolge:"İrlanda",sev:"3",tur:"Single Malt",abv:43.6,yas:"NAS",tl:4400,bul:"zor",puan:83,uz:"",ai:0,kat:0,not:"Atlantik kıyısı; porto bitiş"},
 {id:"oldforester-1897",ad:"Old Forester 1897 Bottled-in-Bond",dam:"Old Forester",ulke:"ABD",bolge:"Bourbon (Kentucky)",sev:"2",tur:"Bourbon",abv:50,yas:"NAS",tl:3400,bul:"zor",puan:86,uz:"",ai:0,kat:0,not:"Yüksek dereceli BiB"},
 {id:"oldforester-statesman",ad:"Old Forester Statesman",dam:"Old Forester",ulke:"ABD",bolge:"Bourbon (Kentucky)",sev:"2",tur:"Bourbon",abv:47.5,yas:"NAS",tl:3700,bul:"zor",puan:85,uz:"",ai:0,kat:0,not:"Kingsman filmi sürümü"},
-{id:"michters-bourbon-sour",ad:"Michter’s US*1 Sour Mash",dam:"Michter's",ulke:"ABD",bolge:"Bourbon (Kentucky)",sev:"2",tur:"Bourbon",abv:43,yas:"NAS",tl:4100,bul:"zor",puan:85,uz:"",ai:0,kat:0,not:"Bourbon-çavdar arası; yumuşak"},
 {id:"michters-toasted",ad:"Michter’s Toasted Barrel Bourbon",dam:"Michter's",ulke:"ABD",bolge:"Bourbon (Kentucky)",sev:"2",tur:"Bourbon",abv:45.7,yas:"NAS",tl:7500,bul:"zor",puan:88,uz:"",ai:0,kat:0,not:"İkinci kavrulmuş fıçı; aranan"},
 {id:"makersmark-cellar",ad:"Maker’s Mark Cellar Aged",dam:"Maker's Mark",ulke:"ABD",bolge:"Bourbon (Kentucky)",sev:"2",tur:"Bourbon",abv:57.85,yas:"NAS",tl:10400,bul:"muzayede",puan:89,uz:"",ai:0,kat:0,not:"En yıllı Maker’s; sınırlı"},
 {id:"jimbeam-devils",ad:"Jim Beam Devil’s Cut",dam:"Jim Beam",ulke:"ABD",bolge:"Bourbon (Kentucky)",sev:"3",tur:"Bourbon",abv:45,yas:"NAS",tl:2100,bul:"tekel",puan:79,uz:"",ai:0,kat:0,not:"Fıçıdan geri kazanılan; yoğun"},
 {id:"elijahcraig-18",ad:"Elijah Craig 18 Single Barrel",dam:"Heaven Hill",ulke:"ABD",bolge:"Bourbon (Kentucky)",sev:"3",tur:"Bourbon",abv:45,yas:"18",tl:10400,bul:"muzayede",puan:88,uz:"",ai:0,kat:0,not:"Yıllanmış tek fıçı"},
-{id:"russells-sib",ad:"Russell’s Reserve Single Barrel",dam:"Wild Turkey",ulke:"ABD",bolge:"Bourbon (Kentucky)",sev:"3",tur:"Bourbon",abv:55,yas:"NAS",tl:4600,bul:"zor",puan:88,uz:"",ai:0,kat:0,ncf:1,not:"Tek fıçı; yüksek dereceli"},
 {id:"knobcreek-singlebarrel",ad:"Knob Creek Single Barrel Reserve",dam:"Jim Beam",ulke:"ABD",bolge:"Bourbon (Kentucky)",sev:"3",tur:"Bourbon",abv:60,yas:"9",tl:3900,bul:"zor",puan:87,uz:"",ai:0,kat:0,not:"Tek fıçı; yüksek dereceli"},
 {id:"omar-bourbon",ad:"Omar Single Malt (Bourbon)",dam:"Nantou (TTL)",ulke:"Tayvan",bolge:"Tayvan",sev:"3",tur:"Single Malt",abv:46,yas:"NAS",tl:5200,bul:"zor",puan:84,uz:"",ai:0,kat:0,not:"Tayvan devlet damıtımevi; tropikal"},
 {id:"amrut-kadhambam",ad:"Amrut Kadhambam",dam:"Amrut",ulke:"Hindistan",bolge:"Hindistan",sev:"2",tur:"Single Malt",abv:50,yas:"NAS",tl:7500,bul:"zor",puan:87,uz:"",ai:0,kat:0,ncf:1,not:"Rom/şeri/bira fıçısı; egzotik"},
@@ -1333,7 +1330,6 @@ const DATA = [
 {id:"glenfiddich-select",ad:"Glenfiddich Select Cask",dam:"Glenfiddich",ulke:"İskoçya",bolge:"Speyside",sev:"2",tur:"Single Malt",abv:40,yas:"NAS",tl:3400,bul:"dutyfree",puan:83,uz:"",ai:0,kat:0,not:"Seyahat serisi; üç fıçı"},
 {id:"highlandpark-spiritbear",ad:"Highland Park Spirit of the Bear",dam:"Highland Park",ulke:"İskoçya",bolge:"Islands (Orkney)",sev:"Premium",tur:"Single Malt",abv:40,yas:"NAS",tl:3900,bul:"dutyfree",puan:84,uz:"",ai:0,kat:0,not:"Seyahat serisi; dengeli is"},
 {id:"ardbeg-anthology",ad:"Ardbeg Anthology",dam:"Ardbeg",ulke:"İskoçya",bolge:"Islay",sev:"Premium",tur:"Single Malt",abv:46,yas:"13",tl:10400,bul:"zor",puan:88,uz:"",ai:0,kat:0,ncf:1,not:"Yıllanmış; sınırlı koleksiyon"},
-{id:"macallan-15dc",ad:"The Macallan Double Cask 15",dam:"The Macallan",ulke:"İskoçya",bolge:"Speyside",sev:"Premium",tur:"Single Malt",abv:43,yas:"15",tl:10900,bul:"dutyfree",puan:89,uz:"",ai:0,kat:0,not:"Amerikan+Avrupa şeri; 15 yaş"},
 {id:"mackmyra-svenskek",ad:"Mackmyra Svensk Ek",dam:"Mackmyra",ulke:"İsveç",bolge:"İsveç",sev:"3",tur:"Single Malt",abv:46.1,yas:"NAS",tl:5500,bul:"zor",puan:85,uz:"",ai:0,kat:0,ncf:1,not:"İsveç meşesi; baharatlı"},
 {id:"stauning-kaos",ad:"Stauning KAOS",dam:"Stauning",ulke:"Danimarka",bolge:"Danimarka",sev:"3",tur:"Blend",abv:46,yas:"NAS",tl:6300,bul:"zor",puan:86,uz:"",ai:0,kat:0,ncf:1,not:"Çavdar+arpa+isli; üçlü harman"},
 {id:"amrut-bagheera",ad:"Amrut Bagheera",dam:"Amrut",ulke:"Hindistan",bolge:"Hindistan",sev:"2",tur:"Single Malt",abv:46,yas:"NAS",tl:5800,bul:"zor",puan:85,uz:"",ai:0,kat:0,ncf:1,not:"Seyahat serisi Hint maltı"},
@@ -1497,7 +1493,6 @@ const DATA = [
 {id:"cuttysark-prohibition",ad:"Cutty Sark Prohibition",dam:"Edrington",ulke:"İskoçya",bolge:"Harman (Blend)",sev:"3",tur:"Blend",abv:50,yas:"NAS",tl:1800,bul:"tekel",puan:81,uz:"",ai:0,kat:0,ncf:0,not:"Yüksek dereceli; baharatlı"},
 {id:"teachers-highland-bottled",ad:"Teacher’s 25",dam:"Teacher’s",ulke:"İskoçya",bolge:"Harman (Blend)",sev:"3",tur:"Blend",abv:46,yas:"25",tl:9000,bul:"muzayede",puan:87,uz:"",ai:0,kat:0,ncf:0,not:"Yıllanmış; nadir"},
 {id:"tomintoul-16b",ad:"Tomintoul 16 (ikinci)",dam:"Tomintoul",ulke:"İskoçya",bolge:"Speyside",sev:"3",tur:"Single Malt",abv:40,yas:"16",tl:3500,bul:"tekel",puan:84,uz:"",ai:0,kat:0,ncf:0,not:"Nazik dram; ek parti"},
-{id:"speyburn-bradan",ad:"Speyburn Bradan Orach",dam:"Speyburn",ulke:"İskoçya",bolge:"Speyside",sev:"3",tur:"Single Malt",abv:40,yas:"NAS",tl:1700,bul:"tekel",puan:79,uz:"",ai:0,kat:0,ncf:0,not:"Uygun giriş"},
 {id:"glenmoray-elgin12",ad:"Glen Moray Elgin Classic 12",dam:"Glen Moray",ulke:"İskoçya",bolge:"Speyside",sev:"3",tur:"Single Malt",abv:40,yas:"12",tl:2600,bul:"tekel",puan:82,uz:"",ai:0,kat:0,ncf:0,not:"Uygun yıllı Speyside"},
 {id:"strathisla-25",ad:"Strathisla 25",dam:"Strathisla",ulke:"İskoçya",bolge:"Speyside",sev:"3",tur:"Single Malt",abv:43,yas:"25",tl:14000,bul:"muzayede",puan:88,uz:"",ai:0,kat:0,ncf:0,not:"Chivas kalbi; yıllanmış"},
 {id:"cragganmore-distillers2",ad:"Cragganmore 12 (ikinci)",dam:"Cragganmore",ulke:"İskoçya",bolge:"Speyside",sev:"3",tur:"Single Malt",abv:40,yas:"12",tl:3700,bul:"tekel",puan:85,uz:"",ai:0,kat:0,ncf:0,not:"Karmaşık; ek parti"},
@@ -1514,8 +1509,7 @@ const DATA = [
 {id:"caolila-distedition",ad:"Caol Ila Distillers Edition (ikinci)",dam:"Caol Ila",ulke:"İskoçya",bolge:"Islay",sev:"2",tur:"Single Malt",abv:43,yas:"NAS",tl:4600,bul:"zor",puan:87,uz:"",ai:0,kat:0,ncf:0,not:"Moscatel bitiş; ek parti"},
 {id:"kilchoman-sanaig2",ad:"Kilchoman Sanaig (ikinci)",dam:"Kilchoman",ulke:"İskoçya",bolge:"Islay",sev:"3",tur:"Single Malt",abv:46,yas:"NAS",tl:4600,bul:"zor",puan:87,uz:"",ai:0,kat:0,ncf:1,not:"Şeri+is; ek parti"},
 {id:"glenscotia-victoriana2",ad:"Glen Scotia Victoriana (ikinci)",dam:"Glen Scotia",ulke:"İskoçya",bolge:"Campbeltown",sev:"3",tur:"Single Malt",abv:54.2,yas:"NAS",tl:4900,bul:"zor",puan:86,uz:"",ai:0,kat:0,ncf:1,not:"Derin meşe; ek parti"},
-{id:"hazelburn-10b",ad:"Hazelburn 10 (ikinci)",dam:"Springbank (Hazelburn)",ulke:"İskoçya",bolge:"Campbeltown",sev:"Premium",tur:"Single Malt",abv:46,yas:"10",tl:0,bul:"zor",puan:87,uz:"",ai:0,kat:0,ncf:1,not:"Üçlü damıtım; ek parti"},
-{id:"longrow-red",ad:"Longrow Red",dam:"Springbank (Longrow)",ulke:"İskoçya",bolge:"Campbeltown",sev:"Premium",tur:"Single Malt",abv:51,yas:"NAS",tl:0,bul:"zor",puan:88,uz:"",ai:0,kat:0,ncf:1,not:"Şarap fıçısı; isli seri"},
+{id:"longrow-red",ad:"Longrow Red",dam:"Springbank (Longrow)",ulke:"İskoçya",bolge:"Campbeltown",sev:"Premium",tur:"Single Malt",abv:51,yas:"NAS",tl:9500,bul:"zor",puan:88,uz:"",ai:0,kat:0,ncf:1,not:"Şarap fıçısı; isli seri"},
 {id:"glenkinchie-distedition",ad:"Glenkinchie Distillers Edition (ikinci)",dam:"Glenkinchie",ulke:"İskoçya",bolge:"Lowland",sev:"3",tur:"Single Malt",abv:43,yas:"NAS",tl:4100,bul:"zor",puan:85,uz:"",ai:0,kat:0,ncf:0,not:"Amontillado; ek parti"},
 {id:"auchentoshan-american2",ad:"Auchentoshan American Oak (ikinci)",dam:"Auchentoshan",ulke:"İskoçya",bolge:"Lowland",sev:"3",tur:"Single Malt",abv:40,yas:"NAS",tl:2300,bul:"tekel",puan:80,uz:"",ai:0,kat:0,ncf:0,not:"Vanilyalı; ek parti"},
 {id:"jw-islay",ad:"Johnnie Walker Islay Origin",dam:"Johnnie Walker",ulke:"İskoçya",bolge:"Harman (Blended Malt)",sev:"2",tur:"Blend",abv:42,yas:"NAS",tl:4000,bul:"zor",puan:85,uz:"",ai:0,kat:0,ncf:1,not:"Sadece Islay maltları"},

@@ -30,14 +30,24 @@ header{padding:26px 0 14px;border-bottom:1px solid var(--line);margin-bottom:18p
 .fill{position:absolute;bottom:0;left:0;right:0;background:linear-gradient(180deg,#f2c14e,#c8862a);transition:height .6s ease}
 .glass-box .lbl{font-size:12px;color:var(--muted)}
 .glass-box .big{font-size:22px;font-weight:800;color:var(--amber2)}
+.gstat{display:flex;flex-direction:column;gap:8px}
+.grow{display:flex;flex-direction:column}
+.gl{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.4px}
+.gv{font-size:20px;font-weight:800;color:var(--amber2);line-height:1}
+.gv.ai{color:#9fc0ff}
 .kpi{flex:1;min-width:140px;background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:12px 16px;display:flex;flex-direction:column;justify-content:center}
 .kpi .lbl{font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px}
 .kpi .val{font-size:21px;font-weight:800;margin-top:3px}
 .kpi.have .val{color:var(--have)} .kpi.target .val{color:var(--target)}
-nav.tabs{display:flex;gap:6px;flex-wrap:wrap;margin:22px 0 12px;border-bottom:1px solid var(--line)}
-.tab{padding:10px 16px;cursor:pointer;color:var(--muted);font-weight:600;font-size:14.5px;border:1px solid transparent;border-bottom:none;border-radius:10px 10px 0 0;position:relative;top:1px}
-.tab:hover{color:var(--txt)}
-.tab.active{color:#1a1208;background:linear-gradient(180deg,#f2c14e,#d8a13a);border-color:var(--amber)}
+nav.tabs{display:flex;gap:7px;flex-wrap:wrap;margin:20px 0 14px;padding-bottom:2px}
+.tab{padding:9px 15px;cursor:pointer;color:var(--txt);font-weight:700;font-size:14px;background:var(--panel);border:1px solid var(--line);border-radius:10px}
+.tab:hover{border-color:var(--amber-soft);background:var(--panel2)}
+.tab.active{color:#1a1208;background:linear-gradient(180deg,#f2c14e,#d8a13a);border-color:var(--amber);box-shadow:0 2px 10px rgba(224,168,60,.25)}
+.kpi.clk{cursor:pointer;transition:border-color .15s}.kpi.clk:hover{border-color:var(--amber-soft)}
+.qty{display:flex;align-items:center;gap:6px;background:var(--bg2);border:1px solid var(--line);border-radius:8px;padding:2px}
+.qbtn{width:24px;height:24px;border:none;background:var(--panel2);color:var(--amber2);border-radius:6px;cursor:pointer;font-size:15px;font-weight:800;line-height:1;display:flex;align-items:center;justify-content:center}
+.qbtn:hover{background:var(--amber);color:#1a1208}
+.qn{min-width:22px;text-align:center;font-weight:800;font-size:13.5px}
 .controls{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-bottom:14px}
 .controls input[type=text]{flex:1;min-width:200px;background:var(--panel);border:1px solid var(--line);color:var(--txt);padding:10px 14px;border-radius:10px;font-size:14px}
 .controls select{background:var(--panel);border:1px solid var(--line);color:var(--txt);padding:9px 12px;border-radius:10px;font-size:13px;cursor:pointer}
@@ -179,7 +189,7 @@ nav.tabs{display:flex;gap:6px;flex-wrap:wrap;margin:22px 0 12px;border-bottom:1p
 .k1 h3{color:#9fd68c}.k2 h3{color:var(--amber2)}.k3 h3{color:#c6a0e0}
 .listcol{display:grid;grid-template-columns:1fr 1fr;gap:18px}
 .listcol h3{font-size:16px;margin-bottom:10px;display:flex;align-items:center;gap:8px}
-.mini{background:var(--panel);border:1px solid var(--line);border-radius:11px;padding:11px 13px;display:flex;align-items:center;gap:10px;margin-bottom:8px}
+.mini{background:var(--panel);border:1px solid var(--line);border-radius:9px;padding:6px 11px;display:flex;align-items:center;gap:9px;margin-bottom:5px}
 .mini .nm{font-weight:700;font-size:14px}
 .mini .meta{font-size:11.5px;color:var(--muted)}
 .mini .price{margin-left:auto;font-weight:800;color:var(--amber2);font-size:13px;white-space:nowrap}
@@ -194,6 +204,29 @@ nav.tabs{display:flex;gap:6px;flex-wrap:wrap;margin:22px 0 12px;border-bottom:1p
 .hidden{display:none}
 .pillrow{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}
 .intro{color:var(--muted);font-size:13.5px;line-height:1.6;margin-bottom:16px;max-width:780px}
+.authbar{display:flex;align-items:center;gap:10px;margin-left:auto;align-self:flex-start}
+.gbtn{display:flex;align-items:center;gap:8px;background:#fff;color:#1a1208;border:none;padding:9px 15px;border-radius:10px;font-weight:700;cursor:pointer;font-size:13px}
+.gbtn:hover{filter:brightness(.94)}
+.gbtn svg{width:17px;height:17px}
+.uchip{display:flex;align-items:center;gap:9px;background:var(--panel);border:1px solid var(--line);padding:6px 12px;border-radius:30px;cursor:pointer}
+.uchip:hover{border-color:var(--amber-soft)}
+.uchip .uav{width:30px;height:30px;border-radius:50%;background:var(--amber);color:#1a1208;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:13px;overflow:hidden}
+.uchip .uav img{width:100%;height:100%;object-fit:cover}
+.uchip .un{font-weight:700;font-size:13.5px;line-height:1.1}
+.uchip .uc{font-size:10.5px;color:var(--have)}
+.modal-bg{position:fixed;inset:0;background:rgba(0,0,0,.65);display:none;align-items:center;justify-content:center;z-index:100;padding:20px}
+.modal-bg.on{display:flex}
+.modal{background:var(--panel2);border:1px solid var(--line);border-radius:16px;padding:24px;max-width:440px;width:100%;max-height:90vh;overflow:auto}
+.modal h3{font-size:19px;margin-bottom:6px}
+.modal .msub{color:var(--muted);font-size:13px;margin-bottom:14px;line-height:1.5}
+.modal label{display:block;font-size:12.5px;color:var(--muted);margin:11px 0 4px}
+.modal input{width:100%;background:var(--bg2);border:1px solid var(--line);color:var(--txt);padding:10px 12px;border-radius:9px;font-size:14px}
+.modal input:disabled{opacity:.55;cursor:not-allowed}
+.modal .mrow{display:flex;gap:10px;margin-top:20px}
+.modal .mbtn{flex:1;background:linear-gradient(180deg,#f2c14e,#d8a13a);color:#1a1208;border:none;padding:11px;border-radius:10px;font-weight:800;cursor:pointer;font-size:14px}
+.modal .mbtn.sec{background:var(--panel);color:var(--muted);border:1px solid var(--line)}
+.modal .mbtn.danger{background:transparent;color:var(--red);border:1px solid rgba(200,105,74,.4);flex:0 0 auto;padding:11px 16px}
+.cloudnote{font-size:11px;color:var(--muted2);margin-top:14px;line-height:1.45}
 ::-webkit-scrollbar{width:10px;height:10px}::-webkit-scrollbar-thumb{background:var(--line);border-radius:6px}
 @media(max-width:760px){.katcols{grid-template-columns:1fr}.listcol{grid-template-columns:1fr}.bottle{flex-wrap:wrap}.bottle .acts{margin-left:auto}}
 </style>
@@ -206,13 +239,16 @@ nav.tabs{display:flex;gap:6px;flex-wrap:wrap;margin:22px 0 12px;border-bottom:1p
       <div class="sub">Bölge → Damıtımevi → Şişe · Uzman & AI tercihleri · Türkiye katmanları · Kişisel koleksiyon</div></div>
   </div>
   <div class="stats">
-    <div class="glass-box"><div class="glass"><div class="fill" id="fill" style="height:0%"></div></div>
-      <div><div class="lbl">Koleksiyon</div><div class="big" id="pct">0%</div></div></div>
-    <div class="kpi"><div class="lbl">Toplam Şişe</div><div class="val" id="kTotal">0</div></div>
-    <div class="kpi have"><div class="lbl">Elimde Var</div><div class="val" id="kHave">0</div></div>
-    <div class="kpi target"><div class="lbl">Hedefim</div><div class="val" id="kTarget">0</div></div>
-    <div class="kpi"><div class="lbl">Kasa Değeri (TL)</div><div class="val" id="kValue">0</div></div>
-    <div class="kpi"><div class="lbl">Hedef Maliyeti (TL)</div><div class="val" id="kTargetVal">0</div></div>
+    <div class="glass-box" data-goto="mylist" style="cursor:pointer"><div class="glass"><div class="fill" id="fill" style="height:0%"></div></div>
+      <div class="gstat">
+        <div class="grow"><span class="gl">Hedefe ulaşma</span><span class="gv" id="pct">0%</span></div>
+        <div class="grow"><span class="gl">AI Top 25</span><span class="gv ai" id="pctAI">0%</span></div>
+      </div></div>
+    <div class="kpi clk" data-goto="explore"><div class="lbl">Toplam Şişe</div><div class="val" id="kTotal">0</div></div>
+    <div class="kpi have clk" data-goto="mylist"><div class="lbl">Elimde Var ›</div><div class="val" id="kHave">0</div></div>
+    <div class="kpi target clk" data-goto="mylist"><div class="lbl">Hedefim ›</div><div class="val" id="kTarget">0</div></div>
+    <div class="kpi clk" data-goto="mylist"><div class="lbl">Kasa Değeri (TL)</div><div class="val" id="kValue">0</div></div>
+    <div class="kpi clk" data-goto="mylist"><div class="lbl">Hedef Maliyeti (TL)</div><div class="val" id="kTargetVal">0</div></div>
   </div>
 </div></header>
 
@@ -866,7 +902,81 @@ const DATA = [
 {id:'langatun-old-deer',ad:'Langatun Old Deer Cask Proof',dam:'Langatun',ulke:'İsviçre',bolge:'İsviçre',sev:'3',tur:'Single Malt',abv:62.5,yas:'NAS',tl:6000,bul:'zor',puan:87,uz:'',ai:0,kat:0,ncf:1,not:'İsviçre; şeri+Chardonnay fıçı'},
 {id:'kyro-malt',ad:'Kyrö Malt Rye',dam:'Kyrö',ulke:'Finlandiya',bolge:'Finlandiya',sev:'3',tur:'Rye',abv:47.2,yas:'NAS',tl:4500,bul:'zor',puan:85,uz:'',ai:0,kat:0,ncf:1,not:'Finlandiya; %100 çavdar malt'},
 {id:'starward-twofold',ad:'Starward Two-Fold',dam:'Starward',ulke:'Avustralya',bolge:'Avustralya',sev:'3',tur:'Blend',abv:40,yas:'NAS',tl:3200,bul:'zor',puan:84,uz:'',ai:0,kat:0,not:'Buğday+arpa; kırmızı şarap fıçısı'},
-{id:'mh-elements-sherry',ad:'Milk & Honey Elements Sherry',dam:'Milk & Honey',ulke:'İsrail',bolge:'İsrail',sev:'3',tur:'Single Malt',abv:46,yas:'NAS',tl:5000,bul:'zor',puan:86,uz:'',ai:0,kat:0,ncf:1,not:'Tel Aviv; şeri serisi'}
+{id:'mh-elements-sherry',ad:'Milk & Honey Elements Sherry',dam:'Milk & Honey',ulke:'İsrail',bolge:'İsrail',sev:'3',tur:'Single Malt',abv:46,yas:'NAS',tl:5000,bul:'zor',puan:86,uz:'',ai:0,kat:0,ncf:1,not:'Tel Aviv; şeri serisi'},
+
+// ========== PARTİ 2: GENİŞLETME (gerçek şişeler) ==========
+// --- İskoç Harmanlar (eksik popülerler) ---
+{id:'jw-red',ad:'Johnnie Walker Red Label',dam:'Johnnie Walker',ulke:'İskoçya',bolge:'Harman (Blend)',sev:'2',tur:'Blend',abv:40,yas:'NAS',tl:1100,bul:'kolay',puan:77,uz:'',ai:0,kat:0,not:'Dünyanın en çok satan harmanlarından; kokteyl/highball dostu'},
+{id:'jw-18',ad:'Johnnie Walker 18',dam:'Johnnie Walker',ulke:'İskoçya',bolge:'Harman (Blend)',sev:'2',tur:'Blend',abv:40,yas:'18',tl:4500,bul:'tekel',puan:86,uz:'',ai:0,kat:0,not:'Olgun, dengeli üst harman'},
+{id:'ballantines-finest',ad:"Ballantine's Finest",dam:"Ballantine's",ulke:'İskoçya',bolge:'Harman (Blend)',sev:'3',tur:'Blend',abv:40,yas:'NAS',tl:1200,bul:'kolay',puan:78,uz:'',ai:0,kat:0,not:'Klasik günlük harman'},
+{id:'ballantines-17',ad:"Ballantine's 17",dam:"Ballantine's",ulke:'İskoçya',bolge:'Harman (Blend)',sev:'2',tur:'Blend',abv:40,yas:'17',tl:4500,bul:'tekel',puan:87,uz:'',ai:0,kat:0,not:'Yumuşak, çok katmanlı'},
+{id:'ballantines-12',ad:"Ballantine's 12",dam:"Ballantine's",ulke:'İskoçya',bolge:'Harman (Blend)',sev:'3',tur:'Blend',abv:40,yas:'12',tl:2000,bul:'tekel',puan:82,uz:'',ai:0,kat:0,not:'Uygun yıllı harman'},
+{id:'chivas-25',ad:'Chivas Regal 25',dam:'Chivas Brothers',ulke:'İskoçya',bolge:'Harman (Blend)',sev:'2',tur:'Blend',abv:40,yas:'25',tl:13000,bul:'zor',puan:89,uz:'',ai:0,kat:0,not:'Prestij yıllı harman'},
+{id:'dewars-white',ad:"Dewar's White Label",dam:"Dewar's",ulke:'İskoçya',bolge:'Harman (Blend)',sev:'3',tur:'Blend',abv:40,yas:'NAS',tl:1100,bul:'kolay',puan:76,uz:'',ai:0,kat:0,not:'Klasik highball harmanı'},
+{id:'dewars-15',ad:"Dewar's 15",dam:"Dewar's",ulke:'İskoçya',bolge:'Harman (Blend)',sev:'3',tur:'Blend',abv:40,yas:'15',tl:2600,bul:'tekel',puan:84,uz:'',ai:0,kat:0,not:'Çifte yaşlandırma'},
+{id:'grants-family',ad:"Grant's Triple Wood",dam:"William Grant",ulke:'İskoçya',bolge:'Harman (Blend)',sev:'3',tur:'Blend',abv:40,yas:'NAS',tl:900,bul:'kolay',puan:75,uz:'',ai:0,kat:0,not:'Üç fıçı; uygun harman'},
+{id:'teachers',ad:'Teacher’s Highland Cream',dam:'Teacher’s',ulke:'İskoçya',bolge:'Harman (Blend)',sev:'3',tur:'Blend',abv:40,yas:'NAS',tl:1000,bul:'kolay',puan:76,uz:'',ai:0,kat:0,not:'Yüksek malt oranlı, hafif isli'},
+{id:'cuttysark',ad:'Cutty Sark',dam:'Edrington',ulke:'İskoçya',bolge:'Harman (Blend)',sev:'3',tur:'Blend',abv:40,yas:'NAS',tl:1000,bul:'tekel',puan:75,uz:'',ai:0,kat:0,not:'Hafif, ferah klasik'},
+{id:'jb-rare',ad:'J&B Rare',dam:'Justerini & Brooks',ulke:'İskoçya',bolge:'Harman (Blend)',sev:'3',tur:'Blend',abv:40,yas:'NAS',tl:950,bul:'kolay',puan:74,uz:'Kraliyet şarap tüccarı (1761 bağ)',ai:0,kat:0,not:'Hafif Speyside ağırlıklı harman'},
+{id:'whytemackay-13',ad:'Whyte & Mackay 13',dam:'Whyte & Mackay',ulke:'İskoçya',bolge:'Harman (Blend)',sev:'3',tur:'Blend',abv:40,yas:'13',tl:2200,bul:'tekel',puan:83,uz:'',ai:0,kat:0,not:'Richard Paterson harmanı'},
+
+// --- Singleton & Speyside ek ---
+{id:'singleton-dufftown15',ad:'The Singleton of Dufftown 15',dam:'Dufftown',ulke:'İskoçya',bolge:'Speyside',sev:'3',tur:'Single Malt',abv:40,yas:'15',tl:3600,bul:'tekel',puan:85,uz:'',ai:0,kat:0,not:'Şeri etkili, yumuşak'},
+{id:'singleton-dufftown12',ad:'The Singleton of Dufftown 12',dam:'Dufftown',ulke:'İskoçya',bolge:'Speyside',sev:'3',tur:'Single Malt',abv:40,yas:'12',tl:2800,bul:'tekel',puan:83,uz:'',ai:0,kat:0,not:'Kolay içim Speyside'},
+{id:'singleton-glendullan',ad:'The Singleton of Glendullan 12',dam:'Glendullan',ulke:'İskoçya',bolge:'Speyside',sev:'3',tur:'Single Malt',abv:40,yas:'12',tl:2800,bul:'zor',puan:83,uz:'',ai:0,kat:0,not:'Meyveli, vanilyalı'},
+{id:'tamnavulin-doublecask',ad:'Tamnavulin Double Cask',dam:'Tamnavulin',ulke:'İskoçya',bolge:'Speyside',sev:'3',tur:'Single Malt',abv:40,yas:'NAS',tl:1800,bul:'tekel',puan:80,uz:'',ai:0,kat:0,not:'Şeri fıçı bitiş; fiyat dostu'},
+{id:'cardhu-18',ad:'Cardhu 18',dam:'Cardhu',ulke:'İskoçya',bolge:'Speyside',sev:'3',tur:'Single Malt',abv:40,yas:'18',tl:5500,bul:'zor',puan:85,uz:'',ai:0,kat:0,not:'Yumuşak, olgun'},
+{id:'tomintoul-10',ad:'Tomintoul 10',dam:'Tomintoul',ulke:'İskoçya',bolge:'Speyside',sev:'3',tur:'Single Malt',abv:40,yas:'10',tl:2400,bul:'tekel',puan:82,uz:'',ai:0,kat:0,not:'Nazik, hafif giriş'},
+{id:'glenfiddich-30',ad:'Glenfiddich 30',dam:'Glenfiddich',ulke:'İskoçya',bolge:'Speyside',sev:'2',tur:'Single Malt',abv:40,yas:'30',tl:45000,bul:'muzayede',puan:91,uz:'',ai:0,kat:0,not:'Yıllanmış prestij'},
+
+// --- Singleton Highland & yeni Highland ---
+{id:'singleton-glenord15',ad:'The Singleton of Glen Ord 15',dam:'Glen Ord',ulke:'İskoçya',bolge:'Highland',sev:'3',tur:'Single Malt',abv:40,yas:'15',tl:3800,bul:'zor',puan:85,uz:'',ai:0,kat:0,not:'Asya pazarının gözdesi; şerili'},
+{id:'ardnamurchan-ad',ad:'Ardnamurchan AD',dam:'Ardnamurchan',ulke:'İskoçya',bolge:'Highland',sev:'3',tur:'Single Malt',abv:46.8,yas:'NAS',tl:4500,bul:'zor',puan:87,uz:'',ai:0,kat:0,ncf:1,not:'Yarı isli, sürdürülebilir yeni damıtımevi'},
+{id:'ncnean-organic',ad:'Nc’nean Organic Single Malt',dam:'Nc’nean',ulke:'İskoçya',bolge:'Highland',sev:'3',tur:'Single Malt',abv:46,yas:'NAS',tl:4500,bul:'zor',puan:85,uz:'',ai:0,kat:0,ncf:1,not:'Organik, karbon-nötr öncü'},
+{id:'glengoyne-25',ad:'Glengoyne 25',dam:'Glengoyne',ulke:'İskoçya',bolge:'Highland',sev:'2',tur:'Single Malt',abv:48,yas:'25',tl:22000,bul:'muzayede',puan:91,uz:'',ai:0,kat:0,not:'Tam şeri, yıllanmış'},
+{id:'dalwhinnie-wintersgold',ad:'Dalwhinnie Winter’s Gold',dam:'Dalwhinnie',ulke:'İskoçya',bolge:'Highland',sev:'3',tur:'Single Malt',abv:43,yas:'NAS',tl:3200,bul:'tekel',puan:83,uz:'',ai:0,kat:0,not:'Bal, kremamsı'},
+
+// --- Islay ek ---
+{id:'lagavulin-9got',ad:'Lagavulin 9 (Game of Thrones)',dam:'Lagavulin',ulke:'İskoçya',bolge:'Islay',sev:'Premium',tur:'Single Malt',abv:46,yas:'9',tl:6000,bul:'zor',puan:88,uz:'',ai:0,kat:0,not:'GoT serisi; yoğun is'},
+{id:'caolila-de',ad:'Caol Ila Distillers Edition',dam:'Caol Ila',ulke:'İskoçya',bolge:'Islay',sev:'2',tur:'Single Malt',abv:43,yas:'NAS',tl:4500,bul:'zor',puan:88,uz:'',ai:0,kat:0,not:'Moscatel şeri bitiş'},
+{id:'bunna-stiuireadair',ad:'Bunnahabhain Stiùireadair',dam:'Bunnahabhain',ulke:'İskoçya',bolge:'Islay',sev:'2',tur:'Single Malt',abv:46.3,yas:'NAS',tl:3200,bul:'tekel',puan:85,uz:'',ai:0,kat:0,ncf:1,not:'Şeri fıçı; turbasız giriş'},
+{id:'kilchoman-lochgorm',ad:'Kilchoman Loch Gorm',dam:'Kilchoman',ulke:'İskoçya',bolge:'Islay',sev:'3',tur:'Single Malt',abv:46,yas:'NAS',tl:5500,bul:'zor',puan:88,uz:'',ai:0,kat:0,ncf:1,not:'Tamamen şeri fıçı, isli'},
+{id:'bowmore-10',ad:'Bowmore 10 Dark & Intense',dam:'Bowmore',ulke:'İskoçya',bolge:'Islay',sev:'2',tur:'Single Malt',abv:40,yas:'10',tl:3000,bul:'tekel',puan:84,uz:'',ai:0,kat:0,not:'Şeri etkili giriş Islay'},
+{id:'bruichladdich-bere',ad:'Bruichladdich Bere Barley',dam:'Bruichladdich',ulke:'İskoçya',bolge:'Islay',sev:'2',tur:'Single Malt',abv:50,yas:'NAS',tl:5500,bul:'zor',puan:88,uz:'',ai:0,kat:0,ncf:1,not:'Antik bere arpası; turbasız'},
+
+// --- Japonya ek ---
+{id:'nikka-coffeymalt',ad:'Nikka Coffey Malt',dam:'Nikka',ulke:'Japonya',bolge:'Japonya',sev:'2',tur:'Grain',abv:45,yas:'NAS',tl:5500,bul:'dutyfree',puan:88,uz:'',ai:0,kat:0,not:'Coffey damıtımıyla malt; benzersiz'},
+{id:'hakushu-dr',ad:'Hakushu Distiller’s Reserve',dam:'Hakushu (Suntory)',ulke:'Japonya',bolge:'Japonya',sev:'Premium',tur:'Single Malt',abv:43,yas:'NAS',tl:8000,bul:'dutyfree',puan:87,uz:'',ai:0,kat:0,not:'Yeşil, hafif isli yaşsız'},
+{id:'yamazaki-dr',ad:'Yamazaki Distiller’s Reserve',dam:'Yamazaki (Suntory)',ulke:'Japonya',bolge:'Japonya',sev:'Premium',tur:'Single Malt',abv:43,yas:'NAS',tl:8500,bul:'dutyfree',puan:88,uz:'',ai:0,kat:0,not:'Şeri-meyve yaşsız Yamazaki'},
+{id:'kaiyo',ad:'Kaiyo Mizunara Oak',dam:'Kaiyo',ulke:'Japonya',bolge:'Japonya',sev:'3',tur:'Blend',abv:46,yas:'NAS',tl:6000,bul:'zor',puan:85,uz:'',ai:0,kat:0,not:'Mizunara meşe; deniz olgunlaşması'},
+{id:'togouchi-premium',ad:'Togouchi Premium',dam:'Chugoku Jozo',ulke:'Japonya',bolge:'Japonya',sev:'3',tur:'Blend',abv:40,yas:'NAS',tl:3800,bul:'zor',puan:82,uz:'',ai:0,kat:0,not:'Tünelde dinlendirilen Japon harmanı'},
+
+// --- ABD ek (giriş & kült) ---
+{id:'jimbeam-white',ad:'Jim Beam White Label',dam:'Jim Beam',ulke:'ABD',bolge:'Bourbon (Kentucky)',sev:'3',tur:'Bourbon',abv:40,yas:'NAS',tl:1300,bul:'kolay',puan:75,uz:'',ai:0,kat:0,not:'Dünyanın en çok satan bourbonu'},
+{id:'jimbeam-black',ad:'Jim Beam Black',dam:'Jim Beam',ulke:'ABD',bolge:'Bourbon (Kentucky)',sev:'3',tur:'Bourbon',abv:43,yas:'NAS',tl:1700,bul:'tekel',puan:81,uz:'',ai:0,kat:0,not:'Daha yıllı, dolgun Beam'},
+{id:'evanwilliams-bib',ad:'Evan Williams Bottled-in-Bond',dam:'Heaven Hill',ulke:'ABD',bolge:'Bourbon (Kentucky)',sev:'3',tur:'Bourbon',abv:50,yas:'NAS',tl:2000,bul:'zor',puan:84,uz:'',ai:0,kat:0,not:'Fiyat/performans BiB klasiği'},
+{id:'evanwilliams-black',ad:'Evan Williams Black Label',dam:'Heaven Hill',ulke:'ABD',bolge:'Bourbon (Kentucky)',sev:'3',tur:'Bourbon',abv:43,yas:'NAS',tl:1400,bul:'tekel',puan:78,uz:'',ai:0,kat:0,not:'Uygun günlük bourbon'},
+{id:'oldforester-100',ad:'Old Forester 100 Proof',dam:'Old Forester',ulke:'ABD',bolge:'Bourbon (Kentucky)',sev:'2',tur:'Bourbon',abv:50,yas:'NAS',tl:2200,bul:'zor',puan:85,uz:'',ai:0,kat:0,not:'Yüksek dereceli klasik'},
+{id:'unclenearest-1856',ad:'Uncle Nearest 1856',dam:'Uncle Nearest',ulke:'ABD',bolge:'Tennessee',sev:'2',tur:'Tennessee',abv:50,yas:'NAS',tl:4500,bul:'zor',puan:87,uz:'',ai:0,kat:0,not:'Ödüllü; Nearest Green mirası'},
+{id:'wildturkey-longbranch',ad:'Wild Turkey Longbranch',dam:'Wild Turkey',ulke:'ABD',bolge:'Bourbon (Kentucky)',sev:'3',tur:'Bourbon',abv:43,yas:'8',tl:3000,bul:'zor',puan:84,uz:'McConaughey ile geliştirildi',ai:0,kat:0,not:'Meşe kömürü + Teksas meşe filtre'},
+{id:'knobcreek-rye',ad:'Knob Creek Rye',dam:'Jim Beam',ulke:'ABD',bolge:'Rye (Çavdar)',sev:'3',tur:'Rye',abv:50,yas:'NAS',tl:2800,bul:'zor',puan:86,uz:'',ai:0,kat:0,not:'Yüksek dereceli, baharatlı çavdar'},
+{id:'sagamore-rye',ad:'Sagamore Spirit Rye',dam:'Sagamore Spirit',ulke:'ABD',bolge:'Rye (Çavdar)',sev:'3',tur:'Rye',abv:41.5,yas:'NAS',tl:3200,bul:'zor',puan:84,uz:'',ai:0,kat:0,not:'Maryland tarzı çavdar'},
+
+// --- İrlanda ek ---
+{id:'roe-co',ad:'Roe & Co',dam:'Roe & Co',ulke:'İrlanda',bolge:'İrlanda',sev:'3',tur:'Blend',abv:45,yas:'NAS',tl:2600,bul:'tekel',puan:84,uz:'',ai:0,kat:0,not:'Bourbon fıçı; modern Dublin harmanı'},
+{id:'tyrconnell',ad:'The Tyrconnell Single Malt',dam:'Cooley',ulke:'İrlanda',bolge:'İrlanda',sev:'3',tur:'Single Malt',abv:43,yas:'NAS',tl:2800,bul:'tekel',puan:84,uz:'',ai:0,kat:0,not:'Tarihi tek malt markası'},
+{id:'thesexton',ad:'The Sexton Single Malt',dam:'Bushmills',ulke:'İrlanda',bolge:'İrlanda',sev:'3',tur:'Single Malt',abv:40,yas:'NAS',tl:2400,bul:'tekel',puan:82,uz:'',ai:0,kat:0,not:'Tamamen oloroso fıçı'},
+{id:'glendalough-pot',ad:'Glendalough Pot Still',dam:'Glendalough',ulke:'İrlanda',bolge:'İrlanda',sev:'3',tur:'Single Pot Still',abv:43,yas:'NAS',tl:3600,bul:'zor',puan:85,uz:'',ai:0,kat:0,ncf:1,not:'İrlanda meşesi bitiş'},
+
+// --- Dünya ek (yeni dalga) ---
+{id:'sullivans-cove',ad:'Sullivans Cove French Oak',dam:'Sullivans Cove',ulke:'Avustralya',bolge:'Avustralya',sev:'Premium',tur:'Single Malt',abv:47.5,yas:'NAS',tl:0,bul:'muzayede',puan:91,uz:'',ai:0,kat:0,ncf:1,not:'Tasmanya; Dünyanın En İyi Single Malt’ı (2014)'},
+{id:'lark-classic',ad:'Lark Classic Cask',dam:'Lark',ulke:'Avustralya',bolge:'Avustralya',sev:'2',tur:'Single Malt',abv:43,yas:'NAS',tl:7000,bul:'zor',puan:87,uz:'',ai:0,kat:0,ncf:1,not:'Tasmanya öncüsü'},
+{id:'slyrs-classic',ad:'Slyrs Classic',dam:'Slyrs',ulke:'Almanya',bolge:'Almanya',sev:'3',tur:'Single Malt',abv:43,yas:'NAS',tl:4500,bul:'zor',puan:84,uz:'',ai:0,kat:0,not:'Bavyera; meyveli Alman maltı'},
+{id:'armorik-classic',ad:'Armorik Classic',dam:'Warenghem',ulke:'Fransa',bolge:'Fransa',sev:'3',tur:'Single Malt',abv:46,yas:'NAS',tl:4000,bul:'zor',puan:84,uz:'',ai:0,kat:0,ncf:1,not:'Breton tek maltı'},
+{id:'brenne-10',ad:'Brenne Estate Cask',dam:'Brenne',ulke:'Fransa',bolge:'Fransa',sev:'3',tur:'Single Malt',abv:40,yas:'NAS',tl:4500,bul:'zor',puan:83,uz:'',ai:0,kat:0,not:'Konyak fıçısı; çiçeksi'},
+{id:'teerenpeli-kaski',ad:'Teerenpeli Kaski',dam:'Teerenpeli',ulke:'Finlandiya',bolge:'Finlandiya',sev:'3',tur:'Single Malt',abv:43,yas:'NAS',tl:4500,bul:'zor',puan:85,uz:'',ai:0,kat:0,not:'Tam şeri Fin maltı'},
+{id:'kavalan-kingcar',ad:'Kavalan King Car Conductor',dam:'Kavalan',ulke:'Tayvan',bolge:'Tayvan',sev:'Premium',tur:'Single Malt',abv:46,yas:'NAS',tl:7500,bul:'zor',puan:88,uz:'',ai:0,kat:0,not:'Üst seri Kavalan'},
+{id:'amrut-naarangi',ad:'Amrut Naarangi',dam:'Amrut',ulke:'Hindistan',bolge:'Hindistan',sev:'2',tur:'Single Malt',abv:50,yas:'NAS',tl:7000,bul:'zor',puan:87,uz:'',ai:0,kat:0,ncf:1,not:'Portakallı şeri fıçısı; sıra dışı'}
 ];
 const AI_GROUPS = {
  'lagavulin-16':'Islay / İsli','ardbeg-uigeadail':'Islay / İsli','laphroaig-10':'Islay / İsli','caolila-18':'Islay / İsli','bruichladdich-octomore':'Islay / İsli',
@@ -878,9 +988,11 @@ const AI_GROUPS = {
 
 const LS='viski_atlas_v1';
 let state=JSON.parse(localStorage.getItem(LS)||'null');
-if(!state){state={have:['glenlivet-18','lagavulin-16'],target:[],prices:{},custom:[]};}
-state.have=state.have||[]; state.target=state.target||[]; state.prices=state.prices||{}; state.custom=state.custom||[];
-function save(){localStorage.setItem(LS,JSON.stringify(state))}
+if(!state){state={have:['glenlivet-18','lagavulin-16'],target:[],prices:{},custom:[],qty:{}};}
+state.have=state.have||[]; state.target=state.target||[]; state.prices=state.prices||{}; state.custom=state.custom||[]; state.qty=state.qty||{};
+function save(){localStorage.setItem(LS,JSON.stringify(state)); if(window.cloudSync)window.cloudSync();}
+function qtyOf(id){return state.qty[id]||1}
+function setQty(id,n){n=Math.max(1,Math.min(999,n|0));state.qty[id]=n;save();renderAll();}
 
 let activeAvail=new Set();
 let ncfOnly=false;
@@ -1254,16 +1366,25 @@ function renderMyList(){
   const hL=document.getElementById('haveList'),tL=document.getElementById('targetList');
   hL.innerHTML=have.length?'':'<div class="empty">Henüz şişe işaretlemedin.</div>';
   tL.innerHTML=target.length?'':'<div class="empty">Henüz hedef eklemedin.</div>';
-  have.forEach(b=>hL.appendChild(mini(b)));
+  have.forEach(b=>hL.appendChild(miniHave(b)));
   target.forEach(b=>tL.appendChild(mini(b)));
-  document.getElementById('haveTot').textContent=fmt(have.reduce((s,b)=>s+(priceOf(b)||0),0));
+  const adet=have.reduce((s,b)=>s+qtyOf(b.id),0);
+  document.getElementById('haveTot').textContent=fmt(have.reduce((s,b)=>s+(priceOf(b)||0)*qtyOf(b.id),0));
   document.getElementById('targetTot').textContent=fmt(target.reduce((s,b)=>s+(priceOf(b)||0),0));
-  document.getElementById('haveCount').textContent='('+have.length+')';
+  document.getElementById('haveCount').textContent='('+have.length+' çeşit · '+adet+' şişe)';
   document.getElementById('targetCount').textContent='('+target.length+')';
+}
+function miniHave(b){
+  const el=document.createElement('div');el.className='mini';
+  const q=qtyOf(b.id);
+  el.innerHTML=`<div style="flex:1;min-width:0"><div class="nm">${b.ad}</div><div class="meta">${b.dam} · ${b.bolge} · ${fmt(priceOf(b))}${q>1?' × '+q+' = <b style="color:var(--have)">'+fmt(priceOf(b)*q)+'</b>':''}</div></div>
+    <div class="qty"><button class="qbtn" data-qty="dec" data-id="${b.id}">−</button><span class="qn">${q}</span><button class="qbtn" data-qty="inc" data-id="${b.id}">+</button></div>
+    <button class="btn" data-act="have" data-id="${b.id}" title="Listeden çıkar">✕</button>`;
+  return el;
 }
 function mini(b){
   const el=document.createElement('div');el.className='mini';
-  el.innerHTML=`<div><div class="nm">${b.ad}</div><div class="meta">${b.dam} · ${b.bolge}</div></div>
+  el.innerHTML=`<div style="flex:1;min-width:0"><div class="nm">${b.ad}</div><div class="meta">${b.dam} · ${b.bolge}</div></div>
     <span class="price" data-id="${b.id}">${fmt(priceOf(b))}</span>
     <button class="btn" data-act="${state.have.includes(b.id)?'have':'target'}" data-id="${b.id}">✕</button>`;
   return el;
@@ -1271,21 +1392,28 @@ function mini(b){
 
 function renderStats(){
   const total=allBottles().length, have=state.have.length, target=state.target.length;
-  const pct=total?Math.round(have/total*100):0;
-  document.getElementById('fill').style.height=Math.min(pct,100)+'%';
-  document.getElementById('pct').textContent=pct+'%';
+  // Hedefe ulaşma: istediklerinin (elimde + hedef) ne kadarı elimde
+  const wantPool=have+target;
+  const pctHedef=wantPool?Math.round(have/wantPool*100):0;
+  // AI Top 25: 25 AI seçiminden kaçı elimde
+  const aiIds=allBottles().filter(b=>b.ai).map(b=>b.id);
+  const aiOwned=aiIds.filter(id=>state.have.includes(id)).length;
+  const pctAI=aiIds.length?Math.round(aiOwned/aiIds.length*100):0;
+  document.getElementById('fill').style.height=Math.min(pctHedef,100)+'%';
+  document.getElementById('pct').textContent=pctHedef+'%';
+  document.getElementById('pctAI').textContent=pctAI+'% ('+aiOwned+'/'+aiIds.length+')';
   document.getElementById('kTotal').textContent=total;
   document.getElementById('kHave').textContent=have;
   document.getElementById('kTarget').textContent=target;
-  document.getElementById('kValue').textContent=allBottles().filter(b=>state.have.includes(b.id)).reduce((s,b)=>s+(priceOf(b)||0),0).toLocaleString('tr-TR');
+  document.getElementById('kValue').textContent=allBottles().filter(b=>state.have.includes(b.id)).reduce((s,b)=>s+(priceOf(b)||0)*qtyOf(b.id),0).toLocaleString('tr-TR');
   document.getElementById('kTargetVal').textContent=allBottles().filter(b=>state.target.includes(b.id)).reduce((s,b)=>s+(priceOf(b)||0),0).toLocaleString('tr-TR');
 }
 
 function toggle(act,id){
   if(act==='have'){
     const i=state.have.indexOf(id);
-    if(i>=0)state.have.splice(i,1);
-    else{state.have.push(id);const t=state.target.indexOf(id);if(t>=0)state.target.splice(t,1);}
+    if(i>=0){state.have.splice(i,1);delete state.qty[id];}
+    else{state.have.push(id);state.qty[id]=state.qty[id]||1;const t=state.target.indexOf(id);if(t>=0)state.target.splice(t,1);}
   }else{
     const i=state.target.indexOf(id);
     if(i>=0)state.target.splice(i,1); else state.target.push(id);
@@ -1293,7 +1421,19 @@ function toggle(act,id){
   save();renderAll();
 }
 
+function goTab(view){const t=document.querySelector('.tab[data-view="'+view+'"]');if(t)t.click();window.scrollTo({top:0,behavior:'smooth'});}
 document.addEventListener('click',e=>{
+  const gt=e.target.closest('[data-goto]');
+  if(gt){goTab(gt.dataset.goto);return;}
+  const qb=e.target.closest('[data-qty]');
+  if(qb){const id=qb.dataset.id;
+    if(qb.dataset.qty==='inc'){setQty(id,qtyOf(id)+1);}
+    else if(qtyOf(id)<=1){ // şişe bitti → otomatik hedeflere taşı
+      const i=state.have.indexOf(id);if(i>=0)state.have.splice(i,1);delete state.qty[id];
+      if(!state.target.includes(id))state.target.push(id);
+      save();renderAll();
+    } else setQty(id,qtyOf(id)-1);
+    return;}
   const tb=e.target.closest('[data-page]');
   if(tb){window.open(tb.dataset.page,'_blank','noopener');return;}
   const ib=e.target.closest('[data-img]');
@@ -1340,7 +1480,7 @@ document.getElementById('addBtn').onclick=()=>{
   state.custom.push({id,ad,dam:document.getElementById('naDam').value.trim()||'Diğer',ulke:'İskoçya',
     bolge:document.getElementById('naBolge').value.trim()||'Diğer',sev:'3',tur:'Single Malt',abv:'',yas:'NAS',
     tl:parseInt(document.getElementById('naTl').value)||0,bul:'tekel',puan:0,uz:'',ai:0,kat:0,not:'Kendi eklediğin şişe'});
-  state.have.push(id);
+  state.have.push(id);state.qty[id]=1;
   ['naAd','naDam','naBolge','naTl'].forEach(x=>document.getElementById(x).value='');
   save();renderAll();renderMyList();
 };
@@ -1358,14 +1498,14 @@ document.getElementById('restoreFile').onchange=(e)=>{
   r.onload=()=>{try{
     const d=JSON.parse(r.result);const s=d.state||d;
     if(!s.have&&!s.target){alert('Geçersiz yedek dosyası.');return;}
-    state={have:s.have||[],target:s.target||[],prices:s.prices||{},custom:s.custom||[]};
+    state={have:s.have||[],target:s.target||[],prices:s.prices||{},custom:s.custom||[],qty:s.qty||{}};
     save();renderAll();alert('Yedek yüklendi ✓  ('+state.have.length+' elimde, '+state.target.length+' hedef)');
   }catch(err){alert('Dosya okunamadı: '+err.message);}};
   r.readAsText(f);e.target.value='';
 };
 document.getElementById('resetBtn').onclick=(e)=>{e.preventDefault();
   if(confirm('Tüm işaretlemeler, fiyatlar ve eklediğin şişeler silinsin mi?')){
-    localStorage.removeItem(LS);state={have:['glenlivet-18','lagavulin-16'],target:[],prices:{},custom:[]};renderAll();}
+    localStorage.removeItem(LS);state={have:['glenlivet-18','lagavulin-16'],target:[],prices:{},custom:[],qty:{}};renderAll();}
 };
 
 function renderAll(){

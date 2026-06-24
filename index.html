@@ -262,6 +262,7 @@ nav.tabs{display:flex;gap:7px;flex-wrap:wrap;margin:20px 0 14px;padding-bottom:2
     <div class="tab" data-view="katman">🇹🇷 Türkiye Katmanları</div>
     <div class="tab" data-view="kaynak">📚 Kaynaklar</div>
     <div class="tab" data-view="gurme">🎖️ Gurme Seviyem</div>
+    <div class="tab" data-view="notes">📝 Tadım Notlarım</div>
     <div class="tab" data-view="mylist">📋 Listem</div>
   </nav>
 
@@ -354,6 +355,11 @@ nav.tabs{display:flex;gap:7px;flex-wrap:wrap;margin:20px 0 14px;padding-bottom:2
     <div id="gurmeBox"></div>
   </section>
 
+  <section id="view-notes" class="hidden">
+    <p class="intro">Denediğin viskilere <b>kendi puanını (0-100)</b> ve <b>tadım notunu</b> ekle. Bu deneyim, Gurme puanına “Deneyim & Tadım” kriteri olarak ağırlıklı katkı sağlar — çünkü gerçek gurme sadece toplayan değil, tadıp değerlendirendir.</p>
+    <div id="notesBox"></div>
+  </section>
+
   <section id="view-mylist" class="hidden">
     <p class="intro">Koleksiyonun ve hedeflerin. Bir şişeyi aldığında <b>Elimde Var</b>'a geçir; hedeflerin otomatik küçülür.</p>
     <div class="listcol">
@@ -378,6 +384,23 @@ nav.tabs{display:flex;gap:7px;flex-wrap:wrap;margin:20px 0 14px;padding-bottom:2
     <input type="file" id="restoreFile" accept="application/json,.json" style="display:none">
     <span class="note" style="margin:0">Koleksiyonunu dosyaya indir; başka cihaza/tarayıcıya taşımak veya kaybetmemek için geri yükle.</span>
   </div>
+<div class="modal-bg" id="tasteModal">
+  <div class="modal">
+    <h3 id="tasteTitle">Tadım Notu</h3>
+    <div class="msub" id="tasteSub"></div>
+    <label>Senin puanın (0-100)</label>
+    <input type="number" id="tastePuan" min="0" max="100" placeholder="örn. 88">
+    <label>Tadım notun</label>
+    <textarea id="tasteNot" rows="4" style="width:100%;background:var(--bg2);border:1px solid var(--line);color:var(--txt);padding:10px 12px;border-radius:9px;font-size:14px;resize:vertical;font-family:inherit" placeholder="Burun, damak, bitiş… kendi deneyimin"></textarea>
+    <div class="mrow">
+      <button class="mbtn" id="tasteSave">Kaydet</button>
+      <button class="mbtn sec" id="tasteCancel">İptal</button>
+      <button class="mbtn danger" id="tasteDel">Sil</button>
+    </div>
+    <p class="cloudnote">Tadım notların bu cihazda kaydedilir ve Gurme puanına “Deneyim” olarak katkı sağlar.</p>
+  </div>
+</div>
+
   <p class="note">💾 İşaretlemelerin ve fiyat düzenlemelerin bu tarayıcıda otomatik kaydedilir. Fiyatlar 2026 yaklaşık Türkiye perakende referansıdır (70cl), mağaza/kur/duty-free'ye göre değişir. <a href="#" id="resetBtn">↺ Tüm seçimleri sıfırla</a></p>
 </div>
 
@@ -1176,8 +1199,8 @@ const AI_GROUPS = {
 
 const LS='viski_atlas_v1';
 let state=JSON.parse(localStorage.getItem(LS)||'null');
-if(!state){state={have:['glenlivet-18','lagavulin-16'],target:[],prices:{},custom:[],qty:{}};}
-state.have=state.have||[]; state.target=state.target||[]; state.prices=state.prices||{}; state.custom=state.custom||[]; state.qty=state.qty||{};
+if(!state){state={have:['glenlivet-18','lagavulin-16'],target:[],prices:{},custom:[],qty:{},notes:{}};}
+state.have=state.have||[]; state.target=state.target||[]; state.prices=state.prices||{}; state.custom=state.custom||[]; state.qty=state.qty||{}; state.notes=state.notes||{};
 function save(){localStorage.setItem(LS,JSON.stringify(state)); if(window.cloudSync)window.cloudSync();}
 function qtyOf(id){return state.qty[id]||1}
 function setQty(id,n){n=Math.max(1,Math.min(999,n|0));state.qty[id]=n;save();renderAll();}
@@ -1307,6 +1330,7 @@ function bottleRow(b,rank){
   if(b.kat) badges.push(`<span class="badge b-kat">TR Katman ${b.kat}</span>`);
   if(b.ncf) badges.push(`<span class="badge b-ncf" title="Soğuk filtrasyondan geçmemiş">❄️ Filtresiz</span>`);
   if(b.puan) badges.push(`<span class="badge b-score">${b.puan} puan</span>`);
+  if(state.notes[b.id]&&state.notes[b.id].p) badges.push(`<span class="badge" style="background:rgba(127,191,106,.18);color:#9fd68c;border:1px solid rgba(127,191,106,.4)">📝 ${state.notes[b.id].p}</span>`);
   el.innerHTML=`<div class="rank">${rank}</div>
     ${thumb(b)}
     <div class="info"><div class="nm">${b.ad} ${badges.join(' ')}</div>
@@ -1314,6 +1338,7 @@ function bottleRow(b,rank){
     <div class="price" data-id="${b.id}">${fmt(priceOf(b))}</div>
     <div class="acts">
       <button class="btn" data-img="${esc(imgURL(b))}" title="Google Görseller'de aç">📷</button>
+      <button class="btn" data-taste="${b.id}" title="Tadım notu / puanın">📝</button>
       <button class="btn ${haveOn?'have-on':''}" data-act="have" data-id="${b.id}">${haveOn?'✓ Elimde':'+ Elimde'}</button>
       <button class="btn ${targetOn?'target-on':''}" data-act="target" data-id="${b.id}">${targetOn?'★ Hedef':'☆ Hedef'}</button></div>`;
   return el;
@@ -1471,20 +1496,24 @@ function computeScore(ids){
   const profs=new Set(); bs.forEach(b=>profilesOf(b).forEach(p=>profs.add(p)));
   const coreCov=CORE_PROFILES.filter(c=>profs.has(c)).length;
   const avg=n?bs.reduce((s,b)=>s+(b.puan||0),0)/n:0;
+  const damsQ=new Set(bs.filter(b=>(b.puan||0)>=82).map(b=>b.dam)); // SADECE kaliteli markalar (ucuz markalar çeşitliliğe sayılmaz)
+  const hq88=bs.filter(b=>(b.puan||0)>=88).length, hq92=bs.filter(b=>(b.puan||0)>=92).length;
   const expert=bs.filter(b=>b.uz).length, prem=bs.filter(b=>b.sev==='Premium').length;
-  const age18=bs.filter(b=>parseInt(b.yas)>=18).length, age21=bs.filter(b=>parseInt(b.yas)>=21).length;
+  const age18=bs.filter(b=>parseInt(b.yas)>=18).length, age21=bs.filter(b=>parseInt(b.yas)>=21).length, age25=bs.filter(b=>parseInt(b.yas)>=25).length;
   const ncf=bs.filter(b=>b.ncf).length, rare=bs.filter(b=>['zor','muzayede'].includes(b.bul)).length;
   const world=bs.filter(b=>['Japonya','Hindistan','Tayvan','Galler','İsveç','Avustralya','İngiltere','Danimarka','İsrail','İtalya','İsviçre','Finlandiya','Yeni Zelanda'].includes(b.ulke)).length;
-  const sReg=Math.min(16, cats.size/GURME_CATS.length*16);                 // bölge çeşitliliği
-  const sDam=Math.min(14, 14*(1-Math.exp(-dams.size/12)));                 // farklı damıtımevi (çeşitlilik, adet DEĞİL)
-  const sStyle=coreCov/CORE_PROFILES.length*14;                            // stil dengesi
-  const sQual=Math.max(0,Math.min(16,(avg-80)/(94-80)*16));                // kalite (eşik 80'e yükseltildi)
+  const rated=bs.filter(b=>state.notes&&state.notes[b.id]&&((state.notes[b.id].p||0)>0||(state.notes[b.id].n||'').trim())).length; // tadım notu/puanı girilen
+  const sReg=Math.min(12, cats.size/GURME_CATS.length*12);                 // bölge kapsama
+  const sDam=Math.min(12, 12*(1-Math.exp(-damsQ.size/12)));                // KALİTELİ marka çeşitliliği
+  const sStyle=coreCov/CORE_PROFILES.length*12;                            // stil dengesi
+  const sQual=Math.max(0,Math.min(14,(avg-81)/(93-81)*14));                // ortalama kalite (eşik 81)
+  const sDepth=Math.min(12, hq88*0.9+hq92*0.8);                           // kalite derinliği (88+/92+)
   const sPres=Math.min(14, expert*3.2+prem*0.9);                          // prestij & ödül
-  const sExp=Math.min(12, ncf*0.55+rare*0.85+world*1.1);                  // nadirlik & keşif
-  const sAge=Math.min(8, age18*0.9+age21*0.9);                            // olgunluk (18+/21+)
-  const sSize=Math.min(6, 6*(1-Math.exp(-n/20)));                         // derinlik (düşük ağırlık)
-  const total=Math.round(Math.min(100,sReg+sDam+sStyle+sQual+sPres+sExp+sAge+sSize));
-  return {total,n,cats,dams,profs,avg,parts:{sReg,sDam,sStyle,sQual,sPres,sExp,sAge,sSize}};
+  const sAge=Math.min(8, age18*0.6+age21*0.7+age25*1.0);                  // olgunluk (18/21/25+)
+  const sExp=Math.min(8, ncf*0.35+rare*0.7+world*0.9);                    // nadirlik & keşif
+  const sTaste=Math.min(8, rated*0.7);                                     // DENEYİM: kendi tadım notları/puanları
+  const total=Math.round(Math.min(100,sReg+sDam+sStyle+sQual+sDepth+sPres+sAge+sExp+sTaste));
+  return {total,n,cats,dams:damsQ,profs,avg,rated,parts:{sReg,sDam,sStyle,sQual,sDepth,sPres,sAge,sExp,sTaste}};
 }
 const GURME_LEVELS=[
   {min:0,e:'🌱',t:'Acemi',d:'İlk dramların. Yolculuk yeni başlıyor — birkaç farklı bölge denemekle başla.'},
@@ -1513,7 +1542,7 @@ function renderGurme(){
   const cc={}; bs.forEach(b=>{const c=regionCat(b);cc[c]=(cc[c]||0)+1;});
   const domCat=Object.entries(cc).sort((a,b)=>b[1]-a[1])[0];
   const circ=2*Math.PI*66, off=circ*(1-cur.total/100);
-  const P=cur.parts, MAXP={sReg:16,sDam:14,sStyle:14,sQual:16,sPres:14,sExp:12,sAge:8,sSize:6};
+  const P=cur.parts, MAXP={sReg:12,sDam:12,sStyle:12,sQual:14,sDepth:12,sPres:14,sAge:8,sExp:8,sTaste:8};
   const barRow=(lbl,v,mx)=>`<div class="bar"><div class="bl">${lbl}</div><div class="track"><div class="fillb" style="width:${Math.round(v/mx*100)}%"></div></div><div class="bv">${v.toFixed(1)}/${mx}</div></div>`;
   // öneriler: eksik kategoriler + eksik profiller
   const sugg=[]; const seen=new Set();
@@ -1531,18 +1560,19 @@ function renderGurme(){
       <div class="emoji">${lvl.e}</div>
       <div class="title">${lvl.t}</div>
       <div class="desc">${lvl.d}</div>
-      <div class="char">Karakterin: <b>${domProf?domProf[0]:'—'}</b>${domCat?' · ağırlık <b>'+domCat[0]+'</b>':''} · ${cur.n} farklı şişe · ${cur.dams.size} damıtımevi · ${cur.cats.size}/${GURME_CATS.length} bölge · ort. kalite <b>${cur.avg?cur.avg.toFixed(1):'—'}</b></div>
+      <div class="char">Karakterin: <b>${domProf?domProf[0]:'—'}</b>${domCat?' · ağırlık <b>'+domCat[0]+'</b>':''} · ${cur.n} farklı şişe · ${cur.dams.size} damıtımevi · ${cur.cats.size}/${GURME_CATS.length} bölge · ort. kalite <b>${cur.avg?cur.avg.toFixed(1):'—'}</b> · ${cur.rated||0} tadım notu</div>
     </div>
   </div>
   <div class="bars"><h3>📊 Puan Dağılımı</h3>
     ${barRow('Bölge Kapsama',P.sReg,MAXP.sReg)}
-    ${barRow('Damıtımevi Çeşitliliği',P.sDam,MAXP.sDam)}
+    ${barRow('Kaliteli Marka Çeşitliliği',P.sDam,MAXP.sDam)}
     ${barRow('Stil Dengesi',P.sStyle,MAXP.sStyle)}
-    ${barRow('Kalite (eleştirmen)',P.sQual,MAXP.sQual)}
+    ${barRow('Ortalama Kalite',P.sQual,MAXP.sQual)}
+    ${barRow('Kalite Derinliği (88/92+)',P.sDepth,MAXP.sDepth)}
     ${barRow('Prestij & Ödül',P.sPres,MAXP.sPres)}
+    ${barRow('Olgunluk (18/21/25+)',P.sAge,MAXP.sAge)}
     ${barRow('Nadirlik & Keşif',P.sExp,MAXP.sExp)}
-    ${barRow('Olgunluk (yaş 18+)',P.sAge,MAXP.sAge)}
-    ${barRow('Koleksiyon Derinliği',P.sSize,MAXP.sSize)}
+    ${barRow('Deneyim & Tadım Notları',P.sTaste,MAXP.sTaste)}
   </div>`;
   if(state.target.length){
     const delta=proj.total-cur.total;
@@ -1568,6 +1598,41 @@ function renderGurme(){
   }
   box.innerHTML=html;
 }
+let tasteId=null;
+function openTaste(id){
+  tasteId=id;const b=allBottles().find(x=>x.id===id);if(!b)return;
+  const nt=state.notes[id]||{};
+  document.getElementById('tasteTitle').textContent=b.ad;
+  document.getElementById('tasteSub').textContent=b.dam+' · '+b.bolge+(b.puan?' · eleştirmen '+b.puan:'');
+  document.getElementById('tastePuan').value=nt.p||'';
+  document.getElementById('tasteNot').value=nt.n||'';
+  document.getElementById('tasteModal').classList.add('on');
+}
+function closeTaste(){document.getElementById('tasteModal').classList.remove('on');tasteId=null;}
+function saveTaste(){
+  if(!tasteId)return;
+  const p=parseInt(document.getElementById('tastePuan').value)||0;
+  const n=document.getElementById('tasteNot').value.trim();
+  if(!p&&!n)delete state.notes[tasteId];
+  else state.notes[tasteId]={p:Math.max(0,Math.min(100,p)),n:n};
+  save();closeTaste();renderAll();
+}
+function delTaste(){if(tasteId){delete state.notes[tasteId];save();closeTaste();renderAll();}}
+function renderNotes(){
+  const box=document.getElementById('notesBox');
+  const rated=Object.keys(state.notes).map(id=>allBottles().find(b=>b.id===id)).filter(Boolean)
+    .sort((a,b)=>(state.notes[b.id].p||0)-(state.notes[a.id].p||0));
+  const scored=rated.filter(b=>(state.notes[b.id].p||0)>0);
+  const avg=scored.length?Math.round(scored.reduce((s,b)=>s+state.notes[b.id].p,0)/scored.length):0;
+  let html='<div class="bars" style="margin-bottom:14px"><h3>📝 Tadım İstatistiğin</h3><div class="char">'+rated.length+' viski için not/puan girdin · ortalama kişisel puanın <b>'+(avg||'—')+'</b> · bu deneyim Gurme puanına “Deneyim & Tadım” olarak katkı sağlar.</div></div>';
+  if(!rated.length)html+='<div class="empty">Henüz tadım notu yok. Keşfet, Listem veya herhangi bir karttaki 📝 düğmesiyle kendi puanını (0-100) ve tadım notunu ekle.</div>';
+  else{html+='<div class="grid">';
+    rated.forEach(b=>{const nt=state.notes[b.id];
+      html+='<div class="card"><div class="top">'+thumb(b)+'<div><div class="nm">'+b.ad+'</div><div class="meta">'+b.dam+' · '+b.bolge+'</div>'+(nt.p?'<div class="src" style="color:#9fd68c;font-style:normal">⭐ Senin puanın: '+nt.p+'/100</div>':'')+'</div></div>'+(nt.n?'<div class="meta" style="line-height:1.5">“'+nt.n+'”</div>':'')+'<div class="row"><button class="btn" data-taste="'+b.id+'">✏️ Düzenle</button></div></div>';});
+    html+='</div>';}
+  box.innerHTML=html;
+}
+
 function renderMyList(){
   const have=allBottles().filter(b=>state.have.includes(b.id));
   const target=allBottles().filter(b=>state.target.includes(b.id));
@@ -1642,6 +1707,8 @@ document.addEventListener('click',e=>{
       save();renderAll();
     } else setQty(id,qtyOf(id)-1);
     return;}
+  const tt=e.target.closest('[data-taste]');
+  if(tt){openTaste(tt.dataset.taste);return;}
   const tb=e.target.closest('[data-page]');
   if(tb){window.open(tb.dataset.page,'_blank','noopener');return;}
   const ib=e.target.closest('[data-img]');
@@ -1672,7 +1739,7 @@ document.getElementById('expandAll').onclick=()=>{
 document.getElementById('collapseAll').onclick=()=>{openDams.clear();renderTree();};
 document.querySelectorAll('.tab').forEach(t=>t.onclick=()=>{
   document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));t.classList.add('active');
-  ['explore','experts','ai','magazin','ncf','katman','kaynak','gurme','mylist'].forEach(v=>document.getElementById('view-'+v).classList.add('hidden'));
+  ['explore','experts','ai','magazin','ncf','katman','kaynak','gurme','notes','mylist'].forEach(v=>document.getElementById('view-'+v).classList.add('hidden'));
   document.getElementById('view-'+t.dataset.view).classList.remove('hidden');
   if(t.dataset.view==='experts')renderExperts();
   if(t.dataset.view==='magazin')renderMagazin();
@@ -1680,6 +1747,7 @@ document.querySelectorAll('.tab').forEach(t=>t.onclick=()=>{
   if(t.dataset.view==='ncf')renderNCF();
   if(t.dataset.view==='katman')renderKatman();
   if(t.dataset.view==='gurme')renderGurme();
+  if(t.dataset.view==='notes')renderNotes();
   if(t.dataset.view==='mylist')renderMyList();
 });
 document.getElementById('addBtn').onclick=()=>{
@@ -1706,20 +1774,23 @@ document.getElementById('restoreFile').onchange=(e)=>{
   r.onload=()=>{try{
     const d=JSON.parse(r.result);const s=d.state||d;
     if(!s.have&&!s.target){alert('Geçersiz yedek dosyası.');return;}
-    state={have:s.have||[],target:s.target||[],prices:s.prices||{},custom:s.custom||[],qty:s.qty||{}};
+    state={have:s.have||[],target:s.target||[],prices:s.prices||{},custom:s.custom||[],qty:s.qty||{},notes:s.notes||{}};
     save();renderAll();alert('Yedek yüklendi ✓  ('+state.have.length+' elimde, '+state.target.length+' hedef)');
   }catch(err){alert('Dosya okunamadı: '+err.message);}};
   r.readAsText(f);e.target.value='';
 };
+document.getElementById('tasteSave').onclick=saveTaste;
+document.getElementById('tasteCancel').onclick=closeTaste;
+document.getElementById('tasteDel').onclick=delTaste;
 document.getElementById('resetBtn').onclick=(e)=>{e.preventDefault();
   if(confirm('Tüm işaretlemeler, fiyatlar ve eklediğin şişeler silinsin mi?')){
-    localStorage.removeItem(LS);state={have:['glenlivet-18','lagavulin-16'],target:[],prices:{},custom:[],qty:{}};renderAll();}
+    localStorage.removeItem(LS);state={have:['glenlivet-18','lagavulin-16'],target:[],prices:{},custom:[],qty:{},notes:{}};renderAll();}
 };
 
 function renderAll(){
   // Her işaretlemede TÜM sekmeler güncellenir (gizli olanlar dahil) — böylece
   // bir sayfada seçtiğin viski diğer tüm sayfalarda da işaretli görünür.
-  renderStats();renderTree();renderExperts();renderAI();renderMagazin();renderNCF();renderKatman();renderGurme();renderMyList();
+  renderStats();renderTree();renderExperts();renderAI();renderMagazin();renderNCF();renderKatman();renderGurme();renderNotes();renderMyList();
 }
 renderAll();
 </script>

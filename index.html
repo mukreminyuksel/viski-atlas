@@ -271,6 +271,7 @@ nav.tabs{display:flex;gap:7px;flex-wrap:wrap;margin:20px 0 14px;padding-bottom:2
     <div class="tab" data-view="katman">🇹🇷 Türkiye Katmanları</div>
     <div class="tab" data-view="kaynak">📚 Kaynaklar</div>
     <div class="tab" data-view="stats">📊 İstatistik</div>
+    <div class="tab" data-view="akilli">🎯 Akıllı</div>
     <div class="tab" data-view="gurme">🎖️ Gurme Seviyem</div>
     <div class="tab" data-view="personal">🧭 Bana Özel</div>
     <div class="tab" data-view="notes">📝 Tadım Notlarım</div>
@@ -365,6 +366,11 @@ nav.tabs{display:flex;gap:7px;flex-wrap:wrap;margin:20px 0 14px;padding-bottom:2
   <section id="view-stats" class="hidden">
     <p class="intro">Koleksiyonunun rakamlarla portresi: değer, dağılımlar ve öne çıkanlar. <b>Elimde olanlar</b> üzerinden hesaplanır.</p>
     <div id="statsBox"></div>
+  </section>
+
+  <section id="view-akilli" class="hidden">
+    <p class="intro">Akıllı yardımcılar: <b>bütçene göre öneri</b>, koleksiyon <b>boşluk analizi</b> ve <b>şişe karşılaştırma</b>. Öneriler elinde <b>olmayan</b> şişelerden seçilir.</p>
+    <div id="akilliBox"></div>
   </section>
 
   <section id="view-gurme" class="hidden">
@@ -2149,6 +2155,164 @@ function renderStats(){
 }
 
 
+
+/* ===== AKILLI: Bütçe önerisi + Boşluk analizi + Karşılaştırma ===== */
+let AK_BUDGET=0, AK_CMP=['','',''];
+function akEsc(s){return (s+'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
+function akMissing(){const all=allBottles();const h=new Set(state.have);return all.filter(b=>!h.has(b.id)&&(priceOf(b)||0)>0&&(b.puan||0)>0);}
+function akRow(b,extra){
+  return '<div style="display:flex;align-items:center;gap:8px;padding:5px 0;border-bottom:1px solid var(--line)">'
+    +'<div style="flex:1;min-width:0"><div style="font-size:13px;color:var(--txt);font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">'+akEsc(b.ad)+'</div>'
+    +'<div style="font-size:11px;color:var(--muted2)">'+akEsc(b.dam)+' · '+akEsc(b.bolge||b.ulke)+'</div></div>'
+    +'<div style="flex:0 0 46px;text-align:center"><span style="background:var(--bg2);border:1px solid var(--line);border-radius:6px;padding:2px 6px;font-size:12px;font-weight:800;color:var(--amber2)">'+(b.puan||'—')+'</span></div>'
+    +'<div style="flex:0 0 90px;text-align:right;font-size:12px;color:var(--muted);font-weight:700">'+fmt(priceOf(b))+'</div>'
+    +(extra||'')+'</div>';
+}
+function akCard(title,inner,note){
+  return '<div style="background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:12px 14px;margin-top:12px">'
+    +'<div style="font-weight:800;color:var(--amber2);font-size:14px;margin-bottom:6px">'+title+'</div>'
+    +(note?'<div style="color:var(--muted2);font-size:12px;margin-bottom:6px">'+note+'</div>':'')+inner+'</div>';
+}
+function runBudget(){
+  const out=document.getElementById('akBudgetOut'); if(!out) return;
+  const B=AK_BUDGET;
+  if(!B){out.innerHTML='<div style="color:var(--muted);font-size:13px;padding:6px 0">Bütçeni gir, sana en mantıklı alımları sıralayayım.</div>';return;}
+  const pool=akMissing();
+  const aff=pool.filter(b=>priceOf(b)<=B);
+  if(!aff.length){out.innerHTML='<div style="color:var(--muted);font-size:13px;padding:6px 0">Bu bütçeye (≤'+fmt(B)+') uygun, elinde olmayan şişe bulunamadı. Bütçeyi artırmayı dene.</div>';return;}
+  const kaliteli=aff.slice().sort((a,b)=>(b.puan||0)-(a.puan||0)).slice(0,8);
+  const firsat=aff.filter(b=>(b.puan||0)>=84).map(b=>({b,v:(b.puan-80)/(priceOf(b)/1000)})).sort((a,b)=>b.v-a.v).slice(0,8).map(o=>o.b);
+  const tg=new Set(state.target);
+  const hedef=aff.filter(b=>tg.has(b.id)).sort((a,b)=>(b.puan||0)-(a.puan||0)).slice(0,8);
+  // greedy basket: en yüksek puanlıdan başla, bütçe yettikçe ekle (farklı şişeler)
+  const sorted=aff.slice().sort((a,b)=>(b.puan||0)-(a.puan||0));
+  let rem=B, basket=[]; for(const b of sorted){const p=priceOf(b); if(p<=rem){basket.push(b);rem-=p;}}
+  const basketTot=B-rem;
+  let html='';
+  html+=akCard('🏅 Bütçeyle alınabilecek en kaliteliler', kaliteli.map(b=>akRow(b)).join(''));
+  html+=akCard('💡 En iyi puan/fiyat fırsatları', firsat.map(b=>akRow(b)).join(''), 'Liraya en çok kalite veren şişeler (puan ≥ 84).');
+  if(hedef.length) html+=akCard('🎯 Hedef listenden alınabilecekler', hedef.map(b=>akRow(b)).join(''));
+  html+=akCard('🛒 Bütçe sepeti (kaliteyi en çoklayan)', basket.map(b=>akRow(b)).join('')
+    +'<div style="display:flex;justify-content:space-between;margin-top:8px;font-weight:800;color:var(--amber2)"><span>'+basket.length+' şişe</span><span>'+fmt(basketTot)+' / '+fmt(B)+'</span></div>',
+    'Bütçenle en yüksek toplam kaliteyi hedefleyen örnek sepet.');
+  out.innerHTML=html;
+}
+function runGap(){
+  const out=document.getElementById('akGapOut'); if(!out) return;
+  const all=allBottles(); const have=all.filter(b=>state.have.includes(b.id));
+  if(!have.length){out.innerHTML='<div style="color:var(--muted);font-size:13px;padding:6px 0">Önce birkaç şişeyi <b>Elimde Var</b> işaretle; boşlukları ona göre çıkarırım.</div>';return;}
+  const haveCats=new Set(have.map(regionCat));
+  const haveProfs=new Set(); have.forEach(b=>profilesOf(b).forEach(p=>haveProfs.add(p)));
+  const haveTypes=new Set(have.map(b=>b.tur));
+  const recById=id=>all.find(b=>b.id===id);
+  const bestIn=(pred)=>all.filter(b=>!state.have.includes(b.id)&&pred(b)&&(b.puan||0)>0).sort((a,b)=>(b.puan||0)-(a.puan||0))[0];
+  let items=[];
+  // bölge boşlukları (öncelikli ana kategoriler)
+  ['Islay','Speyside','Highland','Campbeltown','İrlanda','Bourbon','Japonya','Çavdar/Rye'].forEach(c=>{
+    if(!haveCats.has(c)){let r=(REP_CAT[c]&&recById(REP_CAT[c]))||bestIn(b=>regionCat(b)===c); if(r)items.push(['Bölge: '+c,r]);}
+  });
+  // stil/profil boşlukları
+  CORE_PROFILES.forEach(p=>{ if(!haveProfs.has(p)){let r=(REP_PROF[p]&&recById(REP_PROF[p]))||bestIn(b=>profilesOf(b).includes(p)); if(r)items.push(['Stil: '+p,r]);} });
+  // tür boşlukları
+  [['Single Malt','Single Malt'],['Single Pot Still','Single Pot Still'],['Bourbon','Bourbon'],['Rye','Çavdar (Rye)'],['Blend','Harman']].forEach(([t,lbl])=>{
+    if(!haveTypes.has(t)){let r=bestIn(b=>b.tur===t); if(r)items.push(['Tür: '+lbl,r]);}
+  });
+  // tekilleştir (aynı şişeyi iki boşluğa önermemek için id bazında ilkini tut)
+  const seen=new Set(); items=items.filter(it=>{if(seen.has(it[1].id))return false;seen.add(it[1].id);return true;});
+  if(!items.length){out.innerHTML='<div style="color:var(--have);font-size:13px;padding:6px 0;font-weight:700">👏 Tebrikler! Ana bölge, stil ve tür kategorilerinin hepsinde en az bir şişen var. Koleksiyonun çok dengeli.</div>';return;}
+  out.innerHTML=items.map(it=>akRow(it[1],'<div style="flex:0 0 130px;text-align:right;font-size:11px;color:var(--target);font-weight:700">'+it[0]+'</div>')).join('');
+}
+function runCompare(){
+  const out=document.getElementById('akCmpOut'); if(!out) return;
+  const all=allBottles();
+  const sel=AK_CMP.map(id=>id?all.find(b=>b.id===id):null).filter(Boolean);
+  if(sel.length<2){out.innerHTML='<div style="color:var(--muted);font-size:13px;padding:6px 0">Karşılaştırmak için en az 2 şişe seç.</div>';return;}
+  const rows=[
+    ['Puan', b=>b.puan||0, true, b=>(b.puan||'—')],
+    ['Fiyat', b=>priceOf(b)||0, false, b=>fmt(priceOf(b))],
+    ['ABV', b=>b.abv||0, true, b=>(b.abv?b.abv+'%':'—')],
+    ['Yaş', b=>parseInt(b.yas)||0, true, b=>(b.yas||'NAS')],
+    ['Ülke', null, null, b=>akEsc(b.ulke||'—')],
+    ['Bölge', null, null, b=>akEsc(b.bolge||'—')],
+    ['Tür', null, null, b=>akEsc(b.tur||'—')],
+    ['Tat profili', null, null, b=>[...flavorsOf(b)].slice(0,5).join(', ')||'—']
+  ];
+  let h='<div style="overflow-x:auto"><table style="width:100%;border-collapse:collapse;font-size:12px">';
+  h+='<tr><th style="text-align:left;padding:6px;color:var(--muted)"></th>'+sel.map(b=>'<th style="text-align:left;padding:6px;color:var(--amber2);font-size:12px;min-width:120px">'+akEsc(b.ad)+'</th>').join('')+'</tr>';
+  rows.forEach(r=>{
+    let best=null;
+    if(r[2]!==null){const vals=sel.map(r[1]); best=r[2]?Math.max(...vals):Math.min(...vals.filter(v=>v>0));}
+    h+='<tr><td style="padding:6px;color:var(--muted);font-weight:700;border-top:1px solid var(--line)">'+r[0]+'</td>';
+    sel.forEach(b=>{const hit=(r[2]!==null&&r[1](b)===best&&best>0); h+='<td style="padding:6px;border-top:1px solid var(--line);color:'+(hit?'var(--have)':'var(--txt)')+';font-weight:'+(hit?'800':'500')+'">'+r[3](b)+(hit?' ✓':'')+'</td>';});
+    h+='</tr>';
+  });
+  h+='</table></div>';
+  out.innerHTML=h;
+}
+function renderAkilli(){
+  const box=document.getElementById('akilliBox'); if(!box) return;
+  const all=allBottles().slice().sort((a,b)=>a.ad.localeCompare(b.ad,'tr'));
+  const opts='<option value="">— şişe seç —</option>'+all.map(b=>'<option value="'+b.id+'">'+akEsc(b.ad)+'</option>').join('');
+  const selStyle='background:var(--panel2);color:var(--txt);border:1px solid var(--line);border-radius:8px;padding:7px;font-size:13px;flex:1;min-width:0';
+  box.innerHTML =
+    akCard('💰 Bütçeli akıllı öneri',
+      '<div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap"><input id="akBudget" inputmode="numeric" placeholder="Bütçen (TL)" style="'+selStyle+';max-width:200px;flex:0 0 auto"><span style="color:var(--muted2);font-size:12px">örn. 10000</span></div>'
+      +'<div id="akBudgetOut"></div>')
+    + akCard('🧩 Boşluk analizi','<div id="akGapOut"></div>','Koleksiyonunda eksik bölge / stil / tür kategorileri ve her biri için en kaliteli tamamlayıcı öneri.')
+    + akCard('⚖️ Şişe karşılaştırma',
+      '<div style="display:flex;gap:8px;flex-wrap:wrap"><select id="akCmp0" style="'+selStyle+'">'+opts+'</select><select id="akCmp1" style="'+selStyle+'">'+opts+'</select><select id="akCmp2" style="'+selStyle+'">'+opts+'</select></div>'
+      +'<div id="akCmpOut" style="margin-top:8px"></div>');
+  const bi=document.getElementById('akBudget'); if(bi){bi.value=AK_BUDGET||''; bi.oninput=()=>{AK_BUDGET=parseInt((bi.value+'').replace(/\D/g,''))||0; runBudget();};}
+  [0,1,2].forEach(i=>{const s=document.getElementById('akCmp'+i); if(s){s.value=AK_CMP[i]; s.onchange=()=>{AK_CMP[i]=s.value; runCompare();};}});
+  runBudget(); runGap(); runCompare();
+}
+
+/* ===== Koleksiyon paylaşım kartı (canvas → PNG) ===== */
+function makeShareCard(){
+  const all=allBottles();
+  const have=[...new Set(state.have)].map(id=>all.find(b=>b.id===id)).filter(Boolean);
+  if(!have.length){alert('Önce birkaç şişeyi Elimde Var işaretle.');return;}
+  const sc=computeScore(state.have), lv=levelOf(sc.total);
+  const value=have.reduce((s,b)=>s+(priceOf(b)||0)*qtyOf(b.id),0);
+  const units=have.reduce((s,b)=>s+qtyOf(b.id),0);
+  const countries=new Set(have.map(b=>b.ulke)).size;
+  const dams=new Set(have.map(b=>b.dam)).size;
+  const top=have.slice().sort((a,b)=>(b.puan||0)-(a.puan||0)).slice(0,5);
+  const W=1080,H=1350,c=document.createElement('canvas');c.width=W;c.height=H;const x=c.getContext('2d');
+  const g=x.createLinearGradient(0,0,0,H);g.addColorStop(0,'#22180c');g.addColorStop(1,'#140d05');x.fillStyle=g;x.fillRect(0,0,W,H);
+  x.strokeStyle='#e0a83c';x.lineWidth=6;x.strokeRect(28,28,W-56,H-56);
+  x.textAlign='center';
+  x.fillStyle='#f2c14e';x.font='800 64px system-ui,Arial';x.fillText('🥃 VİSKİ ATLASI',W/2,130);
+  x.fillStyle='#b9a888';x.font='600 30px system-ui,Arial';x.fillText('Koleksiyonum',W/2,175);
+  // gurme seviye
+  x.fillStyle='#f4ead6';x.font='90px system-ui,Arial';x.fillText(lv.e,W/2,300);
+  x.fillStyle='#f2c14e';x.font='800 46px system-ui,Arial';x.fillText(lv.t,W/2,365);
+  x.fillStyle='#e0a83c';x.font='800 120px system-ui,Arial';x.fillText(sc.total,W/2,500);
+  x.fillStyle='#8a7a5c';x.font='600 28px system-ui,Arial';x.fillText('Gurme Puanı / 100',W/2,545);
+  // stat boxes
+  const stats=[[have.length,'Benzersiz Şişe'],[units,'Toplam Adet'],[countries,'Ülke'],[dams,'Damıtımevi']];
+  const bw=(W-120)/4;
+  stats.forEach((s,i)=>{const bx=60+i*bw;x.fillStyle='#2b2012';x.fillRect(bx+6,600,bw-12,120);x.strokeStyle='#4a3a1e';x.lineWidth=2;x.strokeRect(bx+6,600,bw-12,120);
+    x.fillStyle='#f2c14e';x.font='800 44px system-ui,Arial';x.fillText(s[0],bx+bw/2,665);
+    x.fillStyle='#b9a888';x.font='600 21px system-ui,Arial';x.fillText(s[1],bx+bw/2,700);});
+  // value
+  x.fillStyle='#7fbf6a';x.font='800 52px system-ui,Arial';x.fillText(value.toLocaleString('tr-TR')+' TL',W/2,800);
+  x.fillStyle='#8a7a5c';x.font='600 26px system-ui,Arial';x.fillText('Kasa Değeri',W/2,838);
+  // top 5
+  x.textAlign='left';x.fillStyle='#f2c14e';x.font='800 34px system-ui,Arial';x.fillText('★ En İyi 5',70,920);
+  top.forEach((b,i)=>{const y=975+i*68;
+    x.fillStyle='#2b2012';x.fillRect(70,y-38,W-140,56);
+    x.fillStyle='#e0a83c';x.font='800 30px system-ui,Arial';x.textAlign='left';x.fillText((b.puan||'—')+'',92,y);
+    x.fillStyle='#f4ead6';x.font='600 28px system-ui,Arial';
+    let name=b.ad;while(x.measureText(name).width>760&&name.length>4){name=name.slice(0,-2);} if(name!==b.ad)name+='…';
+    x.fillText(name,175,y);});
+  // footer
+  x.textAlign='center';x.fillStyle='#8a7a5c';x.font='600 24px system-ui,Arial';
+  const d=new Date().toLocaleDateString('tr-TR');
+  x.fillText('viski-atlas.netlify.app  ·  '+d,W/2,H-60);
+  c.toBlob(bl=>{const u=URL.createObjectURL(bl);const a=document.createElement('a');a.href=u;a.download='viski-koleksiyonum.png';document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(u),2000);},'image/png');
+}
+
 function renderStats2(){
   const box=document.getElementById('statsBox'); if(!box) return;
   const all=allBottles();
@@ -2223,7 +2387,8 @@ function renderStats2(){
     +(mostQty&&qtyOf(mostQty.id)>1?card('📦 En Çok Adet', mostQty.ad, qtyOf(mostQty.id)+' adet'):'')
     +'</div>';
 
-  box.innerHTML = cards + hi
+  const shareBtn='<div style="margin:0 0 4px"><button id="shareCardBtn" style="background:linear-gradient(180deg,#f2c14e,#d8a13a);color:#1a1208;border:none;border-radius:10px;padding:9px 16px;font-weight:800;cursor:pointer;font-size:14px">📸 Koleksiyon kartı oluştur</button> <span style="color:var(--muted2);font-size:12px">PNG indir, paylaş</span></div>';
+  box.innerHTML = shareBtn + cards + hi
     + bars('🌍 Ülke dağılımı (adet)', byCountry)
     + bars('🥃 Tür dağılımı (adet)', byType)
     + bars('📍 Bölge dağılımı (adet)', byRegion)
@@ -2231,6 +2396,7 @@ function renderStats2(){
     + bars('🍯 Tat profili (adet)', byFlavor)
     + bars('💰 Fiyat aralığı (adet)', pb)
     + bars('💵 Ülkeye göre değer (TL)', valByCountry, ' TL');
+  const sb=document.getElementById('shareCardBtn'); if(sb) sb.onclick=makeShareCard;
 }
 
 function toggle(act,id){
@@ -2294,7 +2460,7 @@ document.getElementById('expandAll').onclick=()=>{
 document.getElementById('collapseAll').onclick=()=>{openDams.clear();renderTree();};
 document.querySelectorAll('.tab').forEach(t=>t.onclick=()=>{
   document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));t.classList.add('active');
-  ['explore','experts','ai','magazin','ncf','katman','kaynak','stats','gurme','personal','notes','mylist'].forEach(v=>document.getElementById('view-'+v).classList.add('hidden'));
+  ['explore','experts','ai','magazin','ncf','katman','kaynak','stats','akilli','gurme','personal','notes','mylist'].forEach(v=>document.getElementById('view-'+v).classList.add('hidden'));
   document.getElementById('view-'+t.dataset.view).classList.remove('hidden');
   if(t.dataset.view==='experts')renderExperts();
   if(t.dataset.view==='magazin')renderMagazin();
@@ -2302,6 +2468,7 @@ document.querySelectorAll('.tab').forEach(t=>t.onclick=()=>{
   if(t.dataset.view==='ncf')renderNCF();
   if(t.dataset.view==='katman')renderKatman();
   if(t.dataset.view==='stats')renderStats2();
+  if(t.dataset.view==='akilli')renderAkilli();
   if(t.dataset.view==='gurme')renderGurme();
   if(t.dataset.view==='personal')renderPersonal();
   if(t.dataset.view==='notes')renderNotes();
@@ -2347,7 +2514,7 @@ document.getElementById('resetBtn').onclick=(e)=>{e.preventDefault();
 function renderAll(){
   // Her işaretlemede TÜM sekmeler güncellenir (gizli olanlar dahil) — böylece
   // bir sayfada seçtiğin viski diğer tüm sayfalarda da işaretli görünür.
-  renderStats();renderTree();renderExperts();renderAI();renderMagazin();renderNCF();renderKatman();renderGurme();renderStats2();renderPersonal();renderNotes();renderMyList();
+  renderStats();renderTree();renderExperts();renderAI();renderMagazin();renderNCF();renderKatman();renderGurme();renderStats2();renderAkilli();renderPersonal();renderNotes();renderMyList();
 }
 renderAll();
 if('serviceWorker' in navigator){window.addEventListener('load',()=>{navigator.serviceWorker.register('sw.js').catch(()=>{});});}

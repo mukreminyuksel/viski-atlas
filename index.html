@@ -1931,7 +1931,7 @@ document.addEventListener('click',e=>{
     } else setQty(id,qtyOf(id)-1);
     return;}
   const md=e.target.closest('[data-mood]');
-  if(md){personalMood=md.dataset.mood;renderMood();return;}
+  if(md){personalMood=md.dataset.mood;document.querySelectorAll("#personalBox [data-mood]").forEach(x=>x.classList.toggle("on",x.dataset.mood===personalMood));renderMood();return;}
   const ar=e.target.closest('.aroma');
   if(ar){ar.classList.toggle('on');return;}
   const tt=e.target.closest('[data-taste]');

@@ -201,11 +201,11 @@ nav.tabs{display:flex;gap:7px;flex-wrap:wrap;margin:20px 0 14px;padding-bottom:2
 .mini .price{margin-left:auto;font-weight:800;color:var(--amber2);font-size:13px;white-space:nowrap}
 .empty{color:var(--muted2);font-style:italic;padding:14px;text-align:center;border:1px dashed var(--line);border-radius:11px}
 .tot{margin-top:6px;padding:10px 13px;border-top:1px solid var(--line);font-weight:700;display:flex;justify-content:space-between}
-.addbox{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:16px;margin-top:22px}
-.addbox h3{margin-bottom:12px;font-size:16px}
-.addgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px}
-.addgrid input,.addgrid select{background:var(--bg2);border:1px solid var(--line);color:var(--txt);padding:9px 11px;border-radius:9px;font-size:13px}
-.addbtn{margin-top:12px;background:linear-gradient(180deg,#f2c14e,#d8a13a);color:#1a1208;border:none;padding:10px 22px;border-radius:10px;font-weight:800;cursor:pointer;font-size:14px}
+.eklekutu{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:16px;margin-top:22px}
+.eklekutu h3{margin-bottom:12px;font-size:16px}
+.ekleizgara{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px}
+.ekleizgara input,.ekleizgara select{background:var(--bg2);border:1px solid var(--line);color:var(--txt);padding:9px 11px;border-radius:9px;font-size:13px}
+.eklebtn{margin-top:12px;background:linear-gradient(180deg,#f2c14e,#d8a13a);color:#1a1208;border:none;padding:10px 22px;border-radius:10px;font-weight:800;cursor:pointer;font-size:14px}
 .note{color:var(--muted2);font-size:12px;margin:14px 0 4px;line-height:1.5}
 .hidden{display:none}
 .pillrow{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}
@@ -248,8 +248,8 @@ nav.groups{display:flex;gap:6px;margin:20px 0 10px;background:var(--bg2);border:
 #subNav .tab{display:none;font-size:13.5px;padding:7px 13px}
 #subNav .tab.ingroup{display:block}
 /* ŞİŞE DETAY KARTI */
-.adlink{cursor:pointer}
-.adlink:hover{color:var(--amber2);text-decoration:underline}
+.isimlink{cursor:pointer}
+.isimlink:hover{color:var(--amber2);text-decoration:underline}
 .modal.detay{max-width:600px;position:relative}
 .dt-x{position:absolute;top:12px;right:12px;background:var(--panel);border:1px solid var(--line);color:var(--muted);width:32px;height:32px;border-radius:50%;cursor:pointer;font-size:16px}
 .dt-head{display:flex;gap:14px;align-items:flex-start;padding-right:36px}
@@ -460,18 +460,18 @@ nav.groups{display:flex;gap:6px;margin:20px 0 10px;background:var(--bg2);border:
       <div><h3>🎯 Hedeflerim <span id="targetCount" style="color:var(--muted);font-weight:400;font-size:13px"></span></h3>
         <div id="targetList"></div><div class="tot"><span>Tahmini Maliyet</span><span id="targetTot" style="color:var(--target)">0 TL</span></div></div>
     </div>
-    <div class="addbox"><h3>➕ Kendi şişeni ekle</h3>
+    <div class="eklekutu"><h3>➕ Kendi şişeni ekle</h3>
       <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:8px">
         <input id="naLink" placeholder="🔗 Ürün/site linki yapıştır (Whiskybase, Master of Malt, market…)" style="flex:1;min-width:220px">
-        <button class="addbtn" id="fetchLinkBtn" style="flex:0 0 auto;width:auto;padding:9px 16px">🔗 Linkten çek</button>
+        <button class="eklebtn" id="fetchLinkBtn" style="flex:0 0 auto;width:auto;padding:9px 16px">🔗 Linkten çek</button>
       </div>
       <div id="naFetchStat" style="font-size:12px;color:var(--muted2);margin-bottom:6px"></div>
-      <div class="addgrid">
+      <div class="ekleizgara">
         <input id="naAd" placeholder="Şişe adı (ör. Springbank 18)">
         <input id="naDam" placeholder="Damıtımevi">
         <input id="naBolge" placeholder="Bölge (ör. Campbeltown)">
         <input id="naTl" type="number" placeholder="Fiyat (TL)"></div>
-      <button class="addbtn" id="addBtn">Listeme Ekle (Elimde Var)</button>
+      <button class="eklebtn" id="addBtn">Listeme Ekle (Elimde Var)</button>
       <p class="note">Eklediğin şişeler bu cihazda kayıtlı kalır.</p></div>
   </section>
 
@@ -1771,7 +1771,7 @@ function bottleRow(b,rank){
   if(state.notes[b.id]&&state.notes[b.id].p) badges.push(`<span class="badge" style="background:rgba(127,191,106,.18);color:#9fd68c;border:1px solid rgba(127,191,106,.4)">📝 ${state.notes[b.id].p}</span>`);
   el.innerHTML=`<div class="rank">${rank}</div>
     ${thumb(b)}
-    <div class="info"><div class="nm"><span class="adlink" data-detay="${b.id}">${b.ad}</span> ${badges.join(' ')}</div>
+    <div class="info"><div class="nm"><span class="isimlink" data-detay="${b.id}">${b.ad}</span> ${badges.join(' ')}</div>
       <div class="meta">${b.tur} · ${b.abv?b.abv+'% · ':''}${b.yas==='NAS'?'Yaşsız':b.yas+' yıl'} · <span class="avail av-${b.bul}">${avTxt}</span> · ${b.not}</div></div>
     <div class="price" data-id="${b.id}">${fmt(priceOf(b))}</div>
     <div class="acts">
@@ -1809,7 +1809,7 @@ function card(b,num,src){
   const el=document.createElement('div');el.className='card';
   const haveOn=state.have.includes(b.id),targetOn=state.target.includes(b.id);
   el.innerHTML=`<div class="top">${num!==''?`<div class="num">${num}</div>`:''}${thumb(b)}
-      <div><div class="nm"><span class="adlink" data-detay="${b.id}">${b.ad}</span> ${b.ncf?'<span class="badge b-ncf">❄️ Filtresiz</span>':''}</div>
+      <div><div class="nm"><span class="isimlink" data-detay="${b.id}">${b.ad}</span> ${b.ncf?'<span class="badge b-ncf">❄️ Filtresiz</span>':''}</div>
         <div class="meta">${num!==''?b.dam+' · '+b.bolge+' · '+b.ulke:''}${b.puan?(num!==''?' · ':'')+b.puan+' puan':''}</div>
         ${src&&num===''?`<div class="meta">${src}</div>`:''}
         ${src&&num!==''?`<div class="src">${src}</div>`:''}</div></div>
@@ -1884,7 +1884,7 @@ function renderMagazin(){
       html+=`<div class="magcard ${isOpen?'open':''}" data-magcard="${esc(f.ad)}"><div class="mh"><div class="av">${f.e}</div><div><div class="mn">${f.ad}</div><div class="mr">${f.rol}</div></div></div>
         <div class="blurb">“${f.blurb}”</div>`;
       shown.forEach(b=>{const h=state.have.includes(b.id),t=state.target.includes(b.id);
-        html+=`<div class="pick">${thumb(b)}<span class="pn"><span class="adlink" data-detay="${b.id}">${b.ad}</span></span>
+        html+=`<div class="pick">${thumb(b)}<span class="pn"><span class="isimlink" data-detay="${b.id}">${b.ad}</span></span>
           <button class="btn" data-taste="${b.id}">📝</button>
           <button class="btn ${h?'have-on':''}" data-act="have" data-id="${b.id}">${h?'✓':'+'}</button>
           <button class="btn ${t?'target-on':''}" data-act="target" data-id="${b.id}">${t?'★':'☆'}</button></div>`;});
@@ -2102,7 +2102,7 @@ function renderNotes(){
   if(!rated.length)html+='<div class="empty">Henüz tadım notu yok. Keşfet, Listem veya herhangi bir karttaki 📝 düğmesiyle kendi puanını (0-100) ve tadım notunu ekle.</div>';
   else{html+='<div class="grid">';
     rated.forEach(b=>{const nt=state.notes[b.id];
-      html+='<div class="card"><div class="top">'+thumb(b)+'<div><div class="nm"><span class="adlink" data-detay="'+b.id+'">'+b.ad+'</span></div><div class="meta">'+b.dam+' · '+b.bolge+'</div>'+(nt.p?'<div class="src" style="color:#9fd68c;font-style:normal">⭐ Senin puanın: '+nt.p+'/100</div>':'')+'</div></div>'+(nt.tags&&nt.tags.length?'<div class="meta" style="color:var(--amber-soft)">'+nt.tags.map(t=>'#'+t).join(' ')+'</div>':'')+(nt.n?'<div class="meta" style="line-height:1.5">“'+nt.n+'”</div>':'')+'<div class="row"><button class="btn" data-taste="'+b.id+'">✏️ Düzenle</button></div></div>';});
+      html+='<div class="card"><div class="top">'+thumb(b)+'<div><div class="nm"><span class="isimlink" data-detay="'+b.id+'">'+b.ad+'</span></div><div class="meta">'+b.dam+' · '+b.bolge+'</div>'+(nt.p?'<div class="src" style="color:#9fd68c;font-style:normal">⭐ Senin puanın: '+nt.p+'/100</div>':'')+'</div></div>'+(nt.tags&&nt.tags.length?'<div class="meta" style="color:var(--amber-soft)">'+nt.tags.map(t=>'#'+t).join(' ')+'</div>':'')+(nt.n?'<div class="meta" style="line-height:1.5">“'+nt.n+'”</div>':'')+'<div class="row"><button class="btn" data-taste="'+b.id+'">✏️ Düzenle</button></div></div>';});
     html+='</div>';}
   box.innerHTML=html;
 }
@@ -2184,7 +2184,7 @@ function renderMood(){
   const M=MOODS[personalMood];
   const list=allBottles().filter(b=>state.have.includes(b.id)&&M.f(b)).sort((a,b)=>(b.puan||0)-(a.puan||0)).slice(0,3);
   if(!list.length){el.innerHTML='<div class="empty">Bu ruh haline uygun, elinde olan bir şişe yok — “Sıradaki Şişe” önerisinden bir tane edinebilirsin.</div>';return;}
-  el.innerHTML='<div class="grid">'+list.map(b=>'<div class="card"><div class="top">'+thumb(b)+'<div><div class="nm"><span class="adlink" data-detay="'+b.id+'">'+b.ad+'</span></div><div class="meta">'+b.dam+' · '+b.bolge+' · '+(b.puan||'')+' puan</div></div></div><div class="row"><button class="btn" data-taste="'+b.id+'">📝 Not</button><span class="price">'+fmt(priceOf(b))+'</span></div></div>').join('')+'</div>';
+  el.innerHTML='<div class="grid">'+list.map(b=>'<div class="card"><div class="top">'+thumb(b)+'<div><div class="nm"><span class="isimlink" data-detay="'+b.id+'">'+b.ad+'</span></div><div class="meta">'+b.dam+' · '+b.bolge+' · '+(b.puan||'')+' puan</div></div></div><div class="row"><button class="btn" data-taste="'+b.id+'">📝 Not</button><span class="price">'+fmt(priceOf(b))+'</span></div></div>').join('')+'</div>';
 }
 
 function renderMyList(){
@@ -2204,7 +2204,7 @@ function renderMyList(){
 function miniHave(b){
   const el=document.createElement('div');el.className='mini';
   const q=qtyOf(b.id);
-  el.innerHTML=`<div style="flex:1;min-width:0"><div class="nm"><span class="adlink" data-detay="${b.id}">${b.ad}</span></div><div class="meta">${b.dam} · ${b.bolge} · ${fmt(priceOf(b))}${q>1?' × '+q+' = <b style="color:var(--have)">'+fmt(priceOf(b)*q)+'</b>':''}</div></div>
+  el.innerHTML=`<div style="flex:1;min-width:0"><div class="nm"><span class="isimlink" data-detay="${b.id}">${b.ad}</span></div><div class="meta">${b.dam} · ${b.bolge} · ${fmt(priceOf(b))}${q>1?' × '+q+' = <b style="color:var(--have)">'+fmt(priceOf(b)*q)+'</b>':''}</div></div>
     <div class="qty"><button class="qbtn" data-qty="dec" data-id="${b.id}">−</button><span class="qn">${q}</span><button class="qbtn" data-qty="inc" data-id="${b.id}">+</button></div>
     <button class="btn" data-taste="${b.id}" title="Tadım notu / puanın">📝</button>
     <button class="btn" data-act="have" data-id="${b.id}" title="Listeden çıkar">✕</button>`;
@@ -2212,7 +2212,7 @@ function miniHave(b){
 }
 function mini(b){
   const el=document.createElement('div');el.className='mini';
-  el.innerHTML=`<div style="flex:1;min-width:0"><div class="nm"><span class="adlink" data-detay="${b.id}">${b.ad}</span></div><div class="meta">${b.dam} · ${b.bolge}</div></div>
+  el.innerHTML=`<div style="flex:1;min-width:0"><div class="nm"><span class="isimlink" data-detay="${b.id}">${b.ad}</span></div><div class="meta">${b.dam} · ${b.bolge}</div></div>
     <span class="price" data-id="${b.id}">${fmt(priceOf(b))}</span>
     <button class="btn" data-taste="${b.id}" title="Tadım notu / puanın">📝</button>
     <button class="btn" data-act="${state.have.includes(b.id)?'have':'target'}" data-id="${b.id}">✕</button>`;
@@ -2671,7 +2671,7 @@ function renderFiyat(){
   const box=document.getElementById('fiyatBox');if(!box)return;
   const rows=DATA.filter(b=>b.tlTarih).map(b=>({b,d:fiyatDegisim(b)})).filter(r=>r.d);
   if(!rows.length){box.innerHTML='<div class="empty">Henüz otomatik doğrulanmış fiyat yok. İlk haftalık güncellemeden sonra burada görünecek.</div>';return;}
-  const row=r=>`<div class="mini">${thumb(r.b)}<div><div class="nm"><span class="adlink" data-detay="${r.b.id}">${r.b.ad}</span></div>
+  const row=r=>`<div class="mini">${thumb(r.b)}<div><div class="nm"><span class="isimlink" data-detay="${r.b.id}">${r.b.ad}</span></div>
     <div class="meta">${fmt(r.d.once)} → <b>${fmt(r.d.simdi)}</b> · ${trTarih(r.b.tlTarih)}</div></div>
     <span class="fchg ${r.d.oran<0?'dn':r.d.oran>0?'up':''}">${r.d.oran>0?'+':''}${Math.round(r.d.oran*100)}%</span></div>`;
   const dn=rows.filter(r=>r.d.oran<=-0.005).sort((a,b)=>a.d.oran-b.d.oran);
@@ -2726,7 +2726,7 @@ function openDetay(id){
     ${fl.length?`<div class="dt-sec"><h4>Tat profili</h4><div class="aromarow">${fl.map(f=>`<span class="aroma">${f}</span>`).join('')}</div></div>`:''}
     ${b.tlGecmis&&b.tlGecmis.length>1?`<div class="dt-sec"><h4>Fiyat geçmişi</h4>${sparkSVG(b.tlGecmis)}</div>`:''}
     ${nt&&nt.t?`<div class="dt-sec"><h4>Senin notun</h4><div class="dt-txt">${esc(nt.t)}</div></div>`:''}
-    <div class="dt-sec"><h4>Benzer şişeler</h4>${benzerler(b).map(x=>`<div class="mini">${thumb(x)}<div><div class="nm"><span class="adlink" data-detay="${x.id}">${x.ad}</span></div><div class="meta">${x.bolge} · ${x.puan||'—'} puan</div></div><span class="price">${fmt(priceOf(x))}</span></div>`).join('')}</div>
+    <div class="dt-sec"><h4>Benzer şişeler</h4>${benzerler(b).map(x=>`<div class="mini">${thumb(x)}<div><div class="nm"><span class="isimlink" data-detay="${x.id}">${x.ad}</span></div><div class="meta">${x.bolge} · ${x.puan||'—'} puan</div></div><span class="price">${fmt(priceOf(x))}</span></div>`).join('')}</div>
     <div class="dt-acts">
       <button class="btn ${haveOn?'have-on':''}" data-act="have" data-id="${id}">${haveOn?'✓ Elimde':'+ Elimde'}</button>
       <button class="btn ${targetOn?'target-on':''}" data-act="target" data-id="${id}">${targetOn?'★ Hedef':'☆ Hedefe ekle'}</button>

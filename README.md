@@ -21,4 +21,16 @@ Fiyatlar **otomatik** güncellenir; API anahtarı ya da elle müdahale gerekmez.
   otomatik yayına alır. Sayfa açılışta bu dosyayı okur, fiyatın üstüne gelince kaynağı ve tarihi
   görünür. Kullanıcının kendi girdiği fiyat her zaman önceliklidir.
 
+- **Fiyat geçmişi ve bulunabilirlik:** Her farklı doğrulanmış fiyat tarihiyle saklanır (son 24 kayıt);
+  sitede "Listeler → Fiyat Hareketleri" sekmesi ve şişe detay kartındaki grafik bunu gösterir.
+  Görev, kanıt bulduğunda şişenin Türkiye'de nerede satıldığını (`bul`) da günceller; düşük güvenli
+  bulgular bulunabilirliği değiştirmez.
+- **Düşük güven:** "dusuk" güvenli bir fiyat kayıtlı fiyattan %15'ten fazla farklıysa uygulanmaz.
+  Araştırılıp bulunamayan şişeler `denendi` olarak işaretlenir; böylece sıra kataloğun geri kalanına geçer.
+
+## İçerik önerileri
+
 Puanlar (`puan`, uzman listeleri) özenle seçilmiş içerik olduğu için otomatik değiştirilmez.
+Her yıl 15 Ocak ve 15 Temmuz'da ayrı bir Claude görevi yeni ödülleri, yeni çıkan ve üretimi biten
+şişeleri araştırıp `oneriler/YYYY-MM.md` dosyasına **öneri** olarak yazar. Uygulamak için Claude'a
+"oneriler/YYYY-MM.md dosyasındaki önerileri uygula" demek yeterlidir.

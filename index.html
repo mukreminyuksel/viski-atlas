@@ -237,6 +237,55 @@ nav.tabs{display:flex;gap:7px;flex-wrap:wrap;margin:20px 0 14px;padding-bottom:2
 .aroma{font-size:12px;padding:5px 11px;border-radius:20px;background:var(--bg2);border:1px solid var(--line);color:var(--muted);cursor:pointer;user-select:none}
 .aroma.on{background:var(--amber);color:#1a1208;border-color:var(--amber);font-weight:700}
 ::-webkit-scrollbar{width:10px;height:10px}::-webkit-scrollbar-thumb{background:var(--line);border-radius:6px}
+/* GRUPLU MENÜ */
+nav.groups{display:flex;gap:6px;margin:20px 0 10px;background:var(--bg2);border:1px solid var(--line);border-radius:14px;padding:5px}
+.grp{flex:1;display:flex;align-items:center;justify-content:center;gap:8px;background:transparent;border:none;color:var(--muted);
+  font:inherit;font-weight:700;font-size:14.5px;padding:10px 8px;border-radius:10px;cursor:pointer}
+.grp:hover{color:var(--txt);background:var(--panel)}
+.grp.active{color:#1a1208;background:linear-gradient(180deg,#f2c14e,#d8a13a);box-shadow:0 2px 10px rgba(224,168,60,.25)}
+.grp .gi{font-size:17px}
+#subNav{margin:0 0 14px}#subNav.hidden{display:none}
+#subNav .tab{display:none;font-size:13.5px;padding:7px 13px}
+#subNav .tab.ingroup{display:block}
+/* ŞİŞE DETAY KARTI */
+.adlink{cursor:pointer}
+.adlink:hover{color:var(--amber2);text-decoration:underline}
+.modal.detay{max-width:600px;position:relative}
+.dt-x{position:absolute;top:12px;right:12px;background:var(--panel);border:1px solid var(--line);color:var(--muted);width:32px;height:32px;border-radius:50%;cursor:pointer;font-size:16px}
+.dt-head{display:flex;gap:14px;align-items:flex-start;padding-right:36px}
+.dt-head .thumb{width:44px;height:62px}.dt-head .thumb .lab{font-size:10px;padding:3px 0}
+.dt-head h3{font-size:20px;line-height:1.25}
+.dt-sub{color:var(--muted);font-size:13px;margin-top:3px}
+.dt-badges{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+.dt-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:16px 0}
+.dt-f{background:var(--bg2);border:1px solid var(--line);border-radius:10px;padding:8px 10px}
+.dt-f .l{font-size:10.5px;color:var(--muted);text-transform:uppercase;letter-spacing:.4px}
+.dt-f .v{font-weight:800;margin-top:3px;font-size:14.5px}
+.dt-sec{margin-top:14px}
+.dt-sec h4{font-size:13px;color:var(--amber-soft);text-transform:uppercase;letter-spacing:.5px;margin-bottom:7px}
+.dt-txt{font-size:13.5px;color:var(--txt);line-height:1.55}
+.dt-src{font-size:12px;color:var(--muted);margin-top:4px;word-break:break-all}
+.dt-acts{display:flex;gap:8px;flex-wrap:wrap;margin-top:18px}
+.dt-acts .btn{padding:9px 13px;font-size:13px}
+.spark{width:100%;height:70px;display:block}
+.fchg{font-weight:800;font-size:12.5px;white-space:nowrap;margin-left:auto}
+.fchg.dn{color:var(--have)}.fchg.up{color:var(--red)}
+@media(max-width:760px){
+  body{padding-bottom:calc(84px + env(safe-area-inset-bottom))}
+  header{padding:14px 0 10px;margin-bottom:12px}
+  .brand h1{font-size:24px}.brand .sub{display:none}.brand>div:first-child{font-size:26px!important}
+  .stats{flex-wrap:nowrap;overflow-x:auto;gap:8px;margin-top:12px;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+  .stats::-webkit-scrollbar{display:none}
+  .kpi{flex:0 0 auto;min-width:108px;padding:8px 12px}.kpi .val{font-size:17px}.kpi .lbl{font-size:10px}
+  .glass-box{flex:0 0 auto;padding:8px 12px;gap:10px}.glass{width:28px;height:40px}.gv{font-size:16px}.gl{font-size:9.5px}
+  nav.groups{position:fixed;left:0;right:0;bottom:0;z-index:50;margin:0;border-radius:16px 16px 0 0;border-bottom:none;
+    padding:6px 6px calc(6px + env(safe-area-inset-bottom));background:rgba(26,18,8,.96);backdrop-filter:blur(8px);box-shadow:0 -4px 18px rgba(0,0,0,.45)}
+  .grp{flex-direction:column;gap:2px;font-size:10.5px;padding:7px 2px}.grp .gi{font-size:20px}
+  #subNav{flex-wrap:nowrap;overflow-x:auto;margin-top:4px;scrollbar-width:none}#subNav::-webkit-scrollbar{display:none}
+  #subNav .tab{flex:0 0 auto;white-space:nowrap}
+  .dt-grid{grid-template-columns:repeat(2,1fr)}
+  .modal-bg{padding:10px}.modal{padding:18px}
+}
 @media(max-width:760px){.katcols{grid-template-columns:1fr}.listcol{grid-template-columns:1fr}.bottle{flex-wrap:wrap}.bottle .acts{margin-left:auto}}
 </style>
 </head>
@@ -244,7 +293,7 @@ nav.tabs{display:flex;gap:7px;flex-wrap:wrap;margin:20px 0 14px;padding-bottom:2
 <header><div class="wrap">
   <div class="brand">
     <div style="font-size:34px">🥃</div>
-    <div><h1 onclick="location.href='./'" style="cursor:pointer" title="Ana sayfaya dön">Viski Atlası <span style="font-size:13px;color:var(--muted2);font-weight:600;vertical-align:middle">v1.9</span></h1>
+    <div><h1 onclick="location.href='./'" style="cursor:pointer" title="Ana sayfaya dön">Viski Atlası <span style="font-size:13px;color:var(--muted2);font-weight:600;vertical-align:middle">v2.0</span></h1>
       <div class="sub">Bölge → Damıtımevi → Şişe · Uzman & AI tercihleri · Türkiye katmanları · Kişisel koleksiyon</div></div>
   </div>
   <div class="stats">
@@ -262,20 +311,28 @@ nav.tabs{display:flex;gap:7px;flex-wrap:wrap;margin:20px 0 14px;padding-bottom:2
 </div></header>
 
 <div class="wrap">
-  <nav class="tabs">
-    <div class="tab active" data-view="explore">🗺️ Keşfet</div>
-    <div class="tab" data-view="experts">🏆 Uzman Top 50</div>
-    <div class="tab" data-view="ai">🤖 AI Tercihleri</div>
-    <div class="tab" data-view="magazin">✨ Magazin</div>
-    <div class="tab" data-view="ncf">❄️ Filtresizler Top 50</div>
-    <div class="tab" data-view="katman">🇹🇷 Türkiye Katmanları</div>
-    <div class="tab" data-view="kaynak">📚 Kaynaklar</div>
-    <div class="tab" data-view="stats">📊 İstatistik</div>
-    <div class="tab" data-view="akilli">🎯 Akıllı</div>
-    <div class="tab" data-view="gurme">🎖️ Gurme Seviyem</div>
-    <div class="tab" data-view="personal">🧭 Bana Özel</div>
-    <div class="tab" data-view="notes">📝 Tadım Notlarım</div>
-    <div class="tab" data-view="mylist">📋 Listem</div>
+  <nav class="groups" id="groupNav">
+    <button class="grp active" data-group="kesfet"><span class="gi">🗺️</span><span>Keşfet</span></button>
+    <button class="grp" data-group="listeler"><span class="gi">🏆</span><span>Listeler</span></button>
+    <button class="grp" data-group="oneri"><span class="gi">🎯</span><span>Öneriler</span></button>
+    <button class="grp" data-group="koleksiyon"><span class="gi">📋</span><span>Koleksiyonum</span></button>
+    <button class="grp" data-group="kaynak"><span class="gi">📚</span><span>Kaynaklar</span></button>
+  </nav>
+  <nav class="tabs hidden" id="subNav">
+    <div class="tab active" data-group="kesfet" data-view="explore">🗺️ Keşfet</div>
+    <div class="tab" data-group="listeler" data-view="experts">🏆 Uzman Top 50</div>
+    <div class="tab" data-group="listeler" data-view="ai">🤖 AI Tercihleri</div>
+    <div class="tab" data-group="listeler" data-view="ncf">❄️ Filtresizler Top 50</div>
+    <div class="tab" data-group="listeler" data-view="katman">🇹🇷 Türkiye Katmanları</div>
+    <div class="tab" data-group="listeler" data-view="fiyat">📉 Fiyat Hareketleri</div>
+    <div class="tab" data-group="listeler" data-view="magazin">✨ Magazin</div>
+    <div class="tab" data-group="oneri" data-view="akilli">🎯 Akıllı Öneri</div>
+    <div class="tab" data-group="oneri" data-view="personal">🧭 Bana Özel</div>
+    <div class="tab" data-group="koleksiyon" data-view="mylist">📋 Listem</div>
+    <div class="tab" data-group="koleksiyon" data-view="notes">📝 Tadım Notlarım</div>
+    <div class="tab" data-group="koleksiyon" data-view="gurme">🎖️ Gurme Seviyem</div>
+    <div class="tab" data-group="koleksiyon" data-view="stats">📊 İstatistik</div>
+    <div class="tab" data-group="kaynak" data-view="kaynak">📚 Kaynaklar</div>
   </nav>
 
   <section id="view-explore">
@@ -366,6 +423,10 @@ nav.tabs{display:flex;gap:7px;flex-wrap:wrap;margin:20px 0 14px;padding-bottom:2
     <p class="note">Her şişenin solundaki mini görsele tıklayınca <b>Whiskybase</b> sayfası (gerçek fotoğraf + bilgi), 📷 ile Google Görseller açılır.</p>
   </section>
 
+  <section id="view-fiyat" class="hidden">
+    <p class="intro">Her hafta otomatik olarak Türkiye'deki güncel fiyatı bulunan şişeler. Değişim, bir önceki doğrulanmış fiyata (yoksa sitedeki referans fiyata) göre hesaplanır. Fiyatın üstüne gelince kaynağı görünür.</p>
+    <div id="fiyatBox"></div>
+  </section>
   <section id="view-stats" class="hidden">
     <p class="intro">Koleksiyonunun rakamlarla portresi: değer, dağılımlar ve öne çıkanlar. <b>Elimde olanlar</b> üzerinden hesaplanır.</p>
     <div id="statsBox"></div>
@@ -420,6 +481,14 @@ nav.tabs{display:flex;gap:7px;flex-wrap:wrap;margin:20px 0 14px;padding-bottom:2
     <input type="file" id="restoreFile" accept="application/json,.json" style="display:none">
     <span class="note" style="margin:0">Koleksiyonunu dosyaya indir; başka cihaza/tarayıcıya taşımak veya kaybetmemek için geri yükle.</span>
   </div>
+<div class="modal-bg" id="ageGate"><div class="modal" style="text-align:center">
+  <div style="font-size:40px">🥃</div>
+  <h3>Viski Atlası</h3>
+  <p class="msub">Bu site alkollü içkiler hakkında bilgi, fiyat ve öneriler içerir. Devam etmek için 18 yaşından büyük olmalısın.</p>
+  <div class="mrow"><button class="mbtn sec" id="ageNo">18 yaşından küçüğüm</button><button class="mbtn" id="ageYes">18 yaşından büyüğüm</button></div>
+  <p class="cloudnote" id="ageMsg"></p>
+</div></div>
+<div class="modal-bg" id="detayBg"><div class="modal detay" id="detay"></div></div>
 <div class="modal-bg" id="tasteModal">
   <div class="modal">
     <h3 id="tasteTitle">Tadım Notu</h3>
@@ -1554,7 +1623,7 @@ const AI_GROUPS = {
 
 const LS='viski_atlas_v1';
 let state=JSON.parse(localStorage.getItem(LS)||'null');
-if(!state){state={have:['glenlivet-18','lagavulin-16'],target:[],prices:{},custom:[],qty:{},notes:{}};}
+if(!state){state={have:[],target:[],prices:{},custom:[],qty:{},notes:{}};}
 state.have=state.have||[]; state.target=state.target||[]; state.prices=state.prices||{}; state.custom=state.custom||[]; state.qty=state.qty||{}; state.notes=state.notes||{};
 function save(){localStorage.setItem(LS,JSON.stringify(state)); if(window.cloudSync)window.cloudSync();}
 function qtyOf(id){return state.qty[id]||1}
@@ -1691,7 +1760,7 @@ function bottleRow(b,rank){
   if(state.notes[b.id]&&state.notes[b.id].p) badges.push(`<span class="badge" style="background:rgba(127,191,106,.18);color:#9fd68c;border:1px solid rgba(127,191,106,.4)">📝 ${state.notes[b.id].p}</span>`);
   el.innerHTML=`<div class="rank">${rank}</div>
     ${thumb(b)}
-    <div class="info"><div class="nm">${b.ad} ${badges.join(' ')}</div>
+    <div class="info"><div class="nm"><span class="adlink" data-detay="${b.id}">${b.ad}</span> ${badges.join(' ')}</div>
       <div class="meta">${b.tur} · ${b.abv?b.abv+'% · ':''}${b.yas==='NAS'?'Yaşsız':b.yas+' yıl'} · <span class="avail av-${b.bul}">${avTxt}</span> · ${b.not}</div></div>
     <div class="price" data-id="${b.id}">${fmt(priceOf(b))}</div>
     <div class="acts">
@@ -1729,7 +1798,7 @@ function card(b,num,src){
   const el=document.createElement('div');el.className='card';
   const haveOn=state.have.includes(b.id),targetOn=state.target.includes(b.id);
   el.innerHTML=`<div class="top">${num!==''?`<div class="num">${num}</div>`:''}${thumb(b)}
-      <div><div class="nm">${b.ad} ${b.ncf?'<span class="badge b-ncf">❄️ Filtresiz</span>':''}</div>
+      <div><div class="nm"><span class="adlink" data-detay="${b.id}">${b.ad}</span> ${b.ncf?'<span class="badge b-ncf">❄️ Filtresiz</span>':''}</div>
         <div class="meta">${num!==''?b.dam+' · '+b.bolge+' · '+b.ulke:''}${b.puan?(num!==''?' · ':'')+b.puan+' puan':''}</div>
         ${src&&num===''?`<div class="meta">${src}</div>`:''}
         ${src&&num!==''?`<div class="src">${src}</div>`:''}</div></div>
@@ -1804,7 +1873,7 @@ function renderMagazin(){
       html+=`<div class="magcard ${isOpen?'open':''}" data-magcard="${esc(f.ad)}"><div class="mh"><div class="av">${f.e}</div><div><div class="mn">${f.ad}</div><div class="mr">${f.rol}</div></div></div>
         <div class="blurb">“${f.blurb}”</div>`;
       shown.forEach(b=>{const h=state.have.includes(b.id),t=state.target.includes(b.id);
-        html+=`<div class="pick">${thumb(b)}<span class="pn">${b.ad}</span>
+        html+=`<div class="pick">${thumb(b)}<span class="pn"><span class="adlink" data-detay="${b.id}">${b.ad}</span></span>
           <button class="btn" data-taste="${b.id}">📝</button>
           <button class="btn ${h?'have-on':''}" data-act="have" data-id="${b.id}">${h?'✓':'+'}</button>
           <button class="btn ${t?'target-on':''}" data-act="target" data-id="${b.id}">${t?'★':'☆'}</button></div>`;});
@@ -2022,7 +2091,7 @@ function renderNotes(){
   if(!rated.length)html+='<div class="empty">Henüz tadım notu yok. Keşfet, Listem veya herhangi bir karttaki 📝 düğmesiyle kendi puanını (0-100) ve tadım notunu ekle.</div>';
   else{html+='<div class="grid">';
     rated.forEach(b=>{const nt=state.notes[b.id];
-      html+='<div class="card"><div class="top">'+thumb(b)+'<div><div class="nm">'+b.ad+'</div><div class="meta">'+b.dam+' · '+b.bolge+'</div>'+(nt.p?'<div class="src" style="color:#9fd68c;font-style:normal">⭐ Senin puanın: '+nt.p+'/100</div>':'')+'</div></div>'+(nt.tags&&nt.tags.length?'<div class="meta" style="color:var(--amber-soft)">'+nt.tags.map(t=>'#'+t).join(' ')+'</div>':'')+(nt.n?'<div class="meta" style="line-height:1.5">“'+nt.n+'”</div>':'')+'<div class="row"><button class="btn" data-taste="'+b.id+'">✏️ Düzenle</button></div></div>';});
+      html+='<div class="card"><div class="top">'+thumb(b)+'<div><div class="nm"><span class="adlink" data-detay="'+b.id+'">'+b.ad+'</span></div><div class="meta">'+b.dam+' · '+b.bolge+'</div>'+(nt.p?'<div class="src" style="color:#9fd68c;font-style:normal">⭐ Senin puanın: '+nt.p+'/100</div>':'')+'</div></div>'+(nt.tags&&nt.tags.length?'<div class="meta" style="color:var(--amber-soft)">'+nt.tags.map(t=>'#'+t).join(' ')+'</div>':'')+(nt.n?'<div class="meta" style="line-height:1.5">“'+nt.n+'”</div>':'')+'<div class="row"><button class="btn" data-taste="'+b.id+'">✏️ Düzenle</button></div></div>';});
     html+='</div>';}
   box.innerHTML=html;
 }
@@ -2104,7 +2173,7 @@ function renderMood(){
   const M=MOODS[personalMood];
   const list=allBottles().filter(b=>state.have.includes(b.id)&&M.f(b)).sort((a,b)=>(b.puan||0)-(a.puan||0)).slice(0,3);
   if(!list.length){el.innerHTML='<div class="empty">Bu ruh haline uygun, elinde olan bir şişe yok — “Sıradaki Şişe” önerisinden bir tane edinebilirsin.</div>';return;}
-  el.innerHTML='<div class="grid">'+list.map(b=>'<div class="card"><div class="top">'+thumb(b)+'<div><div class="nm">'+b.ad+'</div><div class="meta">'+b.dam+' · '+b.bolge+' · '+(b.puan||'')+' puan</div></div></div><div class="row"><button class="btn" data-taste="'+b.id+'">📝 Not</button><span class="price">'+fmt(priceOf(b))+'</span></div></div>').join('')+'</div>';
+  el.innerHTML='<div class="grid">'+list.map(b=>'<div class="card"><div class="top">'+thumb(b)+'<div><div class="nm"><span class="adlink" data-detay="'+b.id+'">'+b.ad+'</span></div><div class="meta">'+b.dam+' · '+b.bolge+' · '+(b.puan||'')+' puan</div></div></div><div class="row"><button class="btn" data-taste="'+b.id+'">📝 Not</button><span class="price">'+fmt(priceOf(b))+'</span></div></div>').join('')+'</div>';
 }
 
 function renderMyList(){
@@ -2124,7 +2193,7 @@ function renderMyList(){
 function miniHave(b){
   const el=document.createElement('div');el.className='mini';
   const q=qtyOf(b.id);
-  el.innerHTML=`<div style="flex:1;min-width:0"><div class="nm">${b.ad}</div><div class="meta">${b.dam} · ${b.bolge} · ${fmt(priceOf(b))}${q>1?' × '+q+' = <b style="color:var(--have)">'+fmt(priceOf(b)*q)+'</b>':''}</div></div>
+  el.innerHTML=`<div style="flex:1;min-width:0"><div class="nm"><span class="adlink" data-detay="${b.id}">${b.ad}</span></div><div class="meta">${b.dam} · ${b.bolge} · ${fmt(priceOf(b))}${q>1?' × '+q+' = <b style="color:var(--have)">'+fmt(priceOf(b)*q)+'</b>':''}</div></div>
     <div class="qty"><button class="qbtn" data-qty="dec" data-id="${b.id}">−</button><span class="qn">${q}</span><button class="qbtn" data-qty="inc" data-id="${b.id}">+</button></div>
     <button class="btn" data-taste="${b.id}" title="Tadım notu / puanın">📝</button>
     <button class="btn" data-act="have" data-id="${b.id}" title="Listeden çıkar">✕</button>`;
@@ -2132,7 +2201,7 @@ function miniHave(b){
 }
 function mini(b){
   const el=document.createElement('div');el.className='mini';
-  el.innerHTML=`<div style="flex:1;min-width:0"><div class="nm">${b.ad}</div><div class="meta">${b.dam} · ${b.bolge}</div></div>
+  el.innerHTML=`<div style="flex:1;min-width:0"><div class="nm"><span class="adlink" data-detay="${b.id}">${b.ad}</span></div><div class="meta">${b.dam} · ${b.bolge}</div></div>
     <span class="price" data-id="${b.id}">${fmt(priceOf(b))}</span>
     <button class="btn" data-taste="${b.id}" title="Tadım notu / puanın">📝</button>
     <button class="btn" data-act="${state.have.includes(b.id)?'have':'target'}" data-id="${b.id}">✕</button>`;
@@ -2148,8 +2217,10 @@ function renderStats(){
   const aiIds=allBottles().filter(b=>b.ai).map(b=>b.id);
   const aiOwned=aiIds.filter(id=>state.have.includes(id)).length;
   const pctAI=aiIds.length?Math.round(aiOwned/aiIds.length*100):0;
-  document.getElementById('fill').style.height=Math.min(pctHedef,100)+'%';
-  document.getElementById('pct').textContent=pctHedef+'%';
+  // Hiç hedef seçilmemişse oran anlamsız (elindekiler/elindekiler = %100); boş göster
+  document.getElementById('fill').style.height=(target?Math.min(pctHedef,100):0)+'%';
+  document.getElementById('pct').textContent=target?pctHedef+'%':'—';
+  document.getElementById('pct').title=target?'':'Henüz hedef şişe seçmedin (☆ Hedef)';
   document.getElementById('pctAI').textContent=pctAI+'% ('+aiOwned+'/'+aiIds.length+')';
   document.getElementById('kTotal').textContent=total;
   document.getElementById('kHave').textContent=have;
@@ -2462,21 +2533,26 @@ document.getElementById('ncfChip').onclick=function(){ncfOnly=!ncfOnly;this.clas
 document.getElementById('expandAll').onclick=()=>{
   allBottles().filter(passFilters).forEach(b=>openDams.add(damKey(b)));collapsedCountries.clear();renderTree();};
 document.getElementById('collapseAll').onclick=()=>{openDams.clear();renderTree();};
+// Sekme → çizim fonksiyonu. Sadece açık sekme çizilir (eskiden her işaretlemede 13 sekmenin
+// hepsi yeniden çiziliyordu); sekmeye geçince o sekme güncel durumla yeniden çizilir.
+const RENDER={explore:renderTree,experts:renderExperts,ai:renderAI,magazin:renderMagazin,ncf:renderNCF,katman:renderKatman,
+  stats:renderStats2,akilli:renderAkilli,gurme:renderGurme,personal:renderPersonal,notes:renderNotes,mylist:renderMyList,fiyat:renderFiyat};
+const lastInGroup={};
+function showGroup(g){
+  document.querySelectorAll('.grp').forEach(x=>x.classList.toggle('active',x.dataset.group===g));
+  const tabs=[...document.querySelectorAll('#subNav .tab')];
+  tabs.forEach(t=>t.classList.toggle('ingroup',t.dataset.group===g));
+  document.getElementById('subNav').classList.toggle('hidden',tabs.filter(t=>t.dataset.group===g).length<2);
+}
+document.querySelectorAll('.grp').forEach(b=>b.onclick=()=>{
+  const g=b.dataset.group;goTab(lastInGroup[g]||document.querySelector('#subNav .tab[data-group="'+g+'"]').dataset.view);
+});
 document.querySelectorAll('.tab').forEach(t=>t.onclick=()=>{
   document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));t.classList.add('active');
-  ['explore','experts','ai','magazin','ncf','katman','kaynak','stats','akilli','gurme','personal','notes','mylist'].forEach(v=>document.getElementById('view-'+v).classList.add('hidden'));
+  Object.keys(RENDER).concat('kaynak').forEach(v=>document.getElementById('view-'+v).classList.add('hidden'));
   document.getElementById('view-'+t.dataset.view).classList.remove('hidden');
-  if(t.dataset.view==='experts')renderExperts();
-  if(t.dataset.view==='magazin')renderMagazin();
-  if(t.dataset.view==='ai')renderAI();
-  if(t.dataset.view==='ncf')renderNCF();
-  if(t.dataset.view==='katman')renderKatman();
-  if(t.dataset.view==='stats')renderStats2();
-  if(t.dataset.view==='akilli')renderAkilli();
-  if(t.dataset.view==='gurme')renderGurme();
-  if(t.dataset.view==='personal')renderPersonal();
-  if(t.dataset.view==='notes')renderNotes();
-  if(t.dataset.view==='mylist')renderMyList();
+  showGroup(t.dataset.group);lastInGroup[t.dataset.group]=t.dataset.view;
+  const f=RENDER[t.dataset.view];if(f)f();
 });
 let NA_IMG='', NA_ABV='';
 async function fetchPage(url){
@@ -2564,14 +2640,120 @@ document.getElementById('tasteCancel').onclick=closeTaste;
 document.getElementById('tasteDel').onclick=delTaste;
 document.getElementById('resetBtn').onclick=(e)=>{e.preventDefault();
   if(confirm('Tüm işaretlemeler, fiyatlar ve eklediğin şişeler silinsin mi?')){
-    localStorage.removeItem(LS);state={have:['glenlivet-18','lagavulin-16'],target:[],prices:{},custom:[],qty:{},notes:{}};renderAll();}
+    localStorage.removeItem(LS);state={have:[],target:[],prices:{},custom:[],qty:{},notes:{}};renderAll();}
 };
 
 function renderAll(){
-  // Her işaretlemede TÜM sekmeler güncellenir (gizli olanlar dahil) — böylece
-  // bir sayfada seçtiğin viski diğer tüm sayfalarda da işaretli görünür.
-  renderStats();renderTree();renderExperts();renderAI();renderMagazin();renderNCF();renderKatman();renderGurme();renderStats2();renderAkilli();renderPersonal();renderNotes();renderMyList();
+  // Üst istatistikler + yalnızca açık sekme. Diğer sekmeler açıldıkları anda güncel durumla çizilir.
+  renderStats();
+  const a=document.querySelector('#subNav .tab.active');const f=RENDER[a?a.dataset.view:'explore'];if(f)f();
+  if(DETAY_ID)openDetay(DETAY_ID);
 }
+/* ===== FİYAT HAREKETLERİ ===== */
+function fiyatDegisim(b){
+  // Önceki doğrulanmış fiyat varsa ona, yoksa sitedeki referans fiyata göre
+  const g=b.tlGecmis||[];const once=g.length>1?g[g.length-2][1]:b.tl0;
+  if(!once||!b.tl)return null;return {once,simdi:b.tl,oran:b.tl/once-1};
+}
+function trTarih(t){return t?new Date(t).toLocaleDateString('tr-TR',{day:'numeric',month:'short',year:'numeric'}):''}
+function renderFiyat(){
+  const box=document.getElementById('fiyatBox');if(!box)return;
+  const rows=DATA.filter(b=>b.tlTarih).map(b=>({b,d:fiyatDegisim(b)})).filter(r=>r.d);
+  if(!rows.length){box.innerHTML='<div class="empty">Henüz otomatik doğrulanmış fiyat yok. İlk haftalık güncellemeden sonra burada görünecek.</div>';return;}
+  const row=r=>`<div class="mini">${thumb(r.b)}<div><div class="nm"><span class="adlink" data-detay="${r.b.id}">${r.b.ad}</span></div>
+    <div class="meta">${fmt(r.d.once)} → <b>${fmt(r.d.simdi)}</b> · ${trTarih(r.b.tlTarih)}</div></div>
+    <span class="fchg ${r.d.oran<0?'dn':r.d.oran>0?'up':''}">${r.d.oran>0?'+':''}${Math.round(r.d.oran*100)}%</span></div>`;
+  const dn=rows.filter(r=>r.d.oran<=-0.005).sort((a,b)=>a.d.oran-b.d.oran);
+  const up=rows.filter(r=>r.d.oran>=0.005).sort((a,b)=>b.d.oran-a.d.oran);
+  const ayni=rows.length-dn.length-up.length;
+  box.innerHTML=`<p class="note" style="margin:0 0 12px">${rows.length} şişenin fiyatı doğrulandı · ${dn.length} düştü · ${up.length} arttı · ${ayni} aynı kaldı.</p>
+    <div class="listcol"><div><h3>📉 Fiyatı düşenler</h3>${dn.map(row).join('')||'<div class="empty">Yok</div>'}</div>
+    <div><h3>📈 Fiyatı artanlar</h3>${up.map(row).join('')||'<div class="empty">Yok</div>'}</div></div>`;
+}
+
+/* ===== ŞİŞE DETAY KARTI (paylaşılabilir: #s=<id>) ===== */
+let DETAY_ID=null;
+const AV_TXT={kolay:'Markette',tekel:'Tekel',dutyfree:'Duty-Free',zor:'Zor bulunur',muzayede:'Müzayede'};
+function sparkSVG(g){
+  const W=300,H=70,P=6,v=g.map(x=>x[1]),mn=Math.min(...v),mx=Math.max(...v),r=mx-mn||1;
+  const pts=g.map((x,i)=>[P+i*(W-2*P)/(g.length-1),H-P-(x[1]-mn)/r*(H-2*P)]);
+  return `<svg class="spark" viewBox="0 0 ${W} ${H}" preserveAspectRatio="none"><polyline fill="none" stroke="#e0a83c" stroke-width="2.5" points="${pts.map(p=>p.join(',')).join(' ')}"/>${pts.map(p=>`<circle cx="${p[0]}" cy="${p[1]}" r="3.5" fill="#f2c14e"/>`).join('')}</svg>
+    <div class="dt-src">${g.map(x=>trTarih(x[0])+': '+fmt(x[1])).join(' · ')}</div>`;
+}
+function benzerler(b){
+  const fb=flavorsOf(b),p=priceOf(b)||1;
+  return allBottles().filter(x=>x.id!==b.id).map(x=>{
+    const ortak=[...flavorsOf(x)].filter(f=>fb.has(f)).length;
+    const sk=ortak*2+(x.bolge===b.bolge?2:0)+(x.tur===b.tur?1:0)+((x.puan||0)>=(b.puan||0)-2?1:0)-Math.abs(Math.log((priceOf(x)||1)/p))*1.5;
+    return {x,sk};}).sort((a,c)=>c.sk-a.sk).slice(0,5).map(o=>o.x);
+}
+function openDetay(id){
+  const b=allBottles().find(x=>x.id===id);if(!b){closeDetay();return;}
+  DETAY_ID=id;
+  const haveOn=state.have.includes(id),targetOn=state.target.includes(id),nt=state.notes[id];
+  const badges=[];
+  if(b.uz)badges.push('<span class="badge b-uz">🏆 Uzman</span>');
+  if(b.ai)badges.push(`<span class="badge b-ai">🤖 AI #${b.ai}</span>`);
+  if(b.kat)badges.push(`<span class="badge b-kat">TR Katman ${b.kat}</span>`);
+  if(b.ncf)badges.push('<span class="badge b-ncf">❄️ Filtresiz</span>');
+  const kaynak=state.prices[id]!==undefined?'Senin girdiğin fiyat'
+    :b.tlTarih?(FIYAT_TUR[b.tlTur]||'Otomatik')+' · '+trTarih(b.tlTarih):'Yaklaşık referans fiyat (henüz otomatik doğrulanmadı)';
+  const fl=[...flavorsOf(b)];
+  document.getElementById('detay').innerHTML=`<button class="dt-x" data-detay-kapat title="Kapat">✕</button>
+    <div class="dt-head">${thumb(b)}<div><h3>${b.ad}</h3><div class="dt-sub">${b.dam} · ${b.bolge} · ${b.ulke}</div>
+      <div class="dt-badges">${badges.join('')}</div></div></div>
+    <div class="dt-grid">
+      <div class="dt-f"><div class="l">Fiyat</div><div class="v" style="color:var(--amber2)">${fmt(priceOf(b))}</div></div>
+      <div class="dt-f"><div class="l">Puan</div><div class="v">${b.puan||'—'}${nt&&nt.p?` <span style="color:var(--have);font-size:12px">· senin: ${nt.p}</span>`:''}</div></div>
+      <div class="dt-f"><div class="l">Bulunabilirlik</div><div class="v"><span class="avail av-${b.bul}">${AV_TXT[b.bul]||b.bul}</span></div></div>
+      <div class="dt-f"><div class="l">Tür</div><div class="v">${b.tur}</div></div>
+      <div class="dt-f"><div class="l">Yaş</div><div class="v">${b.yas==='NAS'?'Yaşsız':b.yas+' yıl'}</div></div>
+      <div class="dt-f"><div class="l">Alkol</div><div class="v">${b.abv?'%'+b.abv:'—'}</div></div>
+    </div>
+    <div class="dt-src">💰 ${kaynak}${b.tlKaynak&&state.prices[id]===undefined?` · <a href="${esc(b.tlKaynak)}" target="_blank" rel="noopener">kaynak</a>`:''}</div>
+    ${b.not||b.uz?`<div class="dt-sec"><h4>Hakkında</h4><div class="dt-txt">${b.not||''}${b.uz?`<div class="dt-src">🏆 ${b.uz}</div>`:''}</div></div>`:''}
+    ${fl.length?`<div class="dt-sec"><h4>Tat profili</h4><div class="aromarow">${fl.map(f=>`<span class="aroma">${f}</span>`).join('')}</div></div>`:''}
+    ${b.tlGecmis&&b.tlGecmis.length>1?`<div class="dt-sec"><h4>Fiyat geçmişi</h4>${sparkSVG(b.tlGecmis)}</div>`:''}
+    ${nt&&nt.t?`<div class="dt-sec"><h4>Senin notun</h4><div class="dt-txt">${esc(nt.t)}</div></div>`:''}
+    <div class="dt-sec"><h4>Benzer şişeler</h4>${benzerler(b).map(x=>`<div class="mini">${thumb(x)}<div><div class="nm"><span class="adlink" data-detay="${x.id}">${x.ad}</span></div><div class="meta">${x.bolge} · ${x.puan||'—'} puan</div></div><span class="price">${fmt(priceOf(x))}</span></div>`).join('')}</div>
+    <div class="dt-acts">
+      <button class="btn ${haveOn?'have-on':''}" data-act="have" data-id="${id}">${haveOn?'✓ Elimde':'+ Elimde'}</button>
+      <button class="btn ${targetOn?'target-on':''}" data-act="target" data-id="${id}">${targetOn?'★ Hedef':'☆ Hedefe ekle'}</button>
+      <button class="btn" data-taste="${id}">📝 Tadım notu</button>
+      <button class="btn" data-page="${esc(pageURL(b))}">🔎 Whiskybase</button>
+      <button class="btn" data-paylas="${id}">🔗 Paylaş</button>
+    </div>`;
+  document.getElementById('detayBg').classList.add('on');
+  if(location.hash!=='#s='+id)history.replaceState(null,'','#s='+id);
+}
+function closeDetay(){
+  DETAY_ID=null;document.getElementById('detayBg').classList.remove('on');
+  if(location.hash.startsWith('#s='))history.replaceState(null,'',location.pathname+location.search);
+}
+document.addEventListener('click',e=>{
+  if(e.target.id==='detayBg'||e.target.closest('[data-detay-kapat]')){closeDetay();return;}
+  const sh=e.target.closest('[data-paylas]');
+  if(sh){const b=allBottles().find(x=>x.id===sh.dataset.paylas);const url=location.origin+location.pathname+'#s='+b.id;
+    if(navigator.share)navigator.share({title:b.ad+' · Viski Atlası',url}).catch(()=>{});
+    else if(navigator.clipboard)navigator.clipboard.writeText(url).then(()=>{sh.textContent='✓ Link kopyalandı';});
+    else prompt('Linki kopyala:',url);
+    e.stopPropagation();return;}
+  const dl=e.target.closest('[data-detay]');
+  if(dl){e.stopPropagation();openDetay(dl.dataset.detay);}
+},true);
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&DETAY_ID)closeDetay();});
+function hashAc(){const m=location.hash.match(/^#s=(.+)$/);if(m)openDetay(decodeURIComponent(m[1]));}
+window.addEventListener('hashchange',hashAc);
+
+/* ===== 18 YAŞ ONAYI ===== */
+(function(){
+  let ok=false;try{ok=localStorage.getItem('viski_yas')==='1';}catch(e){}
+  const m=document.getElementById('ageGate');if(ok)return;
+  m.classList.add('on');
+  document.getElementById('ageYes').onclick=()=>{try{localStorage.setItem('viski_yas','1');}catch(e){}m.classList.remove('on');};
+  document.getElementById('ageNo').onclick=()=>{document.getElementById('ageMsg').textContent='Üzgünüz, bu site yalnızca 18 yaşından büyükler içindir.';};
+})();
+showGroup('kesfet');
 renderAll();
 // Otomatik güncellenen fiyatlar: data/fiyatlar.json haftalık bot tarafından GitHub'a yazılır
 // (scripts/fiyat-guncelle.mjs). Önce doğrudan GitHub'dan okunur, böylece site yeniden
@@ -2583,7 +2765,7 @@ fiyatJson(FIYAT_URL).catch(()=>fiyatJson('data/fiyatlar.json')).then(d=>{
   if(!d||!d.fiyatlar)return;
   const byId=new Map(DATA.map(b=>[b.id,b]));
   let n=0;
-  for(const [id,f] of Object.entries(d.fiyatlar)){const b=byId.get(id);if(b&&f.tl>0){b.tl=f.tl;b.tlTarih=f.tarih;b.tlTur=f.tur;b.tlKaynak=f.kaynak||'';n++;}}
+  for(const [id,f] of Object.entries(d.fiyatlar)){const b=byId.get(id);if(b&&f.tl>0){b.tl0=b.tl;b.tl=f.tl;b.tlTarih=f.tarih;b.tlTur=f.tur;b.tlKaynak=f.kaynak||'';b.tlGecmis=f.gecmis||[[f.tarih,f.tl]];if(f.bul)b.bul=f.bul;n++;}}
   const el=document.getElementById('fiyatDurum');
   if(el&&d.guncelleme)el.textContent='🔄 Fiyatlar her hafta otomatik güncellenir · son güncelleme '+new Date(d.guncelleme).toLocaleDateString('tr-TR',{day:'numeric',month:'long',year:'numeric'})+' · '+n+'/'+DATA.length+' şişe doğrulandı.';
   if(n)renderAll();
@@ -2596,6 +2778,7 @@ document.addEventListener('mouseover',e=>{
     :b.tlTarih?(FIYAT_TUR[b.tlTur]||'Otomatik')+' · '+new Date(b.tlTarih).toLocaleDateString('tr-TR')+(b.tlKaynak?' · '+b.tlKaynak:'')
     :'Yaklaşık referans fiyat (henüz otomatik doğrulanmadı)';
 });
+hashAc();
 if('serviceWorker' in navigator){window.addEventListener('load',()=>{navigator.serviceWorker.register('sw.js').catch(()=>{});});}
 </script>
 </body>

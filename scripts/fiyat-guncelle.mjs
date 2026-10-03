@@ -6,7 +6,8 @@
 //                                                     geçirip data/fiyatlar.json'a yazar
 // Bulgu dosyası biçimi:
 //   {"sonuclar":[{"id":"...","tl":12345,"tur":"tr_raf|tr_liste|dutyfree|tahmin",
-//                 "kaynak":"https://...","guven":"yuksek|orta|dusuk","not":"..."}]}
+//                 "kaynak":"https://...","guven":"yuksek|orta|dusuk","not":"...",
+//                 "bul":"kolay|tekel|dutyfree|zor|muzayede"}]}   (bul isteğe bağlı)
 
 import fs from "node:fs";
 import path from "node:path";
@@ -74,6 +75,7 @@ function capalar(data, fiyatlar) {
 
 // ---- Güvenlik kontrolleri ----
 const TURLER = new Set(["tr_raf", "tr_liste", "dutyfree", "tahmin"]);
+const BULLAR = new Set(["kolay", "tekel", "dutyfree", "zor", "muzayede"]);
 function denetle(s, b, eski) {
   if (!TURLER.has(s.tur)) return "geçersiz tür";
   if (!Number.isFinite(s.tl) || s.tl < 300 || s.tl > 5_000_000) return "geçersiz fiyat";
@@ -127,9 +129,16 @@ function uygulaKomutu(dosya) {
       db.inceleme.push({ id: s.id, onerilen: s.tl, mevcut: eski?.tl || b.tl, tur: s.tur, kaynak: s.kaynak || "", neden });
       continue;
     }
+    // Fiyat geçmişi: her farklı doğrulanmış fiyat tarihiyle saklanır (son 24 kayıt)
+    const gecmis = [...(eski?.gecmis || (eski ? [[eski.tarih, eski.tl]] : []))];
+    if (gecmis.length && gecmis[gecmis.length - 1][0] === BUGUN) gecmis.pop();
+    if (!gecmis.length || gecmis[gecmis.length - 1][1] !== s.tl) gecmis.push([BUGUN, s.tl]);
+    // Bulunabilirlik yalnızca düşük güvenli olmayan bulgudan güncellenir
+    const bul = BULLAR.has(s.bul) && s.guven !== "dusuk" ? s.bul : eski?.bul;
     db.fiyatlar[s.id] = {
       tl: s.tl, tarih: BUGUN, tur: s.tur, guven: s.guven || "orta",
       ...(s.kaynak ? { kaynak: s.kaynak } : {}), ...(s.not ? { not: String(s.not).slice(0, 160) } : {}),
+      ...(bul ? { bul } : {}), gecmis: gecmis.slice(-24),
     };
     kabul++;
   }

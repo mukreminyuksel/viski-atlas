@@ -1,4 +1,87 @@
 {
- "gorseller": {},
- "yok": {}
+ "gorseller": {
+  "ardbeg-10": {
+   "dosya": "img/sise/ardbeg-10.webp",
+   "kaynak": "https://www.ardbeg.com/products/ardbeg-ten-years-old",
+   "sahip": "Ardbeg",
+   "tarih": "2026-10-03"
+  },
+  "ardbeg-corryvreckan": {
+   "dosya": "img/sise/ardbeg-corryvreckan.webp",
+   "kaynak": "https://www.ardbeg.com/products/ardbeg-corryvreckan",
+   "sahip": "Ardbeg",
+   "tarih": "2026-10-03"
+  },
+  "ardbeg-uigeadail": {
+   "dosya": "img/sise/ardbeg-uigeadail.webp",
+   "kaynak": "https://www.ardbeg.com/products/ardbeg-uigeadail",
+   "sahip": "Ardbeg",
+   "tarih": "2026-10-03"
+  },
+  "dewars-12": {
+   "dosya": "img/sise/dewars-12.webp",
+   "kaynak": "https://shop.dewars.com/products/dewars-12-year-old-blended-scotch-whisky",
+   "sahip": "Dewar's",
+   "tarih": "2026-10-03"
+  },
+  "dewars-white": {
+   "dosya": "img/sise/dewars-white.webp",
+   "kaynak": "https://shop.dewars.com/products/dewars-white-label-whisky",
+   "sahip": "Dewar's",
+   "tarih": "2026-10-03"
+  },
+  "glenmorangie-signet": {
+   "dosya": "img/sise/glenmorangie-signet.webp",
+   "kaynak": "https://www.glenmorangie.com/products/glenmorangie-signet",
+   "sahip": "Glenmorangie",
+   "tarih": "2026-10-03"
+  },
+  "jw-black": {
+   "dosya": "img/sise/jw-black.webp",
+   "kaynak": "https://www.johnniewalker.com/en/our-whisky/core-range/johnnie-walker-black-label",
+   "sahip": "Johnnie Walker",
+   "tarih": "2026-10-03"
+  },
+  "jw-doubleblack": {
+   "dosya": "img/sise/jw-doubleblack.webp",
+   "kaynak": "https://www.johnniewalker.com/en/our-whisky/core-range/johnnie-walker-double-black",
+   "sahip": "Johnnie Walker",
+   "tarih": "2026-10-03"
+  },
+  "jw-red": {
+   "dosya": "img/sise/jw-red.webp",
+   "kaynak": "https://www.johnniewalker.com/en/our-whisky/core-range/johnnie-walker-red-label",
+   "sahip": "Johnnie Walker",
+   "tarih": "2026-10-03"
+  },
+  "lagavulin-16": {
+   "dosya": "img/sise/lagavulin-16.webp",
+   "kaynak": "https://www.malts.com/en/products/lagavulin-16-year-old-single-malt-scotch-whisky-70cl",
+   "sahip": "Lagavulin",
+   "tarih": "2026-10-03"
+  },
+  "octomore-141": {
+   "dosya": "img/sise/octomore-141.webp",
+   "kaynak": "https://www.bruichladdich.com/products/octomore-edition-14-1",
+   "sahip": "Bruichladdich",
+   "tarih": "2026-10-03"
+  },
+  "talisker-10": {
+   "dosya": "img/sise/talisker-10.webp",
+   "kaynak": "https://www.malts.com/en/products/talisker-10-year-old",
+   "sahip": "Talisker",
+   "tarih": "2026-10-03"
+  },
+  "williamlawsons": {
+   "dosya": "img/sise/williamlawsons.webp",
+   "kaynak": "https://www.williamlawsons.com/our-whisky/",
+   "sahip": "William Lawson's",
+   "tarih": "2026-10-03"
+  }
+ },
+ "yok": {
+  "glenmorangie-10": "2026-10-03",
+  "glenmoray-cabernet": "2026-10-03",
+  "glenmoray-classic": "2026-10-03"
+ }
 }

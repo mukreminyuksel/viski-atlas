@@ -2573,10 +2573,13 @@ function renderAll(){
   renderStats();renderTree();renderExperts();renderAI();renderMagazin();renderNCF();renderKatman();renderGurme();renderStats2();renderAkilli();renderPersonal();renderNotes();renderMyList();
 }
 renderAll();
-// Otomatik güncellenen fiyatlar: data/fiyatlar.json haftalık bot tarafından yazılır
-// (scripts/fiyat-guncelle.mjs). Dosya yoksa/okunamazsa gömülü fiyatlar kullanılır.
+// Otomatik güncellenen fiyatlar: data/fiyatlar.json haftalık bot tarafından GitHub'a yazılır
+// (scripts/fiyat-guncelle.mjs). Önce doğrudan GitHub'dan okunur, böylece site yeniden
+// yüklenmeden güncel kalır; olmazsa yanındaki kopya, o da yoksa gömülü fiyatlar kullanılır.
 const FIYAT_TUR={tr_raf:'✓ Türkiye mağaza fiyatı',tr_liste:'✓ İthalatçı/zam listesi',dutyfree:'✈ Duty-free fiyatı',tahmin:'≈ Yurtdışı fiyatından tahmin'};
-fetch('data/fiyatlar.json',{cache:'no-cache'}).then(r=>r.ok?r.json():null).then(d=>{
+const FIYAT_URL='https://raw.githubusercontent.com/mukreminyuksel/viski-atlas/main/data/fiyatlar.json';
+const fiyatJson=u=>fetch(u,{cache:'no-cache'}).then(r=>r.ok?r.json():Promise.reject());
+fiyatJson(FIYAT_URL).catch(()=>fiyatJson('data/fiyatlar.json')).then(d=>{
   if(!d||!d.fiyatlar)return;
   const byId=new Map(DATA.map(b=>[b.id,b]));
   let n=0;

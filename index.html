@@ -309,7 +309,7 @@ nav.groups{display:flex;gap:6px;margin:20px 0 10px;background:var(--bg2);border:
 .gkart{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:16px;margin-bottom:14px}
 .gkart h3{font-size:16px;margin-bottom:10px}
 .gform{display:grid;gap:10px;min-width:0}.gform label{font-size:12.5px;color:var(--muted);display:grid;gap:4px;min-width:0}
-.gform input:not([type=checkbox]),.gform textarea{width:100%;min-width:0;box-sizing:border-box}.gform input[type=datetime-local]{min-height:40px}
+.gform input:not([type=checkbox]):not([type=radio]),.gform textarea{width:100%;min-width:0;box-sizing:border-box}.gform input[type=datetime-local]{min-height:40px}
 .gform .iki{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 .gsec{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}
 .gsec span{background:var(--bg2);border:1px solid var(--line);border-radius:20px;padding:5px 10px;font-size:12.5px}
@@ -328,6 +328,23 @@ nav.groups{display:flex;gap:6px;margin:20px 0 10px;background:var(--bg2);border:
 .vurgu{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:8px;margin-bottom:12px}
 .vurgu div{background:var(--bg2);border:1px solid var(--line);border-radius:10px;padding:10px;font-size:13px}.vurgu b{display:block;color:var(--amber-soft);font-size:11px;text-transform:uppercase;margin-bottom:3px}
 .glist .mini{cursor:pointer}
+/* SOSYAL: rehber + sade listeler */
+.srehber{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px;position:relative}
+.sr-kart{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:13px 14px;cursor:pointer;transition:border-color .15s}
+.sr-kart:hover{border-color:var(--amber-soft)}.sr-kart.aktif{border-color:var(--amber);box-shadow:0 0 0 1px var(--amber) inset}
+.sr-ust{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap;font-size:16px;margin-bottom:6px}.sr-ust span{font-size:12px;color:var(--amber2);font-weight:700}
+.sr-kart p{font-size:13px;color:var(--muted);line-height:1.5;margin:0 0 6px}.sr-ne{font-size:12.5px;color:var(--txt)}
+.sr-alt{grid-column:1/-1;display:flex;justify-content:flex-end}
+.linkbtn{background:none;border:none;color:var(--muted2);font:inherit;font-size:12.5px;cursor:pointer;padding:2px 0}.linkbtn:hover{color:var(--amber2)}
+.sbaslik{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:4px 0 10px;flex-wrap:wrap}.sbaslik h2{font-size:19px;margin:0}
+.sbaslik .eklebtn{margin:0}
+.adimlar{display:grid;gap:8px;margin:10px 0 4px;counter-reset:a}.adimlar div{display:flex;gap:10px;align-items:flex-start;font-size:13.5px;color:var(--muted);line-height:1.45}
+.adimlar div::before{counter-increment:a;content:counter(a);flex:none;width:24px;height:24px;border-radius:50%;background:var(--amber-soft);color:#1a1208;font-weight:800;font-size:12.5px;display:grid;place-items:center}
+.adimlar b{color:var(--txt)}
+.gbolum{font-size:12px;font-weight:800;letter-spacing:.6px;text-transform:uppercase;color:var(--amber2);margin:6px 0 -2px}
+.ksec{display:grid;gap:6px}.ksec label{display:flex!important;flex-direction:row;align-items:center;gap:10px;background:var(--bg2);border:1px solid var(--line);border-radius:10px;padding:10px 12px;cursor:pointer;color:var(--txt)!important;font-size:13.5px!important}
+.ksec label:has(input:checked){border-color:var(--amber);background:rgba(224,168,60,.08)}.ksec input{flex:none;width:18px;height:18px;margin:0;accent-color:var(--amber)}.ksec small{display:block;color:var(--muted2);font-size:12px}
+.mini .etiket{font-size:11px;font-weight:700;color:var(--amber2);background:rgba(224,168,60,.1);border-radius:6px;padding:1px 6px;margin-left:6px;white-space:nowrap}
 .h-buyut{position:absolute;top:10px;right:10px;z-index:500;background:var(--panel);color:var(--amber2);border:1px solid var(--line);border-radius:9px;padding:7px 11px;font-weight:700;font-size:12.5px;cursor:pointer}
 #haritaSar.buyuk{position:fixed;inset:0;z-index:1800;background:var(--bg)}
 #haritaSar.buyuk #haritaKutu{height:100%;min-height:0;border-radius:0;border:none}
@@ -336,7 +353,7 @@ nav.groups{display:flex;gap:6px;margin:20px 0 10px;background:var(--bg2);border:
 @keyframes parla{0%{box-shadow:0 0 0 3px var(--amber2)}100%{box-shadow:0 0 0 0 transparent}}
 @media(max-width:760px){
   #haritaKutu{height:40vh;min-height:280px}
-  .gform .iki{grid-template-columns:1fr}.gkart{padding:13px}.sonuc{font-size:12.5px}.sonuc td,.sonuc th{padding:7px 4px}
+  .srehber{grid-template-columns:1fr}.gform .iki{grid-template-columns:1fr}.gkart{padding:13px}.sonuc{font-size:12.5px}.sonuc td,.sonuc th{padding:7px 4px}
   .h-ust{gap:6px;margin-bottom:8px}.h-ust .pillrow{flex-wrap:nowrap;overflow-x:auto;width:100%;scrollbar-width:none}.h-ust .pillrow::-webkit-scrollbar{display:none}
   .h-ust .chip,.h-ust .btn{flex:0 0 auto;white-space:nowrap}
   body{padding-bottom:calc(84px + env(safe-area-inset-bottom))}
@@ -361,7 +378,7 @@ nav.groups{display:flex;gap:6px;margin:20px 0 10px;background:var(--bg2);border:
 <header><div class="wrap">
   <div class="brand">
     <div style="font-size:34px">🥃</div>
-    <div><h1 onclick="location.href='./'" style="cursor:pointer" title="Ana sayfaya dön">Viski Atlası <span style="font-size:13px;color:var(--muted2);font-weight:600;vertical-align:middle">v2.9</span></h1>
+    <div><h1 onclick="location.href='./'" style="cursor:pointer" title="Ana sayfaya dön">Viski Atlası <span style="font-size:13px;color:var(--muted2);font-weight:600;vertical-align:middle">v3.0</span></h1>
       <div class="sub">Bölge → Damıtımevi → Şişe · Uzman & AI tercihleri · Türkiye katmanları · Kişisel koleksiyon</div></div>
   </div>
   <div class="stats">
@@ -3301,43 +3318,86 @@ function tarihYaz(t){if(!t)return '';const d=new Date(t);return isNaN(d)?g$(t):d
 const TAKMA_ORNEK=['Frank Gallagher','Kaptan Haddock','Ron Swanson','Don Draper','Roger Sterling','James Bond','Logan Roy','Sherlock Holmes','Tommy Shelby','Jack Torrance','Rick Deckard','The Dude'];
 const ornekTakma=()=>TAKMA_ORNEK[Math.floor(Math.random()*TAKMA_ORNEK.length)];
 let YENI_SISELER=[],YENI_KULUP=null;
+// Sosyal Buluşmalar: tadım gecesi (tek etkinlik) ile kulübün (kalıcı grup) farkını anlatan kartlar
+let SOSYAL={geceForm:false,kulupForm:false};
+function sosyalRehber(aktif){
+  if(lsAl('viski_sosyal_rehber_gizli',false))return `<div style="margin-bottom:10px"><button class="linkbtn" data-sosyal="rehber-ac">ℹ️ Tadım gecesi ile kulüp arasındaki fark ne?</button></div>`;
+  return `<div class="srehber">
+    <div class="sr-kart ${aktif==='gece'?'aktif':''}" data-sosyal="git-gece"><div class="sr-ust">🥃 <b>Tadım Gecesi</b><span>tek seferlik etkinlik</span></div>
+      <p>Bir akşam, birkaç şişe. Linki WhatsApp'tan gönderirsin; herkes kendi telefonundan puan verir, sonunda ortak sonuç tablosu çıkar.</p>
+      <div class="sr-ne">👉 Doğum günü, tek akşamlık buluşma</div></div>
+    <div class="sr-kart ${aktif==='kulup'?'aktif':''}" data-sosyal="git-kulup"><div class="sr-ust">🏛️ <b>Kulüp</b><span>kalıcı arkadaş grubu</span></div>
+      <p>Arkadaşların bir kez katılır. Kulübe eklediğin her gece herkesin kulüp sayfasında görünür; geçmiş sonuçlar ve grubun favorileri birikir.</p>
+      <div class="sr-ne">👉 Düzenli buluşan sabit bir ekip</div></div>
+    <div class="sr-alt"><button class="linkbtn" data-sosyal="rehber-gizle">Anladım, gizle ✕</button></div></div>`;
+}
 function renderKulup(){
   const k=document.getElementById('kulupKutu');if(!k)return;
   if(KULUP.id){kulupSayfa();return;}
-  const kl=kuluplerim(),kids=Object.keys(kl);
-  k.innerHTML=`<p class="intro">Kulüp, arkadaş grubunun kalıcı buluşma yeri: üyeler bir kez katılır; kulübün tüm tadım gecelerini, sonuçlarını ve favorilerini tek yerde görür. Dışarıdan kimse göremez, yalnızca davet linkiyle girilir.</p><div class="gkart"><h3>🏛️ Kulüplerim</h3>
-      ${kids.length?kids.map(id=>`<div class="mini" style="cursor:pointer" data-kulup-ac="${id}"><div><div class="nm">${g$(kl[id].ad||'Kulüp')}</div><div class="meta">${g$(kl[id].benAd||'')}${kl[id].rol==='kurucu'?' · 👑 kurucu':kl[id].rol==='yonetici'?' · ⭐ yönetici':''}</div></div><span class="price">›</span></div>`).join(''):'<p class="dt-txt" style="color:var(--muted)">Henüz bir kulübün yok. Aşağıdan kendi kulübünü kur ya da bir üyeden davet linki iste.</p>'}
-      <details style="margin-top:10px"${kids.length?'':' open'}><summary style="cursor:pointer;color:var(--amber-soft);font-weight:700">➕ Yeni kulüp kur</summary>
-        <div class="gform" style="margin-top:10px"><label>Kulübün adı<input id="kAd" maxlength="60" placeholder="ör. Kadıköy Viski Kulübü"></label>
-          <label>Açıklama (isteğe bağlı)<textarea id="kAcik" maxlength="500" rows="2" placeholder="Ayda bir buluşuyoruz; herkes bir şişe getiriyor…"></textarea></label>
-          <label>Kulüpteki takma adın<input id="kBenAd" maxlength="30" placeholder="ör. ${ornekTakma()}" value="${g$(lsAl('viski_takma_ad',''))}"></label>
-          <button class="eklebtn" style="margin:0" data-kulup="kur">🏛️ Kulübü kur</button><div class="durum" id="kDurum" style="font-size:12.5px;color:var(--red)"></div></div></details></div>`;
+  const kl=kuluplerim(),kids=Object.keys(kl),acik=SOSYAL.kulupForm;
+  k.innerHTML=`${sosyalRehber('kulup')}
+    <div class="sbaslik"><h2>🏛️ Kulüplerim</h2>${acik?'':'<button class="eklebtn" data-sosyal="kulup-form">➕ Yeni kulüp kur</button>'}</div>
+    ${kids.length?`<div class="gkart glist">${kids.map(id=>`<div class="mini" data-kulup-ac="${id}"><div><div class="nm">🏛️ ${g$(kl[id].ad||'Kulüp')}${kl[id].rol==='kurucu'?'<span class="etiket">👑 kurucu</span>':kl[id].rol==='yonetici'?'<span class="etiket">⭐ yönetici</span>':''}</div><div class="meta">Takma adın: ${g$(kl[id].benAd||'')}</div></div><span class="price">›</span></div>`).join('')}</div>`
+      :acik?'':`<div class="gkart"><h3>Henüz bir kulübün yok</h3><div class="adimlar">
+        <div><span><b>Kulübü kur:</b> adını ver, takma adını yaz.</span></div>
+        <div><span><b>Davet linkini gönder:</b> arkadaşların linke tıklayıp bir kez katılır.</span></div>
+        <div><span><b>Geceleri kulübün içinden aç:</b> her yeni gece tüm üyelerin kulüp sayfasında görünür.</span></div></div>
+        <p class="dt-txt" style="color:var(--muted2);margin-top:10px">📩 Biri seni bir kulübe davet ettiyse, gelen linke tıklaman yeterli; kulüp burada görünür.</p></div>`}
+    ${acik?`<div class="gkart"><h3>➕ Yeni kulüp</h3>
+      <div class="gform"><label>Kulübün adı<input id="kAd" maxlength="60" placeholder="ör. Kadıköy Viski Kulübü"></label>
+        <label>Açıklama (isteğe bağlı)<textarea id="kAcik" maxlength="500" rows="2" placeholder="Ayda bir buluşuyoruz; herkes bir şişe getiriyor…"></textarea></label>
+        <label>Kulüpteki takma adın<input id="kBenAd" maxlength="30" placeholder="ör. ${ornekTakma()}" value="${g$(lsAl('viski_takma_ad',''))}"></label>
+        <p class="dt-txt" style="color:var(--muted2);font-size:12.5px">🔒 Kulüp kapalıdır: sitede listelenmez, yalnızca davet linkini verdiğin kişiler katılabilir.</p>
+        <div style="display:flex;gap:8px;flex-wrap:wrap"><button class="eklebtn" style="margin:0" data-kulup="kur">🏛️ Kulübü kur</button><button class="btn" data-sosyal="kulup-form">Vazgeç</button></div>
+        <div class="durum" id="kDurum" style="font-size:12.5px;color:var(--red)"></div></div></div>`:''}`;
+  if(acik){const f=document.getElementById('kAd');if(f)f.focus();}
 }
 function renderGece(){
   const k=document.getElementById('geceKutu');if(!k)return;
   if(GECE.id){geceDetay();return;}
   clearInterval(GECE.zam);
-  const g=gecelerim(),ids=Object.keys(g).sort((a,b)=>(g[b].t||'').localeCompare(g[a].t||''));
+  const g=gecelerim(),ids=Object.keys(g);
   const elimde=allBottles().filter(b=>state.have.includes(b.id));
   const kl=kuluplerim(),kids=Object.keys(kl);
-  k.innerHTML=`<p class="intro">Arkadaşlarınla tadım gecesi düzenle: şişeleri seç, davet linkini WhatsApp'tan gönder; herkes kendi telefonundan puan versin, sonunda ortak sonuç tablosu çıksın. İstersen <b>kör tadım</b> yap: şişelerin adı sen açıklayana kadar gizli kalır. Hesap gerekmez; katılımcılar sadece takma ad girer.</p>
-    ${ids.length?`<div class="gkart glist"><h3>🗓️ Gecelerim</h3>${ids.map(id=>`<div class="mini" data-gece-ac="${id}"><div><div class="nm">${g$(g[id].ad||'Tadım gecesi')}</div><div class="meta">${tarihYaz(g[id].tarih)}${g[id].yk?' · 👑 ev sahibi':''}</div></div><span class="price">›</span></div>`).join('')}</div>`:''}
-    <div class="gkart"><h3>➕ Yeni tadım gecesi</h3>
+  const acik=SOSYAL.geceForm||!!YENI_KULUP;
+  // Yaklaşan: tarihi gelmemiş ya da tarihsiz ve bitmemiş; geçmiş: tarihi geçmiş ya da bitmiş
+  const simdi=new Date(Date.now()-6*3600e3).toISOString().slice(0,16);
+  const gecmis=id=>g[id].bitti||(g[id].tarih&&g[id].tarih<simdi);
+  const yak=ids.filter(id=>!gecmis(id)).sort((a,b)=>(g[a].tarih||'9').localeCompare(g[b].tarih||'9'));
+  const gec=ids.filter(gecmis).sort((a,b)=>(g[b].tarih||g[b].t||'').localeCompare(g[a].tarih||g[a].t||''));
+  const satir=id=>`<div class="mini" data-gece-ac="${id}"><div><div class="nm">${g$(g[id].ad||'Tadım gecesi')}${g[id].yk?'<span class="etiket">👑 ev sahibi</span>':''}</div><div class="meta">${tarihYaz(g[id].tarih)||'Tarih yok'}${g[id].kulup?' · 🏛️ '+g$(g[id].kulup):''}</div></div><span class="price">›</span></div>`;
+  const secili=YENI_KULUP&&kl[YENI_KULUP]?YENI_KULUP:'';
+  k.innerHTML=`${sosyalRehber('gece')}
+    <div class="sbaslik"><h2>🥃 Tadım Gecelerim</h2>${acik?'':'<button class="eklebtn" data-sosyal="gece-form">➕ Yeni tadım gecesi</button>'}</div>
+    ${yak.length?`<div class="gkart glist"><h3>📅 Yaklaşan</h3>${yak.map(satir).join('')}</div>`:''}
+    ${gec.length?`<div class="gkart glist"><h3>🕰️ Geçmiş</h3>${gec.map(satir).join('')}</div>`:''}
+    ${!ids.length&&!acik?`<div class="gkart"><h3>Henüz bir tadım gecen yok</h3><div class="adimlar">
+        <div><span><b>Şişeleri seç:</b> elindekilerden ya da listeden en fazla 12 şişe.</span></div>
+        <div><span><b>Linki gönder:</b> arkadaşların hesap açmadan, sadece takma adla katılır.</span></div>
+        <div><span><b>Herkes puan versin:</b> sonunda ortak sonuç tablosu ve gecenin birincisi çıkar.</span></div></div></div>`:''}
+    ${acik?`<div class="gkart" id="gForm"><h3>➕ Yeni tadım gecesi</h3>
       <div class="gform">
+        <div class="gbolum">1 · Kimler için?</div>
+        <div class="ksec">
+          <label><input type="radio" name="gKulupSec" value="" ${secili?'':'checked'}><span>🔗 <b>Tek seferlik gece</b><small>Linki istediğin kişilere sen gönderirsin.</small></span></label>
+          ${kids.map(id=>`<label><input type="radio" name="gKulupSec" value="${id}" ${secili===id?'checked':''}><span>🏛️ <b>${g$(kl[id].ad)}</b><small>Kulüp üyelerinin hepsi kulüp sayfasında görür.</small></span></label>`).join('')}
+          ${kids.length?'':'<p class="dt-txt" style="color:var(--muted2);font-size:12.5px">Düzenli buluşan bir ekibin mi var? <a href="#kulup" style="color:var(--amber2)">Önce bir kulüp kur</a>, geceler orada birikir.</p>'}
+        </div>
+        <div class="gbolum">2 · Gecenin bilgileri</div>
         <label>Gecenin adı<input id="gAd" maxlength="80" placeholder="ör. Islay Gecesi, Şeri Fıçılar, Japon Akşamı"></label>
         <div class="iki"><label>Tarih ve saat<input id="gTarih" type="datetime-local"></label><label>Yer<input id="gYer" maxlength="80" placeholder="ör. Bizim ev"></label></div>
         <label>Açıklama (isteğe bağlı)<textarea id="gAcik" maxlength="500" rows="2" placeholder="Herkes bir şişe getiriyor, peynir tabağı bizden…"></textarea></label>
-        <label style="display:flex;align-items:center;gap:8px;flex-direction:row"><input type="checkbox" id="gKor"> 🎭 Kör tadım: şişelerin adı ben açıklayana kadar gizli kalsın</label>
-        ${kids.length?`<label>Kulüp (isteğe bağlı)<select id="gKulup" style="background:var(--bg2);border:1px solid var(--line);color:var(--txt);padding:9px 11px;border-radius:9px"><option value="">— Kulüpsüz, tek seferlik gece —</option>${kids.map(id=>`<option value="${id}" ${YENI_KULUP===id?'selected':''}>${g$(kl[id].ad)}</option>`).join('')}</select></label>`:''}
         <label>Senin takma adın<input id="gBenAd" maxlength="30" placeholder="ör. ${ornekTakma()}" value="${g$(lsAl('viski_takma_ad',''))}"></label>
+        <div class="gbolum">3 · Şişeler</div>
         <label>Tadılacak şişeler (en fazla 12; sıra = örnek numarası)
           <div style="display:flex;gap:8px"><input id="gSiseAra" list="gSiseListe" placeholder="Şişe adı yaz ve seç…" style="flex:1"><button class="btn" data-gece="ekle">Ekle</button></div>
           <datalist id="gSiseListe">${allBottles().map(b=>`<option value="${g$(b.ad)}">`).join('')}</datalist></label>
         ${elimde.length?`<div><div style="font-size:12px;color:var(--muted2);margin-bottom:4px">Elimdekilerden hızlı ekle:</div><div class="gsec">${elimde.slice(0,30).map(b=>`<span style="cursor:pointer" data-gece-hizli="${b.id}">+ ${g$(b.ad)}</span>`).join('')}</div></div>`:''}
         <div class="gsec" id="gSecilen"></div>
-        <button class="eklebtn" data-gece="olustur">🥃 Geceyi oluştur</button>
+        <label style="display:flex;align-items:center;gap:8px;flex-direction:row"><input type="checkbox" id="gKor"> 🎭 Kör tadım: şişelerin adı ben açıklayana kadar gizli kalsın</label>
+        <div style="display:flex;gap:8px;flex-wrap:wrap"><button class="eklebtn" style="margin:0" data-gece="olustur">🥃 Geceyi oluştur</button><button class="btn" data-sosyal="gece-form">Vazgeç</button></div>
         <div class="durum" id="gDurum" style="font-size:12.5px;color:var(--red)"></div>
-      </div></div>`;
+      </div></div>`:''}`;
   geceSecilenCiz();
 }
 function geceSecilenCiz(){
@@ -3359,12 +3419,12 @@ async function geceOlustur(){
   if(!YENI_SISELER.length){d.textContent='En az bir şişe seç.';return;}
   try{
     d.textContent='';lsYaz('viski_takma_ad',benAd);
-    const ks=document.getElementById('gKulup'),kid=ks?ks.value:'',kk=kid?kuluplerim()[kid]:null;
+    const ks=document.querySelector('input[name="gKulupSec"]:checked'),kid=ks?ks.value:'',kk=kid?kuluplerim()[kid]:null;
     const r=await api('/api/gece',{method:'POST',body:JSON.stringify({islem:'olustur',ad,tarih:document.getElementById('gTarih').value,yer:document.getElementById('gYer').value,
       aciklama:document.getElementById('gAcik').value,kor:document.getElementById('gKor').checked,siseler:YENI_SISELER,olusturanAd:benAd,kulup:kk?{kid,ad:kk.ad}:null})});
     if(kk){try{await api('/api/kulup',{method:'POST',body:JSON.stringify({islem:'gece-ekle',kid,uid:kk.uid,anahtar:kk.anahtar,gid:r.id})});}catch(e){alert('Gece oluştu ama kulübe bağlanamadı: '+e.message);}}
-    YENI_KULUP=null;
-    geceKaydet(r.id,{ad,tarih:document.getElementById('gTarih').value,yk:r.yk,pid:r.pid,t:new Date().toISOString()});
+    YENI_KULUP=null;SOSYAL.geceForm=false;
+    geceKaydet(r.id,{ad,tarih:document.getElementById('gTarih').value,yk:r.yk,pid:r.pid,kulup:kk?kk.ad:null,t:new Date().toISOString()});
     YENI_SISELER=[];location.hash='#gece='+r.id;
   }catch(e){d.textContent='⚠️ '+e.message;}
 }
@@ -3372,7 +3432,7 @@ async function geceYukle(sessiz){
   const g=gecelerim()[GECE.id]||{};
   try{
     const v=await api('/api/gece?id='+encodeURIComponent(GECE.id)+(g.yk?'&yk='+encodeURIComponent(g.yk):'')+(g.pid?'&pid='+g.pid:'')+(g.rid?'&rid='+g.rid:''));
-    const once=GECE.veri;GECE.veri=v;geceKaydet(GECE.id,{ad:v.ad,tarih:v.tarih,t:g.t||new Date().toISOString()});
+    const once=GECE.veri;GECE.veri=v;geceKaydet(GECE.id,{ad:v.ad,tarih:v.tarih,bitti:!!v.bitti,kulup:v.kulup?v.kulup.ad:null,t:g.t||new Date().toISOString()});
     // Puan kutularında yazarken yeniden çizmeyelim; durum değiştiyse tamamını, yoksa yalnızca sonuç/katılımcıları yenile
     if(!sessiz||!once||once.aciklandi!==v.aciklandi||once.bitti!==v.bitti){if(!(sessiz&&GECE.duzenle))geceCiz();}else geceParcaCiz();
   }catch(e){
@@ -3523,7 +3583,7 @@ async function kulupKur(){
   const d=document.getElementById('kDurum'),ad=document.getElementById('kAd').value.trim(),benAd=document.getElementById('kBenAd').value.trim();
   if(!ad){d.textContent='Kulübün bir adı olmalı.';return;}if(!benAd){d.textContent='Bir takma ad yaz.';return;}
   try{const r=await kulupApi({islem:'olustur',ad,aciklama:document.getElementById('kAcik').value,benAd});
-    lsYaz('viski_takma_ad',benAd);kulupKaydet(r.kid,{uid:r.uid,anahtar:r.anahtar,davet:r.davet,ad,benAd,rol:'kurucu'});
+    lsYaz('viski_takma_ad',benAd);SOSYAL.kulupForm=false;kulupKaydet(r.kid,{uid:r.uid,anahtar:r.anahtar,davet:r.davet,ad,benAd,rol:'kurucu'});
     location.hash='#kulup='+r.kid;}catch(e){d.textContent='⚠️ '+e.message;}
 }
 async function kulupSayfa(){
@@ -3623,6 +3683,19 @@ document.addEventListener('click',async e=>{
   }catch(er){alert(er.message);}
 });
 
+document.addEventListener('click',e=>{
+  const b=e.target.closest('[data-sosyal]');if(!b)return;
+  const ne=b.dataset.sosyal;
+  if(ne==='rehber-gizle'){e.stopPropagation();lsYaz('viski_sosyal_rehber_gizli',true);}
+  else if(ne==='rehber-ac')lsYaz('viski_sosyal_rehber_gizli',false);
+  else if(ne==='gece-form'){SOSYAL.geceForm=!(SOSYAL.geceForm||YENI_KULUP);YENI_KULUP=null;if(!SOSYAL.geceForm)YENI_SISELER=[];}
+  else if(ne==='kulup-form')SOSYAL.kulupForm=!SOSYAL.kulupForm;
+  else if(ne==='git-gece'){GECE.id=null;if(location.hash==='#gece')goTab('gece');else location.hash='#gece';return;}
+  else if(ne==='git-kulup'){KULUP.id=null;if(location.hash==='#kulup')goTab('kulup');else location.hash='#kulup';return;}
+  const a=document.querySelector('#subNav .tab.active');
+  if(a&&a.dataset.view==='kulup')renderKulup();else renderGece();
+  if(ne==='gece-form'&&SOSYAL.geceForm){const f=document.getElementById('gForm');if(f)f.scrollIntoView({behavior:'smooth',block:'start'});}
+});
 /* ===== TADIM GECESİ: ev sahibi düzenlemesi ===== */
 const oySay=(v,i)=>v.katilimcilar.filter(k=>(k.puanlar||{})[i]&&(typeof k.puanlar[i].p==='number'||k.puanlar[i].not)).length;
 function geceDuzenleHTML(v){

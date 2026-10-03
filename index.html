@@ -2718,7 +2718,7 @@ function openDetay(id){
   document.getElementById('detay').innerHTML=`<button class="dt-x" data-detay-kapat title="Kapat">✕</button>
     <div class="dt-head">${b.imgSahip?`<div class="dt-img"><img src="${esc(b.img)}" alt="${esc(b.ad)}" loading="lazy"></div>`:thumb(b)}<div><h3>${b.ad}</h3><div class="dt-sub">${b.dam} · ${b.bolge} · ${b.ulke}</div>
       <div class="dt-badges">${badges.join('')}</div>
-      ${b.imgSahip?`<div class="dt-src">📷 Görsel: ${esc(b.imgSahip)}${b.imgKaynak?` · <a href="${esc(b.imgKaynak)}" target="_blank" rel="noopener">resmî sayfa</a>`:''}</div>`:''}</div></div>
+      ${b.imgSahip?`<div class="dt-src">📷 Görsel: ${esc(b.imgSahip)}${b.imgKaynak?` · <a href="${esc(b.imgKaynak)}" target="_blank" rel="noopener">kaynak</a>`:''}</div>`:''}</div></div>
     <div class="dt-grid">
       <div class="dt-f"><div class="l">Fiyat</div><div class="v" style="color:var(--amber2)">${fmt(priceOf(b))}</div></div>
       <div class="dt-f"><div class="l">Puan</div><div class="v">${b.puan||'—'}${nt&&nt.p?` <span style="color:var(--have);font-size:12px">· senin: ${nt.p}</span>`:''}</div></div>

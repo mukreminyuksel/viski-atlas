@@ -18,6 +18,12 @@
    "sahip": "Ardbeg",
    "tarih": "2026-10-03"
   },
+  "chivas-12": {
+   "dosya": "img/sise/chivas-12.webp",
+   "kaynak": "https://uk.flaviar.com/products/chivas-regal-12-year-old-700",
+   "sahip": "Flaviar",
+   "tarih": "2026-10-03"
+  },
   "dewars-12": {
    "dosya": "img/sise/dewars-12.webp",
    "kaynak": "https://shop.dewars.com/products/dewars-12-year-old-blended-scotch-whisky",
@@ -30,10 +36,52 @@
    "sahip": "Dewar's",
    "tarih": "2026-10-03"
   },
+  "famousgrouse": {
+   "dosya": "img/sise/famousgrouse.webp",
+   "kaynak": "https://uk.flaviar.com/products/the-famous-grouse-blended-scotch-whisky-700",
+   "sahip": "Flaviar",
+   "tarih": "2026-10-03"
+  },
+  "famousgrouse-smoky": {
+   "dosya": "img/sise/famousgrouse-smoky.webp",
+   "kaynak": "https://uk.flaviar.com/products/the-famous-grouse-smoky-black-700",
+   "sahip": "Flaviar",
+   "tarih": "2026-10-03"
+  },
+  "glenfiddich-12": {
+   "dosya": "img/sise/glenfiddich-12.webp",
+   "kaynak": "https://uk.flaviar.com/products/glenfiddich-12-year-old-700",
+   "sahip": "Flaviar",
+   "tarih": "2026-10-03"
+  },
+  "glenlivet-18": {
+   "dosya": "img/sise/glenlivet-18.webp",
+   "kaynak": "https://uk.flaviar.com/products/the-glenlivet-18-year-old-700",
+   "sahip": "Flaviar",
+   "tarih": "2026-10-03"
+  },
+  "glenlivet-founders": {
+   "dosya": "img/sise/glenlivet-founders.webp",
+   "kaynak": "https://uk.flaviar.com/products/the-glenlivet-founders-reserve-700",
+   "sahip": "Flaviar",
+   "tarih": "2026-10-03"
+  },
   "glenmorangie-signet": {
    "dosya": "img/sise/glenmorangie-signet.webp",
    "kaynak": "https://www.glenmorangie.com/products/glenmorangie-signet",
    "sahip": "Glenmorangie",
+   "tarih": "2026-10-03"
+  },
+  "jackdaniels-7": {
+   "dosya": "img/sise/jackdaniels-7.webp",
+   "kaynak": "https://uk.flaviar.com/products/jack-daniels-old-no-7-tennessee-whiskey-700",
+   "sahip": "Flaviar",
+   "tarih": "2026-10-03"
+  },
+  "jameson-blackbarrel": {
+   "dosya": "img/sise/jameson-blackbarrel.webp",
+   "kaynak": "https://uk.flaviar.com/products/jameson-black-barrel-irish-whiskey-700",
+   "sahip": "Flaviar",
    "tarih": "2026-10-03"
   },
   "jw-black": {
@@ -54,10 +102,22 @@
    "sahip": "Johnnie Walker",
    "tarih": "2026-10-03"
   },
+  "kavalan-vinho": {
+   "dosya": "img/sise/kavalan-vinho.webp",
+   "kaynak": "https://uk.flaviar.com/products/kavalan-solist-vinho-barrique-2-700",
+   "sahip": "Flaviar",
+   "tarih": "2026-10-03"
+  },
   "lagavulin-16": {
    "dosya": "img/sise/lagavulin-16.webp",
    "kaynak": "https://www.malts.com/en/products/lagavulin-16-year-old-single-malt-scotch-whisky-70cl",
    "sahip": "Lagavulin",
+   "tarih": "2026-10-03"
+  },
+  "monkeyshoulder": {
+   "dosya": "img/sise/monkeyshoulder.webp",
+   "kaynak": "https://uk.flaviar.com/products/monkey-shoulder-the-original-blended-scotch-whisky-700",
+   "sahip": "Flaviar",
    "tarih": "2026-10-03"
   },
   "octomore-141": {

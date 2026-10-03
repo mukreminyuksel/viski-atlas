@@ -30,12 +30,12 @@ Fiyatlar **otomatik** güncellenir; API anahtarı ya da elle müdahale gerekmez.
 
 ## Şişe görselleri
 
-Şişe görselleri yalnızca **üreticilerin resmî sitelerinden** alınır, küçük bir kopya olarak
-(en fazla 120×160 px WebP) `img/sise/` klasörüne kaydedilir ve her görselin altında sahibi ile
-resmî sayfanın linki gösterilir. Kayıtlar `data/gorseller.json` içindedir; resmî görseli bulunamayan
-şişeler `yok` olarak işaretlenir ve renkli şişe simgesiyle gösterilmeye devam eder.
-Whiskybase, mağaza veya fotoğrafçı görselleri kullanılmaz. Bir hak sahibi itiraz ederse
-`node scripts/gorsel.mjs sil <id>` ile görsel kaldırılır.
+Şişe görselleri önce **üreticinin resmî sitesinden**, bulunamazsa tanınmış bir içki mağazasının
+ürün fotoğrafından (şu an Flaviar) alınır. Küçük bir kopya olarak (en fazla 120×160 px WebP)
+`img/sise/` klasörüne kaydedilir; her görselin altında kaynağı ve kaynak sayfanın linki gösterilir.
+Kayıtlar `data/gorseller.json` içindedir; görseli bulunamayan şişeler `yok` olarak işaretlenir ve
+renkli şişe simgesiyle gösterilmeye devam eder. Farklı yaş/sürüm şişesinin görseli kullanılmaz.
+Bir hak sahibi itiraz ederse `node scripts/gorsel.mjs sil <id>` ile görsel kaldırılır.
 
 ## İçerik önerileri
 

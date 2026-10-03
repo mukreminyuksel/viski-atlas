@@ -1633,6 +1633,7 @@ let activeAvail=new Set();
 let ncfOnly=false;
 let openDams=new Set();          // açık damıtımevleri (kalıcı UI durumu)
 let collapsedCountries=new Set(); // kapalı ülkeler
+let aramaKapali=new Set(), aramaSon='';  // arama sırasında elle kapatılan gruplar
 function allBottles(){return [...DATA, ...state.custom]}
 function priceOf(b){return state.prices[b.id]!==undefined?state.prices[b.id]:b.tl}
 function fmt(n){return n>0?n.toLocaleString('tr-TR')+' TL':'—'}
@@ -1695,6 +1696,12 @@ function renderTree(){
   const sort=document.getElementById('fSort').value;
   const tree=document.getElementById('tree'); tree.innerHTML='';
   const bottles=allBottles().filter(passFilters);
+  // Arama yapılırken eşleşen şişelerin damıtımevi ve ülkesi otomatik açık gelir
+  // (yoksa "Hibiki" aranınca sadece kapalı "Suntory" başlığı görünüyordu).
+  // Arama sırasında elle kapatılanlar ayrı tutulur; arama metni değişince sıfırlanır.
+  const q=document.getElementById('search').value.trim();
+  const arama=q.length>=2;
+  if(q!==aramaSon){aramaSon=q;aramaKapali.clear();}
   const byCountry={};
   bottles.forEach(b=>{(byCountry[b.ulke]=byCountry[b.ulke]||{});
     (byCountry[b.ulke][b.bolge]=byCountry[b.ulke][b.bolge]||{});
@@ -1703,7 +1710,8 @@ function renderTree(){
     let ia=COUNTRY_ORDER.indexOf(a),ib=COUNTRY_ORDER.indexOf(b);return (ia<0?99:ia)-(ib<0?99:ib);});
   if(!countries.length){tree.innerHTML='<div class="empty">Filtrelere uyan şişe yok.</div>';return;}
   countries.forEach(ulke=>{
-    const cEl=document.createElement('div');cEl.className='country'+(collapsedCountries.has(ulke)?' closed':'');
+    const cKapali=arama?aramaKapali.has('ülke:'+ulke):collapsedCountries.has(ulke);
+    const cEl=document.createElement('div');cEl.className='country'+(cKapali?' closed':'');
     const total=Object.values(byCountry[ulke]).reduce((s,r)=>s+Object.values(r).reduce((q,a)=>q+a.length,0),0);
     cEl.innerHTML=`<div class="head"><span class="caret">▼</span><span class="flag">${FLAGS[ulke]||'🌍'}</span><h2>${ulke}</h2><span class="count">${total} şişe</span></div><div class="body"></div>`;
     const body=cEl.querySelector('.body');
@@ -1724,14 +1732,15 @@ function renderTree(){
         const tierCls=sev==='Premium'?'Premium':sev==='2'?'t2':'t3';
         const tierTxt=sev==='Premium'?'Premium':sev==='2'?'2. Düzey':'3. Düzey';
         const key=ulke+'|||'+bolge+'|||'+dam;
-        const isOpen=openDams.has(key);
+        const isOpen=arama?!aramaKapali.has(key):openDams.has(key);
         const dEl=document.createElement('div');dEl.className='distillery'+(isOpen?' open':'');
         dEl.innerHTML=`<div class="dhead"><span class="caret">▶</span><span class="tier ${tierCls}">${tierTxt}</span><h4>${dam}</h4>
           <span class="dc"><span>${arr.length} şişe</span></span></div><div class="dbody"></div>`;
         const db=dEl.querySelector('.dbody');
         arr.forEach((b,i)=>db.appendChild(bottleRow(b,i+1)));
         dEl.querySelector('.dhead').onclick=()=>{
-          if(openDams.has(key))openDams.delete(key); else openDams.add(key);
+          if(arama){if(aramaKapali.has(key))aramaKapali.delete(key); else aramaKapali.add(key);}
+          else if(openDams.has(key))openDams.delete(key); else openDams.add(key);
           dEl.classList.toggle('open');
         };
         rEl.appendChild(dEl);
@@ -1739,7 +1748,9 @@ function renderTree(){
       body.appendChild(rEl);
     });
     cEl.querySelector('.head').onclick=()=>{
-      if(collapsedCountries.has(ulke))collapsedCountries.delete(ulke); else collapsedCountries.add(ulke);
+      const k='ülke:'+ulke;
+      if(arama){if(aramaKapali.has(k))aramaKapali.delete(k); else aramaKapali.add(k);}
+      else if(collapsedCountries.has(ulke))collapsedCountries.delete(ulke); else collapsedCountries.add(ulke);
       cEl.classList.toggle('closed');
     };
     tree.appendChild(cEl);
@@ -2520,10 +2531,10 @@ document.addEventListener('click',e=>{
     const v=prompt(`${b.ad} için güncel fiyat (TL):`, priceOf(b)||'');
     if(v!==null){state.prices[id]=parseInt(v.replace(/[^0-9]/g,''))||0;save();renderAll();}}
 });
-['search','fStatus','fTier','fType','fSort','fFlavor'].forEach(id=>{
-  document.getElementById(id).addEventListener('input',renderTree);
-  document.getElementById(id).addEventListener('change',renderTree);
-});
+// Arama kutusu yalnızca yazarken çizer: 'change' odak kaybında da tetiklenip listeyi yeniden
+// çiziyordu ve o anki tıklama (ör. bir damıtımevini açıp kapatma) kayboluyordu.
+document.getElementById('search').addEventListener('input',renderTree);
+['fStatus','fTier','fType','fSort','fFlavor'].forEach(id=>document.getElementById(id).addEventListener('change',renderTree));
 document.querySelectorAll('.chip[data-avail]').forEach(c=>c.onclick=()=>{
   const a=c.dataset.avail;
   if(activeAvail.has(a)){activeAvail.delete(a);c.classList.remove('on');}else{activeAvail.add(a);c.classList.add('on');}

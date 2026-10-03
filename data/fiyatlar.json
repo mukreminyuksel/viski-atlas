@@ -1,6 +1,151 @@
 {
- "guncelleme": null,
+ "guncelleme": "2026-10-03",
  "kur": null,
- "fiyatlar": {},
+ "fiyatlar": {
+  "ardbeg-10": {
+   "tl": 7150,
+   "tarih": "2026-10-03",
+   "tur": "tr_liste",
+   "guven": "dusuk",
+   "kaynak": "https://www.habergazetesi.com.tr/ardbeg-viski-fiyat",
+   "not": "Ardbeg 2026 fiyat haberi; arama özeti, kayıtlıdan %49 yüksek."
+  },
+  "ardbeg-corryvreckan": {
+   "tl": 9750,
+   "tarih": "2026-10-03",
+   "tur": "tr_liste",
+   "guven": "dusuk",
+   "kaynak": "https://www.habergazetesi.com.tr/ardbeg-viski-fiyat",
+   "not": "Ardbeg 2026 fiyat haberi; arama özeti."
+  },
+  "ardbeg-uigeadail": {
+   "tl": 9350,
+   "tarih": "2026-10-03",
+   "tur": "tr_liste",
+   "guven": "dusuk",
+   "kaynak": "https://www.habergazetesi.com.tr/ardbeg-viski-fiyat",
+   "not": "Ardbeg 2026 fiyat haberi; arama özeti."
+  },
+  "ballantines-finest": {
+   "tl": 1550,
+   "tarih": "2026-10-03",
+   "tur": "tr_liste",
+   "guven": "orta",
+   "kaynak": "https://egeyasam.com/viski-fiyatlari",
+   "not": "İki aramada tutarlı 1.550 TL; arama özeti."
+  },
+  "chivas-12": {
+   "tl": 2100,
+   "tarih": "2026-10-03",
+   "tur": "tr_liste",
+   "guven": "orta",
+   "kaynak": "https://www.habergazetesi.com.tr/migros-viski-fiyatlari",
+   "not": "Migros listesi (Eylül 2026); iki ayrı aramada tutarlı. Sayfa doğrudan açılamadı, arama özeti."
+  },
+  "famousgrouse": {
+   "tl": 1300,
+   "tarih": "2026-10-03",
+   "tur": "tr_liste",
+   "guven": "dusuk",
+   "kaynak": "https://www.birgun.net/haber/viski-fiyatlari-2026-guncel-282074",
+   "not": "Tek kaynak, arama özeti."
+  },
+  "gentlemanjack": {
+   "tl": 2400,
+   "tarih": "2026-10-03",
+   "tur": "tr_liste",
+   "guven": "orta",
+   "kaynak": "https://enucuzfiyatlari.com/viski-fiyatlari/",
+   "not": "2.375 TL; başka kaynakta 2.400 TL."
+  },
+  "grants-family": {
+   "tl": 1250,
+   "tarih": "2026-10-03",
+   "tur": "tr_liste",
+   "guven": "dusuk",
+   "kaynak": "https://www.akademikpersonel.org/viski-fiyatlari/",
+   "not": "Grant's 70 cl genel fiyat; Triple Wood olduğu teyit edilemedi."
+  },
+  "jackdaniels-7": {
+   "tl": 2050,
+   "tarih": "2026-10-03",
+   "tur": "tr_liste",
+   "guven": "orta",
+   "kaynak": "https://egeyasam.com/viski-fiyatlari",
+   "not": "Ekim 2026 zamlı liste haberi; arama özeti."
+  },
+  "jameson": {
+   "tl": 1750,
+   "tarih": "2026-10-03",
+   "tur": "tr_liste",
+   "guven": "orta",
+   "kaynak": "https://www.habergazetesi.com.tr/migros-viski-fiyatlari",
+   "not": "Migros 70 cl; iki aramada tutarlı."
+  },
+  "jameson-blackbarrel": {
+   "tl": 2250,
+   "tarih": "2026-10-03",
+   "tur": "tr_liste",
+   "guven": "orta",
+   "kaynak": "https://enucuzfiyatlari.com/viski-fiyatlari/",
+   "not": "2.250 TL; Migros'ta 2.275 TL."
+  },
+  "jimbeam-white": {
+   "tl": 1550,
+   "tarih": "2026-10-03",
+   "tur": "tr_liste",
+   "guven": "orta",
+   "kaynak": "https://www.habergazetesi.com.tr/jim-beam-fiyat-listesi",
+   "not": "2026 liste; arama özeti."
+  },
+  "jw-black": {
+   "tl": 2000,
+   "tarih": "2026-10-03",
+   "tur": "tr_liste",
+   "guven": "orta",
+   "kaynak": "https://egeyasam.com/viski-fiyatlari",
+   "not": "Çoğu kaynak 1.995 TL; bir Migros özeti 1.775 TL gösterdi."
+  },
+  "jw-doubleblack": {
+   "tl": 2000,
+   "tarih": "2026-10-03",
+   "tur": "tr_liste",
+   "guven": "dusuk",
+   "kaynak": "https://www.habergazetesi.com.tr/migros-viski-fiyatlari",
+   "not": "Tek kaynak (Migros listesi özeti)."
+  },
+  "jw-red": {
+   "tl": 1550,
+   "tarih": "2026-10-03",
+   "tur": "tr_liste",
+   "guven": "orta",
+   "kaynak": "https://egeyasam.com/viski-fiyatlari",
+   "not": "Çoğu kaynak 1.550 TL; bir Migros özeti 1.350 TL gösterdi."
+  },
+  "lagavulin-16": {
+   "tl": 7400,
+   "tarih": "2026-10-03",
+   "tur": "tr_liste",
+   "guven": "orta",
+   "kaynak": "https://fiyatbilgisi.net/lagavulin-viski-fiyati/",
+   "not": "2026 zamlı liste; arama özeti."
+  },
+  "monkeyshoulder": {
+   "tl": 1750,
+   "tarih": "2026-10-03",
+   "tur": "tr_liste",
+   "guven": "dusuk",
+   "kaynak": "https://enucuzfiyatlari.com/viski-fiyatlari/",
+   "not": "Tek kaynak, kayıtlı fiyattan belirgin düşük."
+  },
+  "talisker-10": {
+   "tl": 3050,
+   "tarih": "2026-10-03",
+   "tur": "tr_liste",
+   "guven": "orta",
+   "kaynak": "https://fiyatbilgisi.net/talisker-viski-fiyati/",
+   "not": "2026 Migros listesi 3.000-3.050 TL aralığı."
+  }
+ },
  "inceleme": []
 }

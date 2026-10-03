@@ -42,7 +42,7 @@ Blobs'ta tutulur (ek hesap/ücret gerekmez):
   (ilk girişte liste otomatik oluşur). Numara ve PIN düz metin saklanmaz (`tel/<özet>` kaydı koda
   işaret eder); 10 hatalı PIN denemesinde numara 1 saat kilitlenir. PIN unutulursa kodu bilen cihazdan
   yeni PIN konur; başka listeye bağlı bir numarayı taşımak için o listenin PIN'i gerekir.
-- **`/api/gece` — Tadım Geceleri:** Koleksiyonum → Tadım Geceleri. Ev sahibi şişeleri seçip geceyi
+- **`/api/gece` — Tadım Geceleri:** Sosyal Buluşmalar → Tadım Geceleri. Ev sahibi şişeleri seçip geceyi
   oluşturur, davet linkini paylaşır; katılımcılar yalnızca takma adla katılıp 50–100 arası puan ve not
   verir. Kör tadımda şişe adları ev sahibi açıklayana kadar gizlidir. Sonuç tablosu, gecenin
   birincisi, en çok ayrışan şişe ve "damak ikizleri" otomatik hesaplanır. Ev sahibi linki (`&yk=`)
@@ -51,7 +51,7 @@ Blobs'ta tutulur (ek hesap/ücret gerekmez):
     puanlarını gönderir. Tek tek puan ve notları yalnızca ev sahibi görür; katılımcı kimlikleri (pid)
     başkalarına gönderilmez.
   - **LCV:** Davetliler "Geliyorum / Belki / Gelemiyorum" yanıtı verir; liste gece sayfasında görünür.
-- **`/api/kulup` — Kulüp:** Davetle girilen kapalı topluluk. Kurucu kulübü açar, davet linkini
+- **`/api/kulup` — Kulüp (Sosyal Buluşmalar → Kulüplerim):** Davetle girilen kapalı topluluk. Kurucu kulübü açar, davet linkini
   (`#kulup=<kid>.<davet>`) paylaşır; üyeler takma adla katılır ve üye başına gizli anahtar cihazda
   saklanır. Kulübe bağlı geceler, "kulübün hafızası" (en çok tadılanlar, favoriler) ve üye listesi
   yalnızca üyelere açıktır. Yöneticiler üye çıkarabilir, yönetici atayabilir, davet linkini

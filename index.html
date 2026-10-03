@@ -251,7 +251,7 @@ nav.groups{display:flex;gap:6px;margin:20px 0 10px;background:var(--bg2);border:
   font:inherit;font-weight:700;font-size:14.5px;padding:10px 8px;border-radius:10px;cursor:pointer}
 .grp:hover{color:var(--txt);background:var(--panel)}
 .grp.active{color:#1a1208;background:linear-gradient(180deg,#f2c14e,#d8a13a);box-shadow:0 2px 10px rgba(224,168,60,.25)}
-.grp .gi{font-size:17px}
+.grp .gi{font-size:17px}.grp .kisa{display:none}
 #subNav{margin:0 0 14px}#subNav.hidden{display:none}
 #subNav .tab{display:none;font-size:13.5px;padding:7px 13px}
 #subNav .tab.ingroup{display:block}
@@ -346,9 +346,9 @@ nav.groups{display:flex;gap:6px;margin:20px 0 10px;background:var(--bg2);border:
   .stats::-webkit-scrollbar{display:none}
   .kpi{flex:0 0 auto;min-width:108px;padding:8px 12px}.kpi .val{font-size:17px}.kpi .lbl{font-size:10px}
   .glass-box{flex:0 0 auto;padding:8px 12px;gap:10px}.glass{width:28px;height:40px}.gv{font-size:16px}.gl{font-size:9.5px}
-  nav.groups{position:fixed;left:0;right:0;bottom:0;z-index:1500;margin:0;border-radius:16px 16px 0 0;border-bottom:none;
-    padding:6px 6px calc(6px + env(safe-area-inset-bottom));background:rgba(26,18,8,.96);backdrop-filter:blur(8px);box-shadow:0 -4px 18px rgba(0,0,0,.45)}
-  .grp{flex-direction:column;gap:2px;font-size:10.5px;padding:7px 2px}.grp .gi{font-size:20px}
+  nav.groups{position:fixed;left:0;right:0;bottom:0;z-index:1500;margin:0;gap:2px;border-radius:16px 16px 0 0;border-bottom:none;
+    padding:6px 3px calc(6px + env(safe-area-inset-bottom));background:rgba(26,18,8,.96);backdrop-filter:blur(8px);box-shadow:0 -4px 18px rgba(0,0,0,.45)}
+  .grp{flex-direction:column;gap:2px;font-size:10px;letter-spacing:-.2px;padding:7px 0;min-width:0}.grp .gi{font-size:20px}.grp .uzun{display:none}.grp .kisa{display:inline}.grp>span:last-child{max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
   #subNav{flex-wrap:nowrap;overflow-x:auto;margin-top:4px;scrollbar-width:none}#subNav::-webkit-scrollbar{display:none}
   #subNav .tab{flex:0 0 auto;white-space:nowrap}
   .dt-grid{grid-template-columns:repeat(2,1fr)}
@@ -361,7 +361,7 @@ nav.groups{display:flex;gap:6px;margin:20px 0 10px;background:var(--bg2);border:
 <header><div class="wrap">
   <div class="brand">
     <div style="font-size:34px">🥃</div>
-    <div><h1 onclick="location.href='./'" style="cursor:pointer" title="Ana sayfaya dön">Viski Atlası <span style="font-size:13px;color:var(--muted2);font-weight:600;vertical-align:middle">v2.8</span></h1>
+    <div><h1 onclick="location.href='./'" style="cursor:pointer" title="Ana sayfaya dön">Viski Atlası <span style="font-size:13px;color:var(--muted2);font-weight:600;vertical-align:middle">v2.9</span></h1>
       <div class="sub">Bölge → Damıtımevi → Şişe · Uzman & AI tercihleri · Türkiye katmanları · Kişisel koleksiyon</div></div>
   </div>
   <div class="stats">
@@ -383,7 +383,8 @@ nav.groups{display:flex;gap:6px;margin:20px 0 10px;background:var(--bg2);border:
     <button class="grp active" data-group="kesfet"><span class="gi">🗺️</span><span>Keşfet</span></button>
     <button class="grp" data-group="listeler"><span class="gi">🏆</span><span>Listeler</span></button>
     <button class="grp" data-group="oneri"><span class="gi">🎯</span><span>Öneriler</span></button>
-    <button class="grp" data-group="koleksiyon"><span class="gi">📋</span><span>Koleksiyonum</span></button>
+    <button class="grp" data-group="koleksiyon"><span class="gi">📋</span><span class="uzun">Koleksiyonum</span><span class="kisa">Koleksiyon</span></button>
+    <button class="grp" data-group="sosyal"><span class="gi">🥂</span><span class="uzun">Sosyal Buluşmalar</span><span class="kisa">Sosyal</span></button>
     <button class="grp" data-group="kaynak"><span class="gi">📚</span><span>Kaynaklar</span></button>
   </nav>
   <nav class="tabs hidden" id="subNav">
@@ -401,7 +402,8 @@ nav.groups{display:flex;gap:6px;margin:20px 0 10px;background:var(--bg2);border:
     <div class="tab" data-group="koleksiyon" data-view="notes">📝 Tadım Notlarım</div>
     <div class="tab" data-group="koleksiyon" data-view="gurme">🎖️ Gurme Seviyem</div>
     <div class="tab" data-group="koleksiyon" data-view="stats">📊 İstatistik</div>
-    <div class="tab" data-group="koleksiyon" data-view="gece">🥃 Tadım Geceleri</div>
+    <div class="tab" data-group="sosyal" data-view="gece">🥃 Tadım Geceleri</div>
+    <div class="tab" data-group="sosyal" data-view="kulup">🏛️ Kulüplerim</div>
     <div class="tab" data-group="kaynak" data-view="kaynak">📚 Kaynaklar</div>
   </nav>
 
@@ -516,6 +518,7 @@ nav.groups{display:flex;gap:6px;margin:20px 0 10px;background:var(--bg2);border:
     <div id="fiyatBox"></div>
   </section>
   <section id="view-gece" class="hidden"><div id="geceKutu"></div></section>
+  <section id="view-kulup" class="hidden"><div id="kulupKutu"></div></section>
   <section id="view-stats" class="hidden">
     <p class="intro">Koleksiyonunun rakamlarla portresi: değer, dağılımlar ve öne çıkanlar. <b>Elimde olanlar</b> üzerinden hesaplanır.</p>
     <div id="statsBox"></div>
@@ -2704,7 +2707,7 @@ document.addEventListener('click',e=>{
 // Sekme → çizim fonksiyonu. Sadece açık sekme çizilir (eskiden her işaretlemede 13 sekmenin
 // hepsi yeniden çiziliyordu); sekmeye geçince o sekme güncel durumla yeniden çizilir.
 const RENDER={explore:renderTree,experts:renderExperts,ai:renderAI,magazin:renderMagazin,ncf:renderNCF,katman:renderKatman,
-  stats:renderStats2,gece:renderGece,akilli:renderAkilli,harita:()=>{renderTree();renderHarita();},gurme:renderGurme,personal:renderPersonal,notes:renderNotes,mylist:renderMyList,fiyat:renderFiyat};
+  stats:renderStats2,gece:renderGece,kulup:renderKulup,akilli:renderAkilli,harita:()=>{renderTree();renderHarita();},gurme:renderGurme,personal:renderPersonal,notes:renderNotes,mylist:renderMyList,fiyat:renderFiyat};
 const lastInGroup={};
 function showGroup(g){
   document.querySelectorAll('.grp').forEach(x=>x.classList.toggle('active',x.dataset.group===g));
@@ -3298,22 +3301,26 @@ function tarihYaz(t){if(!t)return '';const d=new Date(t);return isNaN(d)?g$(t):d
 const TAKMA_ORNEK=['Frank Gallagher','Kaptan Haddock','Ron Swanson','Don Draper','Roger Sterling','James Bond','Logan Roy','Sherlock Holmes','Tommy Shelby','Jack Torrance','Rick Deckard','The Dude'];
 const ornekTakma=()=>TAKMA_ORNEK[Math.floor(Math.random()*TAKMA_ORNEK.length)];
 let YENI_SISELER=[],YENI_KULUP=null;
+function renderKulup(){
+  const k=document.getElementById('kulupKutu');if(!k)return;
+  if(KULUP.id){kulupSayfa();return;}
+  const kl=kuluplerim(),kids=Object.keys(kl);
+  k.innerHTML=`<p class="intro">Kulüp, arkadaş grubunun kalıcı buluşma yeri: üyeler bir kez katılır; kulübün tüm tadım gecelerini, sonuçlarını ve favorilerini tek yerde görür. Dışarıdan kimse göremez, yalnızca davet linkiyle girilir.</p><div class="gkart"><h3>🏛️ Kulüplerim</h3>
+      ${kids.length?kids.map(id=>`<div class="mini" style="cursor:pointer" data-kulup-ac="${id}"><div><div class="nm">${g$(kl[id].ad||'Kulüp')}</div><div class="meta">${g$(kl[id].benAd||'')}${kl[id].rol==='kurucu'?' · 👑 kurucu':kl[id].rol==='yonetici'?' · ⭐ yönetici':''}</div></div><span class="price">›</span></div>`).join(''):'<p class="dt-txt" style="color:var(--muted)">Henüz bir kulübün yok. Aşağıdan kendi kulübünü kur ya da bir üyeden davet linki iste.</p>'}
+      <details style="margin-top:10px"${kids.length?'':' open'}><summary style="cursor:pointer;color:var(--amber-soft);font-weight:700">➕ Yeni kulüp kur</summary>
+        <div class="gform" style="margin-top:10px"><label>Kulübün adı<input id="kAd" maxlength="60" placeholder="ör. Kadıköy Viski Kulübü"></label>
+          <label>Açıklama (isteğe bağlı)<textarea id="kAcik" maxlength="500" rows="2" placeholder="Ayda bir buluşuyoruz; herkes bir şişe getiriyor…"></textarea></label>
+          <label>Kulüpteki takma adın<input id="kBenAd" maxlength="30" placeholder="ör. ${ornekTakma()}" value="${g$(lsAl('viski_takma_ad',''))}"></label>
+          <button class="eklebtn" style="margin:0" data-kulup="kur">🏛️ Kulübü kur</button><div class="durum" id="kDurum" style="font-size:12.5px;color:var(--red)"></div></div></details></div>`;
+}
 function renderGece(){
   const k=document.getElementById('geceKutu');if(!k)return;
-  if(KULUP.id){kulupSayfa();return;}
   if(GECE.id){geceDetay();return;}
   clearInterval(GECE.zam);
   const g=gecelerim(),ids=Object.keys(g).sort((a,b)=>(g[b].t||'').localeCompare(g[a].t||''));
   const elimde=allBottles().filter(b=>state.have.includes(b.id));
   const kl=kuluplerim(),kids=Object.keys(kl);
-  k.innerHTML=`<div class="gkart"><h3>🏛️ Kulüplerim</h3>
-      ${kids.length?kids.map(id=>`<div class="mini" style="cursor:pointer" data-kulup-ac="${id}"><div><div class="nm">${g$(kl[id].ad||'Kulüp')}</div><div class="meta">${g$(kl[id].benAd||'')}${kl[id].rol==='kurucu'?' · 👑 kurucu':kl[id].rol==='yonetici'?' · ⭐ yönetici':''}</div></div><span class="price">›</span></div>`).join(''):'<p class="dt-txt" style="color:var(--muted)">Henüz bir kulübün yok. Kulüp, arkadaş grubunun kalıcı buluşma yeri: üyeler bir kez katılır, tüm gecelerini, sonuçlarını ve kulübün favorilerini tek yerde görür. Dışarıdan kimse göremez; sadece davet linkiyle girilir.</p>'}
-      <details style="margin-top:10px"${kids.length?'':' open'}><summary style="cursor:pointer;color:var(--amber-soft);font-weight:700">➕ Yeni kulüp kur</summary>
-        <div class="gform" style="margin-top:10px"><label>Kulübün adı<input id="kAd" maxlength="60" placeholder="ör. Kadıköy Viski Kulübü"></label>
-          <label>Açıklama (isteğe bağlı)<textarea id="kAcik" maxlength="500" rows="2" placeholder="Ayda bir buluşuyoruz; herkes bir şişe getiriyor…"></textarea></label>
-          <label>Kulüpteki takma adın<input id="kBenAd" maxlength="30" placeholder="ör. ${ornekTakma()}" value="${g$(lsAl('viski_takma_ad',''))}"></label>
-          <button class="eklebtn" style="margin:0" data-kulup="kur">🏛️ Kulübü kur</button><div class="durum" id="kDurum" style="font-size:12.5px;color:var(--red)"></div></div></details></div>
-    <p class="intro">Arkadaşlarınla tadım gecesi düzenle: şişeleri seç, davet linkini WhatsApp'tan gönder; herkes kendi telefonundan puan versin, sonunda ortak sonuç tablosu çıksın. İstersen <b>kör tadım</b> yap: şişelerin adı sen açıklayana kadar gizli kalır. Hesap gerekmez; katılımcılar sadece takma ad girer.</p>
+  k.innerHTML=`<p class="intro">Arkadaşlarınla tadım gecesi düzenle: şişeleri seç, davet linkini WhatsApp'tan gönder; herkes kendi telefonundan puan versin, sonunda ortak sonuç tablosu çıksın. İstersen <b>kör tadım</b> yap: şişelerin adı sen açıklayana kadar gizli kalır. Hesap gerekmez; katılımcılar sadece takma ad girer.</p>
     ${ids.length?`<div class="gkart glist"><h3>🗓️ Gecelerim</h3>${ids.map(id=>`<div class="mini" data-gece-ac="${id}"><div><div class="nm">${g$(g[id].ad||'Tadım gecesi')}</div><div class="meta">${tarihYaz(g[id].tarih)}${g[id].yk?' · 👑 ev sahibi':''}</div></div><span class="price">›</span></div>`).join('')}</div>`:''}
     <div class="gkart"><h3>➕ Yeni tadım gecesi</h3>
       <div class="gform">
@@ -3520,7 +3527,7 @@ async function kulupKur(){
     location.hash='#kulup='+r.kid;}catch(e){d.textContent='⚠️ '+e.message;}
 }
 async function kulupSayfa(){
-  const k=document.getElementById('geceKutu'),kid=KULUP.id,ben=kuluplerim()[kid];
+  const k=document.getElementById('kulupKutu'),kid=KULUP.id,ben=kuluplerim()[kid];
   if(!ben||!ben.anahtar){kulupKatilEkrani();return;}
   if(!KULUP.veri||KULUP.veri.kid!==kid)k.innerHTML='<div class="gkart">⏳ Kulüp yükleniyor…</div>';
   try{
@@ -3534,19 +3541,19 @@ async function kulupSayfa(){
     KULUP.geceler=sonuc.filter(Boolean);kulupCiz();
   }catch(e){
     if(/üyesi olmalısın|bulunamadı|davetle girilebilir/.test(e.message)){kulupSil(kid);}
-    k.innerHTML=`<div class="gkart"><h3>⚠️ ${g$(e.message)}</h3><p class="dt-txt" style="color:var(--muted)">Kulüpten çıkarılmış ya da kulüp kapatılmış olabilir.</p><button class="btn" data-gece="liste">‹ Geri</button></div>`;
+    k.innerHTML=`<div class="gkart"><h3>⚠️ ${g$(e.message)}</h3><p class="dt-txt" style="color:var(--muted)">Kulüpten çıkarılmış ya da kulüp kapatılmış olabilir.</p><button class="btn" data-kulup="liste">‹ Geri</button></div>`;
   }
 }
 async function kulupKatilEkrani(){
-  const k=document.getElementById('geceKutu');
-  if(!KULUP.davet){k.innerHTML='<div class="gkart"><h3>🔒 Bu kulübe yalnızca davetle girilebilir</h3><p class="dt-txt" style="color:var(--muted)">Kulüpten bir üyeden davet linki iste.</p><button class="btn" data-gece="liste">‹ Geri</button></div>';return;}
+  const k=document.getElementById('kulupKutu');
+  if(!KULUP.davet){k.innerHTML='<div class="gkart"><h3>🔒 Bu kulübe yalnızca davetle girilebilir</h3><p class="dt-txt" style="color:var(--muted)">Kulüpten bir üyeden davet linki iste.</p><button class="btn" data-kulup="liste">‹ Geri</button></div>';return;}
   k.innerHTML='<div class="gkart">⏳ Davet kontrol ediliyor…</div>';
   try{const v=await api('/api/kulup?kid='+KULUP.id+'&davet='+encodeURIComponent(KULUP.davet));
     k.innerHTML=`<div class="gkart"><h3>🏛️ ${g$(v.ad)}</h3>${v.aciklama?`<p class="dt-txt">${g$(v.aciklama)}</p>`:''}
       <p class="dt-txt" style="color:var(--muted);margin:8px 0 12px">Bu kapalı viski kulübüne davet edildin · ${v.uyeSayisi} üye. Katılınca kulübün gecelerini, sonuçlarını ve üyelerini görebilirsin; dışarıdan kimse göremez.</p>
       <div style="display:flex;gap:8px;flex-wrap:wrap"><input id="kKatilAd" maxlength="30" placeholder="Kulüpteki takma adın (ör. ${ornekTakma()})" value="${g$(lsAl('viski_takma_ad',''))}" style="flex:1;min-width:180px;background:var(--bg2);border:1px solid var(--line);color:var(--txt);padding:9px 11px;border-radius:9px">
       <button class="eklebtn" style="margin:0" data-kulup="katil">🥃 Kulübe katıl</button></div><div class="durum" id="kDurum" style="font-size:12.5px;color:var(--red);margin-top:6px"></div></div>`;
-  }catch(e){k.innerHTML=`<div class="gkart"><h3>⚠️ ${g$(e.message)}</h3><button class="btn" data-gece="liste">‹ Geri</button></div>`;}
+  }catch(e){k.innerHTML=`<div class="gkart"><h3>⚠️ ${g$(e.message)}</h3><button class="btn" data-kulup="liste">‹ Geri</button></div>`;}
 }
 function kulupHafiza(){
   // Kulübün geçmiş gecelerinden: tadılan şişeler, kulübün favorisi, en aktif üyeler
@@ -3561,7 +3568,7 @@ function kulupHafiza(){
   return {tadilan:Object.keys(sise).length,fav,ak};
 }
 function kulupCiz(){
-  const v=KULUP.veri,k=document.getElementById('geceKutu'),yon=v.ben.rol!=='uye',kur=v.ben.rol==='kurucu',yerel=kuluplerim()[v.kid]||{};
+  const v=KULUP.veri,k=document.getElementById('kulupKutu'),yon=v.ben.rol!=='uye',kur=v.ben.rol==='kurucu',yerel=kuluplerim()[v.kid]||{};
   const gec=KULUP.geceler,yakin=gec.filter(x=>!x.bitti).sort((a,b)=>(a.tarih||'9').localeCompare(b.tarih||'9')),gecmis=gec.filter(x=>x.bitti);
   const h=kulupHafiza();
   const rol={kurucu:'👑',yonetici:'⭐',uye:''};
@@ -3569,7 +3576,7 @@ function kulupCiz(){
     const bir=x.ozet&&x.siseler?x.ozet.ornekler.filter(o=>o.ort!==null).sort((a,b)=>b.ort-a.ort)[0]:null;
     return `<div class="mini" style="cursor:pointer" data-gece-ac="${x.id}"><div style="flex:1;min-width:0"><div class="nm">${g$(x.ad)}</div>
       <div class="meta">${x.tarih?tarihYaz(x.tarih)+' · ':''}${x.bitti?(bir?'🏆 '+g$(siseBilgi(x.siseler[bir.i]).ad)+' ('+bir.ort.toFixed(1)+')':'🏁 bitti'):`✅ ${gel}${bel?' · 🤔 '+bel:''}`}${x.kor&&!x.aciklandi?' · 🎭':''}</div></div><span class="price">›</span></div>`;};
-  k.innerHTML=`<div style="margin-bottom:10px"><button class="btn" data-gece="liste">‹ Kulüplerim ve gecelerim</button></div>
+  k.innerHTML=`<div style="margin-bottom:10px"><button class="btn" data-kulup="liste">‹ Kulüplerim</button></div>
     <div class="gkart ghead"><h2>🏛️ ${g$(v.ad)}</h2>${v.aciklama?`<p class="dt-txt" style="margin-top:8px">${g$(v.aciklama)}</p>`:''}
       <div class="meta"><span>👥 ${v.uyeler.length} üye</span><span>🥃 ${v.geceler.length} gece</span><span>Sen: ${g$(v.ben.ad)} ${rol[v.ben.rol]}</span></div>
       <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:12px"><button class="eklebtn" style="margin:0" data-kulup="gecekur">➕ Kulüpte gece düzenle</button>
@@ -3602,7 +3609,8 @@ document.addEventListener('click',async e=>{
       catch(er){document.getElementById('kDurum').textContent='⚠️ '+er.message;}
       return;
     }
-    if(ne==='gecekur'){YENI_KULUP=kid;KULUP.id=null;GECE.id=null;history.replaceState(null,'','#gece');renderGece();document.getElementById('gAd').focus();return;}
+    if(ne==='liste'){location.hash='#kulup';return;}
+    if(ne==='gecekur'){YENI_KULUP=kid;GECE.id=null;history.replaceState(null,'','#gece');goTab('gece');const f=document.getElementById('gAd');if(f)f.focus();return;}
     if(ne==='davet'){const y=kuluplerim()[kid];paylas('Kulüp daveti: '+KULUP.veri.ad,'🏛️ '+KULUP.veri.ad+' viski kulübüne davetlisin! Linke tıkla, takma adını yaz, katıl:',kulupDavetLink(kid,y.davet));return;}
     if(ne==='guncelle'){await kulupApi(Object.assign({islem:'yonet',eylem:'guncelle',ad:document.getElementById('kdAd').value,aciklama:document.getElementById('kdAcik').value},a));kulupSayfa();return;}
     if(ne==='davetyenile'){if(!confirm('Davet linki yenilensin mi? Eski link artık çalışmayacak.'))return;
@@ -3610,8 +3618,8 @@ document.addEventListener('click',async e=>{
     if(ne==='yoneticiyap'||ne==='yoneticilikal'){await kulupApi(Object.assign({islem:'yonet',eylem:ne==='yoneticiyap'?'yonetici-yap':'yoneticilik-al',hedef:b.dataset.hedef},a));kulupSayfa();return;}
     if(ne==='uyecikar'){if(!confirm('"'+b.dataset.ad+'" kulüpten çıkarılsın mı?'))return;await kulupApi(Object.assign({islem:'yonet',eylem:'uye-cikar',hedef:b.dataset.hedef},a));kulupSayfa();return;}
     if(ne==='kapat'){if(!confirm('Kulüp kalıcı olarak kapatılsın mı? Üyeler artık kulüp sayfasına giremez (tadım geceleri ayrı olarak durur).'))return;
-      await kulupApi(Object.assign({islem:'yonet',eylem:'sil'},a));kulupSil(kid);location.hash='#gece';return;}
-    if(ne==='ayril'){if(!confirm('Kulüpten ayrılmak istediğine emin misin?'))return;await kulupApi(Object.assign({islem:'ayril'},a));kulupSil(kid);location.hash='#gece';return;}
+      await kulupApi(Object.assign({islem:'yonet',eylem:'sil'},a));kulupSil(kid);location.hash='#kulup';return;}
+    if(ne==='ayril'){if(!confirm('Kulüpten ayrılmak istediğine emin misin?'))return;await kulupApi(Object.assign({islem:'ayril'},a));kulupSil(kid);location.hash='#kulup';return;}
   }catch(er){alert(er.message);}
 });
 
@@ -3676,6 +3684,11 @@ function ozelHash(){
     if(kod&&kod!==BULUT.kod&&confirm('Bu bağlantı, "'+kod+'" kodlu Viski Atlası listesini bu cihaza getirecek. Devam edilsin mi?\n(Bu cihazda bir liste varsa ikisi birleştirilir, hiçbir şey silinmez.)')){goTab('mylist');bulutBaglan(kod);}
     return true;
   }
+  if(h==='#kulup'||h==='#kulupler'){
+    KULUP.id=null;const a=document.querySelector('#subNav .tab.active');
+    if(!a||a.dataset.view!=='kulup')goTab('kulup');else renderKulup();
+    return true;
+  }
   if(h.startsWith('#kulup=')){
     const m=h.match(/^#kulup=([a-z0-9]{10})(?:\.([a-z0-9]{12}))?/);
     if(!m)return false;
@@ -3683,11 +3696,10 @@ function ozelHash(){
     if(m[2]&&kuluplerim()[m[1]]&&kuluplerim()[m[1]].anahtar){kulupKaydet(m[1],{davet:m[2]});history.replaceState(null,'','#kulup='+m[1]);}
     if(KULUP.veri&&KULUP.veri.kid!==m[1])KULUP.veri=null,KULUP.geceler=[];
     const a=document.querySelector('#subNav .tab.active');
-    if(!a||a.dataset.view!=='gece')goTab('gece');else renderGece();
+    if(!a||a.dataset.view!=='kulup')goTab('kulup');else renderKulup();
     return true;
   }
   if(h.startsWith('#gece')){
-    KULUP.id=null;
     const m=h.match(/^#gece=([a-z0-9]{10})(?:&yk=([a-z0-9]{16}))?/);
     if(m&&m[2]){geceKaydet(m[1],{yk:m[2],t:new Date().toISOString()});history.replaceState(null,'','#gece='+m[1]);}
     if((m?m[1]:null)!==GECE.id)GECE.duzenle=false;

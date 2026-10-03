@@ -383,7 +383,7 @@ nav.groups{display:flex;gap:6px;margin:20px 0 10px;background:var(--bg2);border:
 <header><div class="wrap">
   <div class="brand">
     <div style="font-size:34px">🥃</div>
-    <div><h1 onclick="location.href='./'" style="cursor:pointer" title="Ana sayfaya dön">Viski Atlası <span style="font-size:13px;color:var(--muted2);font-weight:600;vertical-align:middle">v3.1</span></h1>
+    <div><h1 onclick="location.href='./'" style="cursor:pointer" title="Ana sayfaya dön">Viski Atlası <span style="font-size:13px;color:var(--muted2);font-weight:600;vertical-align:middle">v3.2</span></h1>
       <div class="sub">Bölge → Damıtımevi → Şişe · Uzman & AI tercihleri · Türkiye katmanları · Kişisel koleksiyon</div></div>
   </div>
   <div class="stats">
@@ -420,6 +420,7 @@ nav.groups{display:flex;gap:6px;margin:20px 0 10px;background:var(--bg2);border:
     <div class="tab" data-group="listeler" data-view="magazin">✨ Magazin</div>
     <div class="tab" data-group="oneri" data-view="akilli">🎯 Akıllı Öneri</div>
     <div class="tab" data-group="oneri" data-view="personal">🧭 Bana Özel</div>
+    <div class="tab" data-group="oneri" data-view="yemek">🍽️ Yemek & Viski</div>
     <div class="tab" data-group="koleksiyon" data-view="mylist">📋 Listem</div>
     <div class="tab" data-group="koleksiyon" data-view="notes">📝 Tadım Notlarım</div>
     <div class="tab" data-group="koleksiyon" data-view="gurme">🎖️ Gurme Seviyem</div>
@@ -556,6 +557,10 @@ nav.groups{display:flex;gap:6px;margin:20px 0 10px;background:var(--bg2);border:
     <div id="gurmeBox"></div>
   </section>
 
+  <section id="view-yemek" class="hidden">
+    <p class="intro">Viskinin gurme eşlikçileri: bir tabak seç, ona yakışan viski profillerini ve <b>neden</b> yakıştığını gör. Öneriler önce elindeki şişelerden, sonra Türkiye'de bulunabilenlerden gelir. İki temel kural: <b>benzer tatlar birbirini büyütür</b> (şeri fıçı + kuru incir, bourbon + karamel) ve <b>zıt tatlar dengeler</b> (isli Islay + tatlı-tuzlu füme somon). İpucu: viskiyi birkaç damla suyla aç, yemekten küçük bir lokma al, sonra bir yudum; aromalar birbirini taşır.</p>
+    <div id="yemekBox"></div>
+  </section>
   <section id="view-personal" class="hidden">
     <p class="intro">Sana özel: damağının <b>tat radarı</b>, eldekilere göre <b>akıllı “Sıradaki Şişe” önerisi</b> ve ruh haline göre <b>“bu akşam ne içsem?”</b>. Hepsi senin koleksiyonun ve tadım puanlarından hesaplanır.</p>
     <div id="personalBox"></div>
@@ -2382,6 +2387,54 @@ function renderStats(){
 
 
 
+/* ===== YEMEK & VİSKİ: gurme eşlikçiler ===== */
+// tat: uyan tat profilleri (flavorsOf) · bolge: uyan bölge kategorileri (regionCat) · neden: eşleşmenin mantığı
+const YEMEKLER=[
+ {k:'somon',e:'🐟',ad:'Füme somon, lakerda',tat:['İsli','Turba','Tuzlu/Deniz'],bolge:['Islay','Islands'],neden:'Dumanlı ve tuzlu Islay viskileri füme balığın yağını keser, iyot notaları denizi tamamlar. Klasik bir İskoç ikilisi.'},
+ {k:'istiridye',e:'🦪',ad:'İstiridye, midye, karides',tat:['Tuzlu/Deniz','İsli','Narenciye'],bolge:['Islay','Islands','Campbeltown'],neden:'Laphroaig ya da Talisker\'ın tuzlu-mineral karakteri, kabuklu deniz ürünlerine birkaç damla limon gibi davranır.'},
+ {k:'mavi',e:'🧀',ad:'Mavi peynir, rokfor, gorgonzola',tat:['Şeri','İsli','Tatlı','Kuru Meyve'],bolge:['Speyside','Islay'],neden:'Keskin ve tuzlu küflü peyniri şeri fıçının tatlı kuru meyvesi yumuşatır; cesur olanlar için isli viski de çarpıcı bir zıtlık yaratır.'},
+ {k:'kasar',e:'🧀',ad:'Eski kaşar, parmesan, olgun peynir',tat:['Kuruyemiş','Karamel','Şeri','Malt/Tahıl'],bolge:['Highland','Speyside','Bourbon'],neden:'Olgun peynirin kristalli tuzu ve fındıksı derinliği, maltlı ve fındıksı viskilerle aynı dili konuşur.'},
+ {k:'cikolata',e:'🍫',ad:'Bitter çikolata (%70+)',tat:['Şeri','Çikolata','Kahve','Kuru Meyve','Vanilya'],bolge:['Speyside','Bourbon'],neden:'Bitter çikolatanın kakaosu şeri fıçının kuru üzümüyle ya da bourbonun vanilyasıyla buluşunca damakta uzun bir bitiş bırakır.'},
+ {k:'kurumeyve',e:'🌰',ad:'Kuru incir, hurma, ceviz',tat:['Şeri','Kuru Meyve','Kuruyemiş','Bal'],bolge:['Speyside','Highland'],neden:'Şeri fıçıda olgunlaşmış viskilerin kendi aroması zaten kuru incir ve cevizdir: benzer tatlar birbirini büyütür.'},
+ {k:'pastirma',e:'🥩',ad:'Pastırma, sucuk, kurutulmuş et',tat:['Baharatlı','İsli','Kuruyemiş'],bolge:['Çavdar/Rye','Islay','Bourbon'],neden:'Çemenin baharatını çavdar viskisinin biberimsi karakteri karşılar; isli viski kurutulmuş etin tütsüsüne eşlik eder.'},
+ {k:'kuzu',e:'🍖',ad:'Kuzu tandır, pirzola, kuzu güveç',tat:['Şeri','Meşe','Baharatlı','Yağlı/Gövdeli'],bolge:['Speyside','Highland','Campbeltown'],neden:'Yağlı kuzu, gövdeli şeri fıçı ya da Campbeltown viskilerinin yağlı dokusu ve baharatıyla dengelenir.'},
+ {k:'biftek',e:'🥩',ad:'Izgara biftek, dana antrikot',tat:['Karamel','Vanilya','Baharatlı','Meşe'],bolge:['Bourbon','Çavdar/Rye','Highland'],neden:'Izgaranın karamelize kabuğu bourbonun karamel–vanilyasına, çavdarın baharatı karabibere eşlik eder.'},
+ {k:'barbeku',e:'🔥',ad:'Barbekü, füme et, kaburga',tat:['İsli','Karamel','Vanilya','Tatlı'],bolge:['Bourbon','Islay','Tennessee'],neden:'Tatlı-dumanlı barbekü sosu, bourbonun tatlılığıyla birleşir; isli viski ise ateşin kokusunu ikiye katlar.'},
+ {k:'suşi',e:'🍣',ad:'Suşi, Japon mutfağı',tat:['Çiçeksi','Meyveli','Narenciye','Bal'],bolge:['Japonya','Lowland'],neden:'Narin ve çiçeksi Japon viskileri (özellikle highball olarak) çiğ balığı bastırmadan zencefil ve soyayı tamamlar.'},
+ {k:'meze',e:'🫒',ad:'Meze sofrası, beyaz peynir, kavun',tat:['Meyveli','Çiçeksi','Bal','Narenciye'],bolge:['Lowland','İrlanda','Japonya','Speyside'],neden:'Rakı sofrası mezelerine hafif, meyveli ve yumuşak viskiler yakışır; hiçbir tabağı ezmezler.'},
+ {k:'tatli',e:'🥧',ad:'Elmalı tart, armut tatlısı',tat:['Meyveli','Bal','Vanilya'],bolge:['Speyside','Lowland','İrlanda'],neden:'Elma–armut notalı Speyside ve İrlanda viskileri, meyveli tatlının kendisini yansıtır.'},
+ {k:'baklava',e:'🍯',ad:'Baklava, cevizli ve şerbetli tatlılar',tat:['Şeri','Bal','Karamel','Kuruyemiş'],bolge:['Speyside','Bourbon'],neden:'Şerbetin tatlılığına ancak zengin, karamelli ve ballı viskiler dayanır; ceviz ve fıstık, fındıksı notaları açar.'},
+ {k:'kahve',e:'☕',ad:'Türk kahvesi, lokum',tat:['Kahve','Çikolata','Şeri','Çiçeksi'],bolge:['Speyside','Bourbon'],neden:'Kavrulmuş kahve, şeri fıçının ve bourbonun kahve–kakao notalarıyla buluşur; gül lokumu çiçeksi viskileri öne çıkarır.'},
+ {k:'puro',e:'🚬',ad:'Puro (sohbet sonrası)',tat:['Şeri','İsli','Meşe','Yağlı/Gövdeli'],bolge:['Speyside','Islay','Bourbon'],neden:'Puronun tütün ve deri notaları gövdeli, yüksek dereceli şeri ya da isli viskilerle uzun bir sohbet eşlikçisi olur.'}
+];
+let YEMEK_SEC='somon';
+function yemekSkor(y,b){const fl=flavorsOf(b);return y.tat.filter(t=>fl.has(t)).length*2+(y.bolge.includes(regionCat(b))?2:0);}
+function yemekSiseleri(y){
+  const UL={kolay:4,tekel:3,dutyfree:1,zor:-3,muzayede:-8};
+  const hepsi=allBottles().map(b=>({b,s:yemekSkor(y,b)})).filter(o=>o.s>=3).sort((a,c)=>(c.s*3+(c.b.puan||0)/4+(UL[c.b.bul]||0))-(a.s*3+(a.b.puan||0)/4+(UL[a.b.bul]||0))).map(o=>o.b);
+  return {elde:hepsi.filter(b=>state.have.includes(b.id)).slice(0,4),oneri:hepsi.filter(b=>!state.have.includes(b.id)&&b.bul!=='muzayede').slice(0,8)};
+}
+function renderYemek(){
+  const box=document.getElementById('yemekBox');if(!box)return;
+  const y=YEMEKLER.find(x=>x.k===YEMEK_SEC)||YEMEKLER[0],{elde,oneri}=yemekSiseleri(y);
+  const satir=b=>{const t=state.target.includes(b.id);return `<div class="si">${thumb(b)}<div class="why"><span class="isimlink" data-detay="${b.id}">${b.ad}</span> <span style="color:var(--muted)">— ${b.bolge} · <span class="avail av-${b.bul}">${AV_TXT[b.bul]||b.bul}</span></span></div><span class="price">${fmt(priceOf(b))}</span><button class="btn ${t?'target-on':''}" data-act="target" data-id="${b.id}">${t?'★':'☆'}</button></div>`;};
+  box.innerHTML=`<div class="aromarow" style="margin-bottom:12px">${YEMEKLER.map(x=>`<span class="aroma${x.k===y.k?' on':''}" data-yemek="${x.k}">${x.e} ${x.ad}</span>`).join('')}</div>
+    <div class="sugg"><h3>${y.e} ${y.ad}</h3><p class="dt-txt" style="margin:4px 0 10px">${y.neden}</p>
+      <div class="aromarow" style="margin-bottom:8px">${y.tat.map(a=>`<span class="aroma" style="cursor:default">${a}</span>`).join('')}${y.bolge.map(a=>`<span class="aroma" style="cursor:default">📍 ${a}</span>`).join('')}</div>
+      ${elde.length?`<h3 style="margin-top:10px;font-size:14px">✓ Elindekilerden</h3>${elde.map(satir).join('')}`:''}
+      <h3 style="margin-top:10px;font-size:14px">🛒 Önerilen şişeler</h3>${oneri.map(satir).join('')||'<div class="empty">Uygun şişe bulunamadı.</div>'}</div>`;
+}
+// Şişe kartı: yanında ne iyi gider
+function yanindaHTML(b){
+  const uy=YEMEKLER.map(y=>({y,s:yemekSkor(y,b)})).filter(o=>o.s>=3).sort((a,c)=>c.s-a.s).slice(0,4);
+  if(!uy.length)return '';
+  return `<div class="dt-sec"><h4>🍽️ Yanında ne iyi gider?</h4><div class="aromarow" style="margin-bottom:6px">${uy.map(o=>`<span class="aroma" data-yemek-git="${o.y.k}" title="${esc(o.y.neden)}">${o.y.e} ${o.y.ad}</span>`).join('')}</div><div class="dt-src">💡 ${uy[0].y.neden}</div></div>`;
+}
+document.addEventListener('click',e=>{
+  const y=e.target.closest('[data-yemek]');if(y){YEMEK_SEC=y.dataset.yemek;renderYemek();return;}
+  const g=e.target.closest('[data-yemek-git]');if(g){e.stopPropagation();YEMEK_SEC=g.dataset.yemekGit;closeDetay();goTab('yemek');}
+},true);
+
 /* ===== AKILLI: Bütçe önerisi + Boşluk analizi + Karşılaştırma ===== */
 let AK_BUDGET=0, AK_CMP=['','',''];
 function akEsc(s){return (s+'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
@@ -2732,7 +2785,7 @@ document.addEventListener('click',e=>{
 // Sekme → çizim fonksiyonu. Sadece açık sekme çizilir (eskiden her işaretlemede 13 sekmenin
 // hepsi yeniden çiziliyordu); sekmeye geçince o sekme güncel durumla yeniden çizilir.
 const RENDER={explore:renderTree,experts:renderExperts,ai:renderAI,magazin:renderMagazin,ncf:renderNCF,katman:renderKatman,
-  stats:renderStats2,gece:renderGece,kulup:renderKulup,akilli:renderAkilli,harita:()=>{renderTree();renderHarita();},gurme:renderGurme,personal:renderPersonal,notes:renderNotes,mylist:renderMyList,fiyat:renderFiyat};
+  stats:renderStats2,gece:renderGece,kulup:renderKulup,akilli:renderAkilli,harita:()=>{renderTree();renderHarita();},gurme:renderGurme,yemek:renderYemek,personal:renderPersonal,notes:renderNotes,mylist:renderMyList,fiyat:renderFiyat};
 const lastInGroup={};
 function showGroup(g){
   document.querySelectorAll('.grp').forEach(x=>x.classList.toggle('active',x.dataset.group===g));
@@ -2919,6 +2972,7 @@ function openDetay(id){
     ${fl.length?`<div class="dt-sec"><h4>Tat profili</h4><div class="aromarow">${fl.map(f=>`<span class="aroma">${f}</span>`).join('')}</div></div>`:''}
     ${b.tlGecmis&&b.tlGecmis.length>1?`<div class="dt-sec"><h4>Fiyat geçmişi</h4>${sparkSVG(b.tlGecmis)}</div>`:''}
     ${nt&&nt.t?`<div class="dt-sec"><h4>Senin notun</h4><div class="dt-txt">${esc(nt.t)}</div></div>`:''}
+    ${yanindaHTML(b)}
     <div class="dt-sec"><h4>Benzer şişeler</h4>${benzerler(b).map(x=>`<div class="mini">${thumb(x)}<div><div class="nm"><span class="isimlink" data-detay="${x.id}">${x.ad}</span></div><div class="meta">${x.bolge} · ${x.puan||'—'} puan</div></div><span class="price">${fmt(priceOf(x))}</span></div>`).join('')}</div>
     <div class="dt-acts">
       <button class="btn ${haveOn?'have-on':''}" data-act="have" data-id="${id}">${haveOn?'✓ Elimde':'+ Elimde'}</button>

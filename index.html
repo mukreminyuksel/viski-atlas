@@ -439,7 +439,7 @@ nav.tabs{display:flex;gap:7px;flex-wrap:wrap;margin:20px 0 14px;padding-bottom:2
   </div>
 </div>
 
-  <p class="note">💾 İşaretlemelerin ve fiyat düzenlemelerin bu tarayıcıda otomatik kaydedilir. Fiyatlar 2026 yaklaşık Türkiye perakende referansıdır (70cl), mağaza/kur/duty-free'ye göre değişir. <a href="#" id="resetBtn">↺ Tüm seçimleri sıfırla</a></p>
+  <p class="note">💾 İşaretlemelerin ve fiyat düzenlemelerin bu tarayıcıda otomatik kaydedilir. Fiyatlar 2026 yaklaşık Türkiye perakende referansıdır (70cl), mağaza/kur/duty-free'ye göre değişir. <span id="fiyatDurum"></span> <a href="#" id="resetBtn">↺ Tüm seçimleri sıfırla</a></p>
 </div>
 
 <script>
@@ -2573,6 +2573,26 @@ function renderAll(){
   renderStats();renderTree();renderExperts();renderAI();renderMagazin();renderNCF();renderKatman();renderGurme();renderStats2();renderAkilli();renderPersonal();renderNotes();renderMyList();
 }
 renderAll();
+// Otomatik güncellenen fiyatlar: data/fiyatlar.json haftalık bot tarafından yazılır
+// (scripts/fiyat-guncelle.mjs). Dosya yoksa/okunamazsa gömülü fiyatlar kullanılır.
+const FIYAT_TUR={tr_raf:'✓ Türkiye mağaza fiyatı',tr_liste:'✓ İthalatçı/zam listesi',dutyfree:'✈ Duty-free fiyatı',tahmin:'≈ Yurtdışı fiyatından tahmin'};
+fetch('data/fiyatlar.json',{cache:'no-cache'}).then(r=>r.ok?r.json():null).then(d=>{
+  if(!d||!d.fiyatlar)return;
+  const byId=new Map(DATA.map(b=>[b.id,b]));
+  let n=0;
+  for(const [id,f] of Object.entries(d.fiyatlar)){const b=byId.get(id);if(b&&f.tl>0){b.tl=f.tl;b.tlTarih=f.tarih;b.tlTur=f.tur;b.tlKaynak=f.kaynak||'';n++;}}
+  const el=document.getElementById('fiyatDurum');
+  if(el&&d.guncelleme)el.textContent='🔄 Fiyatlar her hafta otomatik güncellenir · son güncelleme '+new Date(d.guncelleme).toLocaleDateString('tr-TR',{day:'numeric',month:'long',year:'numeric'})+' · '+n+'/'+DATA.length+' şişe doğrulandı.';
+  if(n)renderAll();
+}).catch(()=>{});
+// Fiyatın üstüne gelince kaynağını ve tarihini göster
+document.addEventListener('mouseover',e=>{
+  const p=e.target.closest&&e.target.closest('.price[data-id]');if(!p)return;
+  const b=allBottles().find(x=>x.id===p.dataset.id);if(!b)return;
+  p.title=state.prices[b.id]!==undefined?'Senin girdiğin fiyat (tıklayıp değiştirebilirsin)'
+    :b.tlTarih?(FIYAT_TUR[b.tlTur]||'Otomatik')+' · '+new Date(b.tlTarih).toLocaleDateString('tr-TR')+(b.tlKaynak?' · '+b.tlKaynak:'')
+    :'Yaklaşık referans fiyat (henüz otomatik doğrulanmadı)';
+});
 if('serviceWorker' in navigator){window.addEventListener('load',()=>{navigator.serviceWorker.register('sw.js').catch(()=>{});});}
 </script>
 </body>

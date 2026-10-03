@@ -1,0 +1,6 @@
+# Site statik (derleme yok); sunucu fonksiyonları netlify/functions altında
+[build]
+  publish = "."
+
+[functions]
+  directory = "netlify/functions"

@@ -298,6 +298,36 @@ nav.groups{display:flex;gap:6px;margin:20px 0 10px;background:var(--bg2);border:
 .leaflet-control-attribution{background:rgba(0,0,0,.55)!important;color:#9a8e78!important}.leaflet-control-attribution a{color:var(--amber-soft)!important}
 .leaflet-bar a{background:var(--panel)!important;color:var(--amber2)!important;border-color:var(--line)!important}
 .modal-bg{z-index:2000}
+/* BULUT + TADIM GECESİ */
+.bulut{background:linear-gradient(135deg,rgba(120,170,255,.10),var(--panel));border:1px solid var(--line);border-radius:14px;padding:14px 16px;margin-bottom:16px}
+.bulut h3{font-size:15px;margin-bottom:6px}.bulut p{font-size:13px;color:var(--muted);line-height:1.5}
+.bulut .kod{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:18px;font-weight:800;color:var(--amber2);background:var(--bg2);border:1px dashed var(--amber-soft);border-radius:10px;padding:8px 12px;display:inline-block;margin:8px 0;letter-spacing:.5px;word-break:break-all}
+.bulut .satir{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px;align-items:center}
+.bulut input,.gform input,.gform textarea,.gnot{background:var(--bg2);border:1px solid var(--line);color:var(--txt);padding:9px 11px;border-radius:9px;font-size:14px;font-family:inherit}
+.bulut .durum{font-size:12px;color:var(--muted2);margin-top:6px}.bulut .durum.ok{color:var(--have)}.bulut .durum.err{color:var(--red)}
+.ipucu{font-size:12.5px;color:var(--muted);background:var(--bg2);border-radius:9px;padding:8px 10px;margin-top:10px}
+.gkart{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:16px;margin-bottom:14px}
+.gkart h3{font-size:16px;margin-bottom:10px}
+.gform{display:grid;gap:10px;min-width:0}.gform label{font-size:12.5px;color:var(--muted);display:grid;gap:4px;min-width:0}
+.gform input:not([type=checkbox]),.gform textarea{width:100%;min-width:0;box-sizing:border-box}.gform input[type=datetime-local]{min-height:40px}
+.gform .iki{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.gsec{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}
+.gsec span{background:var(--bg2);border:1px solid var(--line);border-radius:20px;padding:5px 10px;font-size:12.5px}
+.gsec span b{color:var(--amber-soft);margin-right:4px}.gsec button{background:none;border:none;color:var(--red);cursor:pointer;margin-left:4px}
+.ghead h2{font-size:22px}.ghead .meta{color:var(--muted);font-size:13px;margin-top:4px;display:flex;gap:12px;flex-wrap:wrap}
+.rozet{font-size:11px;font-weight:800;padding:3px 9px;border-radius:20px;background:rgba(170,120,200,.16);color:#c6a0e0;border:1px solid rgba(170,120,200,.35)}
+.rozet.bitti{background:rgba(127,191,106,.14);color:#9fd68c;border-color:rgba(127,191,106,.35)}
+.ornek{background:var(--bg2);border:1px solid var(--line);border-radius:12px;padding:12px;margin-bottom:10px}
+.ornek .ust{display:flex;align-items:center;gap:10px}.ornek .no{font-size:22px;font-weight:800;color:var(--amber-soft);min-width:38px}
+.ornek .puanrow{display:flex;align-items:center;gap:10px;margin-top:10px}.ornek input[type=range]{flex:1;accent-color:#e0a83c}
+.ornek .pv{font-size:20px;font-weight:800;color:var(--amber2);min-width:44px;text-align:right}
+.gnot{width:100%;margin-top:8px;min-height:38px;resize:vertical;font-size:13px}
+.kaydedildi{font-size:11.5px;color:var(--have);margin-left:6px}
+.sonuc{width:100%;border-collapse:collapse;font-size:13.5px}.sonuc td,.sonuc th{padding:8px 6px;border-bottom:1px solid var(--line);text-align:left}
+.sonuc th{font-size:11px;color:var(--muted);text-transform:uppercase}.sonuc .ort{font-weight:800;color:var(--amber2)}
+.vurgu{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:8px;margin-bottom:12px}
+.vurgu div{background:var(--bg2);border:1px solid var(--line);border-radius:10px;padding:10px;font-size:13px}.vurgu b{display:block;color:var(--amber-soft);font-size:11px;text-transform:uppercase;margin-bottom:3px}
+.glist .mini{cursor:pointer}
 .h-buyut{position:absolute;top:10px;right:10px;z-index:500;background:var(--panel);color:var(--amber2);border:1px solid var(--line);border-radius:9px;padding:7px 11px;font-weight:700;font-size:12.5px;cursor:pointer}
 #haritaSar.buyuk{position:fixed;inset:0;z-index:1800;background:var(--bg)}
 #haritaSar.buyuk #haritaKutu{height:100%;min-height:0;border-radius:0;border:none}
@@ -306,6 +336,7 @@ nav.groups{display:flex;gap:6px;margin:20px 0 10px;background:var(--bg2);border:
 @keyframes parla{0%{box-shadow:0 0 0 3px var(--amber2)}100%{box-shadow:0 0 0 0 transparent}}
 @media(max-width:760px){
   #haritaKutu{height:40vh;min-height:280px}
+  .gform .iki{grid-template-columns:1fr}.gkart{padding:13px}.sonuc{font-size:12.5px}.sonuc td,.sonuc th{padding:7px 4px}
   .h-ust{gap:6px;margin-bottom:8px}.h-ust .pillrow{flex-wrap:nowrap;overflow-x:auto;width:100%;scrollbar-width:none}.h-ust .pillrow::-webkit-scrollbar{display:none}
   .h-ust .chip,.h-ust .btn{flex:0 0 auto;white-space:nowrap}
   body{padding-bottom:calc(84px + env(safe-area-inset-bottom))}
@@ -330,7 +361,7 @@ nav.groups{display:flex;gap:6px;margin:20px 0 10px;background:var(--bg2);border:
 <header><div class="wrap">
   <div class="brand">
     <div style="font-size:34px">🥃</div>
-    <div><h1 onclick="location.href='./'" style="cursor:pointer" title="Ana sayfaya dön">Viski Atlası <span style="font-size:13px;color:var(--muted2);font-weight:600;vertical-align:middle">v2.4</span></h1>
+    <div><h1 onclick="location.href='./'" style="cursor:pointer" title="Ana sayfaya dön">Viski Atlası <span style="font-size:13px;color:var(--muted2);font-weight:600;vertical-align:middle">v2.5</span></h1>
       <div class="sub">Bölge → Damıtımevi → Şişe · Uzman & AI tercihleri · Türkiye katmanları · Kişisel koleksiyon</div></div>
   </div>
   <div class="stats">
@@ -370,6 +401,7 @@ nav.groups{display:flex;gap:6px;margin:20px 0 10px;background:var(--bg2);border:
     <div class="tab" data-group="koleksiyon" data-view="notes">📝 Tadım Notlarım</div>
     <div class="tab" data-group="koleksiyon" data-view="gurme">🎖️ Gurme Seviyem</div>
     <div class="tab" data-group="koleksiyon" data-view="stats">📊 İstatistik</div>
+    <div class="tab" data-group="koleksiyon" data-view="gece">🥃 Tadım Geceleri</div>
     <div class="tab" data-group="kaynak" data-view="kaynak">📚 Kaynaklar</div>
   </nav>
 
@@ -483,6 +515,7 @@ nav.groups{display:flex;gap:6px;margin:20px 0 10px;background:var(--bg2);border:
     <p class="intro">Her hafta otomatik olarak Türkiye'deki güncel fiyatı bulunan şişeler. Değişim, bir önceki doğrulanmış fiyata (yoksa sitedeki referans fiyata) göre hesaplanır. Fiyatın üstüne gelince kaynağı görünür.</p>
     <div id="fiyatBox"></div>
   </section>
+  <section id="view-gece" class="hidden"><div id="geceKutu"></div></section>
   <section id="view-stats" class="hidden">
     <p class="intro">Koleksiyonunun rakamlarla portresi: değer, dağılımlar ve öne çıkanlar. <b>Elimde olanlar</b> üzerinden hesaplanır.</p>
     <div id="statsBox"></div>
@@ -510,6 +543,7 @@ nav.groups{display:flex;gap:6px;margin:20px 0 10px;background:var(--bg2);border:
 
   <section id="view-mylist" class="hidden">
     <p class="intro">Koleksiyonun ve hedeflerin. Bir şişeyi aldığında <b>Elimde Var</b>'a geçir; hedeflerin otomatik küçülür.</p>
+    <div class="bulut" id="bulutKutu"></div>
     <div class="listcol">
       <div><h3>✅ Elimde Var <span id="haveCount" style="color:var(--muted);font-weight:400;font-size:13px"></span></h3>
         <div id="haveList"></div><div class="tot"><span>Kasa Değeri</span><span id="haveTot" style="color:var(--have)">0 TL</span></div></div>
@@ -2670,7 +2704,7 @@ document.addEventListener('click',e=>{
 // Sekme → çizim fonksiyonu. Sadece açık sekme çizilir (eskiden her işaretlemede 13 sekmenin
 // hepsi yeniden çiziliyordu); sekmeye geçince o sekme güncel durumla yeniden çizilir.
 const RENDER={explore:renderTree,experts:renderExperts,ai:renderAI,magazin:renderMagazin,ncf:renderNCF,katman:renderKatman,
-  stats:renderStats2,akilli:renderAkilli,harita:()=>{renderTree();renderHarita();},gurme:renderGurme,personal:renderPersonal,notes:renderNotes,mylist:renderMyList,fiyat:renderFiyat};
+  stats:renderStats2,gece:renderGece,akilli:renderAkilli,harita:()=>{renderTree();renderHarita();},gurme:renderGurme,personal:renderPersonal,notes:renderNotes,mylist:renderMyList,fiyat:renderFiyat};
 const lastInGroup={};
 function showGroup(g){
   document.querySelectorAll('.grp').forEach(x=>x.classList.toggle('active',x.dataset.group===g));
@@ -2691,6 +2725,8 @@ document.querySelectorAll('.tab').forEach(t=>t.onclick=()=>{
   if(t.dataset.view==='harita')document.getElementById('haritaListeYeri').appendChild(la);
   else if(t.dataset.view==='explore')document.getElementById('view-explore').appendChild(la);
   const f=RENDER[t.dataset.view];if(f)f();
+  if(t.dataset.view==='mylist')renderBulut();
+  if(t.dataset.view!=='gece')clearInterval(GECE.zam);
 });
 let NA_IMG='', NA_ABV='';
 async function fetchPage(url){
@@ -2868,7 +2904,7 @@ function openDetay(id){
 }
 function closeDetay(){
   DETAY_ID=null;document.getElementById('detayBg').classList.remove('on');
-  if(/^#[sdb]=/.test(location.hash))history.replaceState(null,'',location.pathname+location.search);
+  if(/^#([sdb]=|qr$)/.test(location.hash))history.replaceState(null,'',location.pathname+location.search);
 }
 document.addEventListener('click',e=>{
   if(e.target.id==='detayBg'||e.target.closest('[data-detay-kapat]')){closeDetay();return;}
@@ -3060,6 +3096,355 @@ document.addEventListener('click',e=>{
   if(hg&&HARITA){const [c,zz]=HGIT[hg.dataset.hgit];HARITA.flyTo(c,zz,{duration:1.2});}
 });
 
+/* ===== ORTAK: kullanıcı içeriği için tam HTML kaçırma ===== */
+function g$(s){return String(s??'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');}
+async function api(yol,secenek){
+  const r=await fetch(yol,Object.assign({cache:'no-store',headers:{'content-type':'application/json'}},secenek||{}));
+  let v={};try{v=await r.json();}catch(e){}
+  if(!r.ok)throw new Error(v.hata||('Sunucu yanıt vermedi ('+r.status+')'));
+  return v;
+}
+function lsAl(k,v){try{const x=localStorage.getItem(k);return x===null?v:JSON.parse(x);}catch(e){return v;}}
+function lsYaz(k,v){try{localStorage.setItem(k,JSON.stringify(v));}catch(e){}}
+function paylas(baslik,metin,url){
+  if(navigator.share)return navigator.share({title:baslik,text:metin,url}).catch(()=>{});
+  window.open('https://wa.me/?text='+encodeURIComponent(metin+(url?'\n'+url:'')),'_blank','noopener');
+}
+function kopyala(metin,btn){
+  const bitti=()=>{if(btn){const e=btn.textContent;btn.textContent='✓ Kopyalandı';setTimeout(()=>btn.textContent=e,1800);}};
+  if(navigator.clipboard)navigator.clipboard.writeText(metin).then(bitti,()=>prompt('Kopyala:',metin));else prompt('Kopyala:',metin);
+}
+function sureOnce(iso){
+  if(!iso)return '';const d=(Date.now()-Date.parse(iso))/1000;
+  return d<60?'az önce':d<3600?Math.floor(d/60)+' dk önce':d<86400?Math.floor(d/3600)+' saat önce':new Date(iso).toLocaleDateString('tr-TR');
+}
+
+/* ===== BULUT SENKRONU (giriş yok; kişiye özel kod) ===== */
+let BULUT={kod:lsAl('viski_bulut_kod',null),son:lsAl('viski_bulut_son',null),kirli:lsAl('viski_bulut_kirli',false),durum:'',hata:false};
+const bulutLink=k=>location.origin+location.pathname+'#bulut='+encodeURIComponent(k);
+function bulutDurum(m,h){BULUT.durum=m;BULUT.hata=!!h;const e=document.querySelector('#bulutKutu .durum');if(e){e.textContent=m;e.className='durum '+(h?'err':'ok');}}
+function stateYaz(s){s=Object.assign({have:[],target:[],prices:{},custom:[],qty:{},notes:{}},s||{});state=s;try{localStorage.setItem(LS,JSON.stringify(state));}catch(e){}}
+function birlestir(a,b){
+  // İki listeyi kayıpsız birleştir (b'deki fiyat/not/adet önceliklidir)
+  const u=(x,y)=>[...new Set([...(x||[]),...(y||[])])];
+  const have=u(a.have,b.have);
+  const cust={};[...(a.custom||[]),...(b.custom||[])].forEach(c=>{cust[c.id]=c;});
+  const qty=Object.assign({},a.qty);Object.entries(b.qty||{}).forEach(([k,v])=>{qty[k]=Math.max(qty[k]||0,v);});
+  return {have,target:u(a.target,b.target).filter(x=>!have.includes(x)),prices:Object.assign({},a.prices,b.prices),
+    custom:Object.values(cust),qty,notes:Object.assign({},a.notes,b.notes)};
+}
+let bulutZam=null;
+window.cloudSync=function(){
+  if(!BULUT.kod)return;
+  BULUT.kirli=true;lsYaz('viski_bulut_kirli',true);
+  clearTimeout(bulutZam);bulutZam=setTimeout(bulutGonder,1500);
+};
+async function bulutGonder(){
+  if(!BULUT.kod)return;
+  try{bulutDurum('☁️ Kaydediliyor…');
+    const r=await api('/api/sync',{method:'PUT',body:JSON.stringify({kod:BULUT.kod,state})});
+    BULUT.son=r.guncelleme;BULUT.kirli=false;lsYaz('viski_bulut_son',BULUT.son);lsYaz('viski_bulut_kirli',false);
+    bulutDurum('☁️ Buluta kaydedildi · '+sureOnce(BULUT.son));
+  }catch(e){bulutDurum('⚠️ Buluta kaydedilemedi ('+e.message+'). İnternet gelince tekrar denenecek.',true);}
+}
+async function bulutCek(){
+  // Başka cihazda yapılan değişiklikleri al; bu cihazda kaydedilmemiş değişiklik varsa birleştir
+  if(!BULUT.kod)return;
+  try{
+    const r=await api('/api/sync?kod='+encodeURIComponent(BULUT.kod));
+    if(!BULUT.son||r.guncelleme>BULUT.son){
+      stateYaz(BULUT.kirli?birlestir(r.state,state):r.state);
+      BULUT.son=r.guncelleme;lsYaz('viski_bulut_son',BULUT.son);renderAll();
+      if(BULUT.kirli)bulutGonder();else bulutDurum('☁️ Güncel · '+sureOnce(BULUT.son));
+    }else if(BULUT.kirli)bulutGonder();
+    else bulutDurum('☁️ Güncel · son kayıt '+sureOnce(BULUT.son));
+  }catch(e){bulutDurum('⚠️ Bulutla eşitlenemedi: '+e.message,true);}
+}
+async function bulutBaslat(){
+  try{bulutDurum('☁️ Hazırlanıyor…');
+    const r=await api('/api/sync',{method:'POST',body:JSON.stringify({islem:'olustur',state})});
+    BULUT.kod=r.kod;BULUT.son=r.guncelleme;BULUT.kirli=false;
+    lsYaz('viski_bulut_kod',r.kod);lsYaz('viski_bulut_son',r.guncelleme);lsYaz('viski_bulut_kirli',false);
+    renderBulut();bulutDurum('☁️ Listen bulutta. Kodunu kaybetmemek için hemen kendine gönder 👇');
+  }catch(e){bulutDurum('⚠️ Başlatılamadı: '+e.message,true);}
+}
+async function bulutBaglan(kod){
+  kod=String(kod||'').toLowerCase().trim().replace(/\s+/g,'-');
+  if(!kod)return;
+  try{bulutDurum('☁️ Liste getiriliyor…');
+    const r=await api('/api/sync?kod='+encodeURIComponent(kod));
+    const yerelDolu=state.have.length||state.target.length||Object.keys(state.notes||{}).length||(state.custom||[]).length;
+    stateYaz(yerelDolu?birlestir(r.state,state):r.state);
+    BULUT.kod=kod;BULUT.son=r.guncelleme;lsYaz('viski_bulut_kod',kod);lsYaz('viski_bulut_son',r.guncelleme);
+    renderAll();renderBulut();
+    if(yerelDolu){BULUT.kirli=true;lsYaz('viski_bulut_kirli',true);await bulutGonder();bulutDurum('☁️ Bağlandı; bu cihazdaki liste buluttakiyle birleştirildi.');}
+    else bulutDurum('☁️ Bağlandı; listen bu cihaza geldi ('+state.have.length+' elimde, '+state.target.length+' hedef).');
+  }catch(e){bulutDurum('⚠️ '+e.message,true);}
+}
+function bulutKes(){
+  if(!confirm('Bu cihazın bulut bağlantısı kesilsin mi? Liste bu cihazda kalır; bulut kaydı silinmez, kodla tekrar bağlanabilirsin.'))return;
+  BULUT={kod:null,son:null,kirli:false,durum:'',hata:false};
+  ['viski_bulut_kod','viski_bulut_son','viski_bulut_kirli'].forEach(k=>{try{localStorage.removeItem(k);}catch(e){}});
+  renderBulut();
+}
+function iosIpucu(){
+  const ios=/iPhone|iPad|iPod/.test(navigator.userAgent),ana=navigator.standalone||matchMedia('(display-mode: standalone)').matches;
+  return ios&&!ana?'<div class="ipucu">📱 <b>iPhone ipucu:</b> Safari, 7 gün açılmayan sitelerin verilerini silebiliyor. Siteyi <b>Paylaş → Ana Ekrana Ekle</b> ile ana ekrana eklersen bu risk ortadan kalkar.</div>':'';
+}
+function renderBulut(){
+  const k=document.getElementById('bulutKutu');if(!k)return;
+  if(!BULUT.kod){
+    k.innerHTML=`<h3>☁️ Listeni kaybetme</h3>
+      <p>Listen şu an <b>sadece bu cihazda</b> duruyor; tarayıcı verisi silinirse ya da cihaz değişirse kaybolur. Bulutta saklarsan sana özel bir kod verilir; aynı kodla telefonda ve bilgisayarda aynı listeyi kullanırsın. Hesap ya da e-posta gerekmez.</p>
+      <div class="satir"><button class="eklebtn" style="margin:0" data-bulut="baslat">☁️ Bulutta saklamaya başla</button></div>
+      <div class="satir"><input id="bulutKodGir" placeholder="Başka cihazdaki kodun (ör. kehribar-islay-kadeh-427)" style="flex:1;min-width:220px"><button class="btn" data-bulut="baglan">🔑 Listemi getir</button></div>
+      <div class="durum"></div>${iosIpucu()}`;
+  }else{
+    k.innerHTML=`<h3>☁️ Listen bulutta</h3>
+      <p>Her değişiklik otomatik kaydedilir. Başka cihazda bu kodu girmen (ya da QR'ı okutman) yeterli. <b>Kodu bilen listeni görebilir</b>; bir şifre gibi sakla.</p>
+      <div class="kod">${g$(BULUT.kod)}</div>
+      <div class="satir"><button class="btn" data-bulut="gonder">📤 Kodu kendine gönder</button><button class="btn" data-bulut="kopyala">📋 Kopyala</button>
+        <button class="btn" data-bulut="qr">▦ QR göster</button><button class="btn" data-bulut="cek">🔄 Şimdi eşitle</button><button class="btn" data-bulut="kes">🔌 Bağlantıyı kes</button></div>
+      <div class="durum ${BULUT.hata?'err':'ok'}">${g$(BULUT.durum||('☁️ Son kayıt '+sureOnce(BULUT.son)))}</div>${iosIpucu()}`;
+  }
+}
+let qrSoz=null;
+function qrYukle(){return window.QRCode?Promise.resolve():(qrSoz=qrSoz||new Promise((ok,no)=>{const j=document.createElement('script');j.src='https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js';j.onload=ok;j.onerror=()=>{qrSoz=null;no();};document.head.appendChild(j);}));}
+async function bulutQR(){
+  try{await qrYukle();}catch(e){alert('QR oluşturulamadı; internet bağlantısını kontrol et.');return;}
+  kartAc(`<h3>▦ Listeni başka cihaza taşı</h3><p class="dt-txt" style="margin:8px 0 14px">Diğer cihazın kamerasıyla okut; liste o cihazda açılır.</p>
+    <div id="qrAlan" style="background:#fff;padding:14px;border-radius:12px;display:inline-block"></div><div class="dt-src" style="margin-top:10px">${g$(BULUT.kod)}</div>`,'qr');
+  new QRCode(document.getElementById('qrAlan'),{text:bulutLink(BULUT.kod),width:220,height:220});
+}
+document.addEventListener('click',e=>{
+  const b=e.target.closest('[data-bulut]');if(!b)return;
+  const i=b.dataset.bulut;
+  if(i==='baslat')bulutBaslat();
+  else if(i==='baglan')bulutBaglan(document.getElementById('bulutKodGir').value);
+  else if(i==='kopyala')kopyala(BULUT.kod,b);
+  else if(i==='gonder')paylas('Viski Atlası bulut kodum','Viski Atlası listemin kodu: '+BULUT.kod+'\nBaşka cihazda açmak için:',bulutLink(BULUT.kod));
+  else if(i==='qr')bulutQR();
+  else if(i==='cek')bulutCek();
+  else if(i==='kes')bulutKes();
+});
+document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible')bulutCek();});
+window.addEventListener('online',()=>{if(BULUT.kirli)bulutGonder();});
+
+/* ===== TADIM GECESİ ===== */
+let GECE={id:null,veri:null,zam:null,kaydetZam:{}};
+const gecelerim=()=>lsAl('viski_geceler',{});
+function geceKaydet(id,v){const g=gecelerim();g[id]=Object.assign(g[id]||{},v);lsYaz('viski_geceler',g);}
+const geceLink=id=>location.origin+location.pathname+'#gece='+id;
+function siseBilgi(x){const b=allBottles().find(y=>y.id===x);return b?{b,ad:b.ad}:{b:null,ad:x};}
+function tarihYaz(t){if(!t)return '';const d=new Date(t);return isNaN(d)?g$(t):d.toLocaleString('tr-TR',{weekday:'short',day:'numeric',month:'long',hour:'2-digit',minute:'2-digit'});}
+let YENI_SISELER=[];
+function renderGece(){
+  const k=document.getElementById('geceKutu');if(!k)return;
+  if(GECE.id){geceDetay();return;}
+  clearInterval(GECE.zam);
+  const g=gecelerim(),ids=Object.keys(g).sort((a,b)=>(g[b].t||'').localeCompare(g[a].t||''));
+  const elimde=allBottles().filter(b=>state.have.includes(b.id));
+  k.innerHTML=`<p class="intro">Arkadaşlarınla tadım gecesi düzenle: şişeleri seç, davet linkini WhatsApp'tan gönder; herkes kendi telefonundan puan versin, sonunda ortak sonuç tablosu çıksın. İstersen <b>kör tadım</b> yap: şişelerin adı sen açıklayana kadar gizli kalır. Hesap gerekmez; katılımcılar sadece takma ad girer.</p>
+    ${ids.length?`<div class="gkart glist"><h3>🗓️ Gecelerim</h3>${ids.map(id=>`<div class="mini" data-gece-ac="${id}"><div><div class="nm">${g$(g[id].ad||'Tadım gecesi')}</div><div class="meta">${tarihYaz(g[id].tarih)}${g[id].yk?' · 👑 ev sahibi':''}</div></div><span class="price">›</span></div>`).join('')}</div>`:''}
+    <div class="gkart"><h3>➕ Yeni tadım gecesi</h3>
+      <div class="gform">
+        <label>Gecenin adı<input id="gAd" maxlength="80" placeholder="ör. Islay Gecesi, Şeri Fıçılar, Japon Akşamı"></label>
+        <div class="iki"><label>Tarih ve saat<input id="gTarih" type="datetime-local"></label><label>Yer<input id="gYer" maxlength="80" placeholder="ör. Bizim ev"></label></div>
+        <label>Açıklama (isteğe bağlı)<textarea id="gAcik" maxlength="500" rows="2" placeholder="Herkes bir şişe getiriyor, peynir tabağı bizden…"></textarea></label>
+        <label style="display:flex;align-items:center;gap:8px;flex-direction:row"><input type="checkbox" id="gKor"> 🎭 Kör tadım: şişelerin adı ben açıklayana kadar gizli kalsın</label>
+        <label>Senin takma adın<input id="gBenAd" maxlength="30" placeholder="ör. Mükremin" value="${g$(lsAl('viski_takma_ad',''))}"></label>
+        <label>Tadılacak şişeler (en fazla 12; sıra = örnek numarası)
+          <div style="display:flex;gap:8px"><input id="gSiseAra" list="gSiseListe" placeholder="Şişe adı yaz ve seç…" style="flex:1"><button class="btn" data-gece="ekle">Ekle</button></div>
+          <datalist id="gSiseListe">${allBottles().map(b=>`<option value="${g$(b.ad)}">`).join('')}</datalist></label>
+        ${elimde.length?`<div><div style="font-size:12px;color:var(--muted2);margin-bottom:4px">Elimdekilerden hızlı ekle:</div><div class="gsec">${elimde.slice(0,30).map(b=>`<span style="cursor:pointer" data-gece-hizli="${b.id}">+ ${g$(b.ad)}</span>`).join('')}</div></div>`:''}
+        <div class="gsec" id="gSecilen"></div>
+        <button class="eklebtn" data-gece="olustur">🥃 Geceyi oluştur</button>
+        <div class="durum" id="gDurum" style="font-size:12.5px;color:var(--red)"></div>
+      </div></div>`;
+  geceSecilenCiz();
+}
+function geceSecilenCiz(){
+  const e=document.getElementById('gSecilen');if(!e)return;
+  e.innerHTML=YENI_SISELER.map((x,i)=>`<span><b>${i+1}</b>${g$(siseBilgi(x).ad)}<button data-gece-cikar="${i}" title="Çıkar">✕</button></span>`).join('');
+}
+function geceSiseEkle(deger){
+  deger=String(deger||'').trim();if(!deger)return;
+  if(YENI_SISELER.length>=12){alert('En fazla 12 şişe seçebilirsin.');return;}
+  const b=allBottles().find(x=>x.ad.toLowerCase()===deger.toLowerCase()||x.id===deger);
+  const v=b?b.id:deger.slice(0,80);
+  if(!YENI_SISELER.includes(v))YENI_SISELER.push(v);
+  geceSecilenCiz();
+}
+async function geceOlustur(){
+  const d=document.getElementById('gDurum');
+  const ad=document.getElementById('gAd').value.trim(),benAd=document.getElementById('gBenAd').value.trim();
+  if(!ad){d.textContent='Gecenin bir adı olmalı.';return;}
+  if(!YENI_SISELER.length){d.textContent='En az bir şişe seç.';return;}
+  try{
+    d.textContent='';lsYaz('viski_takma_ad',benAd);
+    const r=await api('/api/gece',{method:'POST',body:JSON.stringify({islem:'olustur',ad,tarih:document.getElementById('gTarih').value,yer:document.getElementById('gYer').value,
+      aciklama:document.getElementById('gAcik').value,kor:document.getElementById('gKor').checked,siseler:YENI_SISELER,olusturanAd:benAd})});
+    geceKaydet(r.id,{ad,tarih:document.getElementById('gTarih').value,yk:r.yk,pid:r.pid,t:new Date().toISOString()});
+    YENI_SISELER=[];location.hash='#gece='+r.id;
+  }catch(e){d.textContent='⚠️ '+e.message;}
+}
+function geceSonuc(v){
+  // Örnek başına ortalama, yayılım; gecenin öne çıkanları
+  const n=v.siseSayisi,ornek=[];
+  for(let i=0;i<n;i++){
+    const ps=v.katilimcilar.map(k=>k.puanlar[i]&&k.puanlar[i].p).filter(p=>typeof p==='number');
+    const ort=ps.length?ps.reduce((a,b)=>a+b,0)/ps.length:null;
+    const sd=ps.length>1?Math.sqrt(ps.reduce((a,b)=>a+(b-ort)**2,0)/ps.length):0;
+    ornek.push({i,ps,ort,sd,min:ps.length?Math.min(...ps):null,max:ps.length?Math.max(...ps):null});
+  }
+  let ikiz=null;
+  for(let a=0;a<v.katilimcilar.length;a++)for(let b=a+1;b<v.katilimcilar.length;b++){
+    const A=v.katilimcilar[a],B=v.katilimcilar[b],ort=[];
+    for(let i=0;i<n;i++){const x=A.puanlar[i]&&A.puanlar[i].p,y=B.puanlar[i]&&B.puanlar[i].p;if(typeof x==='number'&&typeof y==='number')ort.push(Math.abs(x-y));}
+    if(ort.length>=2){const f=ort.reduce((p,q)=>p+q,0)/ort.length;if(!ikiz||f<ikiz.f)ikiz={a:A.ad,b:B.ad,f};}
+  }
+  return {ornek,ikiz};
+}
+async function geceYukle(sessiz){
+  const g=gecelerim()[GECE.id]||{};
+  try{
+    const v=await api('/api/gece?id='+encodeURIComponent(GECE.id)+(g.yk?'&yk='+encodeURIComponent(g.yk):''));
+    const once=GECE.veri;GECE.veri=v;geceKaydet(GECE.id,{ad:v.ad,tarih:v.tarih,t:g.t||new Date().toISOString()});
+    // Puan kutularında yazarken yeniden çizmeyelim; durum değiştiyse tamamını, yoksa yalnızca sonuç/katılımcıları yenile
+    if(!sessiz||!once||once.aciklandi!==v.aciklandi||once.bitti!==v.bitti)geceCiz();else geceParcaCiz();
+  }catch(e){
+    document.getElementById('geceKutu').innerHTML=`<div class="gkart"><h3>⚠️ ${g$(e.message)}</h3><button class="btn" data-gece="liste">‹ Gecelerime dön</button></div>`;
+    clearInterval(GECE.zam);
+  }
+}
+function geceDetay(){
+  const k=document.getElementById('geceKutu');
+  if(!GECE.veri||GECE.veri.id!==GECE.id)k.innerHTML='<div class="gkart">⏳ Yükleniyor…</div>';
+  geceYukle(false);
+  clearInterval(GECE.zam);GECE.zam=setInterval(()=>{
+    const a=document.querySelector('#subNav .tab.active');
+    if(a&&a.dataset.view==='gece'&&GECE.id&&document.visibilityState==='visible')geceYukle(true);
+  },15000);
+}
+function geceKatilimciHTML(v){
+  return `<div class="gsec">${v.katilimcilar.map(k=>`<span>${g$(k.ad)} <b style="margin:0 0 0 4px">${Object.values(k.puanlar).filter(x=>x&&typeof x.p==='number').length}/${v.siseSayisi}</b></span>`).join('')}</div>`;
+}
+function geceSonucHTML(v){
+  const g=gecelerim()[GECE.id]||{};
+  const gorunur=!v.kor||v.aciklandi;
+  if(!gorunur&&!v.yonetici)return '<p class="dt-txt" style="color:var(--muted)">🎭 Kör tadım: sonuçlar ve şişelerin adları, ev sahibi açıklayınca burada görünecek.</p>';
+  const {ornek,ikiz}=geceSonuc(v);
+  const sira=ornek.filter(o=>o.ort!==null).sort((a,b)=>b.ort-a.ort);
+  if(!sira.length)return '<p class="dt-txt" style="color:var(--muted)">Henüz puan verilmedi.</p>';
+  const ad=o=>v.siseler?g$(siseBilgi(v.siseler[o.i]).ad):'Örnek '+(o.i+1);
+  const ayr=ornek.filter(o=>o.ps.length>=2).sort((a,b)=>b.sd-a.sd)[0];
+  return `${!gorunur?'<p class="dt-txt" style="color:var(--muted);margin-bottom:8px">👑 Bu sonuçları şu an sadece sen görüyorsun.</p>':''}
+    <div class="vurgu"><div><b>🏆 Gecenin birincisi</b>${ad(sira[0])} · ${sira[0].ort.toFixed(1)}</div>
+      ${ayr&&ayr.sd>=3?`<div><b>⚖️ En çok ayrışan</b>${ad(ayr)} · ${ayr.min}–${ayr.max} arası</div>`:''}
+      ${ikiz?`<div><b>🤝 Damak ikizleri</b>${g$(ikiz.a)} & ${g$(ikiz.b)} · ortalama ${ikiz.f.toFixed(1)} puan fark</div>`:''}</div>
+    <table class="sonuc"><tr><th>#</th><th>Şişe</th><th>Ort.</th><th>Aralık</th><th>Oy</th><th>Sen</th></tr>
+    ${sira.map((o,j)=>{const ben=(v.katilimcilar.find(k=>k.pid===g.pid)||{puanlar:{}}).puanlar[o.i];
+      return `<tr><td>${j+1}</td><td>${ad(o)}</td><td class="ort">${o.ort.toFixed(1)}</td><td>${o.min}–${o.max}</td><td>${o.ps.length}</td><td>${ben&&typeof ben.p==='number'?ben.p:'—'}</td></tr>`;}).join('')}</table>`;
+}
+function geceParcaCiz(){
+  const v=GECE.veri;
+  const a=document.getElementById('gKatilim');if(a)a.innerHTML=geceKatilimciHTML(v);
+  const b=document.getElementById('gSonuc');if(b)b.innerHTML=geceSonucHTML(v);
+}
+function geceCiz(){
+  const v=GECE.veri,g=gecelerim()[GECE.id]||{},k=document.getElementById('geceKutu');
+  const ben=v.katilimcilar.find(x=>x.pid===g.pid);
+  const kilit=v.bitti;
+  const ornekler=Array.from({length:v.siseSayisi},(_,i)=>{
+    const s=v.siseler?siseBilgi(v.siseler[i]):null,p=ben&&ben.puanlar[i]||{};
+    return `<div class="ornek"><div class="ust"><div class="no">${i+1}</div>
+      ${s?`${s.b?thumb(s.b):''}<div><div class="nm" style="font-weight:800">${s.b?`<span class="isimlink" data-detay="${s.b.id}">${g$(s.ad)}</span>`:g$(s.ad)}</div>${s.b?`<div class="meta" style="font-size:12px;color:var(--muted)">${g$(s.b.dam)} · ${g$(s.b.bolge)}</div>`:''}</div>`:`<div class="nm" style="font-weight:800">Örnek ${i+1}</div>`}</div>
+      ${ben?`<div class="puanrow"><input type="range" min="50" max="100" step="1" value="${typeof p.p==='number'?p.p:75}" data-puan="${i}" ${kilit?'disabled':''}>
+        <span class="pv" id="pv${i}">${typeof p.p==='number'?p.p:'–'}</span></div>
+        <textarea class="gnot" data-not="${i}" maxlength="300" placeholder="Notun: burun, damak, bitiş…" ${kilit?'disabled':''}>${g$(p.not||'')}</textarea><span class="kaydedildi" id="kd${i}"></span>`:''}
+    </div>`;}).join('');
+  k.innerHTML=`<div style="margin-bottom:10px"><button class="btn" data-gece="liste">‹ Gecelerim</button></div>
+    <div class="gkart ghead"><h2>🥃 ${g$(v.ad)}</h2>
+      <div class="meta">${v.tarih?`<span>📅 ${tarihYaz(v.tarih)}</span>`:''}${v.yer?`<span>📍 ${g$(v.yer)}</span>`:''}${v.kor?`<span class="rozet">🎭 Kör tadım${v.aciklandi?' · açıklandı':''}</span>`:''}${v.bitti?'<span class="rozet bitti">🏁 Bitti</span>':''}</div>
+      ${v.aciklama?`<p class="dt-txt" style="margin-top:10px">${g$(v.aciklama)}</p>`:''}
+      <div class="satir" style="display:flex;gap:8px;flex-wrap:wrap;margin-top:12px"><button class="eklebtn" style="margin:0" data-gece="davet">📤 Davet et</button><button class="btn" data-gece="linkkopya">🔗 Linki kopyala</button></div>
+      <h4 style="margin:14px 0 6px;font-size:12px;color:var(--amber-soft);text-transform:uppercase">Katılımcılar</h4><div id="gKatilim">${geceKatilimciHTML(v)}</div>
+    </div>
+    ${!ben&&!kilit?`<div class="gkart"><h3>🙋 Katıl</h3><div style="display:flex;gap:8px;flex-wrap:wrap"><input id="gKatilAd" maxlength="30" placeholder="Takma adın" value="${g$(lsAl('viski_takma_ad',''))}" style="flex:1;min-width:160px;background:var(--bg2);border:1px solid var(--line);color:var(--txt);padding:9px 11px;border-radius:9px"><button class="eklebtn" style="margin:0" data-gece="katil">Katılıyorum</button></div></div>`:''}
+    <div class="gkart"><h3>${ben?'⭐ Puanların':'🥃 Örnekler'}</h3>${ben&&!kilit?'<p class="dt-txt" style="color:var(--muted);margin-bottom:10px">Kaydırıcıyla 50–100 arası puan ver; notun otomatik kaydedilir.</p>':''}${ornekler}</div>
+    <div class="gkart"><h3>📊 Sonuçlar</h3><div id="gSonuc">${geceSonucHTML(v)}</div></div>
+    ${v.yonetici?`<div class="gkart"><h3>👑 Ev sahibi</h3><div style="display:flex;gap:8px;flex-wrap:wrap">
+      ${v.kor&&!v.aciklandi?'<button class="btn" data-gece-yonet="acikla">🎭 Şişeleri açıkla</button>':''}
+      ${!v.bitti?'<button class="btn" data-gece-yonet="bitir">🏁 Geceyi bitir</button>':'<button class="btn" data-gece-yonet="ac">🔓 Yeniden aç</button>'}
+      <button class="btn" data-gece="yklink">🔑 Ev sahibi linkini kopyala</button><button class="btn" data-gece-yonet="sil" style="color:var(--red)">🗑️ Geceyi sil</button></div>
+      <p class="dt-txt" style="color:var(--muted);font-size:12px;margin-top:8px">Ev sahibi linkiyle bu geceyi başka cihazdan da yönetebilirsin; kimseyle paylaşma.</p></div>`:''}`;
+}
+async function gecePuanKaydet(i){
+  const g=gecelerim()[GECE.id]||{};
+  const r=document.querySelector(`[data-puan="${i}"]`),n=document.querySelector(`[data-not="${i}"]`),kd=document.getElementById('kd'+i);
+  const dokunuldu=r.dataset.dokunuldu||document.getElementById('pv'+i).textContent!=='–';
+  try{await api('/api/gece',{method:'POST',body:JSON.stringify({islem:'puan',id:GECE.id,pid:g.pid,sira:i,p:dokunuldu?+r.value:null,not:n.value})});
+    if(kd){kd.textContent='✓ kaydedildi';setTimeout(()=>kd.textContent='',1500);}
+    const ben=GECE.veri.katilimcilar.find(x=>x.pid===g.pid);if(ben)ben.puanlar[i]={p:dokunuldu?+r.value:null,not:n.value};geceParcaCiz();
+  }catch(e){if(kd)kd.textContent='⚠️ '+e.message;}
+}
+document.addEventListener('input',e=>{
+  const r=e.target.closest('[data-puan]'),n=e.target.closest('[data-not]');
+  if(!r&&!n)return;
+  const i=(r||n).dataset.puan??(r||n).dataset.not;
+  if(r){r.dataset.dokunuldu='1';document.getElementById('pv'+i).textContent=r.value;}
+  clearTimeout(GECE.kaydetZam[i]);GECE.kaydetZam[i]=setTimeout(()=>gecePuanKaydet(+i),r?500:900);
+});
+document.addEventListener('click',async e=>{
+  const ac=e.target.closest('[data-gece-ac]');if(ac){location.hash='#gece='+ac.dataset.geceAc;return;}
+  const hz=e.target.closest('[data-gece-hizli]');if(hz){geceSiseEkle(hz.dataset.geceHizli);return;}
+  const cx=e.target.closest('[data-gece-cikar]');if(cx){YENI_SISELER.splice(+cx.dataset.geceCikar,1);geceSecilenCiz();return;}
+  const y=e.target.closest('[data-gece-yonet]');
+  if(y){
+    const ey=y.dataset.geceYonet;
+    if(ey==='sil'&&!confirm('Bu tadım gecesi ve tüm puanlar kalıcı olarak silinsin mi?'))return;
+    if(ey==='bitir'&&!confirm('Gece bitirilsin mi? Puanlar kilitlenir ve şişeler herkese açıklanır.'))return;
+    try{await api('/api/gece',{method:'POST',body:JSON.stringify({islem:'yonet',id:GECE.id,yk:(gecelerim()[GECE.id]||{}).yk,eylem:ey})});
+      if(ey==='sil'){const g=gecelerim();delete g[GECE.id];lsYaz('viski_geceler',g);location.hash='#gece';return;}
+      geceYukle(false);}catch(er){alert(er.message);}
+    return;
+  }
+  const b=e.target.closest('[data-gece]');if(!b)return;
+  const i=b.dataset.gece;
+  if(i==='ekle'){const a=document.getElementById('gSiseAra');geceSiseEkle(a.value);a.value='';a.focus();}
+  else if(i==='olustur')geceOlustur();
+  else if(i==='liste')location.hash='#gece';
+  else if(i==='davet'){const v=GECE.veri;paylas('Tadım gecesi: '+v.ad,'🥃 '+v.ad+(v.tarih?' · '+tarihYaz(v.tarih):'')+'\nTadım gecesine davetlisin! Linke tıkla, takma adını yaz, puanlarını telefonundan ver:',geceLink(GECE.id));}
+  else if(i==='linkkopya')kopyala(geceLink(GECE.id),b);
+  else if(i==='yklink')kopyala(geceLink(GECE.id)+'&yk='+(gecelerim()[GECE.id]||{}).yk,b);
+  else if(i==='katil'){
+    const ad=document.getElementById('gKatilAd').value.trim();if(!ad){alert('Bir takma ad yaz.');return;}
+    try{lsYaz('viski_takma_ad',ad);const r=await api('/api/gece',{method:'POST',body:JSON.stringify({islem:'katil',id:GECE.id,ad})});
+      geceKaydet(GECE.id,{pid:r.pid,t:new Date().toISOString()});geceYukle(false);}catch(er){alert(er.message);}
+  }
+});
+document.addEventListener('keydown',e=>{if(e.key==='Enter'&&e.target.id==='gSiseAra'){e.preventDefault();geceSiseEkle(e.target.value);e.target.value='';}});
+
+/* ===== #bulut= ve #gece= bağlantıları ===== */
+function ozelHash(){
+  const h=decodeURIComponent(location.hash||'');
+  if(h.startsWith('#bulut=')){
+    const kod=h.slice(7);history.replaceState(null,'',location.pathname+location.search);
+    if(kod&&kod!==BULUT.kod&&confirm('Bu bağlantı, "'+kod+'" kodlu Viski Atlası listesini bu cihaza getirecek. Devam edilsin mi?\n(Bu cihazda bir liste varsa ikisi birleştirilir, hiçbir şey silinmez.)')){goTab('mylist');bulutBaglan(kod);}
+    return true;
+  }
+  if(h.startsWith('#gece')){
+    const m=h.match(/^#gece=([a-z0-9]{10})(?:&yk=([a-z0-9]{16}))?/);
+    if(m&&m[2]){geceKaydet(m[1],{yk:m[2],t:new Date().toISOString()});history.replaceState(null,'','#gece='+m[1]);}
+    GECE.id=m?m[1]:null;GECE.veri=GECE.veri&&GECE.id&&GECE.veri.id===GECE.id?GECE.veri:null;
+    const a=document.querySelector('#subNav .tab.active');
+    if(!a||a.dataset.view!=='gece')goTab('gece');else renderGece();
+    return true;
+  }
+  return false;
+}
+window.addEventListener('hashchange',ozelHash);
+
 /* ===== 18 YAŞ ONAYI ===== */
 (function(){
   let ok=false;try{ok=localStorage.getItem('viski_yas')==='1';}catch(e){}
@@ -3101,6 +3486,8 @@ document.addEventListener('mouseover',e=>{
     :'Yaklaşık referans fiyat (henüz otomatik doğrulanmadı)';
 });
 hashAc();
+ozelHash();
+bulutCek();
 if('serviceWorker' in navigator){window.addEventListener('load',()=>{navigator.serviceWorker.register('sw.js').catch(()=>{});});}
 </script>
 </body>

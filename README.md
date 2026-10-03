@@ -28,6 +28,22 @@ Fiyatlar **otomatik** güncellenir; API anahtarı ya da elle müdahale gerekmez.
 - **Düşük güven:** "dusuk" güvenli bir fiyat kayıtlı fiyattan %15'ten fazla farklıysa uygulanmaz.
   Araştırılıp bulunamayan şişeler `denendi` olarak işaretlenir; böylece sıra kataloğun geri kalanına geçer.
 
+## Bulut senkronu ve Tadım Geceleri
+
+Site statik, ama iki küçük Netlify sunucu fonksiyonu var (`netlify/functions/`), veriler Netlify
+Blobs'ta tutulur (ek hesap/ücret gerekmez):
+
+- **`/api/sync` — bulut senkronu:** Giriş yok. "Listem → Bulutta saklamaya başla" ile viski temalı
+  bir kod üretilir (ör. `kehribar-islay-kadeh-427`); liste her değişiklikte bu kodla kaydedilir.
+  Başka cihazda kodu girmek, `#bulut=<kod>` linkini açmak ya da QR'ı okutmak yeterli. İki cihazdaki
+  listeler kayıpsız birleştirilir. Depoda kodun kendisi değil SHA-256 özeti anahtar olarak durur.
+  Kodu kaybetmemek için: kullanılan cihazda her zaman görünür, "Kendine gönder" ve QR seçenekleri var.
+- **`/api/gece` — Tadım Geceleri:** Koleksiyonum → Tadım Geceleri. Ev sahibi şişeleri seçip geceyi
+  oluşturur, davet linkini paylaşır; katılımcılar yalnızca takma adla katılıp 50–100 arası puan ve not
+  verir. Kör tadımda şişe adları ev sahibi açıklayana kadar gizlidir. Sonuç tablosu, gecenin
+  birincisi, en çok ayrışan şişe ve "damak ikizleri" otomatik hesaplanır. Ev sahibi linki (`&yk=`)
+  ile gece başka cihazdan yönetilebilir.
+
 ## Şişe görselleri
 
 Şişe görselleri önce **üreticinin resmî sitesinden**, bulunamazsa tanınmış bir içki mağazasının

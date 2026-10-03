@@ -99,6 +99,7 @@ nav.tabs{display:flex;gap:7px;flex-wrap:wrap;margin:20px 0 14px;padding-bottom:2
 .thumb::before{content:'';position:absolute;top:-4px;left:50%;transform:translateX(-50%);width:7px;height:6px;
   background:var(--c,#7a5a2a);border:1px solid rgba(0,0,0,.45);border-bottom:none;border-radius:2px 2px 0 0}
 .thumb:hover{filter:brightness(1.18)}
+.thumb.resmi::before{display:none}.thumb.resmi{border-color:rgba(255,255,255,.25)}
 .thumb .lab{font-size:6.5px;font-weight:800;color:#1a1208;background:#f4ead6;width:100%;text-align:center;
   padding:1px 0;letter-spacing:0;border-radius:0 0 4px 4px;line-height:1}
 .card .thumb{width:28px;height:40px}.card .thumb .lab{font-size:8px;padding:2px 0}
@@ -255,6 +256,8 @@ nav.groups{display:flex;gap:6px;margin:20px 0 10px;background:var(--bg2);border:
 .dt-head{display:flex;gap:14px;align-items:flex-start;padding-right:36px}
 .dt-head .thumb{width:44px;height:62px}.dt-head .thumb .lab{font-size:10px;padding:3px 0}
 .dt-head h3{font-size:20px;line-height:1.25}
+.dt-img{flex:0 0 auto;width:84px;height:120px;background:#fff;border-radius:10px;display:flex;align-items:center;justify-content:center;padding:6px}
+.dt-img img{max-width:100%;max-height:100%;object-fit:contain}
 .dt-sub{color:var(--muted);font-size:13px;margin-top:3px}
 .dt-badges{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
 .dt-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:16px 0}
@@ -1665,6 +1668,8 @@ function initials(b){
   return d.slice(0,3).toUpperCase();
 }
 function thumb(b){
+  // Üreticinin resmî ürün görseli (data/gorseller.json): beyaz zemin üzerinde, oran korunarak
+  if(b.imgSahip)return `<div class="thumb resmi" data-page="${esc(pageURL(b))}" style="background:#fff center/contain no-repeat url('${esc(b.img)}')" title="Görsel: ${esc(b.imgSahip)}"></div>`;
   if(b.img)return `<div class="thumb" data-page="${esc(pageURL(b))}" style="background:#f4ead6 center/cover no-repeat url('${esc(b.img)}')" title="Şişenin sayfasını aç"></div>`;
   return `<div class="thumb" data-page="${esc(pageURL(b))}" style="--c:${colorFor(b)}" title="Şişenin sayfasını aç (fotoğraf + bilgi)"><div class="lab">${initials(b)}</div></div>`;
 }
@@ -2711,8 +2716,9 @@ function openDetay(id){
     :b.tlTarih?(FIYAT_TUR[b.tlTur]||'Otomatik')+' · '+trTarih(b.tlTarih):'Yaklaşık referans fiyat (henüz otomatik doğrulanmadı)';
   const fl=[...flavorsOf(b)];
   document.getElementById('detay').innerHTML=`<button class="dt-x" data-detay-kapat title="Kapat">✕</button>
-    <div class="dt-head">${thumb(b)}<div><h3>${b.ad}</h3><div class="dt-sub">${b.dam} · ${b.bolge} · ${b.ulke}</div>
-      <div class="dt-badges">${badges.join('')}</div></div></div>
+    <div class="dt-head">${b.imgSahip?`<div class="dt-img"><img src="${esc(b.img)}" alt="${esc(b.ad)}" loading="lazy"></div>`:thumb(b)}<div><h3>${b.ad}</h3><div class="dt-sub">${b.dam} · ${b.bolge} · ${b.ulke}</div>
+      <div class="dt-badges">${badges.join('')}</div>
+      ${b.imgSahip?`<div class="dt-src">📷 Görsel: ${esc(b.imgSahip)}${b.imgKaynak?` · <a href="${esc(b.imgKaynak)}" target="_blank" rel="noopener">resmî sayfa</a>`:''}</div>`:''}</div></div>
     <div class="dt-grid">
       <div class="dt-f"><div class="l">Fiyat</div><div class="v" style="color:var(--amber2)">${fmt(priceOf(b))}</div></div>
       <div class="dt-f"><div class="l">Puan</div><div class="v">${b.puan||'—'}${nt&&nt.p?` <span style="color:var(--have);font-size:12px">· senin: ${nt.p}</span>`:''}</div></div>
@@ -2779,6 +2785,13 @@ fiyatJson(FIYAT_URL).catch(()=>fiyatJson('data/fiyatlar.json')).then(d=>{
   for(const [id,f] of Object.entries(d.fiyatlar)){const b=byId.get(id);if(b&&f.tl>0){b.tl0=b.tl;b.tl=f.tl;b.tlTarih=f.tarih;b.tlTur=f.tur;b.tlKaynak=f.kaynak||'';b.tlGecmis=f.gecmis||[[f.tarih,f.tl]];if(f.bul)b.bul=f.bul;n++;}}
   const el=document.getElementById('fiyatDurum');
   if(el&&d.guncelleme)el.textContent='🔄 Fiyatlar her hafta otomatik güncellenir · son güncelleme '+new Date(d.guncelleme).toLocaleDateString('tr-TR',{day:'numeric',month:'long',year:'numeric'})+' · '+n+'/'+DATA.length+' şişe doğrulandı.';
+  if(n)renderAll();
+}).catch(()=>{});
+// Resmî şişe görselleri: data/gorseller.json haftalık görev tarafından doldurulur (scripts/gorsel.mjs)
+fetch('data/gorseller.json',{cache:'no-cache'}).then(r=>r.ok?r.json():null).then(d=>{
+  if(!d||!d.gorseller)return;
+  const byId=new Map(DATA.map(b=>[b.id,b]));let n=0;
+  for(const [id,g] of Object.entries(d.gorseller)){const b=byId.get(id);if(b&&!b.img){b.img=g.dosya;b.imgSahip=g.sahip||'Üretici';b.imgKaynak=g.kaynak||'';n++;}}
   if(n)renderAll();
 }).catch(()=>{});
 // Fiyatın üstüne gelince kaynağını ve tarihini göster

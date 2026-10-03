@@ -28,6 +28,15 @@ Fiyatlar **otomatik** güncellenir; API anahtarı ya da elle müdahale gerekmez.
 - **Düşük güven:** "dusuk" güvenli bir fiyat kayıtlı fiyattan %15'ten fazla farklıysa uygulanmaz.
   Araştırılıp bulunamayan şişeler `denendi` olarak işaretlenir; böylece sıra kataloğun geri kalanına geçer.
 
+## Şişe görselleri
+
+Şişe görselleri yalnızca **üreticilerin resmî sitelerinden** alınır, küçük bir kopya olarak
+(en fazla 120×160 px WebP) `img/sise/` klasörüne kaydedilir ve her görselin altında sahibi ile
+resmî sayfanın linki gösterilir. Kayıtlar `data/gorseller.json` içindedir; resmî görseli bulunamayan
+şişeler `yok` olarak işaretlenir ve renkli şişe simgesiyle gösterilmeye devam eder.
+Whiskybase, mağaza veya fotoğrafçı görselleri kullanılmaz. Bir hak sahibi itiraz ederse
+`node scripts/gorsel.mjs sil <id>` ile görsel kaldırılır.
+
 ## İçerik önerileri
 
 Puanlar (`puan`, uzman listeleri) özenle seçilmiş içerik olduğu için otomatik değiştirilmez.

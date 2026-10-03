@@ -13,6 +13,7 @@ import fs from "node:fs";
 import path from "node:path";
 import vm from "node:vm";
 import { fileURLToPath } from "node:url";
+import { execFileSync } from "node:child_process";
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const HTML = path.join(ROOT, "index.html");
@@ -37,8 +38,8 @@ function jsonOku() {
 // ---- TCMB kuru ----
 async function kurOku() {
   try {
-    const r = await fetch("https://www.tcmb.gov.tr/kurlar/today.xml");
-    const x = await r.text();
+    // Node'un fetch'i bu ortamdaki proxy'yi kullanmadığı için curl
+    const x = execFileSync("curl", ["-sSf", "-m", "20", "https://www.tcmb.gov.tr/kurlar/today.xml"]).toString();
     const al = (k) => {
       const m = x.match(new RegExp(`Kod="${k}"[\\s\\S]*?<ForexSelling>([\\d.]+)</ForexSelling>`));
       return m ? +m[1] : null;

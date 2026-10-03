@@ -2625,7 +2625,10 @@ function renderStats2(){
   const sb=document.getElementById('shareCardBtn'); if(sb) sb.onclick=makeShareCard;
 }
 
+// Ziyaret istatistiği (GoatCounter, çerezsiz): önemli eylemler "olay" olarak sayılır
+function olay(ad){try{if(window.goatcounter&&window.goatcounter.count)window.goatcounter.count({path:'olay/'+ad,title:ad,event:true});}catch(e){}}
 function toggle(act,id){
+  olay(act==='have'?(state.have.includes(id)?'liste-cikar':'liste-ekle'):'hedef');
   if(act==='have'){
     const i=state.have.indexOf(id);
     if(i>=0){state.have.splice(i,1);delete state.qty[id];}
@@ -2934,7 +2937,7 @@ function closeDetay(){
 document.addEventListener('click',e=>{
   if(e.target.id==='detayBg'||e.target.closest('[data-detay-kapat]')){closeDetay();return;}
   const sh=e.target.closest('[data-paylas]');
-  if(sh){const b=allBottles().find(x=>x.id===sh.dataset.paylas);const url=location.origin+location.pathname+'#s='+b.id;
+  if(sh){olay('paylas');const b=allBottles().find(x=>x.id===sh.dataset.paylas);const url=location.origin+location.pathname+'#s='+b.id;
     if(navigator.share)navigator.share({title:b.ad+' · Viski Atlası',url}).catch(()=>{});
     else if(navigator.clipboard)navigator.clipboard.writeText(url).then(()=>{sh.textContent='✓ Link kopyalandı';});
     else prompt('Linki kopyala:',url);
@@ -3248,6 +3251,7 @@ function telPinAl(kok){
   return {t,p};
 }
 async function telDevam(kok){
+  olay('telefon-giris');
   const x=telPinAl(kok);if(!x)return;
   try{bulutDurum('☁️ Kontrol ediliyor…');
     const r=await api('/api/sync',{method:'POST',body:JSON.stringify({islem:'telefon-giris',tel:x.t,pin:x.p})});
@@ -3452,6 +3456,7 @@ function geceSiseEkle(deger){
   geceSecilenCiz();
 }
 async function geceOlustur(){
+  olay('gece-olustur');
   const d=document.getElementById('gDurum');
   const ad=document.getElementById('gAd').value.trim(),benAd=document.getElementById('gBenAd').value.trim();
   if(!ad){d.textContent='Gecenin bir adı olmalı.';return;}
@@ -3620,6 +3625,7 @@ const kulupDavetLink=(kid,d)=>location.origin+location.pathname+'#kulup='+kid+'.
 const kulupAuth=kid=>{const k=kuluplerim()[kid]||{};return {kid,uid:k.uid,anahtar:k.anahtar};};
 async function kulupApi(govde){return api('/api/kulup',{method:'POST',body:JSON.stringify(govde)});}
 async function kulupKur(){
+  olay('kulup-kur');
   const d=document.getElementById('kDurum'),ad=document.getElementById('kAd').value.trim(),benAd=document.getElementById('kBenAd').value.trim();
   if(!ad){d.textContent='Kulübün bir adı olmalı.';return;}if(!benAd){d.textContent='Bir takma ad yaz.';return;}
   try{const r=await kulupApi({islem:'olustur',ad,aciklama:document.getElementById('kAcik').value,benAd});
@@ -3870,5 +3876,6 @@ ozelHash();
 bulutCek();
 if('serviceWorker' in navigator){window.addEventListener('load',()=>{navigator.serviceWorker.register('sw.js').catch(()=>{});});}
 </script>
+<script data-goatcounter="https://viski-atlas.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>
 </html>

@@ -1,5 +1,5 @@
 // Viski Atlası — Service Worker (çevrimdışı destek)
-const CACHE = 'viski-atlas-v25';
+const CACHE = 'viski-atlas-v26';
 const ASSETS = [
   './',
   './index.html',
@@ -25,6 +25,8 @@ self.addEventListener('fetch', e => {
   const url = new URL(req.url);
   // Güncel fiyat dosyası her zaman ağdan gelsin (önbelleğe alınmaz)
   if (url.hostname === 'raw.githubusercontent.com') return;
+  // Ziyaret sayacı istekleri önbelleğe alınmaz
+  if (url.hostname.endsWith('goatcounter.com') || url.hostname === 'gc.zgo.at') return;
   // Sunucu fonksiyonları (bulut senkronu, tadım gecesi) her zaman canlı yanıt vermeli
   if (url.origin === location.origin && url.pathname.startsWith('/api/')) return;
   // Harita karoları çok sayıda; önbelleği şişirmesin

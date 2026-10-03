@@ -1,6 +1,7 @@
 // Tadım Gecesi: davetle çalışan, hesapsız tadım etkinlikleri.
 //   POST /api/gece {islem:"olustur", ad, tarih, yer, aciklama, kor, siseler[], olusturanAd} → {id, yk, pid}
-//   GET  /api/gece?id=...[&yk=...]                     → gece bilgisi + katılımcılar + (açıklandıysa) şişeler
+//   GET  /api/gece?id=...[&yk=...][&pid=...][&rid=...]  → gece bilgisi; gizlilik kuralları aşağıda
+//   POST /api/gece {islem:"lcv", id, rid?, ad, durum:"geliyor"|"belki"|"gelmiyor"} → {rid}
 //   POST /api/gece {islem:"katil", id, ad}               → {pid}
 //   POST /api/gece {islem:"puan", id, pid, sira, p, not} → {tamam}
 //   POST /api/gece {islem:"yonet", id, yk, eylem:"acikla"|"bitir"|"ac"|"sil"}
@@ -9,7 +10,13 @@
 //   POST /api/gece {islem:"yonet", id, yk, eylem:"sise-cikar"|"sise-degistir", sira[, sise]}
 //   POST /api/gece {islem:"yonet", id, yk, eylem:"katilimci-cikar", pid}
 // Depo düzeni: "<id>/meta" gece bilgisi, "<id>/k/<pid>" her katılımcının kendi puanları
-// (aynı anda puan veren katılımcılar birbirinin verisini ezmesin diye ayrı anahtarlar).
+// (aynı anda puan veren katılımcılar birbirinin verisini ezmesin diye ayrı anahtarlar),
+// "<id>/r/<rid>" katılım cevapları (Geliyorum/Belki/Gelemiyorum).
+//
+// GİZLİLİK: pid ve rid, sahiplerinin yazma anahtarıdır; yalnızca sahibine (ve pid'ler ev sahibine)
+// gönderilir. Bireysel puan ve notlar yalnızca sahibine ve ev sahibine gider; diğer katılımcılar
+// isimleri, kaç şişeye puan verildiğini ve (kör değilse ya da açıklandıysa) sunucuda hesaplanan
+// ortalamaları görür.
 import type { Context, Config } from "@netlify/functions";
 import { depoAl, json, hata, ozet, govdeOku, rastgele, kirp, type Depo } from "../lib/ortak.mts";
 
@@ -34,6 +41,33 @@ async function puanlariDuzenle(depo: Depo, id: string, sira: number, kaydir: boo
   }));
 }
 
+// Örnek başına ortalama/aralık/yayılım ve "damak ikizleri" (yalnızca isimler) — sunucuda hesaplanır
+function ozetHesapla(kisiler: any[], n: number) {
+  const ornekler = [];
+  for (let i = 0; i < n; i++) {
+    const ps = kisiler.map((k) => k.puanlar?.[i]?.p).filter((p) => typeof p === "number") as number[];
+    const ort = ps.length ? ps.reduce((a, b) => a + b, 0) / ps.length : null;
+    const sd = ps.length > 1 && ort !== null ? Math.sqrt(ps.reduce((a, b) => a + (b - ort) ** 2, 0) / ps.length) : 0;
+    ornekler.push({ i, n: ps.length, ort, sd, min: ps.length ? Math.min(...ps) : null, max: ps.length ? Math.max(...ps) : null });
+  }
+  let ikiz: { a: string; b: string; f: number } | null = null;
+  for (let a = 0; a < kisiler.length; a++) for (let b = a + 1; b < kisiler.length; b++) {
+    const fark: number[] = [];
+    for (let i = 0; i < n; i++) {
+      const x = kisiler[a].puanlar?.[i]?.p, y = kisiler[b].puanlar?.[i]?.p;
+      if (typeof x === "number" && typeof y === "number") fark.push(Math.abs(x - y));
+    }
+    if (fark.length >= 2) { const f = fark.reduce((p, q) => p + q, 0) / fark.length; if (!ikiz || f < ikiz.f) ikiz = { a: kisiler[a].ad, b: kisiler[b].ad, f }; }
+  }
+  return { ornekler, ikiz };
+}
+const puanSayisi = (k: any) => Object.values(k.puanlar || {}).filter((x: any) => x && typeof x.p === "number").length;
+
+async function lcvler(depo: Depo, id: string) {
+  const { blobs } = await depo.list({ prefix: `${id}/r/` });
+  return (await Promise.all(blobs.map((b) => depo.get(b.key, { type: "json" })))).filter(Boolean);
+}
+
 async function katilimcilar(depo: Depo, id: string) {
   const { blobs } = await depo.list({ prefix: `${id}/k/` });
   const liste = await Promise.all(blobs.map((b) => depo.get(b.key, { type: "json" })));
@@ -48,17 +82,27 @@ export async function isle(req: Request, depo: Depo): Promise<Response> {
       if (!idGecerli(id)) return hata("Geçersiz gece bağlantısı");
       const meta = await depo.get(`${id}/meta`, { type: "json" });
       if (!meta) return hata("Bu tadım gecesi bulunamadı ya da silinmiş", 404);
-      const yk = u.searchParams.get("yk");
+      const yk = u.searchParams.get("yk"), pid = u.searchParams.get("pid"), rid = u.searchParams.get("rid");
       const yonetici = !!yk && (await ozet(yk)) === meta.ykOzet;
-      const kisiler = await katilimcilar(depo, id!);
+      const [kisiler, cevaplar] = await Promise.all([katilimcilar(depo, id!), lcvler(depo, id!)]);
       const acik = !meta.kor || meta.aciklandi;
+      const ben = kisiler.find((k: any) => k.pid === pid);
       return json({
         id, ad: meta.ad, tarih: meta.tarih, yer: meta.yer, aciklama: meta.aciklama, kor: meta.kor,
-        aciklandi: !!meta.aciklandi, bitti: !!meta.bitti, olusturma: meta.olusturma, yonetici,
+        aciklandi: !!meta.aciklandi, bitti: !!meta.bitti, olusturma: meta.olusturma, yonetici, kulup: meta.kulup || null,
         siseSayisi: meta.siseler.length,
         // Kör tadımda şişelerin kimliği yalnızca açıklanınca (ya da yöneticiye) gösterilir
         siseler: acik || yonetici ? meta.siseler : null,
-        katilimcilar: kisiler.map((k: any) => ({ pid: k.pid, ad: k.ad, puanlar: k.puanlar || {} })),
+        // Herkese: isim + kaç şişeye puan verdiği. pid yalnızca kendisine ve ev sahibine.
+        katilimcilar: kisiler.map((k: any) => ({
+          ad: k.ad, sayi: puanSayisi(k), ben: k === ben,
+          ...(yonetici || k === ben ? { pid: k.pid } : {}),
+          ...(yonetici ? { puanlar: k.puanlar || {} } : {}),
+        })),
+        benimPuanlarim: ben ? ben.puanlar || {} : null,
+        // Ortalamalar: kör değilse ya da açıklandıysa herkese, aksi halde yalnızca ev sahibine
+        ozet: acik || yonetici ? ozetHesapla(kisiler, meta.siseler.length) : null,
+        lcv: cevaplar.map((r: any) => ({ ad: r.ad, durum: r.durum, ben: r.rid === rid })),
       });
     }
     if (req.method !== "POST") return hata("Desteklenmeyen istek", 405);
@@ -74,6 +118,7 @@ export async function isle(req: Request, depo: Depo): Promise<Response> {
       await depo.setJSON(`${id}/meta`, {
         ad, tarih: kirp(g.tarih, 30), yer: kirp(g.yer, 80), aciklama: kirp(g.aciklama, 500), kor: !!g.kor,
         siseler, ykOzet: await ozet(yk), aciklandi: false, bitti: false, olusturma: simdi,
+        ...(g.kulup && /^[a-z0-9]{10}$/.test(String(g.kulup.kid)) ? { kulup: { kid: g.kulup.kid, ad: kirp(g.kulup.ad, 60) } } : {}),
       });
       await depo.setJSON(`${id}/k/${pid}`, { pid, ad: kirp(g.olusturanAd, 30) || "Ev sahibi", puanlar: {}, katilma: simdi });
       return json({ id, yk, pid });
@@ -92,6 +137,21 @@ export async function isle(req: Request, depo: Depo): Promise<Response> {
       const pid = rastgele(8);
       await depo.setJSON(`${g.id}/k/${pid}`, { pid, ad, puanlar: {}, katilma: new Date().toISOString() });
       return json({ pid });
+    }
+
+    if (g.islem === "lcv") {
+      const ad = kirp(g.ad, 30), durum = String(g.durum);
+      if (!ad) return hata("Bir takma ad yazmalısın");
+      if (!["geliyor", "belki", "gelmiyor"].includes(durum)) return hata("Geçersiz cevap");
+      let rid = typeof g.rid === "string" && /^[a-z0-9]{8}$/.test(g.rid) ? g.rid : null;
+      if (rid && !(await depo.get(`${g.id}/r/${rid}`, { type: "json" }))) rid = null;
+      if (!rid) {
+        const { blobs } = await depo.list({ prefix: `${g.id}/r/` });
+        if (blobs.length >= 60) return hata("Bu gecenin cevap sınırı doldu");
+        rid = rastgele(8);
+      }
+      await depo.setJSON(`${g.id}/r/${rid}`, { rid, ad, durum, t: new Date().toISOString() });
+      return json({ rid });
     }
 
     if (g.islem === "puan") {

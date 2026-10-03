@@ -43,6 +43,16 @@ Blobs'ta tutulur (ek hesap/ücret gerekmez):
   verir. Kör tadımda şişe adları ev sahibi açıklayana kadar gizlidir. Sonuç tablosu, gecenin
   birincisi, en çok ayrışan şişe ve "damak ikizleri" otomatik hesaplanır. Ev sahibi linki (`&yk=`)
   ile gece başka cihazdan yönetilebilir.
+  - **Gizlilik:** Sunucu, katılımcılara yalnızca ortalamaları/özet istatistikleri ve kişinin kendi
+    puanlarını gönderir. Tek tek puan ve notları yalnızca ev sahibi görür; katılımcı kimlikleri (pid)
+    başkalarına gönderilmez.
+  - **LCV:** Davetliler "Geliyorum / Belki / Gelemiyorum" yanıtı verir; liste gece sayfasında görünür.
+- **`/api/kulup` — Kulüp:** Davetle girilen kapalı topluluk. Kurucu kulübü açar, davet linkini
+  (`#kulup=<kid>.<davet>`) paylaşır; üyeler takma adla katılır ve üye başına gizli anahtar cihazda
+  saklanır. Kulübe bağlı geceler, "kulübün hafızası" (en çok tadılanlar, favoriler) ve üye listesi
+  yalnızca üyelere açıktır. Yöneticiler üye çıkarabilir, yönetici atayabilir, davet linkini
+  yenileyebilir (eskisi geçersiz olur); kulübü yalnızca kurucu kapatabilir. Davet ve anahtarların
+  kendisi değil SHA-256 özetleri saklanır.
 
 ## Şişe görselleri
 

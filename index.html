@@ -282,7 +282,8 @@ nav.groups{display:flex;gap:6px;margin:20px 0 10px;background:var(--bg2);border:
 .fchg.dn{color:var(--have)}.fchg.up{color:var(--red)}
 /* HARİTA */
 .h-ust{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-bottom:10px}
-#haritaKutu{height:68vh;min-height:420px;border-radius:14px;border:1px solid var(--line);position:relative;z-index:0;background:#0e0b07;overflow:hidden}
+#haritaSar{position:relative}
+#haritaKutu{height:52vh;min-height:360px;border-radius:14px;border:1px solid var(--line);position:relative;z-index:0;background:#0e0b07;overflow:hidden}
 .leaflet-container{font-family:inherit;background:#0e0b07}
 .leaflet-tooltip.h-etiket{background:rgba(26,18,8,.92);color:var(--txt);border:1px solid var(--line);font-weight:700;font-size:12px;box-shadow:none;padding:3px 8px;border-radius:8px}
 .leaflet-tooltip.h-etiket.dam{font-weight:600;font-size:11px;color:var(--muted)}
@@ -290,7 +291,16 @@ nav.groups{display:flex;gap:6px;margin:20px 0 10px;background:var(--bg2);border:
 .leaflet-control-attribution{background:rgba(0,0,0,.55)!important;color:#9a8e78!important}.leaflet-control-attribution a{color:var(--amber-soft)!important}
 .leaflet-bar a{background:var(--panel)!important;color:var(--amber2)!important;border-color:var(--line)!important}
 .modal-bg{z-index:2000}
+.h-buyut{position:absolute;top:10px;right:10px;z-index:500;background:var(--panel);color:var(--amber2);border:1px solid var(--line);border-radius:9px;padding:7px 11px;font-weight:700;font-size:12.5px;cursor:pointer}
+#haritaSar.buyuk{position:fixed;inset:0;z-index:1800;background:var(--bg)}
+#haritaSar.buyuk #haritaKutu{height:100%;min-height:0;border-radius:0;border:none}
+.h-liste-baslik{font-size:16px;margin:18px 0 10px;color:var(--amber-soft)}
+.parla{animation:parla 1.6s ease-out}
+@keyframes parla{0%{box-shadow:0 0 0 3px var(--amber2)}100%{box-shadow:0 0 0 0 transparent}}
 @media(max-width:760px){
+  #haritaKutu{height:40vh;min-height:280px}
+  .h-ust{gap:6px;margin-bottom:8px}.h-ust .pillrow{flex-wrap:nowrap;overflow-x:auto;width:100%;scrollbar-width:none}.h-ust .pillrow::-webkit-scrollbar{display:none}
+  .h-ust .chip,.h-ust .btn{flex:0 0 auto;white-space:nowrap}
   body{padding-bottom:calc(84px + env(safe-area-inset-bottom))}
   header{padding:14px 0 10px;margin-bottom:12px}
   .brand h1{font-size:24px}.brand .sub{display:none}.brand>div:first-child{font-size:26px!important}
@@ -313,7 +323,7 @@ nav.groups{display:flex;gap:6px;margin:20px 0 10px;background:var(--bg2);border:
 <header><div class="wrap">
   <div class="brand">
     <div style="font-size:34px">🥃</div>
-    <div><h1 onclick="location.href='./'" style="cursor:pointer" title="Ana sayfaya dön">Viski Atlası <span style="font-size:13px;color:var(--muted2);font-weight:600;vertical-align:middle">v2.2</span></h1>
+    <div><h1 onclick="location.href='./'" style="cursor:pointer" title="Ana sayfaya dön">Viski Atlası <span style="font-size:13px;color:var(--muted2);font-weight:600;vertical-align:middle">v2.3</span></h1>
       <div class="sub">Bölge → Damıtımevi → Şişe · Uzman & AI tercihleri · Türkiye katmanları · Kişisel koleksiyon</div></div>
   </div>
   <div class="stats">
@@ -358,6 +368,7 @@ nav.groups{display:flex;gap:6px;margin:20px 0 10px;background:var(--bg2);border:
 
   <section id="view-explore">
     <p class="intro">Dünya viski bölgeleri ve damıtımevleri. Damıtımevleri <b>Premium / 2. Düzey / 3. Düzey</b> rozetli; şişeler en kaliteliden aşağı sıralı. Menüler birden çok seçim yapabilmen için <b>açık kalır</b> — başlığa basınca kapanır. Fiyata tıklayıp güncelleyebilirsin.</p>
+    <div id="listeAlani">
     <div class="controls">
       <input type="text" id="search" placeholder="🔍 Şişe, damıtımevi veya bölge ara…">
       <select id="fStatus"><option value="">Tüm durumlar</option><option value="have">Elimde olanlar</option><option value="missing">Eksik olanlar</option><option value="target">Hedeflerim</option></select>
@@ -376,6 +387,7 @@ nav.groups{display:flex;gap:6px;margin:20px 0 10px;background:var(--bg2);border:
     </div>
     <div class="expctl"><button id="expandAll">⊕ Tümünü aç</button><button id="collapseAll">⊖ Tümünü kapat</button></div>
     <div id="tree"></div>
+    </div>
   </section>
 
   <section id="view-experts" class="hidden">
@@ -454,8 +466,10 @@ nav.groups{display:flex;gap:6px;margin:20px 0 10px;background:var(--bg2);border:
         <button class="btn" data-hgit="irlanda">🇮🇪 İrlanda</button><button class="btn" data-hgit="kentucky">🇺🇸 Kentucky</button><button class="btn" data-hgit="japonya">🇯🇵 Japonya</button>
       </div>
     </div>
-    <div id="haritaKutu"></div>
-    <p class="note" id="haritaNot">Daireler bölgedeki şişe sayısını gösterir. Yakınlaştırınca damıtımevleri belirir (yeşil = elinde olan şişesi var). Dokununca bölge rehberi ya da damıtımevi kartı açılır.</p>
+    <div id="haritaSar"><div id="haritaKutu"></div><button class="h-buyut" id="haritaBuyut" title="Haritayı büyüt">⛶ Büyüt</button></div>
+    <p class="note" id="haritaNot"></p>
+    <h3 class="h-liste-baslik">📋 Bölge listesi</h3>
+    <div id="haritaListeYeri"></div>
   </section>
   <section id="view-fiyat" class="hidden">
     <p class="intro">Her hafta otomatik olarak Türkiye'deki güncel fiyatı bulunan şişeler. Değişim, bir önceki doğrulanmış fiyata (yoksa sitedeki referans fiyata) göre hesaplanır. Fiyatın üstüne gelince kaynağı görünür.</p>
@@ -1744,6 +1758,7 @@ function renderTree(){
     (byCountry[b.ulke][b.bolge][b.dam]=byCountry[b.ulke][b.bolge][b.dam]||[]).push(b);});
   const countries=Object.keys(byCountry).sort((a,b)=>{
     let ia=COUNTRY_ORDER.indexOf(a),ib=COUNTRY_ORDER.indexOf(b);return (ia<0?99:ia)-(ib<0?99:ib);});
+  if(haritaAcik()&&HARITA)haritaCiz();  // Harita sekmesinde liste filtreleri haritaya da yansır
   if(!countries.length){tree.innerHTML='<div class="empty">Filtrelere uyan şişe yok.</div>';return;}
   countries.forEach(ulke=>{
     const cKapali=arama?aramaKapali.has('ülke:'+ulke):collapsedCountries.has(ulke);
@@ -1754,7 +1769,7 @@ function renderTree(){
     const regions=Object.keys(byCountry[ulke]).sort((a,b)=>{
       let ia=REGION_ORDER.indexOf(a),ib=REGION_ORDER.indexOf(b);return (ia<0?50:ia)-(ib<0?50:ib);});
     regions.forEach(bolge=>{
-      const rEl=document.createElement('div');rEl.className='region';
+      const rEl=document.createElement('div');rEl.className='region';rEl.dataset.rk=ulke+'|'+bolge;
       const rc=Object.values(byCountry[ulke][bolge]).reduce((q,a)=>q+a.length,0);
       const rk=bolgeAnahtar({ulke,bolge});
       rEl.innerHTML=`<div class="rhead"><h3>${bolge}</h3>${BOLGELER[rk]?`<button class="bilgibtn rehber" data-bolge="${esc(rk)}">📖 Bölge rehberi</button>`:''}<span class="rc">${rc} şişe</span></div>`;
@@ -1770,7 +1785,7 @@ function renderTree(){
         const tierTxt=sev==='Premium'?'Premium':sev==='2'?'2. Düzey':'3. Düzey';
         const key=ulke+'|||'+bolge+'|||'+dam;
         const isOpen=arama?!aramaKapali.has(key):openDams.has(key);
-        const dEl=document.createElement('div');dEl.className='distillery'+(isOpen?' open':'');
+        const dEl=document.createElement('div');dEl.className='distillery'+(isOpen?' open':'');dEl.dataset.dk=key;
         dEl.innerHTML=`<div class="dhead"><span class="caret">▶</span><span class="tier ${tierCls}">${tierTxt}</span><h4>${dam}</h4><button class="bilgibtn" data-dam="${esc(dam)}" title="${esc(dam)} hakkında">ℹ️</button>
           <span class="dc"><span>${arr.length} şişe</span></span></div><div class="dbody"></div>`;
         const db=dEl.querySelector('.dbody');
@@ -2584,7 +2599,7 @@ document.getElementById('collapseAll').onclick=()=>{openDams.clear();renderTree(
 // Sekme → çizim fonksiyonu. Sadece açık sekme çizilir (eskiden her işaretlemede 13 sekmenin
 // hepsi yeniden çiziliyordu); sekmeye geçince o sekme güncel durumla yeniden çizilir.
 const RENDER={explore:renderTree,experts:renderExperts,ai:renderAI,magazin:renderMagazin,ncf:renderNCF,katman:renderKatman,
-  stats:renderStats2,akilli:renderAkilli,harita:renderHarita,gurme:renderGurme,personal:renderPersonal,notes:renderNotes,mylist:renderMyList,fiyat:renderFiyat};
+  stats:renderStats2,akilli:renderAkilli,harita:()=>{renderTree();renderHarita();},gurme:renderGurme,personal:renderPersonal,notes:renderNotes,mylist:renderMyList,fiyat:renderFiyat};
 const lastInGroup={};
 function showGroup(g){
   document.querySelectorAll('.grp').forEach(x=>x.classList.toggle('active',x.dataset.group===g));
@@ -2600,6 +2615,10 @@ document.querySelectorAll('.tab').forEach(t=>t.onclick=()=>{
   Object.keys(RENDER).concat('kaynak').forEach(v=>document.getElementById('view-'+v).classList.add('hidden'));
   document.getElementById('view-'+t.dataset.view).classList.remove('hidden');
   showGroup(t.dataset.group);lastInGroup[t.dataset.group]=t.dataset.view;
+  // Bölge listesi tek kopya: Harita sekmesinde haritanın altına, Bölge listesi sekmesinde yerine taşınır
+  const la=document.getElementById('listeAlani');
+  if(t.dataset.view==='harita')document.getElementById('haritaListeYeri').appendChild(la);
+  else if(t.dataset.view==='explore')document.getElementById('view-explore').appendChild(la);
   const f=RENDER[t.dataset.view];if(f)f();
 });
 let NA_IMG='', NA_ABV='';
@@ -2880,7 +2899,7 @@ async function renderHarita(){
   try{if(!KONUM)KONUM=await fetch('data/konumlar.json').then(r=>r.json());await leafletYukle();}
   catch(e){kutu.innerHTML='<div class="empty" style="margin:20px">Harita yüklenemedi; internet bağlantısı gerekli.</div>';return;}
   if(!HARITA){
-    HARITA=L.map(kutu,{worldCopyJump:true,minZoom:2,maxZoom:14}).setView(HGIT.dunya[0],HGIT.dunya[1]);
+    HARITA=L.map(kutu,{worldCopyJump:true,minZoom:2,maxZoom:14}).setView(innerWidth<760?[42,-20]:HGIT.dunya[0],HGIT.dunya[1]);
     // Esri Koyu Gri altlık + yer adları katmanı (API anahtarı gerektirmez)
     const ESRI='https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/';
     L.tileLayer(ESRI+'World_Dark_Gray_Base/MapServer/tile/{z}/{y}/{x}',{maxZoom:16,attribution:'Harita © Esri, HERE, Garmin, © OpenStreetMap katkıcıları'}).addTo(HARITA);
@@ -2891,8 +2910,23 @@ async function renderHarita(){
   setTimeout(()=>HARITA.invalidateSize(),60);
   haritaCiz();
 }
+function haritaBuyut(){
+  const s=document.getElementById('haritaSar'),b=s.classList.toggle('buyuk');
+  document.getElementById('haritaBuyut').textContent=b?'✕ Küçült':'⛶ Büyüt';
+  document.body.style.overflow=b?'hidden':'';
+  if(HARITA)setTimeout(()=>HARITA.invalidateSize(),60);
+}
+function haritaAcik(){const a=document.querySelector('#subNav .tab.active');return a&&a.dataset.view==='harita';}
+// Haritada bir yere dokununca alttaki listede o bölgeyi/damıtımevini aç, oraya kaydır ve kısa bir parlama göster
+function listedeGoster(sec,hazirla){
+  hazirla();renderTree();
+  const el=document.querySelector(sec);if(!el)return;
+  if(document.getElementById('haritaSar').classList.contains('buyuk'))haritaBuyut();
+  el.scrollIntoView({behavior:'smooth',block:'start'});el.classList.remove('parla');void el.offsetWidth;el.classList.add('parla');
+}
 function haritaSiseler(){
-  const a=allBottles();
+  // Harita sekmesinde listedeki arama ve filtreler haritaya da uygulanır
+  const a=allBottles().filter(passFilters);
   if(HMod==='elimde')return a.filter(b=>state.have.includes(b.id));
   if(HMod==='hedef')return a.filter(b=>state.target.includes(b.id));
   return a;
@@ -2919,7 +2953,12 @@ function haritaCiz(){
     // Bölge etiketi: dünya görünümünde yalnızca büyük bölgeler, orta yakınlıkta hepsi, damıtımevleri görününce gizli (üst üste binmesin)
     const kalici=z<4?p.n>=60:z<6?p.n>=5:z<7?p.n>=10:false;
     m.bindTooltip(`${bolgeEtiket(p.k)} · ${p.n} şişe${p.sahip?` · ✓${p.sahip}`:''}`,{direction:'top',className:'h-etiket',permanent:kalici,offset:[0,-yar]});
-    m.on('click',()=>openBolge(bolgeAnahtar({ulke:u,bolge:r})));
+    m.on('click',()=>{
+      const rk=u+'|'+r;
+      if(document.querySelector('[data-rk="'+CSS.escape(rk)+'"]')||allBottles().some(b=>b.ulke===u&&b.bolge===r&&passFilters(b)))
+        listedeGoster('[data-rk="'+CSS.escape(rk)+'"]',()=>collapsedCountries.delete(u));
+      else openBolge(bolgeAnahtar({ulke:u,bolge:r}));
+    });
     HKatman.addLayer(m);
   });
   if(damGoster){
@@ -2928,17 +2967,24 @@ function haritaCiz(){
     Object.entries(damlar).forEach(([ad,d])=>{
       const m=L.circleMarker(KONUM.damlar[ad],{radius:5+Math.min(5,d.n/3),color:'#1a1208',weight:1.5,fillColor:d.sahip?'#7fbf6a':'#f4ead6',fillOpacity:.95});
       m.bindTooltip(`${ad} · ${d.n}`,{direction:'top',className:'h-etiket dam',permanent:z>=9,offset:[0,-6]});
-      m.on('click',()=>openDam(ad));
+      m.on('click',()=>{
+        const b0=allBottles().find(b=>b.dam===ad&&passFilters(b));
+        if(!b0){openDam(ad);return;}
+        const k=damKey(b0);
+        listedeGoster('[data-dk="'+CSS.escape(k)+'"]',()=>{collapsedCountries.delete(b0.ulke);openDams.add(k);if(typeof aramaKapali!=='undefined')aramaKapali.delete(k);});
+      });
       HKatman.addLayer(m);
     });
   }
   const not=document.getElementById('haritaNot');
-  if(not&&HMod!=='hepsi'&&!sis.length)not.textContent=HMod==='elimde'?'Henüz "Elimde" işaretlediğin şişe yok; işaretledikçe haritan dolacak.':'Henüz hedef şişe seçmedin.';
-  else if(not)not.textContent='Daireler bölgedeki şişe sayısını gösterir. Yakınlaştırınca damıtımevleri belirir (yeşil = elinde olan şişesi var). Dokununca bölge rehberi ya da damıtımevi kartı açılır.';
+  if(not&&!sis.length&&HMod==='hepsi')not.textContent='Arama ve filtrelere uyan şişe yok.';
+  else if(not&&HMod!=='hepsi'&&!sis.length)not.textContent=HMod==='elimde'?'Henüz "Elimde" işaretlediğin şişe yok; işaretledikçe haritan dolacak.':'Henüz hedef şişe seçmedin.';
+  else if(not)not.textContent='Daireler bölgedeki şişe sayısını gösterir; yakınlaştırınca damıtımevleri belirir (yeşil = elinde olan şişesi var). Bir yere dokununca alttaki listede orası açılır; rehber ve kartlar için listedeki 📖 ve ℹ️ butonlarını kullan. Listede arama yaparsan harita da ona göre süzülür.';
 }
 document.addEventListener('click',e=>{
   const hm=e.target.closest('[data-hmod]');
   if(hm){HMod=hm.dataset.hmod;document.querySelectorAll('[data-hmod]').forEach(x=>x.classList.toggle('on',x===hm));haritaCiz();return;}
+  if(e.target.closest('#haritaBuyut')){haritaBuyut();return;}
   const hg=e.target.closest('[data-hgit]');
   if(hg&&HARITA){const [c,zz]=HGIT[hg.dataset.hgit];HARITA.flyTo(c,zz,{duration:1.2});}
 });

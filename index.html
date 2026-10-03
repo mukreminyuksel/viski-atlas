@@ -361,7 +361,7 @@ nav.groups{display:flex;gap:6px;margin:20px 0 10px;background:var(--bg2);border:
 <header><div class="wrap">
   <div class="brand">
     <div style="font-size:34px">🥃</div>
-    <div><h1 onclick="location.href='./'" style="cursor:pointer" title="Ana sayfaya dön">Viski Atlası <span style="font-size:13px;color:var(--muted2);font-weight:600;vertical-align:middle">v2.7</span></h1>
+    <div><h1 onclick="location.href='./'" style="cursor:pointer" title="Ana sayfaya dön">Viski Atlası <span style="font-size:13px;color:var(--muted2);font-weight:600;vertical-align:middle">v2.8</span></h1>
       <div class="sub">Bölge → Damıtımevi → Şişe · Uzman & AI tercihleri · Türkiye katmanları · Kişisel koleksiyon</div></div>
   </div>
   <div class="stats">
@@ -3101,7 +3101,7 @@ function g$(s){return String(s??'').replace(/&/g,'&amp;').replace(/</g,'&lt;').r
 async function api(yol,secenek){
   const r=await fetch(yol,Object.assign({cache:'no-store',headers:{'content-type':'application/json'}},secenek||{}));
   let v={};try{v=await r.json();}catch(e){}
-  if(!r.ok)throw new Error(v.hata||('Sunucu yanıt vermedi ('+r.status+')'));
+  if(!r.ok){const e=new Error(v.hata||('Sunucu yanıt vermedi ('+r.status+')'));e.durum=r.status;throw e;}
   return v;
 }
 function lsAl(k,v){try{const x=localStorage.getItem(k);return x===null?v:JSON.parse(x);}catch(e){return v;}}
@@ -3120,7 +3120,7 @@ function sureOnce(iso){
 }
 
 /* ===== BULUT SENKRONU (giriş yok; kişiye özel kod) ===== */
-let BULUT={kod:lsAl('viski_bulut_kod',null),son:lsAl('viski_bulut_son',null),kirli:lsAl('viski_bulut_kirli',false),durum:'',hata:false};
+let BULUT={kod:lsAl('viski_bulut_kod',null),son:lsAl('viski_bulut_son',null),kirli:lsAl('viski_bulut_kirli',false),tel:lsAl('viski_bulut_tel',null),durum:'',hata:false};
 const bulutLink=k=>location.origin+location.pathname+'#bulut='+encodeURIComponent(k);
 function bulutDurum(m,h){BULUT.durum=m;BULUT.hata=!!h;const e=document.querySelector('#bulutKutu .durum');if(e){e.textContent=m;e.className='durum '+(h?'err':'ok');}}
 function stateYaz(s){s=Object.assign({have:[],target:[],prices:{},custom:[],qty:{},notes:{}},s||{});state=s;try{localStorage.setItem(LS,JSON.stringify(state));}catch(e){}}
@@ -3183,10 +3183,57 @@ async function bulutBaglan(kod){
 }
 function bulutKes(){
   if(!confirm('Bu cihazın bulut bağlantısı kesilsin mi? Liste bu cihazda kalır; bulut kaydı silinmez, kodla tekrar bağlanabilirsin.'))return;
-  BULUT={kod:null,son:null,kirli:false,durum:'',hata:false};
-  ['viski_bulut_kod','viski_bulut_son','viski_bulut_kirli'].forEach(k=>{try{localStorage.removeItem(k);}catch(e){}});
+  BULUT={kod:null,son:null,kirli:false,tel:null,durum:'',hata:false};
+  ['viski_bulut_kod','viski_bulut_son','viski_bulut_kirli','viski_bulut_tel'].forEach(k=>{try{localStorage.removeItem(k);}catch(e){}});
   renderBulut();
 }
+// Telefon + PIN: numara kullanıcı adı gibi, PIN şifre gibi. Sunucu ikisini de özet olarak tutar,
+// 10 hatalı denemede numarayı 1 saat kilitler.
+const telTemiz=t=>{let d=String(t||'').replace(/\D/g,'');if(d.length===12&&d.startsWith('90'))d=d.slice(2);else if(d.length===11&&d.startsWith('0'))d=d.slice(1);return d;};
+const telMaske=d=>(d.length===10?'0':'+')+d.slice(0,3)+' *** ** '+d.slice(-2);
+function telKaydet(t){BULUT.tel=t;if(t)lsYaz('viski_bulut_tel',t);else try{localStorage.removeItem('viski_bulut_tel');}catch(e){}}
+function telPinAl(){
+  const t=telTemiz((document.getElementById('telGir')||{}).value),p=String((document.getElementById('pinGir')||{}).value||'').trim();
+  if(!/^\d{10,15}$/.test(t)){bulutDurum('⚠️ Telefon numaranı kontrol et (ör. 0532 123 45 67)',true);return null;}
+  if(!/^\d{4,6}$/.test(p)){bulutDurum('⚠️ PIN 4-6 haneli rakam olmalı',true);return null;}
+  return {t,p};
+}
+async function telDevam(){
+  const x=telPinAl();if(!x)return;
+  try{bulutDurum('☁️ Kontrol ediliyor…');
+    const r=await api('/api/sync',{method:'POST',body:JSON.stringify({islem:'telefon-giris',tel:x.t,pin:x.p})});
+    telKaydet(x.t);await bulutBaglan(r.kod);
+  }catch(e){
+    if(e.durum===404&&/kayıtlı liste yok/.test(e.message)){
+      if(!confirm('Bu numarayla kayıtlı liste yok.\n'+telMaske(x.t)+' numarası ve bu PIN ile yeni bir bulut listesi oluşturulsun mu?')){bulutDurum('');return;}
+      await bulutBaslat();if(BULUT.kod)await telBagla(x.t,x.p);
+    }else bulutDurum('⚠️ '+e.message,true);
+  }
+}
+async function telBagla(t,p,eskiPin){
+  try{bulutDurum('☁️ Kaydediliyor…');
+    await api('/api/sync',{method:'POST',body:JSON.stringify(Object.assign({islem:'telefon-bagla',kod:BULUT.kod,tel:t,pin:p},eskiPin!==undefined?{eskiPin}:{}))});
+    telKaydet(t);renderBulut();bulutDurum('📱 Tamam! Başka bir cihazda numaran ve PIN\'inle listene ulaşabilirsin.');
+  }catch(e){
+    if(e.durum===409){
+      const ep=prompt('Bu numara daha önce başka bir listeye bağlanmış. Numarayı bu listeye taşımak için o listenin PIN\'ini gir:');
+      if(ep)return telBagla(t,p,ep.trim());bulutDurum('');return;
+    }
+    bulutDurum('⚠️ '+e.message,true);
+  }
+}
+async function telKaldir(){
+  if(!confirm('Telefonla giriş kaldırılsın mı? Liste ve kod yerinde kalır.'))return;
+  try{await api('/api/sync',{method:'POST',body:JSON.stringify({islem:'telefon-kaldir',kod:BULUT.kod,tel:BULUT.tel})});
+    telKaydet(null);renderBulut();bulutDurum('📱 Telefonla giriş kaldırıldı.');
+  }catch(e){bulutDurum('⚠️ '+e.message,true);}
+}
+function telPinDegistir(){
+  const p=(prompt('Yeni PIN (4-6 rakam):')||'').trim();if(!p)return;
+  if(!/^\d{4,6}$/.test(p)){bulutDurum('⚠️ PIN 4-6 haneli rakam olmalı',true);return;}
+  telBagla(BULUT.tel,p);
+}
+const telGirdileri=`<input id="telGir" type="tel" inputmode="tel" autocomplete="tel" placeholder="Telefon numaran (0532…)" style="flex:1;min-width:170px"><input id="pinGir" type="password" inputmode="numeric" autocomplete="off" maxlength="6" placeholder="PIN (4-6 rakam)" style="width:140px">`;
 function iosIpucu(){
   const ios=/iPhone|iPad|iPod/.test(navigator.userAgent),ana=navigator.standalone||matchMedia('(display-mode: standalone)').matches;
   return ios&&!ana?'<div class="ipucu">📱 <b>iPhone ipucu:</b> Safari, 7 gün açılmayan sitelerin verilerini silebiliyor. Siteyi <b>Paylaş → Ana Ekrana Ekle</b> ile ana ekrana eklersen bu risk ortadan kalkar.</div>':'';
@@ -3198,6 +3245,8 @@ function renderBulut(){
       <p>Listen şu an <b>sadece bu cihazda</b> duruyor; tarayıcı verisi silinirse ya da cihaz değişirse kaybolur. Bulutta saklarsan sana özel bir kod verilir; aynı kodla telefonda ve bilgisayarda aynı listeyi kullanırsın. Hesap ya da e-posta gerekmez.</p>
       <div class="satir"><button class="eklebtn" style="margin:0" data-bulut="baslat">☁️ Bulutta saklamaya başla</button></div>
       <div class="satir"><input id="bulutKodGir" placeholder="Başka cihazdaki kodun (ör. kehribar-islay-kadeh-427)" style="flex:1;min-width:220px"><button class="btn" data-bulut="baglan">🔑 Listemi getir</button></div>
+      <p style="margin-top:12px"><b>📱 Ya da telefon numaran + PIN ile:</b> ilk kez giriyorsan listen bu numara ve PIN'le oluşturulur; başka cihazda aynı numara ve PIN yeterli.</p>
+      <div class="satir">${telGirdileri}<button class="btn" data-bulut="tel">📱 Telefonla devam et</button></div>
       <div class="durum"></div>${iosIpucu()}`;
   }else{
     k.innerHTML=`<h3>☁️ Listen bulutta</h3>
@@ -3205,6 +3254,10 @@ function renderBulut(){
       <div class="kod">${g$(BULUT.kod)}</div>
       <div class="satir"><button class="btn" data-bulut="gonder">📤 Kodu kendine gönder</button><button class="btn" data-bulut="kopyala">📋 Kopyala</button>
         <button class="btn" data-bulut="qr">▦ QR göster</button><button class="btn" data-bulut="cek">🔄 Şimdi eşitle</button><button class="btn" data-bulut="kes">🔌 Bağlantıyı kes</button></div>
+      ${BULUT.tel?`<div class="satir" style="margin-top:12px">📱 Telefonla giriş açık: <b>${g$(telMaske(BULUT.tel))}</b> + PIN
+          <button class="btn" data-bulut="telpin">🔢 PIN değiştir</button><button class="btn" data-bulut="telkaldir">✕ Kaldır</button></div>`
+        :`<p style="margin-top:12px"><b>📱 Kodu hatırlamak istemiyor musun?</b> Telefon numaranı ve kendi seçtiğin bir PIN'i ekle; başka cihazda bunlarla girersin. PIN'i unutursan bu koddan yenisini koyabilirsin.</p>
+      <div class="satir">${telGirdileri}<button class="btn" data-bulut="telbagla">📱 Telefon + PIN ekle</button></div>`}
       <div class="durum ${BULUT.hata?'err':'ok'}">${g$(BULUT.durum||('☁️ Son kayıt '+sureOnce(BULUT.son)))}</div>${iosIpucu()}`;
   }
 }
@@ -3226,6 +3279,10 @@ document.addEventListener('click',e=>{
   else if(i==='qr')bulutQR();
   else if(i==='cek')bulutCek();
   else if(i==='kes')bulutKes();
+  else if(i==='tel')telDevam();
+  else if(i==='telbagla'){const x=telPinAl();if(x)telBagla(x.t,x.p);}
+  else if(i==='telkaldir')telKaldir();
+  else if(i==='telpin')telPinDegistir();
 });
 document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible')bulutCek();});
 window.addEventListener('online',()=>{if(BULUT.kirli)bulutGonder();});

@@ -38,6 +38,10 @@ Blobs'ta tutulur (ek hesap/ücret gerekmez):
   Başka cihazda kodu girmek, `#bulut=<kod>` linkini açmak ya da QR'ı okutmak yeterli. İki cihazdaki
   listeler kayıpsız birleştirilir. Depoda kodun kendisi değil SHA-256 özeti anahtar olarak durur.
   Kodu kaybetmemek için: kullanılan cihazda her zaman görünür, "Kendine gönder" ve QR seçenekleri var.
+  **Telefon + PIN:** Kod yerine telefon numarası ve kişinin seçtiği 4-6 haneli PIN ile de girilir
+  (ilk girişte liste otomatik oluşur). Numara ve PIN düz metin saklanmaz (`tel/<özet>` kaydı koda
+  işaret eder); 10 hatalı PIN denemesinde numara 1 saat kilitlenir. PIN unutulursa kodu bilen cihazdan
+  yeni PIN konur; başka listeye bağlı bir numarayı taşımak için o listenin PIN'i gerekir.
 - **`/api/gece` — Tadım Geceleri:** Koleksiyonum → Tadım Geceleri. Ev sahibi şişeleri seçip geceyi
   oluşturur, davet linkini paylaşır; katılımcılar yalnızca takma adla katılıp 50–100 arası puan ve not
   verir. Kör tadımda şişe adları ev sahibi açıklayana kadar gizlidir. Sonuç tablosu, gecenin

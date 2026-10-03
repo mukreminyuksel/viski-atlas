@@ -30,7 +30,7 @@ function dataOku() {
 
 function jsonOku() {
   try { return JSON.parse(fs.readFileSync(OUT, "utf8")); }
-  catch { return { guncelleme: null, kur: null, fiyatlar: {}, inceleme: [] }; }
+  catch { return { guncelleme: null, kur: null, fiyatlar: {}, denendi: {}, inceleme: [] }; }
 }
 
 // ---- TCMB kuru ----
@@ -50,10 +50,11 @@ async function kurOku() {
 
 // ---- Şişe seçimi: hiç doğrulanmamış / en eski doğrulananlar önce; bulunabilirlik ve puan öncelikli ----
 const BUL_ONCELIK = { kolay: 0, tekel: 1, dutyfree: 2, zor: 3, muzayede: 4 };
-function sec(data, fiyatlar, adet) {
+function sec(data, fiyatlar, adet, denendi = {}) {
+  const son = (id) => [fiyatlar[id]?.tarih || "0000", denendi[id] || "0000"].sort().pop();
   return [...data]
     .sort((a, b) => {
-      const ta = fiyatlar[a.id]?.tarih || "0000", tb = fiyatlar[b.id]?.tarih || "0000";
+      const ta = son(a.id), tb = son(b.id);
       if (ta !== tb) return ta < tb ? -1 : 1;
       const ba = BUL_ONCELIK[a.bul] ?? 5, bb = BUL_ONCELIK[b.bul] ?? 5;
       if (ba !== bb) return ba - bb;
@@ -82,6 +83,8 @@ function denetle(s, b, eski) {
     const sert = oran < 0.6 || oran > 1.8;
     if (sert && !(s.guven === "yuksek" && s.tur !== "tahmin" && s.kaynak)) return `şüpheli değişim (x${oran.toFixed(2)})`;
   }
+  // Düşük güvenli bulgu ancak küçük bir düzeltmeyse (±%15) uygulanır
+  if (s.guven === "dusuk" && onceki > 0 && Math.abs(s.tl / onceki - 1) > 0.15) return "düşük güven, büyük değişim";
   // Son 6 ayda gerçek kaynaktan doğrulanmış fiyatı tahminle ezme
   if (s.tur === "tahmin" && eski && eski.tur !== "tahmin") {
     const yas = (Date.now() - Date.parse(eski.tarih)) / 864e5;
@@ -97,7 +100,7 @@ async function secKomutu(adet) {
   const data = dataOku();
   const db = jsonOku();
   const kur = (await kurOku()) || db.kur;
-  const secilen = sec(data, db.fiyatlar, adet).map((b) => ({
+  const secilen = sec(data, db.fiyatlar, adet, db.denendi).map((b) => ({
     id: b.id, ad: b.ad, damitimevi: b.dam, tur: b.tur, yas: b.yas, abv: b.abv, bulunabilirlik: b.bul,
     kayitli_tl: db.fiyatlar[b.id]?.tl || b.tl,
   }));
@@ -130,6 +133,13 @@ function uygulaKomutu(dosya) {
     };
     kabul++;
   }
+  // Araştırılıp fiyatı bulunamayan şişeler de "denendi" olarak işaretlenir; böylece sıra
+  // sonraki haftalarda diğer şişelere geçer, bunlar ancak tüm katalog dolaşılınca tekrar denenir.
+  db.denendi = db.denendi || {};
+  try {
+    for (const b of JSON.parse(fs.readFileSync(path.join(ROOT, "data", "arastir.json"), "utf8")).siseler) db.denendi[b.id] = BUGUN;
+  } catch { for (const s of sonuclar) if (byId.has(s.id)) db.denendi[s.id] = BUGUN; }
+  db.denendi = Object.fromEntries(Object.entries(db.denendi).sort(([a], [b]) => a.localeCompare(b)));
   db.guncelleme = BUGUN;
   db.fiyatlar = Object.fromEntries(Object.entries(db.fiyatlar).sort(([a], [b]) => a.localeCompare(b)));
   fs.writeFileSync(OUT, JSON.stringify(db, null, 1) + "\n");

@@ -2,30 +2,6 @@
  "guncelleme": "2026-10-03",
  "kur": null,
  "fiyatlar": {
-  "ardbeg-10": {
-   "tl": 7150,
-   "tarih": "2026-10-03",
-   "tur": "tr_liste",
-   "guven": "dusuk",
-   "kaynak": "https://www.habergazetesi.com.tr/ardbeg-viski-fiyat",
-   "not": "Ardbeg 2026 fiyat haberi; arama özeti, kayıtlıdan %49 yüksek."
-  },
-  "ardbeg-corryvreckan": {
-   "tl": 9750,
-   "tarih": "2026-10-03",
-   "tur": "tr_liste",
-   "guven": "dusuk",
-   "kaynak": "https://www.habergazetesi.com.tr/ardbeg-viski-fiyat",
-   "not": "Ardbeg 2026 fiyat haberi; arama özeti."
-  },
-  "ardbeg-uigeadail": {
-   "tl": 9350,
-   "tarih": "2026-10-03",
-   "tur": "tr_liste",
-   "guven": "dusuk",
-   "kaynak": "https://www.habergazetesi.com.tr/ardbeg-viski-fiyat",
-   "not": "Ardbeg 2026 fiyat haberi; arama özeti."
-  },
   "ballantines-finest": {
    "tl": 1550,
    "tarih": "2026-10-03",
@@ -57,14 +33,6 @@
    "guven": "orta",
    "kaynak": "https://enucuzfiyatlari.com/viski-fiyatlari/",
    "not": "2.375 TL; başka kaynakta 2.400 TL."
-  },
-  "grants-family": {
-   "tl": 1250,
-   "tarih": "2026-10-03",
-   "tur": "tr_liste",
-   "guven": "dusuk",
-   "kaynak": "https://www.akademikpersonel.org/viski-fiyatlari/",
-   "not": "Grant's 70 cl genel fiyat; Triple Wood olduğu teyit edilemedi."
   },
   "jackdaniels-7": {
    "tl": 2050,
@@ -106,14 +74,6 @@
    "kaynak": "https://egeyasam.com/viski-fiyatlari",
    "not": "Çoğu kaynak 1.995 TL; bir Migros özeti 1.775 TL gösterdi."
   },
-  "jw-doubleblack": {
-   "tl": 2000,
-   "tarih": "2026-10-03",
-   "tur": "tr_liste",
-   "guven": "dusuk",
-   "kaynak": "https://www.habergazetesi.com.tr/migros-viski-fiyatlari",
-   "not": "Tek kaynak (Migros listesi özeti)."
-  },
   "jw-red": {
    "tl": 1550,
    "tarih": "2026-10-03",
@@ -130,14 +90,6 @@
    "kaynak": "https://fiyatbilgisi.net/lagavulin-viski-fiyati/",
    "not": "2026 zamlı liste; arama özeti."
   },
-  "monkeyshoulder": {
-   "tl": 1750,
-   "tarih": "2026-10-03",
-   "tur": "tr_liste",
-   "guven": "dusuk",
-   "kaynak": "https://enucuzfiyatlari.com/viski-fiyatlari/",
-   "not": "Tek kaynak, kayıtlı fiyattan belirgin düşük."
-  },
   "talisker-10": {
    "tl": 3050,
    "tarih": "2026-10-03",
@@ -147,5 +99,96 @@
    "not": "2026 Migros listesi 3.000-3.050 TL aralığı."
   }
  },
- "inceleme": []
+ "inceleme": [
+  {
+   "id": "ardbeg-10",
+   "onerilen": 7150,
+   "mevcut": 4800,
+   "tur": "tr_liste",
+   "kaynak": "https://www.habergazetesi.com.tr/ardbeg-viski-fiyat",
+   "neden": "düşük güven, büyük değişim"
+  },
+  {
+   "id": "ardbeg-corryvreckan",
+   "onerilen": 9750,
+   "mevcut": 8000,
+   "tur": "tr_liste",
+   "kaynak": "https://www.habergazetesi.com.tr/ardbeg-viski-fiyat",
+   "neden": "düşük güven, büyük değişim"
+  },
+  {
+   "id": "ardbeg-uigeadail",
+   "onerilen": 9350,
+   "mevcut": 7500,
+   "tur": "tr_liste",
+   "kaynak": "https://www.habergazetesi.com.tr/ardbeg-viski-fiyat",
+   "neden": "düşük güven, büyük değişim"
+  },
+  {
+   "id": "grants-family",
+   "onerilen": 1250,
+   "mevcut": 1000,
+   "tur": "tr_liste",
+   "kaynak": "https://www.akademikpersonel.org/viski-fiyatlari/",
+   "neden": "düşük güven, büyük değişim"
+  },
+  {
+   "id": "jw-doubleblack",
+   "onerilen": 2000,
+   "mevcut": 2800,
+   "tur": "tr_liste",
+   "kaynak": "https://www.habergazetesi.com.tr/migros-viski-fiyatlari",
+   "neden": "düşük güven, büyük değişim"
+  },
+  {
+   "id": "monkeyshoulder",
+   "onerilen": 1750,
+   "mevcut": 2800,
+   "tur": "tr_liste",
+   "kaynak": "https://enucuzfiyatlari.com/viski-fiyatlari/",
+   "neden": "düşük güven, büyük değişim"
+  }
+ ],
+ "denendi": {
+  "aberlour-abunadh": "2026-10-03",
+  "ardbeg-10": "2026-10-03",
+  "ardbeg-corryvreckan": "2026-10-03",
+  "ardbeg-uigeadail": "2026-10-03",
+  "ballantines-finest": "2026-10-03",
+  "bells-original": "2026-10-03",
+  "blackandwhite": "2026-10-03",
+  "chivas-12": "2026-10-03",
+  "dewars-12": "2026-10-03",
+  "dewars-white": "2026-10-03",
+  "famousgrouse": "2026-10-03",
+  "famousgrouse-smoky": "2026-10-03",
+  "gentlemanjack": "2026-10-03",
+  "glenfiddich-12": "2026-10-03",
+  "glengrant-18": "2026-10-03",
+  "glenlivet-18": "2026-10-03",
+  "glenlivet-founders": "2026-10-03",
+  "glenmorangie-10": "2026-10-03",
+  "glenmorangie-signet": "2026-10-03",
+  "glenmoray-cabernet": "2026-10-03",
+  "glenmoray-classic": "2026-10-03",
+  "grants-family": "2026-10-03",
+  "jackdaniels-7": "2026-10-03",
+  "jameson": "2026-10-03",
+  "jameson-blackbarrel": "2026-10-03",
+  "jb-rare": "2026-10-03",
+  "jimbeam-white": "2026-10-03",
+  "jw-black": "2026-10-03",
+  "jw-doubleblack": "2026-10-03",
+  "jw-red": "2026-10-03",
+  "kavalan-bourbon": "2026-10-03",
+  "kavalan-vinho": "2026-10-03",
+  "lagavulin-16": "2026-10-03",
+  "monkeyshoulder": "2026-10-03",
+  "octomore-141": "2026-10-03",
+  "talisker-10": "2026-10-03",
+  "teachers": "2026-10-03",
+  "vat69": "2026-10-03",
+  "whitehorse": "2026-10-03",
+  "williamlawsons": "2026-10-03"
+ }
 }

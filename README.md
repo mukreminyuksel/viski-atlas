@@ -42,6 +42,10 @@ Blobs'ta tutulur (ek hesap/ücret gerekmez):
   (ilk girişte liste otomatik oluşur). Numara ve PIN düz metin saklanmaz (`tel/<özet>` kaydı koda
   işaret eder); 10 hatalı PIN denemesinde numara 1 saat kilitlenir. PIN unutulursa kodu bilen cihazdan
   yeni PIN konur; başka listeye bağlı bir numarayı taşımak için o listenin PIN'i gerekir.
+  **Tek giriş:** Bulut kaydı listeyle birlikte kulüp üyeliklerini (uid + anahtar) ve tadım gecelerini
+  (ev sahibi yetkisi dahil) da taşır (`state.sosyal`). Kod ya da telefon + PIN ile giren her cihaz
+  hepsini alır; silinen kulüp/geceler `sil` listesiyle işaretlenir, başka cihazdan geri gelmez.
+  Giriş kutusu Sosyal Buluşmalar sayfalarında da var.
 - **`/api/gece` — Tadım Geceleri:** Sosyal Buluşmalar → Tadım Geceleri. Ev sahibi şişeleri seçip geceyi
   oluşturur, davet linkini paylaşır; katılımcılar yalnızca takma adla katılıp 50–100 arası puan ve not
   verir. Kör tadımda şişe adları ev sahibi açıklayana kadar gizlidir. Sonuç tablosu, gecenin

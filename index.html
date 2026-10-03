@@ -329,6 +329,11 @@ nav.groups{display:flex;gap:6px;margin:20px 0 10px;background:var(--bg2);border:
 .vurgu div{background:var(--bg2);border:1px solid var(--line);border-radius:10px;padding:10px;font-size:13px}.vurgu b{display:block;color:var(--amber-soft);font-size:11px;text-transform:uppercase;margin-bottom:3px}
 .glist .mini{cursor:pointer}
 /* SOSYAL: rehber + sade listeler */
+.sgiris{background:linear-gradient(135deg,rgba(120,170,255,.10),var(--panel));border:1px solid var(--line);border-radius:14px;padding:12px 14px;margin-bottom:12px;font-size:13.5px}
+.sgiris span{color:var(--muted);font-size:13px;line-height:1.5}.sgiris .satir{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
+.sgiris input{background:var(--bg2);border:1px solid var(--line);color:var(--txt);padding:9px 11px;border-radius:9px;font-size:14px;font-family:inherit;min-width:0}
+.sgiris .durum{font-size:12px;margin-top:6px;color:var(--muted2)}.sgiris .durum.err{color:var(--red)}.sgiris .durum.ok{color:var(--have)}
+.sgiris.ok{padding:8px 12px;font-size:12.5px;color:var(--muted)}
 .srehber{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px;position:relative}
 .sr-kart{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:13px 14px;cursor:pointer;transition:border-color .15s}
 .sr-kart:hover{border-color:var(--amber-soft)}.sr-kart.aktif{border-color:var(--amber);box-shadow:0 0 0 1px var(--amber) inset}
@@ -378,7 +383,7 @@ nav.groups{display:flex;gap:6px;margin:20px 0 10px;background:var(--bg2);border:
 <header><div class="wrap">
   <div class="brand">
     <div style="font-size:34px">🥃</div>
-    <div><h1 onclick="location.href='./'" style="cursor:pointer" title="Ana sayfaya dön">Viski Atlası <span style="font-size:13px;color:var(--muted2);font-weight:600;vertical-align:middle">v3.0</span></h1>
+    <div><h1 onclick="location.href='./'" style="cursor:pointer" title="Ana sayfaya dön">Viski Atlası <span style="font-size:13px;color:var(--muted2);font-weight:600;vertical-align:middle">v3.1</span></h1>
       <div class="sub">Bölge → Damıtımevi → Şişe · Uzman & AI tercihleri · Türkiye katmanları · Kişisel koleksiyon</div></div>
   </div>
   <div class="stats">
@@ -3142,7 +3147,7 @@ function sureOnce(iso){
 /* ===== BULUT SENKRONU (giriş yok; kişiye özel kod) ===== */
 let BULUT={kod:lsAl('viski_bulut_kod',null),son:lsAl('viski_bulut_son',null),kirli:lsAl('viski_bulut_kirli',false),tel:lsAl('viski_bulut_tel',null),durum:'',hata:false};
 const bulutLink=k=>location.origin+location.pathname+'#bulut='+encodeURIComponent(k);
-function bulutDurum(m,h){BULUT.durum=m;BULUT.hata=!!h;const e=document.querySelector('#bulutKutu .durum');if(e){e.textContent=m;e.className='durum '+(h?'err':'ok');}}
+function bulutDurum(m,h){BULUT.durum=m;BULUT.hata=!!h;document.querySelectorAll('#bulutKutu .durum, .girisDurum').forEach(e=>{e.textContent=m;e.classList.toggle('err',!!h);e.classList.toggle('ok',!h);});}
 function stateYaz(s){s=Object.assign({have:[],target:[],prices:{},custom:[],qty:{},notes:{}},s||{});state=s;try{localStorage.setItem(LS,JSON.stringify(state));}catch(e){}}
 function birlestir(a,b){
   // İki listeyi kayıpsız birleştir (b'deki fiyat/not/adet önceliklidir)
@@ -3159,10 +3164,31 @@ window.cloudSync=function(){
   BULUT.kirli=true;lsYaz('viski_bulut_kirli',true);
   clearTimeout(bulutZam);bulutZam=setTimeout(bulutGonder,1500);
 };
+// Kulüp üyelikleri (uid + gizli anahtar) ve tadım geceleri (ev sahibi yetkisi dahil) listeyle aynı
+// bulut kaydında taşınır: tek giriş (kod ya da telefon + PIN) her cihazda hepsini getirir.
+// Silinenler "sil" listesinde tutulur ki başka cihazdan geri dirilmesinler.
+const bulutPaket=()=>Object.assign({},state,{sosyal:{kulupler:kuluplerim(),geceler:gecelerim(),sil:lsAl('viski_sosyal_sil',{}),takma:lsAl('viski_takma_ad','')}});
+function sosyalBirlestir(p){
+  if(!p||typeof p!=='object')return false;
+  const sil=Object.assign({},p.sil||{},lsAl('viski_sosyal_sil',{}));
+  const birles=(uzak,yerel)=>{const o={};
+    Object.entries(uzak||{}).forEach(([k,v])=>{if(v&&typeof v==='object')o[k]=v;});
+    Object.entries(yerel||{}).forEach(([k,v])=>{o[k]=Object.assign({},o[k]||{},v);});
+    Object.keys(o).forEach(k=>{if(sil[k])delete o[k];});return o;};
+  const k=birles(p.kulupler,kuluplerim()),g=birles(p.geceler,gecelerim());
+  const once=JSON.stringify([kuluplerim(),gecelerim()]);
+  lsYaz('viski_kulupler',k);lsYaz('viski_geceler',g);lsYaz('viski_sosyal_sil',sil);
+  if(p.takma&&!lsAl('viski_takma_ad',''))lsYaz('viski_takma_ad',p.takma);
+  // Bu cihazda bulutta olmayan bir şey varsa geri gönder
+  if(JSON.stringify(k)!==JSON.stringify(birles({},p.kulupler))||JSON.stringify(g)!==JSON.stringify(birles({},p.geceler)))window.cloudSync();
+  return once!==JSON.stringify([k,g]);
+}
+function sosyalDegisti(){if(window.cloudSync)window.cloudSync();}
+function bulutStateAyir(st){const x=Object.assign({},st||{});const so=x.sosyal;delete x.sosyal;return [x,so];}
 async function bulutGonder(){
   if(!BULUT.kod)return;
   try{bulutDurum('☁️ Kaydediliyor…');
-    const r=await api('/api/sync',{method:'PUT',body:JSON.stringify({kod:BULUT.kod,state})});
+    const r=await api('/api/sync',{method:'PUT',body:JSON.stringify({kod:BULUT.kod,state:bulutPaket()})});
     BULUT.son=r.guncelleme;BULUT.kirli=false;lsYaz('viski_bulut_son',BULUT.son);lsYaz('viski_bulut_kirli',false);
     bulutDurum('☁️ Buluta kaydedildi · '+sureOnce(BULUT.son));
   }catch(e){bulutDurum('⚠️ Buluta kaydedilemedi ('+e.message+'). İnternet gelince tekrar denenecek.',true);}
@@ -3173,7 +3199,8 @@ async function bulutCek(){
   try{
     const r=await api('/api/sync?kod='+encodeURIComponent(BULUT.kod));
     if(!BULUT.son||r.guncelleme>BULUT.son){
-      stateYaz(BULUT.kirli?birlestir(r.state,state):r.state);
+      const [st,so]=bulutStateAyir(r.state);sosyalBirlestir(so);
+      stateYaz(BULUT.kirli?birlestir(st,state):st);
       BULUT.son=r.guncelleme;lsYaz('viski_bulut_son',BULUT.son);renderAll();
       if(BULUT.kirli)bulutGonder();else bulutDurum('☁️ Güncel · '+sureOnce(BULUT.son));
     }else if(BULUT.kirli)bulutGonder();
@@ -3182,7 +3209,7 @@ async function bulutCek(){
 }
 async function bulutBaslat(){
   try{bulutDurum('☁️ Hazırlanıyor…');
-    const r=await api('/api/sync',{method:'POST',body:JSON.stringify({islem:'olustur',state})});
+    const r=await api('/api/sync',{method:'POST',body:JSON.stringify({islem:'olustur',state:bulutPaket()})});
     BULUT.kod=r.kod;BULUT.son=r.guncelleme;BULUT.kirli=false;
     lsYaz('viski_bulut_kod',r.kod);lsYaz('viski_bulut_son',r.guncelleme);lsYaz('viski_bulut_kirli',false);
     renderBulut();bulutDurum('☁️ Listen bulutta. Kodunu kaybetmemek için hemen kendine gönder 👇');
@@ -3194,8 +3221,10 @@ async function bulutBaglan(kod){
   try{bulutDurum('☁️ Liste getiriliyor…');
     const r=await api('/api/sync?kod='+encodeURIComponent(kod));
     const yerelDolu=state.have.length||state.target.length||Object.keys(state.notes||{}).length||(state.custom||[]).length;
-    stateYaz(yerelDolu?birlestir(r.state,state):r.state);
+    const [st,so]=bulutStateAyir(r.state);
+    stateYaz(yerelDolu?birlestir(st,state):st);
     BULUT.kod=kod;BULUT.son=r.guncelleme;lsYaz('viski_bulut_kod',kod);lsYaz('viski_bulut_son',r.guncelleme);
+    sosyalBirlestir(so);
     renderAll();renderBulut();
     if(yerelDolu){BULUT.kirli=true;lsYaz('viski_bulut_kirli',true);await bulutGonder();bulutDurum('☁️ Bağlandı; bu cihazdaki liste buluttakiyle birleştirildi.');}
     else bulutDurum('☁️ Bağlandı; listen bu cihaza geldi ('+state.have.length+' elimde, '+state.target.length+' hedef).');
@@ -3212,17 +3241,17 @@ function bulutKes(){
 const telTemiz=t=>{let d=String(t||'').replace(/\D/g,'');if(d.length===12&&d.startsWith('90'))d=d.slice(2);else if(d.length===11&&d.startsWith('0'))d=d.slice(1);return d;};
 const telMaske=d=>(d.length===10?'0':'+')+d.slice(0,3)+' *** ** '+d.slice(-2);
 function telKaydet(t){BULUT.tel=t;if(t)lsYaz('viski_bulut_tel',t);else try{localStorage.removeItem('viski_bulut_tel');}catch(e){}}
-function telPinAl(){
-  const t=telTemiz((document.getElementById('telGir')||{}).value),p=String((document.getElementById('pinGir')||{}).value||'').trim();
+function telPinAl(kok){
+  kok=kok||document;const t=telTemiz((kok.querySelector('.telGir')||{}).value),p=String((kok.querySelector('.pinGir')||{}).value||'').trim();
   if(!/^\d{10,15}$/.test(t)){bulutDurum('⚠️ Telefon numaranı kontrol et (ör. 0532 123 45 67)',true);return null;}
   if(!/^\d{4,6}$/.test(p)){bulutDurum('⚠️ PIN 4-6 haneli rakam olmalı',true);return null;}
   return {t,p};
 }
-async function telDevam(){
-  const x=telPinAl();if(!x)return;
+async function telDevam(kok){
+  const x=telPinAl(kok);if(!x)return;
   try{bulutDurum('☁️ Kontrol ediliyor…');
     const r=await api('/api/sync',{method:'POST',body:JSON.stringify({islem:'telefon-giris',tel:x.t,pin:x.p})});
-    telKaydet(x.t);await bulutBaglan(r.kod);
+    telKaydet(x.t);await bulutBaglan(r.kod);renderAll();
   }catch(e){
     if(e.durum===404&&/kayıtlı liste yok/.test(e.message)){
       if(!confirm('Bu numarayla kayıtlı liste yok.\n'+telMaske(x.t)+' numarası ve bu PIN ile yeni bir bulut listesi oluşturulsun mu?')){bulutDurum('');return;}
@@ -3233,7 +3262,7 @@ async function telDevam(){
 async function telBagla(t,p,eskiPin){
   try{bulutDurum('☁️ Kaydediliyor…');
     await api('/api/sync',{method:'POST',body:JSON.stringify(Object.assign({islem:'telefon-bagla',kod:BULUT.kod,tel:t,pin:p},eskiPin!==undefined?{eskiPin}:{}))});
-    telKaydet(t);renderBulut();bulutDurum('📱 Tamam! Başka bir cihazda numaran ve PIN\'inle listene ulaşabilirsin.');
+    telKaydet(t);renderBulut();renderAll();bulutDurum('📱 Tamam! Başka bir cihazda numaran ve PIN\'inle listene, kulüplerine ve gecelerine ulaşabilirsin.');
   }catch(e){
     if(e.durum===409){
       const ep=prompt('Bu numara daha önce başka bir listeye bağlanmış. Numarayı bu listeye taşımak için o listenin PIN\'ini gir:');
@@ -3253,7 +3282,13 @@ function telPinDegistir(){
   if(!/^\d{4,6}$/.test(p)){bulutDurum('⚠️ PIN 4-6 haneli rakam olmalı',true);return;}
   telBagla(BULUT.tel,p);
 }
-const telGirdileri=`<input id="telGir" type="tel" inputmode="tel" autocomplete="tel" placeholder="Telefon numaran (0532…)" style="flex:1;min-width:170px"><input id="pinGir" type="password" inputmode="numeric" autocomplete="off" maxlength="6" placeholder="PIN (4-6 rakam)" style="width:140px">`;
+const telGirdileri=`<input class="telGir" type="tel" inputmode="tel" autocomplete="tel" placeholder="Telefon numaran (0532…)" style="flex:1;min-width:170px"><input class="pinGir" type="password" inputmode="numeric" autocomplete="off" maxlength="6" placeholder="PIN (4-6 rakam)" style="width:140px">`;
+// Sosyal sayfalarının başındaki giriş kutusu: aynı telefon + PIN girişi
+function sosyalGiris(){
+  if(BULUT.kod)return `<div class="sgiris ok">☁️ ${BULUT.tel?'Giriş yapıldı: <b>'+g$(telMaske(BULUT.tel))+'</b>':'Bulut kodunla bağlısın'} · kulüplerin ve gecelerin her cihazda seninle.</div>`;
+  return `<div class="sgiris"><div><b>🔐 Her cihazda aynı kulüpler ve geceler</b><br><span>Telefon numaran + PIN ile giriş yap: listen, kulüplerin ve tadım gecelerin hangi cihazdan girersen gir seninle gelir. İlk kez giriyorsan hesabın bu numara ve PIN'le açılır.</span></div>
+    <div class="satir">${telGirdileri}<button class="eklebtn" style="margin:0" data-bulut="tel">📱 Giriş yap</button></div><div class="durum girisDurum"></div></div>`;
+}
 function iosIpucu(){
   const ios=/iPhone|iPad|iPod/.test(navigator.userAgent),ana=navigator.standalone||matchMedia('(display-mode: standalone)').matches;
   return ios&&!ana?'<div class="ipucu">📱 <b>iPhone ipucu:</b> Safari, 7 gün açılmayan sitelerin verilerini silebiliyor. Siteyi <b>Paylaş → Ana Ekrana Ekle</b> ile ana ekrana eklersen bu risk ortadan kalkar.</div>':'';
@@ -3270,7 +3305,7 @@ function renderBulut(){
       <div class="durum"></div>${iosIpucu()}`;
   }else{
     k.innerHTML=`<h3>☁️ Listen bulutta</h3>
-      <p>Her değişiklik otomatik kaydedilir. Başka cihazda bu kodu girmen (ya da QR'ı okutman) yeterli. <b>Kodu bilen listeni görebilir</b>; bir şifre gibi sakla.</p>
+      <p>Her değişiklik otomatik kaydedilir; <b>kulüplerin ve tadım gecelerin de</b> bu kayıtta. Başka cihazda bu kodu girmen (ya da QR'ı okutman) yeterli. <b>Kodu bilen listeni görebilir</b>; bir şifre gibi sakla.</p>
       <div class="kod">${g$(BULUT.kod)}</div>
       <div class="satir"><button class="btn" data-bulut="gonder">📤 Kodu kendine gönder</button><button class="btn" data-bulut="kopyala">📋 Kopyala</button>
         <button class="btn" data-bulut="qr">▦ QR göster</button><button class="btn" data-bulut="cek">🔄 Şimdi eşitle</button><button class="btn" data-bulut="kes">🔌 Bağlantıyı kes</button></div>
@@ -3299,8 +3334,8 @@ document.addEventListener('click',e=>{
   else if(i==='qr')bulutQR();
   else if(i==='cek')bulutCek();
   else if(i==='kes')bulutKes();
-  else if(i==='tel')telDevam();
-  else if(i==='telbagla'){const x=telPinAl();if(x)telBagla(x.t,x.p);}
+  else if(i==='tel')telDevam(b.closest('.satir'));
+  else if(i==='telbagla'){const x=telPinAl(b.closest('.satir'));if(x)telBagla(x.t,x.p);}
   else if(i==='telkaldir')telKaldir();
   else if(i==='telpin')telPinDegistir();
 });
@@ -3310,7 +3345,11 @@ window.addEventListener('online',()=>{if(BULUT.kirli)bulutGonder();});
 /* ===== TADIM GECESİ ===== */
 let GECE={id:null,veri:null,zam:null,kaydetZam:{},duzenle:false};
 const gecelerim=()=>lsAl('viski_geceler',{});
-function geceKaydet(id,v){const g=gecelerim();g[id]=Object.assign(g[id]||{},v);lsYaz('viski_geceler',g);}
+function geceKaydet(id,v){const g=gecelerim(),once=JSON.stringify(g[id]||null);g[id]=Object.assign(g[id]||{},v);
+  if(once===JSON.stringify(g[id]))return;lsYaz('viski_geceler',g);silIsaretKaldir(id);sosyalDegisti();}
+function geceSil(id){const g=gecelerim();delete g[id];lsYaz('viski_geceler',g);silIsaretle(id);sosyalDegisti();}
+function silIsaretle(id){const x=lsAl('viski_sosyal_sil',{});x[id]=new Date().toISOString();lsYaz('viski_sosyal_sil',x);}
+function silIsaretKaldir(id){const x=lsAl('viski_sosyal_sil',{});if(x[id]){delete x[id];lsYaz('viski_sosyal_sil',x);}}
 const geceLink=id=>location.origin+location.pathname+'#gece='+id;
 function siseBilgi(x){const b=allBottles().find(y=>y.id===x);return b?{b,ad:b.ad}:{b:null,ad:x};}
 function tarihYaz(t){if(!t)return '';const d=new Date(t);return isNaN(d)?g$(t):d.toLocaleString('tr-TR',{weekday:'short',day:'numeric',month:'long',hour:'2-digit',minute:'2-digit'});}
@@ -3335,7 +3374,7 @@ function renderKulup(){
   const k=document.getElementById('kulupKutu');if(!k)return;
   if(KULUP.id){kulupSayfa();return;}
   const kl=kuluplerim(),kids=Object.keys(kl),acik=SOSYAL.kulupForm;
-  k.innerHTML=`${sosyalRehber('kulup')}
+  k.innerHTML=`${sosyalGiris()}${sosyalRehber('kulup')}
     <div class="sbaslik"><h2>🏛️ Kulüplerim</h2>${acik?'':'<button class="eklebtn" data-sosyal="kulup-form">➕ Yeni kulüp kur</button>'}</div>
     ${kids.length?`<div class="gkart glist">${kids.map(id=>`<div class="mini" data-kulup-ac="${id}"><div><div class="nm">🏛️ ${g$(kl[id].ad||'Kulüp')}${kl[id].rol==='kurucu'?'<span class="etiket">👑 kurucu</span>':kl[id].rol==='yonetici'?'<span class="etiket">⭐ yönetici</span>':''}</div><div class="meta">Takma adın: ${g$(kl[id].benAd||'')}</div></div><span class="price">›</span></div>`).join('')}</div>`
       :acik?'':`<div class="gkart"><h3>Henüz bir kulübün yok</h3><div class="adimlar">
@@ -3367,7 +3406,7 @@ function renderGece(){
   const gec=ids.filter(gecmis).sort((a,b)=>(g[b].tarih||g[b].t||'').localeCompare(g[a].tarih||g[a].t||''));
   const satir=id=>`<div class="mini" data-gece-ac="${id}"><div><div class="nm">${g$(g[id].ad||'Tadım gecesi')}${g[id].yk?'<span class="etiket">👑 ev sahibi</span>':''}</div><div class="meta">${tarihYaz(g[id].tarih)||'Tarih yok'}${g[id].kulup?' · 🏛️ '+g$(g[id].kulup):''}</div></div><span class="price">›</span></div>`;
   const secili=YENI_KULUP&&kl[YENI_KULUP]?YENI_KULUP:'';
-  k.innerHTML=`${sosyalRehber('gece')}
+  k.innerHTML=`${sosyalGiris()}${sosyalRehber('gece')}
     <div class="sbaslik"><h2>🥃 Tadım Gecelerim</h2>${acik?'':'<button class="eklebtn" data-sosyal="gece-form">➕ Yeni tadım gecesi</button>'}</div>
     ${yak.length?`<div class="gkart glist"><h3>📅 Yaklaşan</h3>${yak.map(satir).join('')}</div>`:''}
     ${gec.length?`<div class="gkart glist"><h3>🕰️ Geçmiş</h3>${gec.map(satir).join('')}</div>`:''}
@@ -3550,7 +3589,7 @@ document.addEventListener('click',async e=>{
     if(ey==='sil'&&!confirm('Bu tadım gecesi ve tüm puanlar kalıcı olarak silinsin mi?'))return;
     if(ey==='bitir'&&!confirm('Gece bitirilsin mi? Puanlar kilitlenir ve şişeler herkese açıklanır.'))return;
     try{await api('/api/gece',{method:'POST',body:JSON.stringify({islem:'yonet',id:GECE.id,yk:(gecelerim()[GECE.id]||{}).yk,eylem:ey})});
-      if(ey==='sil'){const g=gecelerim();delete g[GECE.id];lsYaz('viski_geceler',g);location.hash='#gece';return;}
+      if(ey==='sil'){geceSil(GECE.id);location.hash='#gece';return;}
       geceYukle(false);}catch(er){alert(er.message);}
     return;
   }
@@ -3574,8 +3613,9 @@ document.addEventListener('keydown',e=>{if(e.key==='Enter'&&e.target.id==='gSise
 /* ===== KULÜP (davetle kapalı topluluk) ===== */
 let KULUP={id:null,davet:null,veri:null,geceler:[]};
 const kuluplerim=()=>lsAl('viski_kulupler',{});
-function kulupKaydet(kid,v){const k=kuluplerim();k[kid]=Object.assign(k[kid]||{},v);lsYaz('viski_kulupler',k);}
-function kulupSil(kid){const k=kuluplerim();delete k[kid];lsYaz('viski_kulupler',k);}
+function kulupKaydet(kid,v){const k=kuluplerim(),once=JSON.stringify(k[kid]||null);k[kid]=Object.assign(k[kid]||{},v);
+  if(once===JSON.stringify(k[kid]))return;lsYaz('viski_kulupler',k);silIsaretKaldir(kid);sosyalDegisti();}
+function kulupSil(kid){const k=kuluplerim();delete k[kid];lsYaz('viski_kulupler',k);silIsaretle(kid);sosyalDegisti();}
 const kulupDavetLink=(kid,d)=>location.origin+location.pathname+'#kulup='+kid+'.'+d;
 const kulupAuth=kid=>{const k=kuluplerim()[kid]||{};return {kid,uid:k.uid,anahtar:k.anahtar};};
 async function kulupApi(govde){return api('/api/kulup',{method:'POST',body:JSON.stringify(govde)});}

@@ -1,6 +1,9 @@
 # Site statik (derleme yok); sunucu fonksiyonları netlify/functions altında
 [build]
   publish = "."
+  # Yalnızca veri (haftalık fiyat/görsel) ya da betik değiştiyse yeniden yayınlama:
+  # fiyatlar sitede doğrudan GitHub'dan okunur, Netlify kredisi harcanmasın.
+  ignore = "git diff --quiet $CACHED_COMMIT_REF $COMMIT_REF -- . ':(exclude)data' ':(exclude)scripts' ':(exclude)README.md'"
 
 [functions]
   directory = "netlify/functions"

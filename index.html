@@ -280,6 +280,16 @@ nav.groups{display:flex;gap:6px;margin:20px 0 10px;background:var(--bg2);border:
 .dt-kunye b{color:var(--amber-soft);font-weight:700}
 .fchg{font-weight:800;font-size:12.5px;white-space:nowrap;margin-left:auto}
 .fchg.dn{color:var(--have)}.fchg.up{color:var(--red)}
+/* HARİTA */
+.h-ust{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-bottom:10px}
+#haritaKutu{height:68vh;min-height:420px;border-radius:14px;border:1px solid var(--line);position:relative;z-index:0;background:#0e0b07;overflow:hidden}
+.leaflet-container{font-family:inherit;background:#0e0b07}
+.leaflet-tooltip.h-etiket{background:rgba(26,18,8,.92);color:var(--txt);border:1px solid var(--line);font-weight:700;font-size:12px;box-shadow:none;padding:3px 8px;border-radius:8px}
+.leaflet-tooltip.h-etiket.dam{font-weight:600;font-size:11px;color:var(--muted)}
+.leaflet-tooltip-top.h-etiket:before{border-top-color:var(--line)}
+.leaflet-control-attribution{background:rgba(0,0,0,.55)!important;color:#9a8e78!important}.leaflet-control-attribution a{color:var(--amber-soft)!important}
+.leaflet-bar a{background:var(--panel)!important;color:var(--amber2)!important;border-color:var(--line)!important}
+.modal-bg{z-index:2000}
 @media(max-width:760px){
   body{padding-bottom:calc(84px + env(safe-area-inset-bottom))}
   header{padding:14px 0 10px;margin-bottom:12px}
@@ -288,7 +298,7 @@ nav.groups{display:flex;gap:6px;margin:20px 0 10px;background:var(--bg2);border:
   .stats::-webkit-scrollbar{display:none}
   .kpi{flex:0 0 auto;min-width:108px;padding:8px 12px}.kpi .val{font-size:17px}.kpi .lbl{font-size:10px}
   .glass-box{flex:0 0 auto;padding:8px 12px;gap:10px}.glass{width:28px;height:40px}.gv{font-size:16px}.gl{font-size:9.5px}
-  nav.groups{position:fixed;left:0;right:0;bottom:0;z-index:50;margin:0;border-radius:16px 16px 0 0;border-bottom:none;
+  nav.groups{position:fixed;left:0;right:0;bottom:0;z-index:1500;margin:0;border-radius:16px 16px 0 0;border-bottom:none;
     padding:6px 6px calc(6px + env(safe-area-inset-bottom));background:rgba(26,18,8,.96);backdrop-filter:blur(8px);box-shadow:0 -4px 18px rgba(0,0,0,.45)}
   .grp{flex-direction:column;gap:2px;font-size:10.5px;padding:7px 2px}.grp .gi{font-size:20px}
   #subNav{flex-wrap:nowrap;overflow-x:auto;margin-top:4px;scrollbar-width:none}#subNav::-webkit-scrollbar{display:none}
@@ -303,7 +313,7 @@ nav.groups{display:flex;gap:6px;margin:20px 0 10px;background:var(--bg2);border:
 <header><div class="wrap">
   <div class="brand">
     <div style="font-size:34px">🥃</div>
-    <div><h1 onclick="location.href='./'" style="cursor:pointer" title="Ana sayfaya dön">Viski Atlası <span style="font-size:13px;color:var(--muted2);font-weight:600;vertical-align:middle">v2.1</span></h1>
+    <div><h1 onclick="location.href='./'" style="cursor:pointer" title="Ana sayfaya dön">Viski Atlası <span style="font-size:13px;color:var(--muted2);font-weight:600;vertical-align:middle">v2.2</span></h1>
       <div class="sub">Bölge → Damıtımevi → Şişe · Uzman & AI tercihleri · Türkiye katmanları · Kişisel koleksiyon</div></div>
   </div>
   <div class="stats">
@@ -329,7 +339,8 @@ nav.groups{display:flex;gap:6px;margin:20px 0 10px;background:var(--bg2);border:
     <button class="grp" data-group="kaynak"><span class="gi">📚</span><span>Kaynaklar</span></button>
   </nav>
   <nav class="tabs hidden" id="subNav">
-    <div class="tab active" data-group="kesfet" data-view="explore">🗺️ Keşfet</div>
+    <div class="tab active" data-group="kesfet" data-view="explore">📋 Bölge listesi</div>
+    <div class="tab" data-group="kesfet" data-view="harita">🌍 Harita</div>
     <div class="tab" data-group="listeler" data-view="experts">🏆 Uzman Top 50</div>
     <div class="tab" data-group="listeler" data-view="ai">🤖 AI Tercihleri</div>
     <div class="tab" data-group="listeler" data-view="ncf">❄️ Filtresizler Top 50</div>
@@ -433,6 +444,19 @@ nav.groups{display:flex;gap:6px;margin:20px 0 10px;background:var(--bg2);border:
     <p class="note">Her şişenin solundaki mini görsele tıklayınca <b>Whiskybase</b> sayfası (gerçek fotoğraf + bilgi), 📷 ile Google Görseller açılır.</p>
   </section>
 
+  <section id="view-harita" class="hidden">
+    <div class="h-ust">
+      <div class="pillrow" style="margin:0">
+        <span class="chip on" data-hmod="hepsi">Tüm şişeler</span><span class="chip" data-hmod="elimde">✓ Elimdekiler</span><span class="chip" data-hmod="hedef">★ Hedeflerim</span>
+      </div>
+      <div class="pillrow" style="margin:0">
+        <button class="btn" data-hgit="dunya">🌍 Dünya</button><button class="btn" data-hgit="iskocya">🏴 İskoçya</button><button class="btn" data-hgit="islay">🌊 Islay</button>
+        <button class="btn" data-hgit="irlanda">🇮🇪 İrlanda</button><button class="btn" data-hgit="kentucky">🇺🇸 Kentucky</button><button class="btn" data-hgit="japonya">🇯🇵 Japonya</button>
+      </div>
+    </div>
+    <div id="haritaKutu"></div>
+    <p class="note" id="haritaNot">Daireler bölgedeki şişe sayısını gösterir. Yakınlaştırınca damıtımevleri belirir (yeşil = elinde olan şişesi var). Dokununca bölge rehberi ya da damıtımevi kartı açılır.</p>
+  </section>
   <section id="view-fiyat" class="hidden">
     <p class="intro">Her hafta otomatik olarak Türkiye'deki güncel fiyatı bulunan şişeler. Değişim, bir önceki doğrulanmış fiyata (yoksa sitedeki referans fiyata) göre hesaplanır. Fiyatın üstüne gelince kaynağı görünür.</p>
     <div id="fiyatBox"></div>
@@ -2560,7 +2584,7 @@ document.getElementById('collapseAll').onclick=()=>{openDams.clear();renderTree(
 // Sekme → çizim fonksiyonu. Sadece açık sekme çizilir (eskiden her işaretlemede 13 sekmenin
 // hepsi yeniden çiziliyordu); sekmeye geçince o sekme güncel durumla yeniden çizilir.
 const RENDER={explore:renderTree,experts:renderExperts,ai:renderAI,magazin:renderMagazin,ncf:renderNCF,katman:renderKatman,
-  stats:renderStats2,akilli:renderAkilli,gurme:renderGurme,personal:renderPersonal,notes:renderNotes,mylist:renderMyList,fiyat:renderFiyat};
+  stats:renderStats2,akilli:renderAkilli,harita:renderHarita,gurme:renderGurme,personal:renderPersonal,notes:renderNotes,mylist:renderMyList,fiyat:renderFiyat};
 const lastInGroup={};
 function showGroup(g){
   document.querySelectorAll('.grp').forEach(x=>x.classList.toggle('active',x.dataset.group===g));
@@ -2836,6 +2860,88 @@ function hashAc2(){
   const h=decodeURIComponent(location.hash);
   if(h.startsWith('#d='))openDam(h.slice(3));else if(h.startsWith('#b='))openBolge(h.slice(3));
 }
+
+/* ===== HARİTA (Leaflet; data/konumlar.json) ===== */
+let KONUM=null,HARITA=null,HKatman=null,HMod='hepsi';
+const HGIT={dunya:[[30,10],2],iskocya:[[57.0,-4.6],6],islay:[[55.75,-6.25],10],irlanda:[[53.4,-7.6],7],kentucky:[[37.9,-85.3],8],japonya:[[37.5,138.5],5]};
+// Tek seferlik yükleme: sekme açılırken renderHarita birden çok kez çağrılabiliyor; kütüphane
+// iki kez yüklenirse ikinci kopya ilkinin üzerine yazıp haritayı bozuyordu.
+let leafletSoz=null;
+function leafletYukle(){
+  if(window.L)return Promise.resolve();
+  if(leafletSoz)return leafletSoz;
+  return leafletSoz=new Promise((ok,no)=>{
+    const c=document.createElement('link');c.rel='stylesheet';c.href='https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css';document.head.appendChild(c);
+    const j=document.createElement('script');j.src='https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js';j.onload=ok;j.onerror=()=>{leafletSoz=null;no();};document.head.appendChild(j);
+  });
+}
+async function renderHarita(){
+  const kutu=document.getElementById('haritaKutu');if(!kutu)return;
+  try{if(!KONUM)KONUM=await fetch('data/konumlar.json').then(r=>r.json());await leafletYukle();}
+  catch(e){kutu.innerHTML='<div class="empty" style="margin:20px">Harita yüklenemedi; internet bağlantısı gerekli.</div>';return;}
+  if(!HARITA){
+    HARITA=L.map(kutu,{worldCopyJump:true,minZoom:2,maxZoom:14}).setView(HGIT.dunya[0],HGIT.dunya[1]);
+    // Esri Koyu Gri altlık + yer adları katmanı (API anahtarı gerektirmez)
+    const ESRI='https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/';
+    L.tileLayer(ESRI+'World_Dark_Gray_Base/MapServer/tile/{z}/{y}/{x}',{maxZoom:16,attribution:'Harita © Esri, HERE, Garmin, © OpenStreetMap katkıcıları'}).addTo(HARITA);
+    L.tileLayer(ESRI+'World_Dark_Gray_Reference/MapServer/tile/{z}/{y}/{x}',{maxZoom:16,pane:'shadowPane'}).addTo(HARITA);
+    HKatman=L.layerGroup().addTo(HARITA);
+    HARITA.on('zoomend',haritaCiz);
+  }
+  setTimeout(()=>HARITA.invalidateSize(),60);
+  haritaCiz();
+}
+function haritaSiseler(){
+  const a=allBottles();
+  if(HMod==='elimde')return a.filter(b=>state.have.includes(b.id));
+  if(HMod==='hedef')return a.filter(b=>state.target.includes(b.id));
+  return a;
+}
+function bolgeEtiket(k){
+  const [u,r]=k.split('|');
+  if(r.startsWith('Harman'))return 'İskoç Harmanı';
+  if(r.startsWith('Islands ('))return r.slice(9,-1);
+  if(r===u)return u;
+  return r;
+}
+function haritaCiz(){
+  if(!HARITA||!KONUM)return;
+  HKatman.clearLayers();
+  const z=HARITA.getZoom(),sis=haritaSiseler(),damGoster=z>=6;
+  // Aynı noktaya düşen bölgeleri (ör. üç İskoç harman türü) tek dairede topla
+  const nokta={};
+  sis.forEach(b=>{const k=b.ulke+'|'+b.bolge,c=KONUM.bolgeler[k];if(!c)return;const ck=c.join(',');
+    const p=(nokta[ck]=nokta[ck]||{c,n:0,k,sahip:0});p.n++;if(state.have.includes(b.id))p.sahip++;});
+  Object.values(nokta).forEach(p=>{
+    const [u,r]=p.k.split('|');
+    const yar=Math.max(7,Math.min(34,Math.sqrt(p.n)*3.2))*(damGoster?0.7:1);
+    const m=L.circleMarker(p.c,{radius:yar,color:'#f2c14e',weight:1.5,fillColor:p.sahip?'#7fbf6a':'#e0a83c',fillOpacity:damGoster?0.16:0.42});
+    // Bölge etiketi: dünya görünümünde yalnızca büyük bölgeler, orta yakınlıkta hepsi, damıtımevleri görününce gizli (üst üste binmesin)
+    const kalici=z<4?p.n>=60:z<6?p.n>=5:z<7?p.n>=10:false;
+    m.bindTooltip(`${bolgeEtiket(p.k)} · ${p.n} şişe${p.sahip?` · ✓${p.sahip}`:''}`,{direction:'top',className:'h-etiket',permanent:kalici,offset:[0,-yar]});
+    m.on('click',()=>openBolge(bolgeAnahtar({ulke:u,bolge:r})));
+    HKatman.addLayer(m);
+  });
+  if(damGoster){
+    const damlar={};
+    sis.forEach(b=>{if(!KONUM.damlar[b.dam])return;const d=(damlar[b.dam]=damlar[b.dam]||{n:0,sahip:0});d.n++;if(state.have.includes(b.id))d.sahip++;});
+    Object.entries(damlar).forEach(([ad,d])=>{
+      const m=L.circleMarker(KONUM.damlar[ad],{radius:5+Math.min(5,d.n/3),color:'#1a1208',weight:1.5,fillColor:d.sahip?'#7fbf6a':'#f4ead6',fillOpacity:.95});
+      m.bindTooltip(`${ad} · ${d.n}`,{direction:'top',className:'h-etiket dam',permanent:z>=9,offset:[0,-6]});
+      m.on('click',()=>openDam(ad));
+      HKatman.addLayer(m);
+    });
+  }
+  const not=document.getElementById('haritaNot');
+  if(not&&HMod!=='hepsi'&&!sis.length)not.textContent=HMod==='elimde'?'Henüz "Elimde" işaretlediğin şişe yok; işaretledikçe haritan dolacak.':'Henüz hedef şişe seçmedin.';
+  else if(not)not.textContent='Daireler bölgedeki şişe sayısını gösterir. Yakınlaştırınca damıtımevleri belirir (yeşil = elinde olan şişesi var). Dokununca bölge rehberi ya da damıtımevi kartı açılır.';
+}
+document.addEventListener('click',e=>{
+  const hm=e.target.closest('[data-hmod]');
+  if(hm){HMod=hm.dataset.hmod;document.querySelectorAll('[data-hmod]').forEach(x=>x.classList.toggle('on',x===hm));haritaCiz();return;}
+  const hg=e.target.closest('[data-hgit]');
+  if(hg&&HARITA){const [c,zz]=HGIT[hg.dataset.hgit];HARITA.flyTo(c,zz,{duration:1.2});}
+});
 
 /* ===== 18 YAŞ ONAYI ===== */
 (function(){

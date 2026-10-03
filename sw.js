@@ -1,5 +1,5 @@
 // Viski Atlası — Service Worker (çevrimdışı destek)
-const CACHE = 'viski-atlas-v15';
+const CACHE = 'viski-atlas-v16';
 const ASSETS = [
   './',
   './index.html',
@@ -25,6 +25,8 @@ self.addEventListener('fetch', e => {
   const url = new URL(req.url);
   // Güncel fiyat dosyası her zaman ağdan gelsin (önbelleğe alınmaz)
   if (url.hostname === 'raw.githubusercontent.com') return;
+  // Harita karoları çok sayıda; önbelleği şişirmesin
+  if (url.hostname === 'server.arcgisonline.com') return;
   // Aynı origin: önce ağ (taze sürüm), olmazsa cache. Diğer (resim vs.): cache-first.
   if (url.origin === location.origin) {
     e.respondWith(

@@ -271,6 +271,13 @@ nav.groups{display:flex;gap:6px;margin:20px 0 10px;background:var(--bg2);border:
 .dt-acts{display:flex;gap:8px;flex-wrap:wrap;margin-top:18px}
 .dt-acts .btn{padding:9px 13px;font-size:13px}
 .spark{width:100%;height:70px;display:block}
+.bilgibtn{background:transparent;border:1px solid var(--line);color:var(--muted);border-radius:8px;padding:2px 7px;font-size:12px;cursor:pointer;margin-left:2px}
+.bilgibtn:hover{border-color:var(--amber-soft);color:var(--amber2)}
+.bilgibtn.rehber{font-weight:700;color:var(--amber-soft)}
+.tadim{display:grid;gap:7px}.tadim>div{background:var(--bg2);border:1px solid var(--line);border-radius:10px;padding:8px 10px;font-size:13.5px;line-height:1.5}
+.tadim b{display:block;font-size:11px;color:var(--amber-soft);text-transform:uppercase;letter-spacing:.4px;margin-bottom:2px}
+.dt-kunye{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0}.dt-kunye span{background:var(--bg2);border:1px solid var(--line);border-radius:20px;padding:5px 11px;font-size:12.5px}
+.dt-kunye b{color:var(--amber-soft);font-weight:700}
 .fchg{font-weight:800;font-size:12.5px;white-space:nowrap;margin-left:auto}
 .fchg.dn{color:var(--have)}.fchg.up{color:var(--red)}
 @media(max-width:760px){
@@ -296,7 +303,7 @@ nav.groups{display:flex;gap:6px;margin:20px 0 10px;background:var(--bg2);border:
 <header><div class="wrap">
   <div class="brand">
     <div style="font-size:34px">🥃</div>
-    <div><h1 onclick="location.href='./'" style="cursor:pointer" title="Ana sayfaya dön">Viski Atlası <span style="font-size:13px;color:var(--muted2);font-weight:600;vertical-align:middle">v2.0</span></h1>
+    <div><h1 onclick="location.href='./'" style="cursor:pointer" title="Ana sayfaya dön">Viski Atlası <span style="font-size:13px;color:var(--muted2);font-weight:600;vertical-align:middle">v2.1</span></h1>
       <div class="sub">Bölge → Damıtımevi → Şişe · Uzman & AI tercihleri · Türkiye katmanları · Kişisel koleksiyon</div></div>
   </div>
   <div class="stats">
@@ -1725,7 +1732,8 @@ function renderTree(){
     regions.forEach(bolge=>{
       const rEl=document.createElement('div');rEl.className='region';
       const rc=Object.values(byCountry[ulke][bolge]).reduce((q,a)=>q+a.length,0);
-      rEl.innerHTML=`<div class="rhead"><h3>${bolge}</h3><span class="rc">${rc} şişe</span></div>`;
+      const rk=bolgeAnahtar({ulke,bolge});
+      rEl.innerHTML=`<div class="rhead"><h3>${bolge}</h3>${BOLGELER[rk]?`<button class="bilgibtn rehber" data-bolge="${esc(rk)}">📖 Bölge rehberi</button>`:''}<span class="rc">${rc} şişe</span></div>`;
       const dams=Object.keys(byCountry[ulke][bolge]).sort((a,b)=>{
         const rank={'Premium':0,'2':1,'3':2};
         const ra=rank[byCountry[ulke][bolge][a][0].sev], rb=rank[byCountry[ulke][bolge][b][0].sev];
@@ -1739,7 +1747,7 @@ function renderTree(){
         const key=ulke+'|||'+bolge+'|||'+dam;
         const isOpen=arama?!aramaKapali.has(key):openDams.has(key);
         const dEl=document.createElement('div');dEl.className='distillery'+(isOpen?' open':'');
-        dEl.innerHTML=`<div class="dhead"><span class="caret">▶</span><span class="tier ${tierCls}">${tierTxt}</span><h4>${dam}</h4>
+        dEl.innerHTML=`<div class="dhead"><span class="caret">▶</span><span class="tier ${tierCls}">${tierTxt}</span><h4>${dam}</h4><button class="bilgibtn" data-dam="${esc(dam)}" title="${esc(dam)} hakkında">ℹ️</button>
           <span class="dc"><span>${arr.length} şişe</span></span></div><div class="dbody"></div>`;
         const db=dEl.querySelector('.dbody');
         arr.forEach((b,i)=>db.appendChild(bottleRow(b,i+1)));
@@ -2716,7 +2724,7 @@ function openDetay(id){
     :b.tlTarih?(FIYAT_TUR[b.tlTur]||'Otomatik')+' · '+trTarih(b.tlTarih):'Yaklaşık referans fiyat (henüz otomatik doğrulanmadı)';
   const fl=[...flavorsOf(b)];
   document.getElementById('detay').innerHTML=`<button class="dt-x" data-detay-kapat title="Kapat">✕</button>
-    <div class="dt-head">${b.imgSahip?`<div class="dt-img"><img src="${esc(b.img)}" alt="${esc(b.ad)}" loading="lazy"></div>`:thumb(b)}<div><h3>${b.ad}</h3><div class="dt-sub">${b.dam} · ${b.bolge} · ${b.ulke}</div>
+    <div class="dt-head">${b.imgSahip?`<div class="dt-img"><img src="${esc(b.img)}" alt="${esc(b.ad)}" loading="lazy"></div>`:thumb(b)}<div><h3>${b.ad}</h3><div class="dt-sub"><span class="isimlink" data-dam="${esc(b.dam)}">${b.dam}</span> · <span class="isimlink" data-bolge="${esc(bolgeAnahtar(b))}">${b.bolge}</span> · ${b.ulke}</div>
       <div class="dt-badges">${badges.join('')}</div>
       ${b.imgSahip?`<div class="dt-src">📷 Görsel: ${esc(b.imgSahip)}${b.imgKaynak?` · <a href="${esc(b.imgKaynak)}" target="_blank" rel="noopener">kaynak</a>`:''}</div>`:''}</div></div>
     <div class="dt-grid">
@@ -2729,6 +2737,7 @@ function openDetay(id){
     </div>
     <div class="dt-src">💰 ${kaynak}${b.tlKaynak&&state.prices[id]===undefined?` · <a href="${esc(b.tlKaynak)}" target="_blank" rel="noopener">kaynak</a>`:''}</div>
     ${b.not||b.uz?`<div class="dt-sec"><h4>Hakkında</h4><div class="dt-txt">${b.not||''}${b.uz?`<div class="dt-src">🏆 ${b.uz}</div>`:''}</div></div>`:''}
+    ${TADIM[id]?`<div class="dt-sec"><h4>Tadım notu</h4><div class="tadim"><div><b>👃 Burun</b>${esc(TADIM[id].b)}</div><div><b>👅 Damak</b>${esc(TADIM[id].d)}</div><div><b>⏳ Bitiş</b>${esc(TADIM[id].f)}</div>${TADIM[id].s?`<div><b>🥃 Servis</b>${esc(TADIM[id].s)}</div>`:''}</div></div>`:''}
     ${fl.length?`<div class="dt-sec"><h4>Tat profili</h4><div class="aromarow">${fl.map(f=>`<span class="aroma">${f}</span>`).join('')}</div></div>`:''}
     ${b.tlGecmis&&b.tlGecmis.length>1?`<div class="dt-sec"><h4>Fiyat geçmişi</h4>${sparkSVG(b.tlGecmis)}</div>`:''}
     ${nt&&nt.t?`<div class="dt-sec"><h4>Senin notun</h4><div class="dt-txt">${esc(nt.t)}</div></div>`:''}
@@ -2745,7 +2754,7 @@ function openDetay(id){
 }
 function closeDetay(){
   DETAY_ID=null;document.getElementById('detayBg').classList.remove('on');
-  if(location.hash.startsWith('#s='))history.replaceState(null,'',location.pathname+location.search);
+  if(/^#[sdb]=/.test(location.hash))history.replaceState(null,'',location.pathname+location.search);
 }
 document.addEventListener('click',e=>{
   if(e.target.id==='detayBg'||e.target.closest('[data-detay-kapat]')){closeDetay();return;}
@@ -2761,6 +2770,72 @@ document.addEventListener('click',e=>{
 document.addEventListener('keydown',e=>{if(e.key==='Escape'&&DETAY_ID)closeDetay();});
 function hashAc(){const m=location.hash.match(/^#s=(.+)$/);if(m)openDetay(decodeURIComponent(m[1]));}
 window.addEventListener('hashchange',hashAc);
+
+/* ===== DAMITIMEVİ KARTLARI, BÖLGE REHBERLERİ, TADIM NOTLARI (data/*.json) ===== */
+let DAMS={},BOLGELER={},TADIM={};
+function bolgeAnahtar(b){
+  const r=b.bolge||'',u=b.ulke||'';
+  if(u==='İskoçya'){
+    if(r.startsWith('Islands'))return 'Islands';
+    if(r.startsWith('Harman'))return 'İskoç Harmanı';
+    return r;
+  }
+  if(u==='İrlanda')return 'İrlanda';
+  if(u==='ABD'){if(r.startsWith('Bourbon'))return 'Bourbon';if(r.startsWith('Rye'))return 'Çavdar';if(r==='Tennessee')return 'Tennessee';if(r.startsWith('Amerikan'))return 'Amerikan Single Malt';return 'Bourbon';}
+  if(u==='Kanada')return 'Kanada';
+  if(['Japonya','Hindistan','Tayvan'].includes(u))return u;
+  if(['Avustralya','Yeni Zelanda','İsrail','Güney Afrika'].includes(u))return 'Yeni Dünya';
+  return 'Avrupa';
+}
+function miniSatir(x){return `<div class="mini">${thumb(x)}<div><div class="nm"><span class="isimlink" data-detay="${x.id}">${x.ad}</span></div><div class="meta">${x.dam} · ${x.puan||'—'} puan · <span class="avail av-${x.bul}">${AV_TXT[x.bul]||x.bul}</span></div></div><span class="price">${fmt(priceOf(x))}</span></div>`;}
+function kartAc(html,hash){
+  DETAY_ID=null;document.getElementById('detay').innerHTML='<button class="dt-x" data-detay-kapat title="Kapat">✕</button>'+html;
+  document.getElementById('detayBg').classList.add('on');document.getElementById('detay').scrollTop=0;
+  history.replaceState(null,'','#'+hash);
+}
+function openDam(ad){
+  const sis=allBottles().filter(x=>x.dam===ad).sort((a,c)=>(c.puan||0)-(a.puan||0));if(!sis.length)return;
+  const d=DAMS[ad]||{},b0=sis[0];
+  const fiyatlar=sis.map(priceOf).filter(v=>v>0);
+  const kunye=[d.k?`<span><b>Kuruluş</b> ${d.k}</span>`:'',d.s?`<span><b>Sahibi</b> ${esc(d.s)}</span>`:'',`<span><b>Yer</b> ${esc(d.y||b0.bolge+', '+b0.ulke)}</span>`,
+    `<span><b>Sitede</b> ${sis.length} şişe</span>`,fiyatlar.length?`<span><b>Fiyat</b> ${fmt(Math.min(...fiyatlar))} – ${fmt(Math.max(...fiyatlar))}</span>`:''].join('');
+  kartAc(`<div class="dt-head"><div><h3>🏭 ${esc(ad)}</h3><div class="dt-sub"><span class="isimlink" data-bolge="${esc(bolgeAnahtar(b0))}">${b0.bolge}</span> · ${b0.ulke}</div></div></div>
+    <div class="dt-kunye">${kunye}</div>
+    ${d.stil?`<div class="dt-sec"><h4>Ev stili</h4><div class="dt-txt">${esc(d.stil)}</div></div>`:''}
+    ${d.h?`<div class="dt-sec"><h4>Hikâyesi</h4><div class="dt-txt">${esc(d.h)}</div></div>`:''}
+    <div class="dt-sec"><h4>${sis.length>3?'En yüksek puanlı 3 şişe':'Sitedeki şişeleri'}</h4>${sis.slice(0,3).map(miniSatir).join('')}</div>
+    ${sis.length>3?`<div class="dt-sec"><h4>Diğer şişeleri (${sis.length-3})</h4>${sis.slice(3).map(miniSatir).join('')}</div>`:''}`,'d='+encodeURIComponent(ad));
+}
+function bolgeSecimleri(key){
+  const tum=allBottles().filter(x=>bolgeAnahtar(x)===key&&priceOf(x)>0);
+  const ulas=tum.filter(x=>['kolay','tekel','dutyfree'].includes(x.bul));
+  const havuz=ulas.length>=6?ulas:tum;
+  const fy=havuz.map(priceOf).sort((a,c)=>a-c),med=fy[Math.floor(fy.length/2)]||0;
+  const bas=havuz.filter(x=>priceOf(x)<=med).sort((a,c)=>((c.puan||80)-(a.puan||80))||priceOf(a)-priceOf(c)).slice(0,3);
+  const ust=havuz.filter(x=>!bas.includes(x)&&priceOf(x)>med).sort((a,c)=>((c.puan||80)-(a.puan||80))||priceOf(a)-priceOf(c)).slice(0,3);
+  return {bas,ust,n:allBottles().filter(x=>bolgeAnahtar(x)===key).length};
+}
+function openBolge(key){
+  const r=BOLGELER[key];if(!r)return;const {bas,ust,n}=bolgeSecimleri(key);
+  const damlar=[...new Set(allBottles().filter(x=>bolgeAnahtar(x)===key).map(x=>x.dam))];
+  kartAc(`<div class="dt-head"><div><h3>📖 ${esc(key)}</h3><div class="dt-sub">Sitede ${n} şişe · ${damlar.length} damıtımevi/marka</div></div></div>
+    <div class="dt-sec"><h4>Karakteri</h4><div class="dt-txt">${esc(r.k)}</div></div>
+    ${r.t?`<div class="dt-sec"><h4>Bilmekte fayda var</h4><div class="dt-txt">${esc(r.t)}</div></div>`:''}
+    ${r.i?`<div class="dt-sec"><h4>Nereden başlamalı?</h4><div class="dt-txt">${esc(r.i)}</div></div>`:''}
+    ${bas.length?`<div class="dt-sec"><h4>🌱 Başlangıç için (ulaşılabilir fiyat)</h4>${bas.map(miniSatir).join('')}</div>`:''}
+    ${ust.length?`<div class="dt-sec"><h4>⭐ Bir üst seviye</h4>${ust.map(miniSatir).join('')}</div>`:''}
+    <div class="dt-sec"><h4>Damıtımevleri</h4><div class="aromarow">${damlar.slice(0,40).map(d=>`<span class="aroma" data-dam="${esc(d)}">${esc(d)}</span>`).join('')}</div></div>`,'b='+encodeURIComponent(key));
+}
+document.addEventListener('click',e=>{
+  const dm=e.target.closest('[data-dam]');if(dm){e.stopPropagation();openDam(dm.dataset.dam);return;}
+  const bl=e.target.closest('[data-bolge]');if(bl){e.stopPropagation();openBolge(bl.dataset.bolge);return;}
+},true);
+Promise.all(['damitimevleri','bolgeler','tadim'].map(f=>fetch('data/'+f+'.json',{cache:'no-cache'}).then(r=>r.ok?r.json():{}).catch(()=>({}))))
+  .then(([d,b,t])=>{DAMS=d;BOLGELER=b;TADIM=t;renderAll();hashAc2();});
+function hashAc2(){
+  const h=decodeURIComponent(location.hash);
+  if(h.startsWith('#d='))openDam(h.slice(3));else if(h.startsWith('#b='))openBolge(h.slice(3));
+}
 
 /* ===== 18 YAŞ ONAYI ===== */
 (function(){

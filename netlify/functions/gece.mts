@@ -4,6 +4,10 @@
 //   POST /api/gece {islem:"katil", id, ad}               → {pid}
 //   POST /api/gece {islem:"puan", id, pid, sira, p, not} → {tamam}
 //   POST /api/gece {islem:"yonet", id, yk, eylem:"acikla"|"bitir"|"ac"|"sil"}
+//   POST /api/gece {islem:"yonet", id, yk, eylem:"guncelle", ad, tarih, yer, aciklama, kor}
+//   POST /api/gece {islem:"yonet", id, yk, eylem:"sise-ekle", sise}
+//   POST /api/gece {islem:"yonet", id, yk, eylem:"sise-cikar"|"sise-degistir", sira[, sise]}
+//   POST /api/gece {islem:"yonet", id, yk, eylem:"katilimci-cikar", pid}
 // Depo düzeni: "<id>/meta" gece bilgisi, "<id>/k/<pid>" her katılımcının kendi puanları
 // (aynı anda puan veren katılımcılar birbirinin verisini ezmesin diye ayrı anahtarlar).
 import type { Context, Config } from "@netlify/functions";
@@ -11,6 +15,24 @@ import { depoAl, json, hata, ozet, govdeOku, rastgele, kirp, type Depo } from ".
 
 const EN_COK_SISE = 12, EN_COK_KATILIMCI = 40;
 const idGecerli = (v: unknown) => typeof v === "string" && /^[a-z0-9]{10}$/.test(v);
+
+// Bir örnek çıkarıldığında/değiştirildiğinde katılımcı puanlarını yeniden numaralandır:
+// çıkarmada o örneğin puanları silinir ve sonrakiler bir sıra kayar; değiştirmede yalnızca o örneğin puanları silinir.
+async function puanlariDuzenle(depo: Depo, id: string, sira: number, kaydir: boolean) {
+  const { blobs } = await depo.list({ prefix: `${id}/k/` });
+  await Promise.all(blobs.map(async (b) => {
+    const k = await depo.get(b.key, { type: "json" });
+    if (!k || !k.puanlar) return;
+    const yeni: Record<string, unknown> = {};
+    for (const [anahtar, deger] of Object.entries(k.puanlar)) {
+      const i = Number(anahtar);
+      if (i === sira) continue;
+      yeni[String(kaydir && i > sira ? i - 1 : i)] = deger;
+    }
+    k.puanlar = yeni;
+    await depo.setJSON(b.key, k);
+  }));
+}
 
 async function katilimcilar(depo: Depo, id: string) {
   const { blobs } = await depo.list({ prefix: `${id}/k/` });
@@ -93,6 +115,44 @@ export async function isle(req: Request, depo: Depo): Promise<Response> {
       if (g.eylem === "sil") {
         const { blobs } = await depo.list({ prefix: `${g.id}/` });
         await Promise.all(blobs.map((b) => depo.delete(b.key)));
+        return json({ tamam: true });
+      }
+      if (g.eylem === "guncelle") {
+        const ad = kirp(g.ad, 80);
+        if (!ad) return hata("Gecenin bir adı olmalı");
+        meta.ad = ad; meta.tarih = kirp(g.tarih, 30); meta.yer = kirp(g.yer, 80); meta.aciklama = kirp(g.aciklama, 500);
+        // Şişeler açıklandıktan sonra kör tadım geri açılamaz
+        if (!meta.aciklandi && typeof g.kor === "boolean") meta.kor = g.kor;
+        await depo.setJSON(`${g.id}/meta`, meta);
+        return json({ tamam: true });
+      }
+      if (g.eylem === "sise-ekle") {
+        const sise = kirp(g.sise, 80);
+        if (!sise) return hata("Şişe seçilmedi");
+        if (meta.siseler.length >= EN_COK_SISE) return hata(`En fazla ${EN_COK_SISE} şişe olabilir`);
+        meta.siseler.push(sise);
+        await depo.setJSON(`${g.id}/meta`, meta);
+        return json({ tamam: true });
+      }
+      if (g.eylem === "sise-cikar" || g.eylem === "sise-degistir") {
+        const sira = Number(g.sira);
+        if (!Number.isInteger(sira) || sira < 0 || sira >= meta.siseler.length) return hata("Geçersiz örnek");
+        if (g.eylem === "sise-cikar") {
+          if (meta.siseler.length <= 1) return hata("Gecede en az bir şişe kalmalı");
+          meta.siseler.splice(sira, 1);
+          await puanlariDuzenle(depo, g.id, sira, true);
+        } else {
+          const sise = kirp(g.sise, 80);
+          if (!sise) return hata("Şişe seçilmedi");
+          meta.siseler[sira] = sise;
+          await puanlariDuzenle(depo, g.id, sira, false);
+        }
+        await depo.setJSON(`${g.id}/meta`, meta);
+        return json({ tamam: true });
+      }
+      if (g.eylem === "katilimci-cikar") {
+        if (typeof g.pid !== "string" || !/^[a-z0-9]{8}$/.test(g.pid)) return hata("Geçersiz katılımcı");
+        await depo.delete(`${g.id}/k/${g.pid}`);
         return json({ tamam: true });
       }
       if (g.eylem === "acikla") meta.aciklandi = true;

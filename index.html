@@ -361,7 +361,7 @@ nav.groups{display:flex;gap:6px;margin:20px 0 10px;background:var(--bg2);border:
 <header><div class="wrap">
   <div class="brand">
     <div style="font-size:34px">🥃</div>
-    <div><h1 onclick="location.href='./'" style="cursor:pointer" title="Ana sayfaya dön">Viski Atlası <span style="font-size:13px;color:var(--muted2);font-weight:600;vertical-align:middle">v2.5</span></h1>
+    <div><h1 onclick="location.href='./'" style="cursor:pointer" title="Ana sayfaya dön">Viski Atlası <span style="font-size:13px;color:var(--muted2);font-weight:600;vertical-align:middle">v2.6</span></h1>
       <div class="sub">Bölge → Damıtımevi → Şişe · Uzman & AI tercihleri · Türkiye katmanları · Kişisel koleksiyon</div></div>
   </div>
   <div class="stats">
@@ -3231,12 +3231,15 @@ document.addEventListener('visibilitychange',()=>{if(document.visibilityState===
 window.addEventListener('online',()=>{if(BULUT.kirli)bulutGonder();});
 
 /* ===== TADIM GECESİ ===== */
-let GECE={id:null,veri:null,zam:null,kaydetZam:{}};
+let GECE={id:null,veri:null,zam:null,kaydetZam:{},duzenle:false};
 const gecelerim=()=>lsAl('viski_geceler',{});
 function geceKaydet(id,v){const g=gecelerim();g[id]=Object.assign(g[id]||{},v);lsYaz('viski_geceler',g);}
 const geceLink=id=>location.origin+location.pathname+'#gece='+id;
 function siseBilgi(x){const b=allBottles().find(y=>y.id===x);return b?{b,ad:b.ad}:{b:null,ad:x};}
 function tarihYaz(t){if(!t)return '';const d=new Date(t);return isNaN(d)?g$(t):d.toLocaleString('tr-TR',{weekday:'short',day:'numeric',month:'long',hour:'2-digit',minute:'2-digit'});}
+// Takma ad kutusunda örnek: viskisiyle ünlü karakterlerden rastgele biri
+const TAKMA_ORNEK=['Frank Gallagher','Kaptan Haddock','Ron Swanson','Don Draper','Roger Sterling','James Bond','Logan Roy','Sherlock Holmes','Tommy Shelby','Jack Torrance','Rick Deckard','The Dude'];
+const ornekTakma=()=>TAKMA_ORNEK[Math.floor(Math.random()*TAKMA_ORNEK.length)];
 let YENI_SISELER=[];
 function renderGece(){
   const k=document.getElementById('geceKutu');if(!k)return;
@@ -3252,7 +3255,7 @@ function renderGece(){
         <div class="iki"><label>Tarih ve saat<input id="gTarih" type="datetime-local"></label><label>Yer<input id="gYer" maxlength="80" placeholder="ör. Bizim ev"></label></div>
         <label>Açıklama (isteğe bağlı)<textarea id="gAcik" maxlength="500" rows="2" placeholder="Herkes bir şişe getiriyor, peynir tabağı bizden…"></textarea></label>
         <label style="display:flex;align-items:center;gap:8px;flex-direction:row"><input type="checkbox" id="gKor"> 🎭 Kör tadım: şişelerin adı ben açıklayana kadar gizli kalsın</label>
-        <label>Senin takma adın<input id="gBenAd" maxlength="30" placeholder="ör. Mükremin" value="${g$(lsAl('viski_takma_ad',''))}"></label>
+        <label>Senin takma adın<input id="gBenAd" maxlength="30" placeholder="ör. ${ornekTakma()}" value="${g$(lsAl('viski_takma_ad',''))}"></label>
         <label>Tadılacak şişeler (en fazla 12; sıra = örnek numarası)
           <div style="display:flex;gap:8px"><input id="gSiseAra" list="gSiseListe" placeholder="Şişe adı yaz ve seç…" style="flex:1"><button class="btn" data-gece="ekle">Ekle</button></div>
           <datalist id="gSiseListe">${allBottles().map(b=>`<option value="${g$(b.ad)}">`).join('')}</datalist></label>
@@ -3311,7 +3314,7 @@ async function geceYukle(sessiz){
     const v=await api('/api/gece?id='+encodeURIComponent(GECE.id)+(g.yk?'&yk='+encodeURIComponent(g.yk):''));
     const once=GECE.veri;GECE.veri=v;geceKaydet(GECE.id,{ad:v.ad,tarih:v.tarih,t:g.t||new Date().toISOString()});
     // Puan kutularında yazarken yeniden çizmeyelim; durum değiştiyse tamamını, yoksa yalnızca sonuç/katılımcıları yenile
-    if(!sessiz||!once||once.aciklandi!==v.aciklandi||once.bitti!==v.bitti)geceCiz();else geceParcaCiz();
+    if(!sessiz||!once||once.aciklandi!==v.aciklandi||once.bitti!==v.bitti){if(!(sessiz&&GECE.duzenle))geceCiz();}else geceParcaCiz();
   }catch(e){
     document.getElementById('geceKutu').innerHTML=`<div class="gkart"><h3>⚠️ ${g$(e.message)}</h3><button class="btn" data-gece="liste">‹ Gecelerime dön</button></div>`;
     clearInterval(GECE.zam);
@@ -3370,10 +3373,12 @@ function geceCiz(){
       <div class="satir" style="display:flex;gap:8px;flex-wrap:wrap;margin-top:12px"><button class="eklebtn" style="margin:0" data-gece="davet">📤 Davet et</button><button class="btn" data-gece="linkkopya">🔗 Linki kopyala</button></div>
       <h4 style="margin:14px 0 6px;font-size:12px;color:var(--amber-soft);text-transform:uppercase">Katılımcılar</h4><div id="gKatilim">${geceKatilimciHTML(v)}</div>
     </div>
-    ${!ben&&!kilit?`<div class="gkart"><h3>🙋 Katıl</h3><div style="display:flex;gap:8px;flex-wrap:wrap"><input id="gKatilAd" maxlength="30" placeholder="Takma adın" value="${g$(lsAl('viski_takma_ad',''))}" style="flex:1;min-width:160px;background:var(--bg2);border:1px solid var(--line);color:var(--txt);padding:9px 11px;border-radius:9px"><button class="eklebtn" style="margin:0" data-gece="katil">Katılıyorum</button></div></div>`:''}
+    ${v.yonetici&&GECE.duzenle?geceDuzenleHTML(v):''}
+    ${!ben&&!kilit?`<div class="gkart"><h3>🙋 Katıl</h3><div style="display:flex;gap:8px;flex-wrap:wrap"><input id="gKatilAd" maxlength="30" placeholder="Takma adın (ör. ${ornekTakma()})" value="${g$(lsAl('viski_takma_ad',''))}" style="flex:1;min-width:160px;background:var(--bg2);border:1px solid var(--line);color:var(--txt);padding:9px 11px;border-radius:9px"><button class="eklebtn" style="margin:0" data-gece="katil">Katılıyorum</button></div></div>`:''}
     <div class="gkart"><h3>${ben?'⭐ Puanların':'🥃 Örnekler'}</h3>${ben&&!kilit?'<p class="dt-txt" style="color:var(--muted);margin-bottom:10px">Kaydırıcıyla 50–100 arası puan ver; notun otomatik kaydedilir.</p>':''}${ornekler}</div>
     <div class="gkart"><h3>📊 Sonuçlar</h3><div id="gSonuc">${geceSonucHTML(v)}</div></div>
     ${v.yonetici?`<div class="gkart"><h3>👑 Ev sahibi</h3><div style="display:flex;gap:8px;flex-wrap:wrap">
+      <button class="btn" data-gece="duzenle">✏️ ${GECE.duzenle?'Düzenlemeyi kapat':'Düzenle'}</button>
       ${v.kor&&!v.aciklandi?'<button class="btn" data-gece-yonet="acikla">🎭 Şişeleri açıkla</button>':''}
       ${!v.bitti?'<button class="btn" data-gece-yonet="bitir">🏁 Geceyi bitir</button>':'<button class="btn" data-gece-yonet="ac">🔓 Yeniden aç</button>'}
       <button class="btn" data-gece="yklink">🔑 Ev sahibi linkini kopyala</button><button class="btn" data-gece-yonet="sil" style="color:var(--red)">🗑️ Geceyi sil</button></div>
@@ -3414,6 +3419,7 @@ document.addEventListener('click',async e=>{
   if(i==='ekle'){const a=document.getElementById('gSiseAra');geceSiseEkle(a.value);a.value='';a.focus();}
   else if(i==='olustur')geceOlustur();
   else if(i==='liste')location.hash='#gece';
+  else if(i==='duzenle'){GECE.duzenle=!GECE.duzenle;geceCiz();if(GECE.duzenle)document.getElementById('gDuzenle').scrollIntoView({behavior:'smooth',block:'start'});}
   else if(i==='davet'){const v=GECE.veri;paylas('Tadım gecesi: '+v.ad,'🥃 '+v.ad+(v.tarih?' · '+tarihYaz(v.tarih):'')+'\nTadım gecesine davetlisin! Linke tıkla, takma adını yaz, puanlarını telefonundan ver:',geceLink(GECE.id));}
   else if(i==='linkkopya')kopyala(geceLink(GECE.id),b);
   else if(i==='yklink')kopyala(geceLink(GECE.id)+'&yk='+(gecelerim()[GECE.id]||{}).yk,b);
@@ -3424,6 +3430,59 @@ document.addEventListener('click',async e=>{
   }
 });
 document.addEventListener('keydown',e=>{if(e.key==='Enter'&&e.target.id==='gSiseAra'){e.preventDefault();geceSiseEkle(e.target.value);e.target.value='';}});
+
+/* ===== TADIM GECESİ: ev sahibi düzenlemesi ===== */
+const oySay=(v,i)=>v.katilimcilar.filter(k=>k.puanlar[i]&&(typeof k.puanlar[i].p==='number'||k.puanlar[i].not)).length;
+function geceDuzenleHTML(v){
+  const dt=v.tarih||'';
+  return `<div class="gkart" id="gDuzenle"><h3>✏️ Geceyi düzenle</h3>
+    <div class="gform">
+      <label>Gecenin adı<input id="dAd" maxlength="80" value="${g$(v.ad)}"></label>
+      <div class="iki"><label>Tarih ve saat<input id="dTarih" type="datetime-local" value="${g$(dt)}"></label><label>Yer<input id="dYer" maxlength="80" value="${g$(v.yer||'')}"></label></div>
+      <label>Açıklama<textarea id="dAcik" maxlength="500" rows="2">${g$(v.aciklama||'')}</textarea></label>
+      <label style="display:flex;align-items:center;gap:8px;flex-direction:row"><input type="checkbox" id="dKor" ${v.kor?'checked':''} ${v.aciklandi?'disabled':''}> 🎭 Kör tadım${v.aciklandi?' (şişeler açıklandığı için değiştirilemez)':''}</label>
+      <button class="eklebtn" style="margin:0" data-gduz="kaydet">💾 Bilgileri kaydet</button>
+    </div>
+    <h4 style="margin:16px 0 8px;font-size:12px;color:var(--amber-soft);text-transform:uppercase">Şişeler (sıra = örnek numarası)</h4>
+    ${(v.siseler||[]).map((x,i)=>{const n=oySay(v,i);return `<div class="mini" style="flex-wrap:wrap"><b style="color:var(--amber-soft);min-width:22px">${i+1}</b><div style="flex:1;min-width:120px"><div class="nm">${g$(siseBilgi(x).ad)}</div><div class="meta">${n?n+' kişi puan verdi':'henüz puan yok'}</div></div>
+      <button class="btn" data-gduz="degistirac" data-i="${i}">↔ Değiştir</button><button class="btn" data-gduz="cikar" data-i="${i}" style="color:var(--red)" ${v.siseler.length<=1?'disabled':''}>✕</button>
+      <div id="dDeg${i}" style="display:none;width:100%;gap:8px;margin-top:6px"><input list="gSiseListe2" id="dDegAd${i}" placeholder="Yeni şişe adı…" style="flex:1;min-width:0;background:var(--bg2);border:1px solid var(--line);color:var(--txt);padding:8px 10px;border-radius:9px"><button class="btn" data-gduz="degistir" data-i="${i}">Tamam</button></div></div>`;}).join('')}
+    ${(v.siseler||[]).length<12&&!v.bitti?`<div style="display:flex;gap:8px;margin-top:8px"><input list="gSiseListe2" id="dEkleAd" placeholder="+ Şişe ekle (sona eklenir)…" style="flex:1;min-width:0;background:var(--bg2);border:1px solid var(--line);color:var(--txt);padding:9px 11px;border-radius:9px"><button class="btn" data-gduz="ekle">Ekle</button></div>`:''}
+    <datalist id="gSiseListe2">${allBottles().map(b=>`<option value="${g$(b.ad)}">`).join('')}</datalist>
+    <h4 style="margin:16px 0 8px;font-size:12px;color:var(--amber-soft);text-transform:uppercase">Katılımcılar</h4>
+    <div class="gsec">${v.katilimcilar.map(k=>`<span>${g$(k.ad)}<button data-gduz="kisicikar" data-pid="${g$(k.pid)}" data-ad="${g$(k.ad)}" title="Çıkar">✕</button></span>`).join('')}</div>
+    <div class="durum" id="dDurum" style="font-size:12.5px;margin-top:8px"></div></div>`;
+}
+const siseDegeri=ad=>{ad=String(ad||'').trim();const b=allBottles().find(x=>x.ad.toLowerCase()===ad.toLowerCase());return b?b.id:ad.slice(0,80);};
+async function geceYonet(govde,mesaj){
+  const d=document.getElementById('dDurum');
+  try{await api('/api/gece',{method:'POST',body:JSON.stringify(Object.assign({islem:'yonet',id:GECE.id,yk:(gecelerim()[GECE.id]||{}).yk},govde))});
+    await geceYukle(false);const d2=document.getElementById('dDurum');if(d2){d2.style.color='var(--have)';d2.textContent='✓ '+mesaj;}}
+  catch(e){if(d){d.style.color='var(--red)';d.textContent='⚠️ '+e.message;}}
+}
+document.addEventListener('click',e=>{
+  const b=e.target.closest('[data-gduz]');if(!b)return;
+  const v=GECE.veri,i=+b.dataset.i,ne=b.dataset.gduz;
+  if(ne==='kaydet'){
+    const ad=document.getElementById('dAd').value.trim();if(!ad){alert('Gecenin bir adı olmalı.');return;}
+    geceYonet({eylem:'guncelle',ad,tarih:document.getElementById('dTarih').value,yer:document.getElementById('dYer').value,aciklama:document.getElementById('dAcik').value,kor:document.getElementById('dKor').checked},'Bilgiler kaydedildi');
+  }else if(ne==='ekle'){
+    const a=document.getElementById('dEkleAd');if(!a.value.trim())return;geceYonet({eylem:'sise-ekle',sise:siseDegeri(a.value)},'Şişe eklendi');
+  }else if(ne==='degistirac'){
+    const r=document.getElementById('dDeg'+i);r.style.display=r.style.display==='flex'?'none':'flex';if(r.style.display==='flex')document.getElementById('dDegAd'+i).focus();
+  }else if(ne==='degistir'){
+    const a=document.getElementById('dDegAd'+i);if(!a.value.trim())return;const n=oySay(v,i);
+    if(n&&!confirm(`${i+1}. örneğe ${n} kişi puan vermiş. Şişe değişirse bu puanlar silinecek. Devam edilsin mi?`))return;
+    geceYonet({eylem:'sise-degistir',sira:i,sise:siseDegeri(a.value)},'Şişe değiştirildi');
+  }else if(ne==='cikar'){
+    const n=oySay(v,i);
+    if(!confirm(n?`${i+1}. örneğe ${n} kişi puan vermiş; çıkarılırsa bu puanlar silinir, sonraki örneklerin numarası bir azalır. Devam edilsin mi?`:`${i+1}. örnek çıkarılsın mı? Sonraki örneklerin numarası bir azalır.`))return;
+    geceYonet({eylem:'sise-cikar',sira:i},'Şişe çıkarıldı');
+  }else if(ne==='kisicikar'){
+    if(!confirm(`"${b.dataset.ad}" katılımcılardan çıkarılsın mı? Verdiği puanlar da silinir.`))return;
+    geceYonet({eylem:'katilimci-cikar',pid:b.dataset.pid},'Katılımcı çıkarıldı');
+  }
+});
 
 /* ===== #bulut= ve #gece= bağlantıları ===== */
 function ozelHash(){
@@ -3436,6 +3495,7 @@ function ozelHash(){
   if(h.startsWith('#gece')){
     const m=h.match(/^#gece=([a-z0-9]{10})(?:&yk=([a-z0-9]{16}))?/);
     if(m&&m[2]){geceKaydet(m[1],{yk:m[2],t:new Date().toISOString()});history.replaceState(null,'','#gece='+m[1]);}
+    if((m?m[1]:null)!==GECE.id)GECE.duzenle=false;
     GECE.id=m?m[1]:null;GECE.veri=GECE.veri&&GECE.id&&GECE.veri.id===GECE.id?GECE.veri:null;
     const a=document.querySelector('#subNav .tab.active');
     if(!a||a.dataset.view!=='gece')goTab('gece');else renderGece();

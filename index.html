@@ -536,7 +536,7 @@ nav.groups{display:flex;gap:6px;margin:20px 0 10px;background:var(--bg2);border:
     <div id="haritaListeYeri"></div>
   </section>
   <section id="view-fiyat" class="hidden">
-    <p class="intro">Her hafta otomatik olarak Türkiye'deki güncel fiyatı bulunan şişeler. Değişim, bir önceki doğrulanmış fiyata (yoksa sitedeki referans fiyata) göre hesaplanır. Fiyatın üstüne gelince kaynağı görünür.</p>
+    <p class="intro">Her ay otomatik olarak Türkiye'deki güncel fiyatı bulunan şişeler. Değişim, bir önceki doğrulanmış fiyata (yoksa sitedeki referans fiyata) göre hesaplanır. Fiyatın üstüne gelince kaynağı görünür.</p>
     <div id="fiyatBox"></div>
   </section>
   <section id="view-gece" class="hidden"><div id="geceKutu"></div></section>
@@ -2858,7 +2858,7 @@ function trTarih(t){return t?new Date(t).toLocaleDateString('tr-TR',{day:'numeri
 function renderFiyat(){
   const box=document.getElementById('fiyatBox');if(!box)return;
   const rows=DATA.filter(b=>b.tlTarih).map(b=>({b,d:fiyatDegisim(b)})).filter(r=>r.d);
-  if(!rows.length){box.innerHTML='<div class="empty">Henüz otomatik doğrulanmış fiyat yok. İlk haftalık güncellemeden sonra burada görünecek.</div>';return;}
+  if(!rows.length){box.innerHTML='<div class="empty">Henüz otomatik doğrulanmış fiyat yok. İlk aylık güncellemeden sonra burada görünecek.</div>';return;}
   const row=r=>`<div class="mini">${thumb(r.b)}<div><div class="nm"><span class="isimlink" data-detay="${r.b.id}">${r.b.ad}</span></div>
     <div class="meta">${fmt(r.d.once)} → <b>${fmt(r.d.simdi)}</b> · ${trTarih(r.b.tlTarih)}</div></div>
     <span class="fchg ${r.d.oran<0?'dn':r.d.oran>0?'up':''}">${r.d.oran>0?'+':''}${Math.round(r.d.oran*100)}%</span></div>`;
@@ -3835,7 +3835,7 @@ window.addEventListener('hashchange',ozelHash);
 })();
 showGroup('kesfet');
 renderAll();
-// Otomatik güncellenen fiyatlar: data/fiyatlar.json haftalık bot tarafından GitHub'a yazılır
+// Otomatik güncellenen fiyatlar: data/fiyatlar.json aylık görev tarafından GitHub'a yazılır
 // (scripts/fiyat-guncelle.mjs). Önce doğrudan GitHub'dan okunur, böylece site yeniden
 // yüklenmeden güncel kalır; olmazsa yanındaki kopya, o da yoksa gömülü fiyatlar kullanılır.
 const FIYAT_TUR={tr_raf:'✓ Türkiye mağaza fiyatı',tr_liste:'✓ İthalatçı/zam listesi',dutyfree:'✈ Duty-free fiyatı',tahmin:'≈ Yurtdışı fiyatından tahmin'};
@@ -3847,7 +3847,7 @@ fiyatJson(FIYAT_URL).catch(()=>fiyatJson('data/fiyatlar.json')).then(d=>{
   let n=0;
   for(const [id,f] of Object.entries(d.fiyatlar)){const b=byId.get(id);if(b&&f.tl>0){b.tl0=b.tl;b.tl=f.tl;b.tlTarih=f.tarih;b.tlTur=f.tur;b.tlKaynak=f.kaynak||'';b.tlGecmis=f.gecmis||[[f.tarih,f.tl]];if(f.bul)b.bul=f.bul;n++;}}
   const el=document.getElementById('fiyatDurum');
-  if(el&&d.guncelleme)el.textContent='🔄 Fiyatlar her hafta otomatik güncellenir · son güncelleme '+new Date(d.guncelleme).toLocaleDateString('tr-TR',{day:'numeric',month:'long',year:'numeric'})+' · '+n+'/'+DATA.length+' şişe doğrulandı.';
+  if(el&&d.guncelleme)el.textContent='🔄 Fiyatlar her ay otomatik güncellenir · son güncelleme '+new Date(d.guncelleme).toLocaleDateString('tr-TR',{day:'numeric',month:'long',year:'numeric'})+' · '+n+'/'+DATA.length+' şişe doğrulandı.';
   if(n)renderAll();
 }).catch(()=>{});
 // Resmî şişe görselleri: data/gorseller.json haftalık görev tarafından doldurulur (scripts/gorsel.mjs)

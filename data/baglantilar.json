@@ -12,6 +12,25 @@
    "ig": "https://www.instagram.com/aberlour/",
    "kontrol": "2026-10-04"
   },
+  "Ad Gefrin": {
+   "web": "https://adgefrin.co.uk/",
+   "kontrol": "2026-10-04"
+  },
+  "Adelphi": {
+   "web": "https://www.adelphidistillery.com/",
+   "kontrol": "2026-10-04"
+  },
+  "Adnams": {
+   "web": "https://adnams.co.uk/",
+   "ig": "https://www.instagram.com/adnams/",
+   "fb": "https://www.facebook.com/adnams/",
+   "yt": "https://www.youtube.com/user/AdnamsSouthwold",
+   "kontrol": "2026-10-04"
+  },
+  "Ailsa Bay": {
+   "web": "https://www.ailsabay.com/",
+   "kontrol": "2026-10-04"
+  },
   "Akkeshi": {
    "web": "https://akkeshi-distillery.com",
    "ig": "https://www.instagram.com/hokkaido_akkeshi_distillery/",
@@ -47,6 +66,12 @@
    "web": "https://www.annandaledistillery.com",
    "ig": "https://www.instagram.com/annandale_distillery/",
    "fb": "https://www.facebook.com/annandaledistillery",
+   "kontrol": "2026-10-04"
+  },
+  "Archie Rose": {
+   "web": "https://archierose.com.au/",
+   "ig": "https://www.instagram.com/archierosedistillingco",
+   "fb": "https://www.facebook.com/archierosedistillingco",
    "kontrol": "2026-10-04"
   },
   "Ardbeg": {
@@ -91,6 +116,12 @@
    "ig": "https://www.instagram.com/aultmore/",
    "kontrol": "2026-10-04"
   },
+  "Bakery Hill": {
+   "web": "https://bakeryhill.com/",
+   "ig": "https://www.instagram.com/bakeryhilldistillery/",
+   "fb": "https://www.facebook.com/BakeryHillWhisky/",
+   "kontrol": "2026-10-04"
+  },
   "Balblair": {
    "web": "https://www.balblair.com",
    "ig": "https://www.instagram.com/balblairwhisky/",
@@ -106,6 +137,16 @@
   "Ballantine's": {
    "web": "https://www.ballantines.com",
    "x": "https://x.com/Ballantines",
+   "kontrol": "2026-10-04"
+  },
+  "Ballantine’s": {
+   "web": "https://www.ballantines.com/",
+   "kontrol": "2026-10-04"
+  },
+  "Ballindalloch": {
+   "web": "https://www.ballindallochdistillery.com/",
+   "ig": "https://www.instagram.com/ballindallochdistillery/",
+   "fb": "https://www.facebook.com/BallindallochDistillery",
    "kontrol": "2026-10-04"
   },
   "Bardstown": {
@@ -126,6 +167,14 @@
    "web": "https://1792bourbon.com",
    "kontrol": "2026-10-04"
   },
+  "Bell's": {
+   "web": "https://www.bells.co.uk/",
+   "kontrol": "2026-10-04"
+  },
+  "Bellevoye": {
+   "web": "https://bellevoye.com/",
+   "kontrol": "2026-10-04"
+  },
   "BenRiach": {
    "web": "https://www.benriachdistillery.com",
    "ig": "https://www.instagram.com/benriach/",
@@ -138,6 +187,14 @@
    "web": "https://www.benromach.com",
    "ig": "https://www.instagram.com/benromach/",
    "x": "https://x.com/Benromach",
+   "kontrol": "2026-10-04"
+  },
+  "Berry Bros & Rudd": {
+   "web": "https://www.bbr.com/",
+   "ig": "https://www.instagram.com/berrybrosrudd",
+   "fb": "https://www.facebook.com/berrybrosrudd",
+   "x": "https://x.com/berrybrosrudd",
+   "yt": "https://www.youtube.com/@BerryBrosRuddLondon",
    "kontrol": "2026-10-04"
   },
   "Bimber": {
@@ -155,6 +212,12 @@
   },
   "Blair Athol": {
    "web": "https://www.malts.com/en/distilleries/blair-athol",
+   "kontrol": "2026-10-04"
+  },
+  "Blue Run": {
+   "web": "https://www.bluerunspirits.com/",
+   "ig": "https://www.instagram.com/bluerunspirits/",
+   "fb": "https://www.facebook.com/bluerunspirits",
    "kontrol": "2026-10-04"
   },
   "Bowmore": {
@@ -175,6 +238,10 @@
    "web": "https://brennewhisky.com",
    "ig": "https://www.instagram.com/brennewhisky",
    "fb": "https://www.facebook.com/brennewhisky",
+   "kontrol": "2026-10-04"
+  },
+  "Brora": {
+   "web": "https://www.malts.com/en/distilleries/brora",
    "kontrol": "2026-10-04"
   },
   "Bruichladdich": {
@@ -208,6 +275,13 @@
    "yt": "https://www.youtube.com/@BushmillsUSA",
    "kontrol": "2026-10-04"
   },
+  "Cadenhead": {
+   "web": "https://www.cadenhead.scot/",
+   "ig": "https://www.instagram.com/wmcadenheads/",
+   "fb": "https://www.facebook.com/WmCadenheadLtd/",
+   "x": "https://x.com/WmCadenhead",
+   "kontrol": "2026-10-04"
+  },
   "Caol Ila": {
    "web": "https://www.malts.com/en/distilleries/caol-ila",
    "kontrol": "2026-10-04"
@@ -220,6 +294,28 @@
    "web": "https://www.cardronadistillery.com",
    "ig": "https://www.instagram.com/cardronadistillery",
    "fb": "https://www.facebook.com/cardronadistillery",
+   "kontrol": "2026-10-04"
+  },
+  "Catoctin Creek": {
+   "web": "https://catoctincreekdistilling.com/",
+   "ig": "https://www.instagram.com/catoctincreek",
+   "fb": "https://www.facebook.com/catoctincreek",
+   "kontrol": "2026-10-04"
+  },
+  "Cedar Ridge": {
+   "web": "https://cedarridgedistillery.com/",
+   "ig": "https://www.instagram.com/cedarridgeiowa/",
+   "fb": "https://www.facebook.com/cedarridgeiowa/",
+   "x": "https://twitter.com/CedarRidgeIowa",
+   "yt": "https://www.youtube.com/channel/UCfDfB8X2Qm0ucUKliuNrkKw/",
+   "kontrol": "2026-10-04"
+  },
+  "Chattanooga": {
+   "web": "https://chattanoogawhiskey.com/",
+   "ig": "https://www.instagram.com/chattwhiskey/",
+   "fb": "https://www.facebook.com/ChattanoogaWhiskey",
+   "x": "https://twitter.com/ChattWhiskey",
+   "yt": "https://www.youtube.com/@ChattWhiskey",
    "kontrol": "2026-10-04"
   },
   "Chichibu": {
@@ -237,6 +333,17 @@
    "yt": "https://www.youtube.com/channel/UC23_NujY3ppRHDIYqJsxI2Q",
    "kontrol": "2026-10-04"
   },
+  "Circumstance": {
+   "web": "https://www.circumstancedistillery.com/",
+   "ig": "https://www.instagram.com/circumstancedistillery",
+   "fb": "https://www.facebook.com/circumstancedistillery",
+   "yt": "https://www.youtube.com/channel/UCKf043yvjLY-RDMeAZ5dh6Q",
+   "kontrol": "2026-10-04"
+  },
+  "Clear Creek": {
+   "web": "https://www.clearcreekdistillery.com/",
+   "kontrol": "2026-10-04"
+  },
   "Clonakilty": {
    "web": "https://www.clonakiltydistillery.ie",
    "kontrol": "2026-10-04"
@@ -251,8 +358,19 @@
    "fb": "https://www.facebook.com/compassboxwhiskyco",
    "kontrol": "2026-10-04"
   },
+  "Cooley": {
+   "web": "https://www.cooleywhiskey.com/",
+   "kontrol": "2026-10-04"
+  },
   "Cooley (Connemara)": {
    "web": "https://www.connemarawhiskey.com",
+   "kontrol": "2026-10-04"
+  },
+  "Copper Fox": {
+   "web": "https://www.copperfoxdistillery.com/",
+   "ig": "https://www.instagram.com/copperfoxdistillery",
+   "fb": "https://www.facebook.com/copperfoxdistillery/",
+   "yt": "https://www.youtube.com/channel/UCzIR2cDVh28YjrSXEKv4MAA",
    "kontrol": "2026-10-04"
   },
   "Cotswolds": {
@@ -277,6 +395,14 @@
    "fb": "https://www.facebook.com/CrownRoyal",
    "kontrol": "2026-10-04"
   },
+  "Dad’s Hat": {
+   "web": "https://dadshatrye.com/",
+   "ig": "https://www.instagram.com/dadshatrye/",
+   "fb": "https://www.facebook.com/Dads-Hat-Rye-152853608137805/",
+   "x": "https://twitter.com/dadshatrye",
+   "yt": "https://www.youtube.com/channel/UCBkHcTM_BR40ARw8qtaMn-A",
+   "kontrol": "2026-10-04"
+  },
   "Daftmill": {
    "web": "https://www.daftmill.com",
    "fb": "https://www.facebook.com/daftmillwhisky/",
@@ -286,11 +412,25 @@
    "web": "https://www.malts.com/en/distilleries/dalwhinnie",
    "kontrol": "2026-10-04"
   },
+  "Dartmoor": {
+   "web": "https://dartmoorwhiskydistillery.co.uk/",
+   "ig": "https://www.instagram.com/dartmoorwhiskydistillery",
+   "fb": "https://www.facebook.com/Dartmoordistillery/",
+   "x": "https://x.com/DartmoorWhisky",
+   "yt": "https://www.youtube.com/channel/UCWt9JVmlhsafiaRiNjaCK-g",
+   "kontrol": "2026-10-04"
+  },
   "Deanston": {
    "web": "https://deanstonmalt.com",
    "ig": "https://www.instagram.com/deanstonmalt/",
    "fb": "https://www.facebook.com/deanstondistillery",
    "x": "https://twitter.com/deanstonmalt/",
+   "kontrol": "2026-10-04"
+  },
+  "DeVANS": {
+   "web": "https://devans.co.in/",
+   "ig": "https://www.instagram.com/devansmodernbreweries/",
+   "fb": "https://www.facebook.com/devansmodernbreweries",
    "kontrol": "2026-10-04"
   },
   "Dewar's": {
@@ -300,11 +440,25 @@
    "yt": "https://www.youtube.com/Dewars",
    "kontrol": "2026-10-04"
   },
+  "Dewar’s": {
+   "web": "https://www.dewars.com/",
+   "ig": "https://www.instagram.com/Dewars/",
+   "fb": "https://www.facebook.com/dewars/",
+   "yt": "https://www.youtube.com/Dewars",
+   "kontrol": "2026-10-04"
+  },
   "Dingle": {
    "web": "https://dingledistillery.ie",
    "ig": "https://www.instagram.com/dingledistillery/",
    "fb": "https://www.facebook.com/dinglewhiskey/",
    "x": "https://x.com/DingleWhiskey",
+   "kontrol": "2026-10-04"
+  },
+  "Dornoch": {
+   "web": "https://www.thompsonbrosdistillers.com/",
+   "ig": "https://www.instagram.com/dornochdistillery",
+   "fb": "https://www.facebook.com/dornochdistillery",
+   "x": "https://twitter.com/DornochDist",
    "kontrol": "2026-10-04"
   },
   "Douglas Laing": {
@@ -318,12 +472,37 @@
    "web": "https://www.malts.com/en/the-singleton",
    "kontrol": "2026-10-04"
   },
+  "Eden Mill": {
+   "web": "https://www.edenmill.com/",
+   "ig": "https://www.instagram.com/edenmill/",
+   "fb": "https://www.facebook.com/edenmillstandrews/",
+   "yt": "https://www.youtube.com/@edenmillstandrews",
+   "kontrol": "2026-10-04"
+  },
   "Edradour": {
    "web": "https://www.edradour.com",
    "kontrol": "2026-10-04"
   },
   "Edrington": {
    "web": "https://www.edrington.com/en",
+   "kontrol": "2026-10-04"
+  },
+  "Eigashima": {
+   "web": "https://www.ei-sake.jp/",
+   "fb": "https://www.facebook.com/Akashi.Kamitaka/",
+   "x": "https://twitter.com/akashikamitaka",
+   "kontrol": "2026-10-04"
+  },
+  "Eimverk": {
+   "web": "https://www.flokiwhisky.is/",
+   "ig": "https://www.instagram.com/eimverk/",
+   "fb": "https://www.facebook.com/eimverk",
+   "kontrol": "2026-10-04"
+  },
+  "Fary Lochan": {
+   "web": "https://farylochan.dk/",
+   "ig": "https://www.instagram.com/farylochan/",
+   "fb": "https://www.facebook.com/farylochan/",
    "kontrol": "2026-10-04"
   },
   "Fettercairn": {
@@ -481,6 +660,10 @@
    "x": "https://twitter.com/DrinkGlenturret",
    "kontrol": "2026-10-04"
   },
+  "GlenWyvis": {
+   "web": "https://www.glenwyvis.com/",
+   "kontrol": "2026-10-04"
+  },
   "Gordon & MacPhail": {
    "web": "https://www.gordonandmacphail.com",
    "ig": "https://www.instagram.com/gordonandmacphail/",
@@ -491,6 +674,10 @@
    "web": "https://distillery.com.au",
    "ig": "https://www.instagram.com/greatsoutherndistillingco",
    "fb": "https://www.facebook.com/GreatSouthernDistillingCo/",
+   "kontrol": "2026-10-04"
+  },
+  "Haig Club": {
+   "web": "https://www.haigclub.com/",
    "kontrol": "2026-10-04"
   },
   "Hakushu (Suntory)": {
@@ -511,11 +698,24 @@
    "x": "https://twitter.com/HeavenHill1935",
    "kontrol": "2026-10-04"
   },
+  "Heaven’s Door": {
+   "web": "https://www.heavensdoor.com/",
+   "ig": "https://www.instagram.com/heavensdoorwhiskey/",
+   "fb": "https://www.facebook.com/HeavensDoorWhiskey",
+   "kontrol": "2026-10-04"
+  },
   "Hellyers Road": {
    "web": "https://hellyersroaddistillery.com.au",
    "ig": "https://www.instagram.com/hellyersroaddistillery",
    "fb": "https://www.facebook.com/hellyersroaddistillery",
    "yt": "https://www.youtube.com/@HellyersRoadDistillery",
+   "kontrol": "2026-10-04"
+  },
+  "Het Anker": {
+   "web": "https://www.hetanker.be/",
+   "ig": "https://www.instagram.com/hetanker/",
+   "fb": "https://www.facebook.com/hetanker",
+   "yt": "https://www.youtube.com/@BrouwerijHetAnkerMechelen",
    "kontrol": "2026-10-04"
   },
   "High Coast": {
@@ -536,8 +736,20 @@
    "x": "https://twitter.com/highlandpark",
    "kontrol": "2026-10-04"
   },
+  "Hillrock": {
+   "web": "https://www.hillrockdistillery.com/",
+   "kontrol": "2026-10-04"
+  },
   "Hiram Walker": {
    "web": "https://corby.ca/en/hiram-walker/",
+   "kontrol": "2026-10-04"
+  },
+  "Hochstadter’s": {
+   "web": "https://hochstadtersvattedrye.com/",
+   "kontrol": "2026-10-04"
+  },
+  "Holyrood": {
+   "web": "https://holyrooddistillery.co.uk/",
    "kontrol": "2026-10-04"
   },
   "Hyde": {
@@ -545,6 +757,14 @@
    "ig": "https://www.instagram.com/hyde_irish_whiskey/",
    "fb": "https://www.facebook.com/HYDEWHISKEY/",
    "x": "https://twitter.com/HydeWhiskey",
+   "kontrol": "2026-10-04"
+  },
+  "Ian Macleod": {
+   "web": "https://www.ianmacleod.com/",
+   "kontrol": "2026-10-04"
+  },
+  "InchDairnie": {
+   "web": "https://www.inchdairniedistillery.com/",
    "kontrol": "2026-10-04"
   },
   "Indri": {
@@ -559,6 +779,10 @@
    "web": "https://www.harrisdistillery.com",
    "ig": "https://www.instagram.com/isleofharrisdistillers",
    "fb": "https://www.facebook.com/isleofharrisdistillers",
+   "kontrol": "2026-10-04"
+  },
+  "J.P. Wiser’s": {
+   "web": "https://www.jpwisers.com/",
    "kontrol": "2026-10-04"
   },
   "Jack Daniel's": {
@@ -604,6 +828,17 @@
    "fb": "https://www.facebook.com/jurawhisky/",
    "kontrol": "2026-10-04"
   },
+  "Justerini & Brooks": {
+   "web": "https://www.justerinis.com/",
+   "ig": "https://www.instagram.com/justerinis/",
+   "fb": "https://www.facebook.com/Justerinis1749",
+   "yt": "https://www.youtube.com/user/Justerinis1749",
+   "kontrol": "2026-10-04"
+  },
+  "Kaikyo": {
+   "web": "https://akashisakebrewery.com/the-kaikyo-distillery/",
+   "kontrol": "2026-10-04"
+  },
   "Kaiyo": {
    "web": "https://kaiyowhisky.com",
    "ig": "https://www.instagram.com/officialkaiyo/",
@@ -628,6 +863,10 @@
    "ig": "https://www.instagram.com/kilchomandistillery/",
    "fb": "https://www.facebook.com/Kilchomanwhisky/",
    "x": "https://twitter.com/Kilchomanwhisky",
+   "kontrol": "2026-10-04"
+  },
+  "Killowen": {
+   "web": "https://www.killowendistillery.com/",
    "kontrol": "2026-10-04"
   },
   "Kingsbarns": {
@@ -655,6 +894,10 @@
   "Lagavulin": {
    "web": "https://www.malts.com/en/distilleries/lagavulin",
    "ig": "https://www.instagram.com/lagavulinwhisky/",
+   "kontrol": "2026-10-04"
+  },
+  "Lagg": {
+   "web": "https://www.laggwhisky.com/",
    "kontrol": "2026-10-04"
   },
   "Lambay": {
@@ -686,6 +929,12 @@
    "yt": "https://www.youtube.com/channel/UCVqXGglP37sb5iQINCmDx_g",
    "kontrol": "2026-10-04"
   },
+  "Les Hautes Glaces": {
+   "web": "https://hautesglaces.com/",
+   "ig": "https://www.instagram.com/hautesglaces",
+   "fb": "https://www.facebook.com/HautesGlaces",
+   "kontrol": "2026-10-04"
+  },
   "Lindores Abbey": {
    "web": "https://lindoresabbeydistillery.com",
    "ig": "https://www.instagram.com/lindoresabbeydistillery/",
@@ -705,6 +954,10 @@
   },
   "Longmorn": {
    "web": "https://www.longmorn.com/en/",
+   "kontrol": "2026-10-04"
+  },
+  "Macduff": {
+   "web": "https://www.thedeveron.com/",
    "kontrol": "2026-10-04"
   },
   "Mackmyra": {
@@ -770,9 +1023,31 @@
    "ig": "https://www.instagram.com/nikkawhiskyglobal/",
    "kontrol": "2026-10-04"
   },
+  "Morris": {
+   "web": "https://www.morrisofrutherglen.com/",
+   "ig": "https://www.instagram.com/morriswhisky/",
+   "fb": "https://www.facebook.com/morrisofrutherglen",
+   "kontrol": "2026-10-04"
+  },
   "Mortlach": {
    "web": "https://www.malts.com/en/mortlach",
    "x": "https://twitter.com/mortlachwhisky",
+   "kontrol": "2026-10-04"
+  },
+  "Mosgaard": {
+   "web": "https://mosgaardwhisky.dk/",
+   "ig": "https://www.instagram.com/mosgaardwhisky/",
+   "fb": "https://www.facebook.com/mosgaardwhisky",
+   "kontrol": "2026-10-04"
+  },
+  "Myken": {
+   "web": "https://www.myken.no/",
+   "ig": "https://www.instagram.com/mykendistillery",
+   "fb": "https://www.facebook.com/mykendistillery",
+   "kontrol": "2026-10-04"
+  },
+  "Nagahama": {
+   "web": "https://www.romanbeer.com/",
    "kontrol": "2026-10-04"
   },
   "Nantou (TTL)": {
@@ -807,6 +1082,16 @@
   "Oban": {
    "web": "https://www.obanwhisky.com",
    "ig": "https://www.instagram.com/obanwhisky/",
+   "kontrol": "2026-10-04"
+  },
+  "Ohishi": {
+   "web": "https://ohishi-shuzohjyo.jp/",
+   "fb": "https://www.facebook.com/ohishishuzohjyo",
+   "kontrol": "2026-10-04"
+  },
+  "Old Elk": {
+   "web": "https://www.oldelk.com/",
+   "ig": "https://www.instagram.com/oldelkbourbon",
    "kontrol": "2026-10-04"
   },
   "Old Forester": {
@@ -857,6 +1142,14 @@
    "x": "https://x.com/powers_whiskey",
    "kontrol": "2026-10-04"
   },
+  "Powerscourt": {
+   "web": "https://powerscourtdistillery.com/",
+   "kontrol": "2026-10-04"
+  },
+  "Pradlo": {
+   "web": "https://www.stock.cz/en",
+   "kontrol": "2026-10-04"
+  },
   "Puni": {
    "web": "https://www.puni.com",
    "ig": "https://www.instagram.com/punidistillery",
@@ -871,10 +1164,27 @@
    "yt": "https://www.youtube.com/c/IsleofRaasayDistillery",
    "kontrol": "2026-10-04"
   },
+  "Rabbit Hole": {
+   "web": "https://www.rabbitholedistillery.com/",
+   "ig": "https://www.instagram.com/rabbithole/",
+   "fb": "https://www.facebook.com/rabbitholedistillery",
+   "kontrol": "2026-10-04"
+  },
   "Rampur": {
    "web": "https://rampursinglemalt.com",
    "ig": "https://www.instagram.com/rampursinglemalt/",
    "fb": "https://www.facebook.com/RampurSingleMalt",
+   "kontrol": "2026-10-04"
+  },
+  "Redemption": {
+   "web": "https://www.redemptionwhiskey.com/",
+   "ig": "https://www.instagram.com/redemptionwhiskey/",
+   "kontrol": "2026-10-04"
+  },
+  "Reisetbauer": {
+   "web": "https://www.reisetbauer.at/",
+   "ig": "https://www.instagram.com/reisetbauer_brand/",
+   "fb": "https://www.facebook.com/Reisetbauer",
    "kontrol": "2026-10-04"
   },
   "Roe & Co": {
@@ -899,6 +1209,13 @@
   },
   "Royal Oak": {
    "web": "https://royaloakdistillery.com",
+   "kontrol": "2026-10-04"
+  },
+  "Rozelieures": {
+   "web": "https://whiskyrozelieures.com/",
+   "ig": "https://www.instagram.com/whiskyrozelieures/",
+   "fb": "https://www.facebook.com/WhiskyRozelieures/",
+   "x": "https://x.com/Whiskyrozelieur",
    "kontrol": "2026-10-04"
   },
   "Saburomaru": {
@@ -942,6 +1259,17 @@
   "Scapa": {
    "web": "https://www.scapawhisky.com/en/",
    "ig": "https://www.instagram.com/scapa.distillery/",
+   "kontrol": "2026-10-04"
+  },
+  "Shizuoka": {
+   "web": "https://shizuoka-distillery.jp/",
+   "ig": "https://www.instagram.com/shizuoka_distillery/",
+   "fb": "https://www.facebook.com/shizuoka.distillery/",
+   "yt": "https://www.youtube.com/channel/UC8-E5hbTsROUWvtT0AtVTSg",
+   "kontrol": "2026-10-04"
+  },
+  "Signatory": {
+   "web": "https://www.edradour.com/",
    "kontrol": "2026-10-04"
   },
   "Slane": {
@@ -1009,6 +1337,12 @@
    "web": "https://springbank.scot",
    "ig": "https://www.instagram.com/springbank1828/",
    "x": "https://x.com/Springbank1828",
+   "kontrol": "2026-10-04"
+  },
+  "St. George": {
+   "web": "https://stgeorgespirits.com/",
+   "ig": "https://www.instagram.com/stgeorgespirits/",
+   "fb": "https://www.facebook.com/StGeorgeSpirits",
    "kontrol": "2026-10-04"
   },
   "St. Kilian": {
@@ -1083,6 +1417,12 @@
    "fb": "https://www.facebook.com/teerenpelipanimotislaamo/",
    "kontrol": "2026-10-04"
   },
+  "Templeton": {
+   "web": "https://templetonamericanwhiskey.com/",
+   "ig": "https://www.instagram.com/templetondistillery/",
+   "fb": "https://www.facebook.com/templetondistillery",
+   "kontrol": "2026-10-04"
+  },
   "The Balvenie": {
    "web": "https://www.thebalvenie.com",
    "ig": "https://www.instagram.com/thebalvenie/",
@@ -1130,6 +1470,18 @@
    "ig": "https://www.instagram.com/the_macallan/",
    "kontrol": "2026-10-04"
   },
+  "Thomson": {
+   "web": "https://thomsonwhisky.co.nz/",
+   "ig": "https://www.instagram.com/thomsonwhisky/",
+   "fb": "https://www.facebook.com/thomsonwhisky",
+   "kontrol": "2026-10-04"
+  },
+  "Thy": {
+   "web": "https://thy-whisky.dk/",
+   "ig": "https://www.instagram.com/thywhisky/",
+   "fb": "https://www.facebook.com/thywhisky/",
+   "kontrol": "2026-10-04"
+  },
   "Tobermory": {
    "web": "https://tobermorydistillery.com",
    "ig": "https://www.instagram.com/tobermorydistillery/",
@@ -1148,6 +1500,17 @@
    "ig": "https://www.instagram.com/tomintoulwhisky/",
    "fb": "https://www.facebook.com/TomintoulWhisky/",
    "x": "https://x.com/TomintoulWhisky",
+   "kontrol": "2026-10-04"
+  },
+  "Torabhaig": {
+   "web": "https://torabhaig.com/",
+   "ig": "https://www.instagram.com/torabhaig_distillery/",
+   "fb": "https://www.facebook.com/TorabhaigDistillery/",
+   "kontrol": "2026-10-04"
+  },
+  "Tormore": {
+   "web": "https://tormore.com/",
+   "ig": "https://www.instagram.com/tormoredistillery",
    "kontrol": "2026-10-04"
   },
   "Tullamore D.E.W.": {
@@ -1175,6 +1538,16 @@
    "fb": "https://www.facebook.com/unclenearest",
    "x": "https://twitter.com/unclenearest",
    "yt": "https://www.youtube.com/channel/UCcfM0XBsHSQRB18ssOImb_g",
+   "kontrol": "2026-10-04"
+  },
+  "Virginia Distillery": {
+   "web": "https://www.vadistillery.com/",
+   "ig": "https://www.instagram.com/vadistillery/",
+   "fb": "https://www.facebook.com/VADistillery",
+   "kontrol": "2026-10-04"
+  },
+  "Warenghem": {
+   "web": "https://distillerie-warenghem.bzh/",
    "kontrol": "2026-10-04"
   },
   "Waterford": {
@@ -1225,11 +1598,24 @@
    "web": "https://www.ei-sake.jp",
    "kontrol": "2026-10-04"
   },
+  "White Peak": {
+   "web": "https://www.whitepeakdistillery.co.uk/",
+   "ig": "https://www.instagram.com/whitepeakdistillery/",
+   "fb": "https://www.facebook.com/whitepeakdistillery/",
+   "x": "https://x.com/whitepeakwhisky",
+   "kontrol": "2026-10-04"
+  },
   "Whyte & Mackay": {
    "web": "https://whyteandmackay.com",
    "fb": "https://www.facebook.com/whyteandmackay",
    "x": "https://twitter.com/whyteandmackay",
    "yt": "https://www.youtube.com/channel/UCPwDcWqTxDBhKGyi1glhuDA",
+   "kontrol": "2026-10-04"
+  },
+  "Widow Jane": {
+   "web": "https://widowjane.com/",
+   "ig": "https://www.instagram.com/widowjane/",
+   "fb": "https://www.facebook.com/Widow-Jane-Distillery-224671021007655/",
    "kontrol": "2026-10-04"
   },
   "Wild Turkey": {
@@ -1276,6 +1662,13 @@
    "x": "https://x.com/walshwhiskey",
    "kontrol": "2026-10-04"
   },
+  "Wyoming Whiskey": {
+   "web": "https://wyomingwhiskey.com/",
+   "ig": "https://www.instagram.com/wyomingwhiskey",
+   "fb": "https://www.facebook.com/WyomingWhiskey",
+   "x": "https://twitter.com/wyowhiskey",
+   "kontrol": "2026-10-04"
+  },
   "Yamazaki (Suntory)": {
    "web": "https://house.suntory.com/yamazaki-whisky",
    "kontrol": "2026-10-04"
@@ -1284,12 +1677,32 @@
    "web": "https://www.nikka.com/en/distilleries/yoichi/",
    "ig": "https://www.instagram.com/nikkawhiskyglobal/",
    "kontrol": "2026-10-04"
+  },
+  "Yuza": {
+   "web": "https://yuza-disty.jp/",
+   "fb": "https://www.facebook.com/yuza.disty/",
+   "kontrol": "2026-10-04"
+  },
+  "Zuidam": {
+   "web": "https://www.zuidam.com/",
+   "kontrol": "2026-10-04"
   }
  },
  "yok": {
+  "Auchroisk": "2026-10-04",
+  "Benrinnes": "2026-10-04",
+  "Black & White": "2026-10-04",
   "Dailuaine": "2026-10-04",
   "Glann ar Mor": "2026-10-04",
+  "Glen Elgin": "2026-10-04",
+  "Glen Keith": "2026-10-04",
+  "Glen Spey": "2026-10-04",
+  "Glenlossie": "2026-10-04",
+  "Inchgower": "2026-10-04",
+  "Knockando": "2026-10-04",
   "Linkwood": "2026-10-04",
+  "Mannochmore": "2026-10-04",
+  "VAT 69": "2026-10-04",
   "White Horse": "2026-10-04"
  }
 }

@@ -1,6 +1,6 @@
 # viski-atlas
 
-Viski Atlası — bölge → damıtımevi → şişe rehberi (statik PWA, Netlify'da yayında).
+Viski Atlası — bölge → damıtımevi → şişe rehberi (statik PWA, Cloudflare Pages'te yayında: https://viski-atlas.pages.dev).
 
 ## Fiyat güncelleme politikası
 

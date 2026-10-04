@@ -629,7 +629,7 @@ nav.groups{display:flex;gap:6px;margin:20px 0 10px;background:var(--bg2);border:
 </div>
 
   <p class="note">💾 İşaretlemelerin ve fiyat düzenlemelerin bu tarayıcıda otomatik kaydedilir. Fiyatlar 2026 yaklaşık Türkiye perakende referansıdır (70cl), mağaza/kur/duty-free'ye göre değişir. <span id="fiyatDurum"></span> <a href="#" id="resetBtn">↺ Tüm seçimleri sıfırla</a></p>
-  <p class="note" style="margin-top:4px">🍺 Kardeş site: <a href="https://mukreminyuksel.github.io/bira-atlas/" target="_blank" rel="noopener" style="color:var(--amber2)">Bira Atlası</a> — 1150+ bira, stil rehberi ve Türkiye craft haritası.</p>
+  <p class="note" style="margin-top:4px">🍺 Kardeş site: <a href="https://bira-atlas.pages.dev" target="_blank" rel="noopener" style="color:var(--amber2)">Bira Atlası</a> — 1150+ bira, stil rehberi ve Türkiye craft haritası.</p>
 </div>
 
 <script>
@@ -2606,7 +2606,7 @@ function makeShareCard(){
   // footer
   x.textAlign='center';x.fillStyle='#8a7a5c';x.font='600 24px system-ui,Arial';
   const d=new Date().toLocaleDateString('tr-TR');
-  x.fillText('viski-atlas.netlify.app  ·  '+d,W/2,H-60);
+  x.fillText('viski-atlas.pages.dev  ·  '+d,W/2,H-60);
   c.toBlob(bl=>{const u=URL.createObjectURL(bl);const a=document.createElement('a');a.href=u;a.download='viski-koleksiyonum.png';document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(u),2000);},'image/png');
 }
 

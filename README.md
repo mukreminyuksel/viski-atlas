@@ -30,8 +30,9 @@ Fiyatlar **otomatik** güncellenir; API anahtarı ya da elle müdahale gerekmez.
 
 ## Bulut senkronu ve Tadım Geceleri
 
-Site statik, ama iki küçük Netlify sunucu fonksiyonu var (`netlify/functions/`), veriler Netlify
-Blobs'ta tutulur (ek hesap/ücret gerekmez):
+Site statik, ama küçük sunucu fonksiyonları var. Çekirdek mantık platformdan bağımsızdır (`api/*.ts`);
+iki ince katman aynı kodu çalıştırır: **Cloudflare Pages** (`functions/api/*.ts`, veri Workers KV'de,
+bağlama adı `VERI`) ve **Netlify** (`netlify/functions/*.mts`, veri Netlify Blobs'ta):
 
 - **`/api/sync` — bulut senkronu:** Giriş yok. "Listem → Bulutta saklamaya başla" ile viski temalı
   bir kod üretilir (ör. `kehribar-islay-kadeh-427`); liste her değişiklikte bu kodla kaydedilir.

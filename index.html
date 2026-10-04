@@ -34,6 +34,10 @@ header{padding:26px 0 14px;border-bottom:1px solid var(--line);margin-bottom:18p
 .kardes small{color:var(--muted);font-weight:600;font-size:11px;text-transform:uppercase;letter-spacing:.4px}
 @media(max-width:760px){.brand{flex-wrap:nowrap;gap:10px}.kardes{padding:5px 10px;font-size:12px;align-self:center}.kardes small{display:none}}
 @media(max-width:400px){.brand h1 span{display:none}}
+.magfiltre{display:flex;gap:8px;flex-wrap:wrap;margin:6px 0 8px}.magfiltre input{flex:1;min-width:200px;background:var(--bg2);border:1px solid var(--line);color:var(--txt);border-radius:10px;padding:9px 12px;font-size:14px}
+.magchips{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px}
+@keyframes parla{0%,100%{box-shadow:none}30%{box-shadow:0 0 0 3px var(--amber2),0 0 24px rgba(242,193,78,.45)}}
+.magcard.parla{animation:parla 1.6s ease 2}
 .brand .sub{color:var(--muted);font-size:13px;margin-top:2px}
 .stats{display:flex;gap:14px;flex-wrap:wrap;margin-top:18px;align-items:stretch}
 .glass-box{display:flex;align-items:center;gap:14px;background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:12px 18px}
@@ -2035,7 +2039,76 @@ const FAMOUS=[
 {"e": "🕵️", "ad": "Philip Marlowe", "rol": "Raymond Chandler romanları", "blurb": "📖 Sayfada: Los Angeles'ın yorgun dedektifi, ofisinin çekmecesinde her zaman bir şişe viski saklar.", "picks": ["oldforester-1920", "wildturkey-101"], "g": "karakter"},
 {"e": "🏴", "ad": "Müfettiş John Rebus", "rol": "Ian Rankin romanları", "blurb": "📖 Sayfada: Edinburgh'un huysuz polisi davaları Oxford Bar'da bir kadeh İskoç viskisiyle düşünür.", "picks": ["highlandpark-12", "talisker-10"], "g": "karakter"},
 {"e": "🥃", "ad": "Don Draper", "rol": "Mad Men (dizi)", "blurb": "📺 Ekranda: Reklamcının ofis barında Kanada viskisi (Canadian Club) ve Old Fashioned eksik olmaz. Katalogda Canadian Club yok; 😄 bizce en yakın akrabaları:", "picks": ["crownroyal-harvest", "lot40"], "g": "karakter"},
-{"e": "🧙", "ad": "Rubeus Hagrid", "rol": "Harry Potter (roman)", "blurb": "📖 Sayfada: Büyücü dünyasının \"Ateşviskisi\" (Firewhisky) Üç Süpürge'de içilir. 😄 Bizce Muggle dünyasındaki karşılığı biberli, isli bir ada viskisi.", "picks": ["talisker-10"], "g": "karakter"}
+{"e": "🧙", "ad": "Rubeus Hagrid", "rol": "Harry Potter (roman)", "blurb": "📖 Sayfada: Büyücü dünyasının \"Ateşviskisi\" (Firewhisky) Üç Süpürge'de içilir. 😄 Bizce Muggle dünyasındaki karşılığı biberli, isli bir ada viskisi.", "picks": ["talisker-10"], "g": "karakter"},
+{"e": "🗼", "ad": "Bob Harris", "rol": "Lost in Translation (film, 2003)", "blurb": "📺 Ekranda: Tokyo'da reklamını çektiği şişe Hibiki 17: \"For relaxing times, make it Suntory time!\" 17'lik artık üretilmiyor; katalogda Harmony ve 21 nöbette.", "picks": ["hibiki-harmony", "hibiki-21", "suntory-toki"], "g": "karakter"},
+{"e": "🚔", "ad": "Jimmy McNulty", "rol": "The Wire (dizi)", "blurb": "📺 Ekranda: Jameson ister; barmen Bushmills uzatınca \"O Protestan viskisi\" diye burun kıvırır. Baltimore'un en dertli dedektifinin cebinde hep bir Jameson.", "picks": ["jameson", "jameson-blackbarrel"], "g": "karakter"},
+{"e": "🕶️", "ad": "Sterling Archer", "rol": "Archer (çizgi dizi)", "blurb": "📺 Ekranda: Glengoolie Blue — tamamen kurgusal bir scotch, üstelik jakuzide üç şişe! 😄 Bizce gerçek dünyadaki en yakın akrabası Johnnie Walker Blue ya da şık bir Glenfiddich.", "picks": ["jw-blue", "glenfiddich-18"], "g": "karakter"},
+{"e": "🤵", "ad": "Barney Stinson", "rol": "How I Met Your Mother (dizi)", "blurb": "📺 Ekranda: Glen McKenna — kurgusal bir single malt; çete 30 yaşlığı 10 dolarlık scotch'tan ayıramaz! 😄 Bizce \"efsaaaneviii\" bir takım elbiseye Glenmorangie 18 yakışır.", "picks": ["glenmorangie-18", "glenlivet-18"], "g": "karakter"},
+{"e": "⚖️", "ad": "Harvey Specter", "rol": "Suits (dizi)", "blurb": "📺 Ekranda: Büyük davaları Macallan 18 ile kutlar. Kazanmak onda alışkanlıksa, kadeh de alışkanlık. Kravat gevşetilir, buz konmaz.", "picks": ["macallan-sherry18", "macallan-doublecask18"], "g": "karakter"},
+{"e": "🖖", "ad": "Montgomery \"Scotty\" Scott", "rol": "Star Trek: The Next Generation – \"Relics\" (dizi)", "blurb": "📺 Ekranda: Sentehol'e burun kıvırır; Data, Guinan'ın zulasından bir şişe açar: \"Yeşil.\" Aldebaran viskisi kurgusal; 😄 bizce İskoç mühendise memleketinden Talisker.", "picks": ["talisker-10", "highlandpark-12"], "g": "karakter"},
+{"e": "🕴️", "ad": "Lancelot", "rol": "Kingsman: Gizli Servis (film, 2014)", "blurb": "📺 Ekranda: Açılış sahnesinde 1962 Dalmore'u kadehte kurtarır: \"Dökmek günah olurdu.\" 62'lik müzelik; katalogdan Dalmore 18 ve King Alexander III.", "picks": ["dalmore-18", "dalmore-king"], "g": "karakter"},
+{"e": "🤠", "ad": "Agent Whiskey", "rol": "Kingsman: Altın Çember (film, 2017)", "blurb": "📺 Ekranda: Statesman ajanları Kentucky'de bir bourbon imalathanesinin arkasına saklanır. Film için gerçekten şişelenen Old Forester Statesman da katalogda!", "picks": ["oldforester-statesman", "oldforester-1920"], "g": "karakter"},
+{"e": "🎹", "ad": "Rick Blaine", "rol": "Casablanca (film, 1942)", "blurb": "📺 Ekranda: Ilsa onun barına girince bourbon şişesini yarılar; etiket kurgusal \"Kentucky Hill\". 😄 Bizce eski usul bir Old Forester 1897.", "picks": ["oldforester-1897", "fourroses-smallbatch"], "g": "karakter"},
+{"e": "⭐", "ad": "Raylan Givens", "rol": "Justified (dizi)", "blurb": "📺 Ekranda: Markayı pek umursamaz, viskiyse içer; ama yaralı patronu Art'ı ziyarete Blanton's'la gider. Kentucky şerifinin şapkası kadar kibar bir jest.", "picks": ["blantons", "wildturkey-101"], "g": "karakter"},
+{"e": "🧨", "ad": "Boyd Crowder", "rol": "Justified (dizi)", "blurb": "📺 Ekranda: Boyd'un bardağında Elmer T. Lee. Katalogda yok; aynı Buffalo Trace damıtımevinden Buffalo Trace ve Eagle Rare en yakın kuzenler. Hitabeti kadar yumuşak.", "picks": ["buffalotrace", "eagle-rare"], "g": "karakter"},
+{"e": "🦁", "ad": "Logan Roy", "rol": "Succession (dizi)", "blurb": "📺 Ekranda: Londra'da gece yarısı Balvenie DoubleWood; Dundee bölümünde Glencadam 25 masada (katalogda 21'lik). Kadehleri taşırıp sır avlamayı da bilir.", "picks": ["balvenie-dw12", "glencadam-21"], "g": "karakter"},
+{"e": "🃏", "ad": "Frank Underwood", "rol": "House of Cards (dizi)", "blurb": "📺 Ekranda: Blanton's Single Barrel, sade ve kısa bardakta; ofiste bir de Bushmills durur. Kameraya dönüp göz kırpmadan önce tek yudum.", "picks": ["blantons", "bushmills-10"], "g": "karakter"},
+{"e": "🧪", "ad": "Walter White", "rol": "Breaking Bad (dizi)", "blurb": "📺 Ekranda: Dimple Pinch — üçgen \"çimdik\" şişe, yalnızca dönüm noktalarında. Katalogda yok; aynı Haig ailesinden Haig Club ve bir blend klasiği önerimiz.", "picks": ["haigclub", "jw-gold"], "g": "karakter"},
+{"e": "🩺", "ad": "Dr. Gregory House", "rol": "House M.D. (dizi)", "blurb": "📺 Ekranda: Piyano başında scotch, çoğu zaman bourbon; bir sahnede Maker's'a benzeyen kurgusal \"Master's Mills\". 😄 Bizce teşhis net: Maker's Mark.", "picks": ["makersmark", "makersmark-46"], "g": "karakter"},
+{"e": "🐴", "ad": "BoJack Horseman", "rol": "BoJack Horseman (çizgi dizi)", "blurb": "📺 Ekranda: Kurgusal \"Guten Bourbon\" bolca ekranda. 😄 Bizce bir at için en dürüst şişe White Horse — ya da Kentucky yarış pistlerinin bourbon'u Woodford.", "picks": ["whitehorse", "woodford"], "g": "karakter"},
+{"e": "🎳", "ad": "The Dude", "rol": "The Big Lebowski (film, 1998)", "blurb": "📺 Ekranda: Viski değil, White Russian (votka, kahve likörü, krema). 😄 Bizce viskiye geçerse halıyla uyumlu, yumuşacık bir Bushmills Black Bush. The Dude abides.", "picks": ["bushmills-black", "monkeyshoulder"], "g": "karakter"},
+{"e": "🧥", "ad": "Komiser Columbo", "rol": "Columbo (dizi)", "blurb": "📺 Ekranda: \"The Conspirators\" bölümünde kurgusal \"Full's Irish Dew\" viskisi ipucu olur; adı Tullamore D.E.W.'ya göz kırpar. 😄 Bizce \"Bir şey daha...\" dedirten şişe: Tullamore.", "picks": ["tullamore-12", "powers-gold"], "g": "karakter"},
+{"e": "🎩", "ad": "Nucky Thompson", "rol": "Boardwalk Empire (dizi)", "blurb": "📺 Ekranda: Atlantic City'nin patronu Bill McCoy'dan kasa kasa Canadian Club alır, sonra İrlanda viskisine de el atar. Yasak döneminin en şık kaçakçısı.", "picks": ["canadianclub-100", "powers-johnslane"], "g": "karakter"},
+{"e": "🐄", "ad": "John Dutton", "rol": "Yellowstone (dizi)", "blurb": "📺 Ekranda: İlk sezonlarda Bulleit, sonra Buffalo Trace ailesi; 5. sezonda Beth çantasından Weller 12 çıkarır: \"Viski ister misin baba?\"", "picks": ["weller-12", "bulleit-bourbon", "buffalotrace"], "g": "karakter"},
+{"e": "🦆", "ad": "Tony Soprano", "rol": "The Sopranos (dizi)", "blurb": "📺 Ekranda: Sık sık buzlu scotch; kaynaklar şişeyi çoğunlukla Glenlivet olarak anar. Terapi seansından sonra bir kadeh, havuzdaki ördekler için bir kadeh daha.", "picks": ["glenlivet-12", "glenlivet-15"], "g": "karakter"},
+{"e": "📞", "ad": "Saul Goodman", "rol": "Better Call Saul (dizi)", "blurb": "📺 Ekranda: Jimmy'nin imza içkisi Rusty Nail: scotch + Drambuie. 😄 Bizce kokteyli Dewar's ya da Monkey Shoulder ile kursun; reklamları gibi ucuz ama iddialı.", "picks": ["dewars-12", "monkeyshoulder"], "g": "karakter"},
+{"e": "🏔️", "ad": "Marion Ravenwood", "rol": "Kutsal Hazine Avcıları (film, 1981)", "blurb": "📺 Ekranda: Nepal'deki barında iri yarı bir rakibi viski shot yarışmasında masaya yatırır. Marka belli değil; 😄 bizce Himalaya ayazına dumanlı bir Talisker Storm.", "picks": ["talisker-storm", "ardbeg-10"], "g": "karakter"},
+{"e": "🕵️‍♀️", "ad": "Jessica Jones", "rol": "Marvel's Jessica Jones (dizi)", "blurb": "📺 Ekranda: Eline ne geçerse; en sık Teacher's (bir de kurgusal Winston). Ofiste Cutty Sark, Four Roses, Jim Beam şişeleri. Sır: setteki sıvı nane çayıymış!", "picks": ["teachers", "fourroses-smallbatch"], "g": "karakter"},
+{"e": "🐑", "ad": "Murakami'nin anlatıcıları", "rol": "Haruki Murakami romanları", "blurb": "📖 Sayfada: Koyun Peşinde'den Renksiz Tsukuru'ya bardakta sık sık Cutty Sark. Caz plağı, spagetti ve Cutty Sark: gerçek bir Murakami üçlemesi.", "picks": ["cuttysark", "cuttysark-prohibition"], "g": "karakter"},
+{"e": "🐉", "ad": "Kazuma Kiryu", "rol": "Yakuza 0 (oyun)", "blurb": "📺 Ekranda: Kamurocho barlarının menüsünde gerçek Suntory şişeleri: Yamazaki 12 ve Suntory Old. Sırtında ejderha, bardağında Yamazaki.", "picks": ["yamazaki-12", "hibiki-harmony"], "g": "karakter"},
+{"e": "☕", "ad": "Bourbon (Toru Amuro)", "rol": "Dedektif Conan (anime/manga)", "blurb": "📺 Ekranda: Kara Örgüt üyeleri içki adı taşır; Amuro'nun kod adı tam olarak \"Bourbon\". Kafede garson, örgütte ajan, aslında polis — kat kat aroma.", "picks": ["bookers", "elijahcraig-sb"], "g": "karakter"},
+{"e": "🎯", "ad": "Rye (Shuichi Akai)", "rol": "Dedektif Conan (anime/manga)", "blurb": "📺 Ekranda: FBI'ın keskin nişancısı örgüte \"Rye\" kod adıyla sızmıştı. Sessiz, sert ve baharatlı — tam bir çavdar viskisi karakteri.", "picks": ["rittenhouse", "michters-rye"], "g": "karakter"},
+{"e": "🤖", "ad": "Bender", "rol": "Futurama (çizgi dizi)", "blurb": "📺 Ekranda: Robotların içkisi Olde Fortran malt likörü — kurgusal. 😄 Bizce yakıt deposuna en yakın şişe varil gücünde bir Stagg Jr.", "picks": ["stagg-jr", "larceny-bp"], "g": "karakter"},
+{"e": "🥂", "ad": "Jay Gatsby", "rol": "Muhteşem Gatsby (roman)", "blurb": "📖 Sayfada: Plaza'daki o bunaltıcı öğleden sonra Tom havluya sarılı viski şişesini masaya koyar, Daisy nane julep ister. 😄 Bizce Gatsby'ye partileri kadar parlak bir Michter's.", "picks": ["michters-bourbon", "woodford-double"], "g": "karakter"},
+{"e": "🐂", "ad": "Jake Barnes", "rol": "Güneş de Doğar (Hemingway romanı)", "blurb": "📖 Sayfada: Paris kafelerinde \"whiskey and soda\" ilk bölümden itibaren elden ele. 😄 Bizce o highball'u bugün Dewar's White Label ya da Suntory Toki ile kurardı.", "picks": ["dewars-white", "suntory-toki"], "g": "karakter"},
+{"e": "🍺", "ad": "Henry Chinaski", "rol": "Charles Bukowski romanları", "blurb": "😄 Bizce: Bira, şarap, ne bulursa... Los Angeles'ın arka sokak barlarında ucuz ama dürüst bir bourbon da sinerdi içine: Evan Williams ya da Old Grand-Dad 114.", "picks": ["evanwilliams-black", "oldgranddad-114"], "g": "karakter"},
+{"e": "🔥", "ad": "Rooster Cogburn", "rol": "True Grit (film, 2010)", "blurb": "📺 Ekranda: Tek gözlü şerif viskiyi doğrudan şişeden içer; marka yok. 😄 Bizce vahşi batının tozuna dayanıklı bir Wild Turkey Rare Breed ya da Henry McKenna.", "picks": ["wildturkey-rarebreed", "henrymckenna-10"], "g": "karakter"},
+{"e": "🐎", "ad": "Arthur Morgan", "rol": "Red Dead Redemption 2 (oyun)", "blurb": "📺 Ekranda: Saloonlarda kurgusal \"Limping Williams\" viskisi — Evan Williams'a açık bir göz kırpma. 😄 Bizce gerçeği: Evan Williams Bottled-in-Bond.", "picks": ["evanwilliams-bib", "heavenhill-7bib"], "g": "karakter"},
+{"e": "💊", "ad": "Max Payne", "rol": "Max Payne 3 (oyun)", "blurb": "📺 Ekranda: Etiketinde bağıran goril olan kurgusal \"Kong\" viskisi. 😄 Bizce kara film ruhuna dumanlı bir Islay: Laphroaig 10, ağır çekimde yudumlanır.", "picks": ["laphroaig-10", "kilchoman-machir"], "g": "karakter"},
+{"e": "🚀", "ad": "Spike Spiegel", "rol": "Cowboy Bebop (anime)", "blurb": "📺 Ekranda: \"Heavy Metal Queen\"de akşamdan kalmalığa prairie oyster dener. 😄 Bizce caz eşliğinde Nikka From The Barrel: küçük şişe, büyük ruh. See you, space cowboy.", "picks": ["nikka-barrel", "nikka-coffeygrain"], "g": "karakter"},
+{"e": "🦁", "ad": "Tyrion Lannister", "rol": "Game of Thrones (dizi)", "blurb": "📺 Ekranda: \"İçerim ve bir şeyler bilirim\" — ama şarapla. 😄 Bizce viskiye geçse dizinin resmi serisindeki Lannister Hanesi şişesi Lagavulin 9'u seçerdi.", "picks": ["lagavulin-9got", "lagavulin-16"], "g": "karakter"},
+{"e": "☕", "ad": "Dale Cooper", "rol": "Twin Peaks (dizi)", "blurb": "📺 Ekranda: \"Damn fine coffee!\" — kahve ve kiraz turtası. 😄 Bizce akşam olunca Nikka Coffey Malt (adı kahveden değil, Coffey kazanından gelse de) ya da stout fıçılı Jameson.", "picks": ["nikka-coffeymalt", "jameson-caskmates"], "g": "karakter"},
+{"e": "🧼", "ad": "Adrian Monk", "rol": "Monk (dizi)", "blurb": "📺 Ekranda: Yalnızca belirli bir marka şişe su içer. 😄 Bizce ölçülü, tertemiz ve simetrik bir Lowland: Glenkinchie 12 — tabii bardak önce dezenfekte edilir.", "picks": ["glenkinchie-12", "auchentoshan-american"], "g": "karakter"},
+{"e": "📰", "ad": "Ron Burgundy", "rol": "Anchorman (film, 2004)", "blurb": "📺 Ekranda: \"Scotch'u severim. Scotchy scotch scotch!\" Marka söylemez; 😄 bizce San Diego'nun haber kralına bıyığı kadar gür bir Macallan 12 Sherry Oak.", "picks": ["macallan-sherry12", "chivas-12"], "g": "karakter"},
+{"e": "✈️", "ad": "Mister No (Jerry Drake)", "rol": "Mister No (Bonelli çizgi romanı)", "blurb": "📖 Sayfada: Manaus'taki barda en sevdiği şey cachaça; ona göre cachaça zenginlerin viskisi kadar iyi! 😄 Bizce Amazon sıcağına tropik iklimde olgunlaşan Kavalan.", "picks": ["kavalan-classic", "amrut-fusion"], "g": "karakter"},
+{"e": "🪓", "ad": "Zagor", "rol": "Zagor (Bonelli çizgi romanı)", "blurb": "😄 Bizce: Darkwood ormanında baltasını asıp kamp ateşine oturduğunda, Chico tencereyle uğraşırken ona orman kokulu bir Hakushu yakışır. Za-gor-te-nay!", "picks": ["hakushu-12", "glenmorangie-forest"], "g": "karakter"},
+{"e": "🪶", "ad": "Ken Parker", "rol": "Ken Parker (Bonelli çizgi romanı)", "blurb": "😄 Bizce: \"Uzun Tüfek\" kitap okuyan, düşünen bir kovboy; ona sessiz ve ince bir rye yakışır: Kanada'dan Lot 40 ya da High West Rendezvous.", "picks": ["lot40", "highwest-rendezvous"], "g": "karakter"},
+{"e": "🧔", "ad": "Kit Carson", "rol": "Tex (Bonelli çizgi romanı)", "blurb": "😄 Bizce: \"Gümüş Bıyık\" saloonda yaşlı kurt edasıyla Tex'e laf yetiştirir; ona eski toprak bir Old Fitzgerald Bottled-in-Bond ya da Four Roses Single Barrel.", "picks": ["oldfitzgerald-bib", "fourroses-sb"], "g": "karakter"},
+{"e": "🤠", "ad": "Lucky Luke", "rol": "Lucky Luke (Fransız-Belçika çizgi romanı)", "blurb": "😄 Bizce: Gölgesinden hızlı çeken yalnız kovboya hızlı ama yumuşak bir Larceny; Jolly Jumper'a da bir kova su. Daltonlar mı? Onlara ancak gazoz.", "picks": ["larceny", "jimbeam-white"], "g": "karakter"},
+{"e": "⚓", "ad": "Corto Maltese", "rol": "Corto Maltese (Hugo Pratt çizgi romanı)", "blurb": "😄 Bizce: Pratt'ın denizcisi kahve, sigara ve romla anılır. Viskiye geçerse küpesi kadar tuzlu bir deniz kenarı maltı: Old Pulteney ya da Campbeltown'dan Glen Scotia.", "picks": ["oldpulteney-12", "glenscotia-15"], "g": "karakter"},
+{"e": "🎖️", "ad": "Teğmen Blueberry", "rol": "Blueberry (Charlier & Giraud çizgi romanı)", "blurb": "😄 Bizce: Poker masasında kumarbaz, karargâhta asi; ona tozlu bir Kentucky klasiği: Old Forester 100 Proof, kartları açık oynar.", "picks": ["oldforester-100", "oldgranddad-114"], "g": "karakter"},
+{"e": "🐺", "ad": "Wolverine (Logan)", "rol": "X-Men (Marvel çizgi romanı)", "blurb": "😄 Bizce: Kanadalı mutantın iyileşme faktörü varil gücünden korkmaz: Alberta Premium Cask Strength Rye. Pençeler çıkmadan önce bir yudum, sonra bir yudum daha.", "picks": ["alberta-cs", "crownroyal-harvest"], "g": "karakter"},
+{"e": "🚬", "ad": "John Constantine", "rol": "Hellblazer (DC/Vertigo çizgi romanı)", "blurb": "😄 Bizce: Liverpool'lu büyücü, trençkot ve sigara. Şeytanlarla pazarlığa giderken cebinde dumanı bol bir şişe olmalı: Big Peat ya da Smokehead.", "picks": ["dl-bigpeat", "smokehead"], "g": "karakter"},
+{"e": "🏴‍☠️", "ad": "Kaptan Jack Sparrow", "rol": "Karayip Korsanları (film serisi)", "blurb": "📺 Ekranda: \"Rom neden hep bitiyor?\" — viski değil, rom adamı. 😄 Bizce viskiye razı olursa rom fıçısında dinlenmiş bir Balvenie Caribbean Cask ister.", "picks": ["balvenie-carib14", "killowen"], "g": "karakter"},
+{"e": "🥚", "ad": "Hercule Poirot", "rol": "Agatha Christie romanları", "blurb": "📖 Sayfada: Küçük gri hücrelerin içkisi sirop de cassis ve bitki çayı. 😄 Bizce viskiye ikna edilirse düzenli, simetrik, zarif bir Glenmorangie Nectar d'Òr — bıyığı gibi bakımlı.", "picks": ["glenmorangie-nectar", "aberfeldy-12"], "g": "karakter"},
+{"e": "🌧️", "ad": "Komiser Maigret", "rol": "Georges Simenon romanları", "blurb": "😄 Bizce: Pipolu komiser bar tezgâhında ne varsa onu söyler; Paris yağmurunda ona memleketten yumuşak bir Fransız viskisi: Armorik ya da Brenne.", "picks": ["armorik-classic", "brenne-10"], "g": "karakter"},
+{"e": "🦅", "ad": "Sam Spade", "rol": "Malta Şahini (roman/film)", "blurb": "😄 Bizce: Hammett'in sert dedektifine ofis çekmecesinde bekleyen kısa ve net bir rye yakışır: Pikesville ya da Sazerac 6. Kuş sahte olabilir, viski olmasın.", "picks": ["pikesville", "sazerac-6"], "g": "karakter"},
+{"e": "🌀", "ad": "Rust Cohle", "rol": "True Detective (dizi, 1. sezon)", "blurb": "😄 Bizce: \"Zaman düz bir dairedir\" diyen dedektife yıllar boyu kendi içinde dönen solera usulü bir şişe: Glenfiddich 15 Solera ya da Hillrock Solera bourbon.", "picks": ["glenfiddich-15", "hillrock"], "g": "karakter"},
+{"e": "✍️", "ad": "Hank Moody", "rol": "Californication (dizi)", "blurb": "😄 Bizce: Yazar tıkanıklığını kaosla aşan yaramaz romancıya adı bile tam oturan bir şişe: Writers' Tears. Yedeğinde bir Redbreast.", "picks": ["writerstears", "redbreast-12"], "g": "karakter"},
+{"e": "🐺", "ad": "Polat Alemdar", "rol": "Kurtlar Vadisi (dizi)", "blurb": "😄 Bizce: Az konuşur, çok bakar. Ona sert, ağırbaşlı, tek kelimelik bir viski: Lagavulin 16. Cevap yine kısadır.", "picks": ["lagavulin-16", "ardbeg-uigeadail"], "tr": true, "g": "karakter"},
+{"e": "🎲", "ad": "Ezel Bayraktar", "rol": "Ezel (dizi)", "blurb": "😄 Bizce: Yıllarca sabırla bekleyen plana yıllarca sabırla bekleyen bir şişe: GlenDronach 21 Parliament ya da Yamazaki 18. İntikam da viski de acele sevmez.", "picks": ["glendronach-21", "yamazaki-18"], "tr": true, "g": "karakter"},
+{"e": "🎰", "ad": "Ramiz Dayı", "rol": "Ezel (dizi)", "blurb": "😄 Bizce: Kumarhanenin kurt emektarı, öğütleri hep yerinde. Ona görmüş geçirmiş, porselen şişeli bir Royal Salute 21 ya da Chivas 18 yakışır.", "picks": ["royalsalute-21", "chivas-18"], "tr": true, "g": "karakter"},
+{"e": "💔", "ad": "Bihter Ziyagil", "rol": "Aşk-ı Memnu (dizi)", "blurb": "😄 Bizce: Yalının en tutkulu ve tehlikeli siması; ona şarap fıçısında kızıllaşmış, yasak meyve kadar çekici bir Glenmorangie Quinta Ruban ya da Tamnavulin Pinot Noir.", "picks": ["glenmorangie-quinta", "tamnavulin-pinotnoir"], "tr": true, "g": "karakter"},
+{"e": "🍂", "ad": "Ali Rıza Bey", "rol": "Yaprak Dökümü (roman/dizi)", "blurb": "😄 Bizce: Reşat Nuri'nin ilkeli babası; aileyi bir arada tutmaya çalışan sıcak, dürüst bir harman: Ballantine's 17. Yapraklar dökülür, değerler kalır.", "picks": ["ballantines-17", "dewars-15"], "tr": true, "g": "karakter"},
+{"e": "🔎", "ad": "Başkomiser Nevzat", "rol": "Ahmet Ümit romanları", "blurb": "😄 Bizce: İstanbul'un tarihini suç dosyalarıyla birlikte okuyan komisere katman katman bir İskoç yakışır: Highland Park 18 ya da Bowmore 15 Darkest.", "picks": ["highlandpark-18", "bowmore-15"], "tr": true, "g": "karakter"},
+{"e": "🎭", "ad": "İsmail Abi", "rol": "Leyla ile Mecnun (dizi)", "blurb": "😄 Bizce: Leyla ile Mecnun'un absürt evreninin vazgeçilmezine kendisi kadar tuhaf ve güzel bir şişe: Compass Box Hedonism. Mantık arama, keyfini çıkar.", "picks": ["compass-hedonism", "compass-orchardhouse"], "tr": true, "g": "karakter"},
+{"e": "🏙️", "ad": "Burhan Altıntop", "rol": "Avrupa Yakası (dizi)", "blurb": "😄 Bizce: Cihangir'in kendini fazlasıyla beğenen beyefendisine adı kadar iddialı ama ulaşılabilir bir şişe: Johnnie Walker Double Black. Kalite görüntüdedir.", "picks": ["jw-doubleblack", "jw-black"], "tr": true, "g": "karakter"},
+{"e": "📻", "ad": "Muhsin Bey", "rol": "Muhsin Bey (film, 1987)", "blurb": "😄 Bizce: Eski usule ve Türk sanat müziğine sadık organizatöre plak gibi sıcak, nostaljik bir şişe: Glenfarclas 15. Yeni modaya değil, iyi şarkıya inanır.", "picks": ["glenfarclas-15", "glengoyne-12"], "tr": true, "g": "karakter"},
+{"e": "⚔️", "ad": "Tarkan", "rol": "Tarkan (Sezgin Burak çizgi romanı)", "blurb": "😄 Bizce: Kurdu Kurt'la Vikinglere kafa tutan Hun savaşçısına Viking ruhlu Highland Park Valkyrie ya da kurtlu Highland Park 14 Loyalty of the Wolf.", "picks": ["highlandpark-valkyrie", "highlandpark-14wolf"], "tr": true, "g": "karakter"},
+{"e": "🗡️", "ad": "Karaoğlan", "rol": "Karaoğlan (Suat Yalaz çizgi romanı)", "blurb": "😄 Bizce: Bozkırın kahramanına at üstünde bile sarsılmayacak kadar sağlam, dumanlı bir şişe: Ardbeg Corryvreckan. Girdabı da kılıcı da keskin.", "picks": ["ardbeg-corryvreckan", "bunna-toiteach"], "tr": true, "g": "karakter"},
+{"e": "🏚️", "ad": "İdris Koçovalı", "rol": "Çukur (dizi)", "blurb": "😄 Bizce: Mahallenin babasına \"Dufftown Canavarı\" lakaplı ağırbaşlı bir Mortlach 16 yakışır. Az konuşur, son sözü o söyler.", "picks": ["mortlach-16", "glenfarclas-21"], "tr": true, "g": "karakter"},
+{"e": "🏫", "ad": "Mahmut Hoca", "rol": "Hababam Sınıfı (Yeşilçam, film, 1975)", "blurb": "😄 Bizce: Disiplinli ama yufka yürekli \"Kel Mahmut\"a (öğrenciler görmeden!) kuralına uygun bir Glenlivet 18. Hababam Sınıfı'na ise ancak ayran.", "picks": ["glenlivet-18", "aberlour-12"], "tr": true, "g": "karakter"},
+{"e": "🧔‍♂️", "ad": "Tom Hagen", "rol": "Baba (film, 1972)", "blurb": "😄 Bizce: Corleone ailesinin soğukkanlı consigliere'si; İrlanda-Alman kökenli avukata ölçülü bir İrlanda klasiği: Redbreast 15. Teklif reddedilmez.", "picks": ["redbreast-15", "greenspot"], "g": "karakter"}
 ];
 let openMag=new Set();
 function renderMagazin(){
@@ -2045,12 +2118,19 @@ function renderMagazin(){
   let html='';
   groups.forEach(([g,title])=>{
     const items=FAMOUS.filter(f=>f.g===g);
-    html+=`<div class="maghead">${title} <span style="color:var(--muted2);font-weight:400;font-size:13px">(${items.length})</span></div><div class="mag">`;
+    html+=`<div class="maghead">${title} <span style="color:var(--muted2);font-weight:400;font-size:13px">(${items.length})</span></div>`;
+    if(g==='karakter'){
+      const say=k=>items.filter(f=>karTur(f).includes(k)).length;
+      html+=`<div class="magfiltre"><input id="magAra" type="search" placeholder="🔎 Karakter ya da eser ara…" value="${esc(MAGF.q)}">
+        <button class="btn" data-magrast>🎲 Rastgele karakter</button></div>
+        <div class="chips magchips">${KAR_TURLER.filter(([k])=>k==='hepsi'||say(k)).map(([k,t])=>`<button class="chip ${MAGF.tur===k?'on':''}" data-magf="${k}">${t}${k==='hepsi'?'':' ('+say(k)+')'}</button>`).join('')}</div>`;
+    }
+    html+=`<div class="mag">`;
     items.forEach(f=>{
       const picks=(f.picks||[]).map(id=>allBottles().find(x=>x.id===id)).filter(Boolean);
       const isOpen=openMag.has(f.ad);
       const shown=isOpen?picks:picks.slice(0,COLLAPSE);
-      html+=`<div class="magcard ${isOpen?'open':''}" data-magcard="${esc(f.ad)}"><div class="mh"><div class="av">${f.e}</div><div><div class="mn">${f.ad}</div><div class="mr">${f.rol}</div></div></div>
+      html+=`<div class="magcard ${isOpen?'open':''}" data-magcard="${esc(f.ad)}"${f.g==='karakter'?` data-kt="${karTur(f).join(' ')}" data-ks="${esc((f.ad+' '+f.rol).toLocaleLowerCase('tr'))}"`:''}><div class="mh"><div class="av">${f.e}</div><div><div class="mn">${f.ad}</div><div class="mr">${f.rol}</div></div></div>
         <div class="blurb">“${f.blurb}”</div>`;
       shown.forEach(b=>{const h=state.have.includes(b.id),t=state.target.includes(b.id);
         html+=`<div class="pick">${thumb(b)}<span class="pn"><span class="isimlink" data-detay="${b.id}">${b.ad}</span></span>
@@ -2065,7 +2145,39 @@ function renderMagazin(){
     html+=`</div>`;
   });
   box.innerHTML=html;
+  magUygula();
 }
+// Kurgu karakterleri: tür filtresi (eserin türü "rol" metninden çıkarılır), arama, rastgele seçim
+const KAR_TURLER=[['hepsi','Tümü'],['gecer','✅ Eserde geçenler'],['dizi','📺 Dizi'],['film','🎬 Film'],['cizgi','💬 Çizgi roman & film'],['roman','📖 Roman'],['oyun','🎮 Oyun'],['tr','🇹🇷 Türk eserleri']];
+const MAGF={tur:'hepsi',q:''};
+function karTur(f){
+  const r=(f.rol||'').toLocaleLowerCase('tr'),t=[];
+  if(/^(📺|📖)/.test(f.blurb||''))t.push('gecer');
+  if(/çizgi|anime|manga|bonelli|marvel|dc\)|animasyon/.test(r))t.push('cizgi');
+  else{if(/dizi|sitcom/.test(r))t.push('dizi');if(/film/.test(r))t.push('film');if(/roman|öykü|hikâye|kitap/.test(r))t.push('roman');}
+  if(/oyun|video/.test(r))t.push('oyun');
+  if(f.tr||/yeşilçam|türk/.test(r))t.push('tr');
+  return t;
+}
+function magUygula(){
+  const q=MAGF.q.trim().toLocaleLowerCase('tr');
+  document.querySelectorAll('#magazinBox [data-kt]').forEach(c=>{
+    const ok=(MAGF.tur==='hepsi'||c.dataset.kt.split(' ').includes(MAGF.tur))&&(!q||c.dataset.ks.includes(q));
+    c.style.display=ok?'':'none';
+  });
+}
+document.addEventListener('input',e=>{if(e.target.id==='magAra'){MAGF.q=e.target.value;magUygula();}});
+document.addEventListener('click',e=>{
+  const f=e.target.closest('[data-magf]');
+  if(f){MAGF.tur=f.dataset.magf;document.querySelectorAll('[data-magf]').forEach(x=>x.classList.toggle('on',x===f));magUygula();return;}
+  if(e.target.closest('[data-magrast]')){
+    const kartlar=[...document.querySelectorAll('#magazinBox [data-kt]')].filter(c=>c.style.display!=='none');
+    if(!kartlar.length)return;
+    const c=kartlar[Math.floor(Math.random()*kartlar.length)];
+    c.scrollIntoView({behavior:'smooth',block:'center'});c.classList.remove('parla');void c.offsetWidth;c.classList.add('parla');
+    olay('rastgele-karakter');
+  }
+});
 // ---------------- GURME PUANI ----------------
 const GURME_CATS=['Speyside','Highland','Islay','Campbeltown','Islands','Lowland','İskoç Harman','İrlanda','Bourbon','Çavdar/Rye','Tennessee','Japonya','Hindistan','Yeni Dünya'];
 function regionCat(b){

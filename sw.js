@@ -1,5 +1,5 @@
 // Viski Atlası — Service Worker (çevrimdışı destek)
-const CACHE = 'viski-atlas-v32';
+const CACHE = 'viski-atlas-v33';
 const ASSETS = [
   './',
   './index.html',

@@ -43,6 +43,12 @@ header{padding:26px 0 14px;border-bottom:1px solid var(--line);margin-bottom:18p
 .ulinkler{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0 4px}
 .ulink{display:inline-flex;align-items:center;gap:4px;padding:4px 10px;border:1px solid var(--line);border-radius:999px;background:var(--bg2);color:var(--amber2);text-decoration:none;font-size:12px;font-weight:700}
 .ulink:hover{border-color:var(--amber-soft)}
+.stilaile{font-size:16px;color:var(--amber2);margin:18px 0 8px}.stilaile span{font-size:12.5px;color:var(--muted2);font-weight:600}
+.stilgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:10px}
+.stilkart{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:11px 12px;cursor:pointer}.stilkart:hover{border-color:var(--amber-soft)}
+.sk-ust{display:flex;gap:10px;align-items:center}.sk-ad{font-weight:800;font-size:14px;color:var(--txt)}.sk-tr{font-size:12px;color:var(--muted2)}
+.sk-olcu{display:flex;gap:6px;flex-wrap:wrap;margin:8px 0 6px}.sk-olcu span{font-size:11.5px;background:var(--bg2);border:1px solid var(--line);border-radius:6px;padding:1px 6px;color:var(--amber-soft);font-weight:700}
+.sk-txt{font-size:12.5px;color:var(--muted);line-height:1.45}.renk.buyuk{width:26px;height:26px}
 .brand .sub{color:var(--muted);font-size:13px;margin-top:2px}
 .stats{display:flex;gap:14px;flex-wrap:wrap;margin-top:18px;align-items:stretch}
 .glass-box{display:flex;align-items:center;gap:14px;background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:12px 18px}
@@ -442,7 +448,9 @@ nav.groups{display:flex;gap:6px;margin:20px 0 10px;background:var(--bg2);border:
     <div class="tab" data-group="koleksiyon" data-view="stats">📊 İstatistik</div>
     <div class="tab" data-group="sosyal" data-view="gece">🥃 Tadım Geceleri</div>
     <div class="tab" data-group="sosyal" data-view="kulup">🏛️ Kulüplerim</div>
+    <div class="tab" data-group="sosyal" data-view="topluluk">🌐 Topluluk</div>
     <div class="tab" data-group="kaynak" data-view="kaynak">📚 Kaynaklar</div>
+    <div class="tab" data-group="kaynak" data-view="satis">🛒 Nereden Alınır</div>
   </nav>
 
   <section id="view-explore">
@@ -556,7 +564,15 @@ nav.groups{display:flex;gap:6px;margin:20px 0 10px;background:var(--bg2);border:
     <div id="fiyatBox"></div>
   </section>
   <section id="view-gece" class="hidden"><div id="geceKutu"></div></section>
+  <section id="view-satis" class="hidden">
+    <p class="intro">Nereden alınır? Uzman dükkânlar, zincir mağazalar ve havalimanı duty-free'leri. Mağazaların kendi sitelerine ve Instagram hesaplarına bağlantı veriyoruz; fiyat ve stok için mağazaya danışın.</p>
+    <div id="satisBox"></div>
+  </section>
   <section id="view-kulup" class="hidden"><div id="kulupKutu"></div></section>
+  <section id="view-topluluk" class="hidden">
+    <p class="intro">Viski topluluğu: Türkiye'deki ve dünyadaki viski kulüpleri, tadım grupları, Instagram ve YouTube hesapları, forumlar ve festivaller. Liste araştırmayla derlendi; her güncellemede yeniden kontrol edilir.</p>
+    <div id="toplulukBox"></div>
+  </section>
   <section id="view-stats" class="hidden">
     <p class="intro">Koleksiyonunun rakamlarla portresi: değer, dağılımlar ve öne çıkanlar. <b>Elimde olanlar</b> üzerinden hesaplanır.</p>
     <div id="statsBox"></div>
@@ -2113,7 +2129,31 @@ const FAMOUS=[
 {"e": "🗡️", "ad": "Karaoğlan", "rol": "Karaoğlan (Suat Yalaz çizgi romanı)", "blurb": "😄 Bizce: Bozkırın kahramanına at üstünde bile sarsılmayacak kadar sağlam, dumanlı bir şişe: Ardbeg Corryvreckan. Girdabı da kılıcı da keskin.", "picks": ["ardbeg-corryvreckan", "bunna-toiteach"], "tr": true, "g": "karakter"},
 {"e": "🏚️", "ad": "İdris Koçovalı", "rol": "Çukur (dizi)", "blurb": "😄 Bizce: Mahallenin babasına \"Dufftown Canavarı\" lakaplı ağırbaşlı bir Mortlach 16 yakışır. Az konuşur, son sözü o söyler.", "picks": ["mortlach-16", "glenfarclas-21"], "tr": true, "g": "karakter"},
 {"e": "🏫", "ad": "Mahmut Hoca", "rol": "Hababam Sınıfı (Yeşilçam, film, 1975)", "blurb": "😄 Bizce: Disiplinli ama yufka yürekli \"Kel Mahmut\"a (öğrenciler görmeden!) kuralına uygun bir Glenlivet 18. Hababam Sınıfı'na ise ancak ayran.", "picks": ["glenlivet-18", "aberlour-12"], "tr": true, "g": "karakter"},
-{"e": "🧔‍♂️", "ad": "Tom Hagen", "rol": "Baba (film, 1972)", "blurb": "😄 Bizce: Corleone ailesinin soğukkanlı consigliere'si; İrlanda-Alman kökenli avukata ölçülü bir İrlanda klasiği: Redbreast 15. Teklif reddedilmez.", "picks": ["redbreast-15", "greenspot"], "g": "karakter"}
+{"e": "🧔‍♂️", "ad": "Tom Hagen", "rol": "Baba (film, 1972)", "blurb": "😄 Bizce: Corleone ailesinin soğukkanlı consigliere'si; İrlanda-Alman kökenli avukata ölçülü bir İrlanda klasiği: Redbreast 15. Teklif reddedilmez.", "picks": ["redbreast-15", "greenspot"], "g": "karakter"},
+{"e": "🎩", "ad": "Cingöz Recai", "rol": "Peyami Safa'nın 'Server Bedi' takma adıyla yazdığı beyefendi hırsız-dedektif (roman, 1924)", "blurb": "😄 Bizce: Kitaplarda kadeh peşinde değil, zenginin kasası peşinde. Sherlock Holmes'u bile İstanbul'da ekmiş bir centilmene, smokinine yakışan bir Blue Label ya da Chivas 18 düşer.", "picks": ["jw-blue", "chivas-18"], "tr": true, "g": "karakter"},
+{"e": "🎮", "ad": "Booker DeWitt", "rol": "BioShock Infinite (oyun, 2013)", "blurb": "🎮 Oyunda: Kumar ve içki borcuna batmış eski Pinkerton. Columbia'da bulduğu 'Columbia 1830 Rye Whiskey' canını doldurur, Salts'ını boşaltır. Şişe kurgusal; bizce adaşı Booker's ya da bir rye.", "picks": ["bookers", "rittenhouse", "oldforester-1910"], "g": "karakter"},
+{"e": "🎮", "ad": "Hank Anderson", "rol": "Detroit: Become Human (oyun, 2018)", "blurb": "🎮 Oyunda: Android sevmeyen yorgun komiser; evde 'Black Lamb' malt Scotch'la baş başa (aynı kurgusal marka Heavy Rain'de de var). Bizce Black Lamb yerine dürüst bir Speyside.", "picks": ["glenfiddich-12", "famousgrouse"], "g": "karakter"},
+{"e": "🎮", "ad": "Larry Laffer", "rol": "Leisure Suit Larry in the Land of the Lounge Lizards (oyun, 1987)", "blurb": "🎮 Oyunda: Lefty's barında bir viski ısmarlar ama içmez; tuvalet önündeki sarhoşa verip karşılığında TV kumandası alır. Bulmaca çözen tek viski. Bizce 80'ler bar rafı: Jim Beam ya da Jack.", "picks": ["jimbeam-white", "jackdaniels-7"], "g": "karakter"},
+{"e": "🎮", "ad": "Bigby Wolf", "rol": "The Wolf Among Us (oyun, 2013)", "blurb": "🎮 Oyunda: Trip Trap barında Grendel'le kapıştıktan sonra ilk işi 'Whiskey, double' demek. Kötü Kurt'un sakinleştiricisi. Bizce 80'ler New York'una 101 proof bir Wild Turkey.", "picks": ["wildturkey-101", "rittenhouse"], "g": "karakter"},
+{"e": "🎮", "ad": "Michael De Santa", "rol": "Grand Theft Auto V (oyun, 2013)", "blurb": "🎮 Oyunda: Emekli soyguncu; depresyonunu evinde viskiyle uyuşturuyor, elinde kadehle havuz başına uzanıyor. Evdeki şişeden içirip sarhoş da edebilirsiniz. Bizce Rockford Hills villasına Glenlivet 18 yakışır.", "picks": ["glenlivet-18", "woodford"], "g": "karakter"},
+{"e": "🎮", "ad": "Tommy Angelo", "rol": "Mafia: The City of Lost Heaven (oyun, 2002)", "blurb": "🎮 Oyunda: Yasak döneminde taksiciden mafyöz olur; 'A Trip to the Country' görevinde Kanada'dan gelmiş iki kamyon içkiyi Morello'ların kurşunları altında şehre taşır. Bizce kasada Kanada viskisi vardı.", "picks": ["canadianclub-100", "lot40"], "g": "karakter"},
+{"e": "🎮", "ad": "Harry Du Bois", "rol": "Disco Elysium (oyun, 2019)", "blurb": "🎮 Oyunda: İçki ve uyuşturucuyla hafızasını silmiş dedektif; envanterdeki şişe bile şekerli 'Commodore Red' şarabı. 😄 Bizce oyunda viski yok, ama Harry'ye bir şey vereceksek 'Week of Peat' kadar sisli olsun.", "picks": ["balvenie-weekofpeat", "talisker-storm"], "g": "karakter"},
+{"e": "🎮", "ad": "Demoman", "rol": "Team Fortress 2 (oyun, 2007)", "blurb": "🎮 Oyunda: İskoç patlayıcı uzmanı; yakın dövüş silahı 'XXX' etiketli, 1808 tarihli bir şişe Scrumpy (yani elma şarabı). 😄 Bizce bir İskoç'un eli er geç Islay'e gider.", "picks": ["laphroaig-10", "ardbeg-wee"], "g": "karakter"},
+{"e": "🎮", "ad": "John Marston", "rol": "Red Dead Redemption (oyun, 2010)", "blurb": "🎮 Oyunda: Saloon tezgâhında viski 2 dolar; ünü 'Gunslinger'a çıkınca bedava. Beş altı kadehten sonra sendeler, yüzüstü kapaklanır. Armadillo Saloon'un müdavimine bizce dürüst bir Bottled-in-Bond.", "picks": ["henrymckenna-10", "oldgranddad-114"], "g": "karakter"},
+{"e": "🎮", "ad": "Uncle", "rol": "Red Dead Redemption 1-2 (oyun, 2010/2018)", "blurb": "🎮 Oyunda: Van der Linde çetesinin 'lumbago'lu ayyaşı; iş varken ortada yok, viski açıldığında hep orada. Marston çiftliğinde bile yan gelip yatar. Bizce ucuz ve bol: Evan Williams.", "picks": ["evanwilliams-black", "jimbeam-white"], "g": "karakter"},
+{"e": "🎮", "ad": "Adam Jensen", "rol": "Deus Ex: Human Revolution / Mankind Divided (oyun, 2011/2016)", "blurb": "🎮 Oyunda: 'Bunu ben istemedim' diyen siborg ajan; ara sahnelerde hep viski, dairesinde kanepenin dibinde boş şişeler, yatak başında yarım kadeh. Bizce altın-siyah estetiğe Gentleman Jack.", "picks": ["gentlemanjack", "jackdaniels-sb"], "g": "karakter"},
+{"e": "🎮", "ad": "Mad Moxxi", "rol": "Borderlands serisi (oyun, 2009-)", "blurb": "🎮 Oyunda: Pandora'da 'Moxxi's' barının sahibesi, kokteylleri meşhur. Gerçek dünyada 2022'de Ballantine's'in 'Chief Galactic Expansion Officer'ı oldu, adına sınırlı Moxxi's Bar şişesi çıktı. Bizce rafta Ballantine's.", "picks": ["ballantines-finest", "ballantines-12"], "g": "karakter"},
+{"e": "🎮", "ad": "Cole Cassidy", "rol": "Overwatch (oyun, 2016)", "blurb": "🎮 Oyunda: Kovboy kanun kaçağı; maç öncesi repliği: 'İyi bir puro, belimde koca bir tabanca. Bir adama başka ne lazım? Belki içecek bir şey...' Ne içtiğini söylemiyor; bizce bir rye.", "picks": ["bulleit-bourbon", "sazerac-6", "highwest-rendezvous"], "g": "karakter"},
+{"e": "🎮", "ad": "Ichiban Kasuga", "rol": "Yakuza: Like a Dragon (oyun, 2020)", "blurb": "🎮 Oyunda: Survive Bar'ın müdavimi; raftaki efsanevi 'Legend Malt' şişesinin içi aslında ucuz içki. Patron isteyene sahte bir aşk hikâyesi anlatıp satmıyor. Bizce gerçek Japon malt: Yamazaki 12.", "picks": ["yamazaki-12", "suntory-toki"], "g": "karakter"},
+{"e": "🎮", "ad": "Anderson Kardeşler (Odin ve Tor)", "rol": "Alan Wake (oyun, 2010)", "blurb": "🎮 Oyunda: 'Old Gods of Asgard'ın yaşlı rockçıları; çiftlikte Cauldron Gölü suyuyla kaçak içki yapıp kendilerini tanrı sanıyorlar. Alan'a da içmesini öğütlüyorlar. Bizce göl suyu olmadan, mısırlı bir bourbon.", "picks": ["hudson-baby", "heavenhill-7bib"], "g": "karakter"},
+{"e": "🎮", "ad": "Victor 'Sully' Sullivan", "rol": "Uncharted serisi (oyun, 2007-2016)", "blurb": "😄 Bizce: Oyunlarda puro hiç ağzından düşmüyor, Uncharted 3'te Drake'le bir barda iş bağlıyor ama kadehinde ne olduğunu söylemiyor. Hawaii gömlekli, bıyıklı bir maceracıya Kentucky'den Blanton's.", "picks": ["blantons", "eagle-rare"], "g": "karakter"},
+{"e": "🎮", "ad": "Silas Greaves", "rol": "Call of Juarez: Gunslinger (oyun, 2013)", "blurb": "🎮 Oyunda: 1910'da Abilene'de bir saloona girip bedava içki karşılığında Billy the Kid'i, Butch Cassidy'yi kendisinin vurduğunu anlatan yaşlı ödül avcısı. Dinleyenler 'viskiye batmış bunak' der. Bizce rye.", "picks": ["rittenhouse", "michters-rye"], "g": "karakter"},
+{"e": "🎩", "ad": "Arsen Lüpen", "rol": "Maurice Leblanc'ın beyefendi hırsızı (roman, 1905)", "blurb": "😄 Bizce: Lüpen'in kadehinde viskiden çok Fransız şıklığı var; kılık değiştirip Herlock Sholmès'ü bile atlatır. Cingöz Recai'nin Fransız ağabeyine Brittany'den bir Armorik ya da Cognac fıçılı bir Glenlivet.", "picks": ["armorik-classic", "glenlivet-14", "brenne-10"], "g": "karakter"},
+{"e": "🎮", "ad": "Trevor Philips", "rol": "Grand Theft Auto V (oyun, 2013)", "blurb": "🎮 Oyunda: Michael ya da Franklin'le karavanına uğrarsanız onu bazen garaj önünde elinde viski şişesi, kör kütük sarhoş, etrafa el bombası atarken bulursunuz. Bizce Sandy Shores'a kaba saba ama dürüst bir Old Grand-Dad.", "picks": ["oldgranddad-114", "wildturkey-101"], "g": "karakter"},
+{"e": "🎮", "ad": "Captain Price", "rol": "Call of Duty serisi (oyun, 2003-)", "blurb": "😄 Bizce: Oyunlarda kadeh kaldırırken görmedik; ama 2019 Price'ı seslendiren Barry Sloane karakterin '18.000 puro içmiş, 18.000 bardak viski devirmiş gibi' konuşması gerektiğini söylüyor. Bıyıklı SAS kurdu: Talisker.", "picks": ["talisker-10", "lagavulin-16"], "g": "karakter"},
+{"e": "🎮", "ad": "Jack", "rol": "BioShock (oyun, 2007)", "blurb": "🎮 Oyunda: Rapture'ın her köşesinde 'Old Tom Whiskey' şişeleri; içtikçe can dolar, EVE eksilir. 'Booze Hound' tonik bunu tersine çevirir. Marka kurgusal; 'would you kindly' bir kadeh: bizce 1960'ların klasiği Old Forester.", "picks": ["oldforester-100", "makersmark"], "g": "karakter"},
+{"e": "⚔️", "ad": "Kara Murat", "rol": "Rahmi Turan ve Abdullah Turhan'ın çizgi romanı (1971), Cüneyt Arkın filmleri", "blurb": "😄 Bizce: Fatih'in fedaisi akıncı beyi kadeh tutmaz, kılıç tutar; Bizans entrikalarını yarar geçer. Yine de bir şişe seçeceksek savaşçı ruhlu, fıçı gücünde bir A'bunadh.", "picks": ["aberlour-abunadh"], "tr": true, "g": "karakter"},
+{"e": "⚔️", "ad": "Malkoçoğlu", "rol": "Ayhan Başoğlu'nun çizgi romanı (1964), Cüneyt Arkın filmleri", "blurb": "😄 Bizce: Akıncı Malkoçoğulları'nın meşhur bir kadehi yok; atlarından inmiyorlar ki. Sınır boylarında at koşturan bir akıncı beyine, savaşçı ruhlu Highland Park'ın Viking serisi.", "picks": ["highlandpark-12", "highlandpark-18"], "tr": true, "g": "karakter"}
 ];
 let openMag=new Set();
 function renderMagazin(){
@@ -2159,7 +2199,7 @@ const KAR_TURLER=[['hepsi','Tümü'],['gecer','✅ Eserde geçenler'],['dizi','�
 const MAGF={tur:'hepsi',q:''};
 function karTur(f){
   const r=(f.rol||'').toLocaleLowerCase('tr'),t=[];
-  if(/^(📺|📖)/.test(f.blurb||''))t.push('gecer');
+  if(/^(📺|📖|🎮)/.test(f.blurb||''))t.push('gecer');
   if(/çizgi|anime|manga|bonelli|marvel|dc\)|animasyon/.test(r))t.push('cizgi');
   else{if(/dizi|sitcom/.test(r))t.push('dizi');if(/film/.test(r))t.push('film');if(/roman|öykü|hikâye|kitap/.test(r))t.push('roman');}
   if(/oyun|video/.test(r))t.push('oyun');
@@ -2929,7 +2969,7 @@ document.addEventListener('click',e=>{
 // Sekme → çizim fonksiyonu. Sadece açık sekme çizilir (eskiden her işaretlemede 13 sekmenin
 // hepsi yeniden çiziliyordu); sekmeye geçince o sekme güncel durumla yeniden çizilir.
 const RENDER={explore:renderTree,experts:renderExperts,ai:renderAI,magazin:renderMagazin,ncf:renderNCF,katman:renderKatman,
-  stats:renderStats2,gece:renderGece,kulup:renderKulup,akilli:renderAkilli,harita:()=>{renderTree();renderHarita();},gurme:renderGurme,yemek:renderYemek,personal:renderPersonal,notes:renderNotes,mylist:renderMyList,fiyat:renderFiyat};
+  stats:renderStats2,gece:renderGece,kulup:renderKulup,satis:renderSatis,topluluk:renderTopluluk,akilli:renderAkilli,harita:()=>{renderTree();renderHarita();},gurme:renderGurme,yemek:renderYemek,personal:renderPersonal,notes:renderNotes,mylist:renderMyList,fiyat:renderFiyat};
 const lastInGroup={};
 function showGroup(g){
   document.querySelectorAll('.grp').forEach(x=>x.classList.toggle('active',x.dataset.group===g));
@@ -3825,6 +3865,44 @@ document.addEventListener('click',async e=>{
 });
 document.addEventListener('keydown',e=>{if(e.key==='Enter'&&e.target.id==='gSiseAra'){e.preventDefault();geceSiseEkle(e.target.value);e.target.value='';}});
 
+/* ===== TOPLULUK (data/topluluk.json) ===== */
+let TOPLULUK=null,TOP_FILTRE='';
+const TOP_TUR={festival:['🎪','Festivaller'],etkinlik:['📅','Etkinlikler'],dernek:['🤝','Dernek & kulüpler'],instagram:['📸','Instagram'],facebook:['👥','Facebook grupları'],telegram:['✈️','Telegram'],discord:['💬','Discord'],reddit:['👽','Reddit'],eksi:['📝','Ekşi Sözlük'],
+  forum:['🗨️','Forumlar'],blog:['✍️','Bloglar & siteler'],okul:['🎓','Bira okulları & atölyeler'],youtube:['▶️','YouTube'],podcast:['🎙️','Podcast']};
+function renderTopluluk(){
+  const box=document.getElementById('toplulukBox');if(!box)return;
+  if(TOPLULUK===null){TOPLULUK=[];fetch('data/topluluk.json',{cache:'no-cache'}).then(r=>r.ok?r.json():{}).then(d=>{TOPLULUK=d.topluluklar||[];renderTopluluk();}).catch(()=>{});box.innerHTML='<div class="empty">Yükleniyor…</div>';return;}
+  if(!TOPLULUK.length){box.innerHTML='<div class="empty">Topluluk listesi hazırlanıyor.</div>';return;}
+  const turler=Object.keys(TOP_TUR).filter(t=>TOPLULUK.some(x=>x.tur===t));
+  let html=`<div class="aromarow" style="margin-bottom:12px"><span class="aroma${!TOP_FILTRE?' on':''}" data-toptur="">Hepsi (${TOPLULUK.length})</span>${turler.map(t=>`<span class="aroma${TOP_FILTRE===t?' on':''}" data-toptur="${t}">${TOP_TUR[t][0]} ${TOP_TUR[t][1]} (${TOPLULUK.filter(x=>x.tur===t).length})</span>`).join('')}</div>`;
+  turler.filter(t=>!TOP_FILTRE||TOP_FILTRE===t).forEach(t=>{
+    html+=`<h3 class="stilaile">${TOP_TUR[t][0]} ${TOP_TUR[t][1]}</h3><div class="stilgrid">`+TOPLULUK.filter(x=>x.tur===t).map(x=>`<a class="stilkart" style="display:block;text-decoration:none" href="${g$(x.url||x.kaynak||'#')}" target="_blank" rel="noopener">
+      <div class="sk-ad">${g$(x.ad)} 🔗</div>${x.hesap&&x.hesap!==x.ad?`<div class="sk-tr">${g$(x.hesap)}</div>`:''}
+      <div class="sk-olcu">${x.sehir?`<span>📍 ${g$(x.sehir)}</span>`:''}${x.aktiflik?`<span>${g$(x.aktiflik)}</span>`:''}</div>
+      <div class="sk-txt">${g$(x.aciklama||'')}</div></a>`).join('')+'</div>';});
+  box.innerHTML=html;
+}
+document.addEventListener('click',e=>{const t=e.target.closest('[data-toptur]');if(t){TOP_FILTRE=t.dataset.toptur;renderTopluluk();}});
+/* ===== NEREDEN ALINIR (data/satis.json) ===== */
+let SATIS=null,SATIS_F='';
+const SATIS_TUR={butik:['🏬','Uzman dükkânlar'],craft:['🍺','Craft dükkânları & birahaneler'],zincir:['🛒','Zincir mağazalar'],'duty-free':['✈️','Havalimanı duty-free'],yurtdisi:['🌍','Yurt dışı (yalnızca fiyat karşılaştırması)']};
+function renderSatis(){
+  const box=document.getElementById('satisBox');if(!box)return;
+  if(SATIS===null){SATIS={yerler:[]};fetch('data/satis.json',{cache:'no-cache'}).then(r=>r.ok?r.json():{}).then(d=>{SATIS={yasal_not:d.yasal_not||'',yerler:(d.yerler||[]).filter(x=>x.site==='viski'||x.site==='ikisi')};renderSatis();}).catch(()=>{});box.innerHTML='<div class="empty">Yükleniyor…</div>';return;}
+  const Y=SATIS.yerler;
+  if(!Y.length){box.innerHTML='<div class="empty">Liste hazırlanıyor.</div>';return;}
+  const turler=Object.keys(SATIS_TUR).filter(t=>Y.some(x=>x.tur===t));
+  let html=SATIS.yasal_not?`<div class="ipucu" style="margin-bottom:12px">⚖️ ${g$(SATIS.yasal_not)}</div>`:'';
+  html+=`<div class="aromarow" style="margin-bottom:12px"><span class="aroma${!SATIS_F?' on':''}" data-satistur="">Hepsi (${Y.length})</span>${turler.map(t=>`<span class="aroma${SATIS_F===t?' on':''}" data-satistur="${t}">${SATIS_TUR[t][0]} ${SATIS_TUR[t][1]} (${Y.filter(x=>x.tur===t).length})</span>`).join('')}</div>`;
+  turler.filter(t=>!SATIS_F||SATIS_F===t).forEach(t=>{
+    html+=`<h3 class="stilaile">${SATIS_TUR[t][0]} ${SATIS_TUR[t][1]}</h3><div class="stilgrid">`+Y.filter(x=>x.tur===t).map(x=>`<div class="stilkart" style="cursor:default">
+      <div class="sk-ad">${g$(x.ad)}</div>
+      <div class="sk-olcu">${x.sehir?`<span>📍 ${g$(x.sehir)}</span>`:''}</div>
+      <div class="sk-txt">${g$(x.not||'')}</div>
+      <div class="ulinkler">${x.web?`<a class="ulink" href="${g$(x.web)}" target="_blank" rel="noopener nofollow">🌐 Site</a>`:''}${x.instagram?`<a class="ulink" href="${g$(x.instagram)}" target="_blank" rel="noopener nofollow">📷 Instagram</a>`:''}</div></div>`).join('')+'</div>';});
+  box.innerHTML=html;
+}
+document.addEventListener('click',e=>{const t=e.target.closest('[data-satistur]');if(t){SATIS_F=t.dataset.satistur;renderSatis();}});
 /* ===== KULÜP (davetle kapalı topluluk) ===== */
 let KULUP={id:null,davet:null,veri:null,geceler:[]};
 const kuluplerim=()=>lsAl('viski_kulupler',{});

@@ -63,12 +63,40 @@ function stateDogrula(s: any): string | null {
   return null;
 }
 
-export async function isle(req: Request, depo: Depo): Promise<Response> {
+// Eski sunucudan (Netlify) taşıma: listede bulunamayan kod ya da numara ilk kullanımda eski
+// sunucuya sorulur, bulunursa buraya kopyalanır. Böylece kullanıcı aynı kodla / aynı telefon+PIN
+// ile devam eder. "x-tasima" başlığı iki sunucunun birbirine sonsuz sorması ihtimaline karşı.
+async function eskiIstek(eski: string, yol: string, govde?: any): Promise<Response | null> {
+  try {
+    return await fetch(eski + yol, {
+      method: govde ? "POST" : "GET",
+      headers: { "content-type": "application/json", "x-tasima": "1" },
+      body: govde ? JSON.stringify(govde) : undefined,
+      signal: AbortSignal.timeout(8000),
+    });
+  } catch {
+    return null;
+  }
+}
+async function eskidenGetir(depo: Depo, eski: string | undefined, kod: string): Promise<any> {
+  if (!eski) return null;
+  const r = await eskiIstek(eski, "/api/sync?kod=" + encodeURIComponent(kod));
+  if (!r || r.status !== 200) return null;
+  const kayit = await r.json().catch(() => null);
+  if (!kayit || stateDogrula(kayit.state)) return null;
+  const yeni = { ...kayit, tasindi: new Date().toISOString() };
+  await depo.setJSON(await ozet(kod), yeni);
+  return yeni;
+}
+
+export async function isle(req: Request, depo: Depo, eskiSunucu?: string): Promise<Response> {
+  const eski = req.headers.get("x-tasima") ? undefined : eskiSunucu;
+  const listeAl = async (kod: string) => (await depo.get(await ozet(kod), { type: "json" })) || (await eskidenGetir(depo, eski, kod));
   try {
     if (req.method === "GET") {
       const kod = kodTemizle(new URL(req.url).searchParams.get("kod"));
       if (!kodGecerli(kod)) return hata("Geçersiz kod biçimi");
-      const kayit = await depo.get(await ozet(kod), { type: "json" });
+      const kayit = await listeAl(kod);
       if (!kayit) return hata("Bu koda ait liste bulunamadı", 404);
       return json(kayit);
     }
@@ -87,17 +115,30 @@ export async function isle(req: Request, depo: Depo): Promise<Response> {
       if (!telGecerli(tel)) return hata("Telefon numarasını kontrol et");
       const anahtar = await telAnahtar(tel);
       const kayit = await depo.get(anahtar, { type: "json" });
+      if (!kayit && eski && pinGecerli(g.pin)) {
+        // Eski sunucuda bu numara+PIN ile kayıt var mı? PIN'i eski sunucu doğrular (kendi kilidiyle).
+        const r = await eskiIstek(eski, "/api/sync", { islem: "telefon-giris", tel, pin: g.pin });
+        if (r && r.status === 200) {
+          const { kod } = await r.json();
+          if (kodGecerli(kod) && (await listeAl(kod))) {
+            await depo.setJSON(anahtar, { kod, pinOzet: await pinOzeti(tel, g.pin), hatali: 0, kilit: null, guncelleme: new Date().toISOString() });
+            return json({ kod });
+          }
+        } else if (r && (r.status === 403 || r.status === 429)) {
+          return hata((await r.json().catch(() => ({}))).hata || "PIN hatalı", r.status);
+        }
+      }
       if (!kayit) return hata("Bu numarayla kayıtlı liste yok", 404);
       const red = await pinKontrol(depo, anahtar, kayit, tel, g.pin);
       if (red) return red;
-      if (!(await depo.get(await ozet(kayit.kod), { type: "json" }))) return hata("Bu numaraya bağlı liste bulunamadı", 404);
+      if (!(await listeAl(kayit.kod))) return hata("Bu numaraya bağlı liste bulunamadı", 404);
       return json({ kod: kayit.kod });
     }
     if (req.method === "POST" && (g.islem === "telefon-bagla" || g.islem === "telefon-kaldir")) {
       const kod = kodTemizle(g.kod), tel = telTemizle(g.tel);
       if (!kodGecerli(kod)) return hata("Geçersiz kod biçimi");
       if (!telGecerli(tel)) return hata("Telefon numarasını kontrol et");
-      if (!(await depo.get(await ozet(kod), { type: "json" }))) return hata("Bu koda ait liste bulunamadı", 404);
+      if (!(await listeAl(kod))) return hata("Bu koda ait liste bulunamadı", 404);
       const anahtar = await telAnahtar(tel);
       const kayit = await depo.get(anahtar, { type: "json" });
       if (g.islem === "telefon-kaldir") {
@@ -121,10 +162,10 @@ export async function isle(req: Request, depo: Depo): Promise<Response> {
       const e = stateDogrula(g.state);
       if (e) return hata(e);
       const anahtar = await ozet(kod);
-      const eski = await depo.get(anahtar, { type: "json" });
-      if (!eski) return hata("Bu koda ait liste bulunamadı", 404);
+      const onceki = await listeAl(kod);
+      if (!onceki) return hata("Bu koda ait liste bulunamadı", 404);
       const guncelleme = new Date().toISOString();
-      await depo.setJSON(anahtar, { ...eski, state: g.state, guncelleme });
+      await depo.setJSON(anahtar, { ...onceki, state: g.state, guncelleme });
       return json({ guncelleme });
     }
     return hata("Desteklenmeyen istek", 405);

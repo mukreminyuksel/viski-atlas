@@ -29,6 +29,11 @@ header{padding:26px 0 14px;border-bottom:1px solid var(--line);margin-bottom:18p
 .brand{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
 .brand h1{font-size:30px;letter-spacing:.5px;font-weight:800;
   background:linear-gradient(90deg,#f2c14e,#caa052);-webkit-background-clip:text;background-clip:text;color:transparent}
+.kardes{margin-left:auto;align-self:flex-start;display:inline-flex;align-items:center;gap:8px;padding:7px 14px;border:1px solid var(--line);border-radius:999px;background:var(--panel);color:var(--amber2);text-decoration:none;font-weight:700;font-size:13px;white-space:nowrap;transition:border-color .15s,background .15s}
+.kardes:hover{border-color:var(--amber-soft);background:var(--panel2)}
+.kardes small{color:var(--muted);font-weight:600;font-size:11px;text-transform:uppercase;letter-spacing:.4px}
+@media(max-width:760px){.brand{flex-wrap:nowrap;gap:10px}.kardes{padding:5px 10px;font-size:12px;align-self:center}.kardes small{display:none}}
+@media(max-width:400px){.brand h1 span{display:none}}
 .brand .sub{color:var(--muted);font-size:13px;margin-top:2px}
 .stats{display:flex;gap:14px;flex-wrap:wrap;margin-top:18px;align-items:stretch}
 .glass-box{display:flex;align-items:center;gap:14px;background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:12px 18px}
@@ -385,6 +390,7 @@ nav.groups{display:flex;gap:6px;margin:20px 0 10px;background:var(--bg2);border:
     <div style="font-size:34px">🥃</div>
     <div><h1 onclick="location.href='./'" style="cursor:pointer" title="Ana sayfaya dön">Viski Atlası <span style="font-size:13px;color:var(--muted2);font-weight:600;vertical-align:middle">v3.2</span></h1>
       <div class="sub">Bölge → Damıtımevi → Şişe · Uzman & AI tercihleri · Türkiye katmanları · Kişisel koleksiyon</div></div>
+    <a class="kardes" href="https://bira-atlas.pages.dev" target="_blank" rel="noopener" onclick="olay('kardes-site')" title="Kardeş site"><small>Kardeş site</small>🍺 Bira Atlası ↗</a>
   </div>
   <div class="stats">
     <div class="glass-box" data-goto="mylist" style="cursor:pointer"><div class="glass"><div class="fill" id="fill" style="height:0%"></div></div>

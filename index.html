@@ -38,6 +38,11 @@ header{padding:26px 0 14px;border-bottom:1px solid var(--line);margin-bottom:18p
 .magchips{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px}
 @keyframes parla{0%,100%{box-shadow:none}30%{box-shadow:0 0 0 3px var(--amber2),0 0 24px rgba(242,193,78,.45)}}
 .magcard.parla{animation:parla 1.6s ease 2}
+.pinKutu{display:inline-flex;align-items:center;gap:6px}.pinKutu .pinGir{width:130px}
+.pinGoster{display:inline-flex!important;align-items:center;gap:4px;font-size:12px;color:var(--muted);cursor:pointer;white-space:nowrap}
+.ulinkler{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0 4px}
+.ulink{display:inline-flex;align-items:center;gap:4px;padding:4px 10px;border:1px solid var(--line);border-radius:999px;background:var(--bg2);color:var(--amber2);text-decoration:none;font-size:12px;font-weight:700}
+.ulink:hover{border-color:var(--amber-soft)}
 .brand .sub{color:var(--muted);font-size:13px;margin-top:2px}
 .stats{display:flex;gap:14px;flex-wrap:wrap;margin-top:18px;align-items:stretch}
 .glass-box{display:flex;align-items:center;gap:14px;background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:12px 18px}
@@ -2168,6 +2173,7 @@ function magUygula(){
     c.style.display=ok?'':'none';
   });
 }
+document.addEventListener('change',e=>{if(e.target.classList&&e.target.classList.contains('pinGosterTik')){const i=e.target.closest('.pinKutu').querySelector('.pinGir');i.type=e.target.checked?'text':'password';}});
 document.addEventListener('input',e=>{if(e.target.id==='magAra'){MAGF.q=e.target.value;magUygula();}});
 document.addEventListener('click',e=>{
   const f=e.target.closest('[data-magf]');
@@ -3095,6 +3101,7 @@ function openDetay(id){
   document.getElementById('detay').innerHTML=`<button class="dt-x" data-detay-kapat title="Kapat">✕</button>
     <div class="dt-head">${b.imgSahip?`<div class="dt-img"><img src="${esc(b.img)}" alt="${esc(b.ad)}" loading="lazy"></div>`:thumb(b)}<div><h3>${b.ad}</h3><div class="dt-sub"><span class="isimlink" data-dam="${esc(b.dam)}">${b.dam}</span> · <span class="isimlink" data-bolge="${esc(bolgeAnahtar(b))}">${b.bolge}</span> · ${b.ulke}</div>
       <div class="dt-badges">${badges.join('')}</div>
+      ${uretLinkleri(b.dam,true)}
       ${b.imgSahip?`<div class="dt-src">📷 Görsel: ${esc(b.imgSahip)}${b.imgKaynak?` · <a href="${esc(b.imgKaynak)}" target="_blank" rel="noopener">kaynak</a>`:''}</div>`:''}</div></div>
     <div class="dt-grid">
       <div class="dt-f"><div class="l">Fiyat</div><div class="v" style="color:var(--amber2)">${fmt(priceOf(b))}</div></div>
@@ -3171,6 +3178,7 @@ function openDam(ad){
     `<span><b>Sitede</b> ${sis.length} şişe</span>`,fiyatlar.length?`<span><b>Fiyat</b> ${fmt(Math.min(...fiyatlar))} – ${fmt(Math.max(...fiyatlar))}</span>`:''].join('');
   kartAc(`<div class="dt-head"><div><h3>🏭 ${esc(ad)}</h3><div class="dt-sub"><span class="isimlink" data-bolge="${esc(bolgeAnahtar(b0))}">${b0.bolge}</span> · ${b0.ulke}</div></div></div>
     <div class="dt-kunye">${kunye}</div>
+    ${uretLinkleri(ad)}
     ${d.stil?`<div class="dt-sec"><h4>Ev stili</h4><div class="dt-txt">${esc(d.stil)}</div></div>`:''}
     ${d.h?`<div class="dt-sec"><h4>Hikâyesi</h4><div class="dt-txt">${esc(d.h)}</div></div>`:''}
     <div class="dt-sec"><h4>${sis.length>3?'En yüksek puanlı 3 şişe':'Sitedeki şişeleri'}</h4>${sis.slice(0,3).map(miniSatir).join('')}</div>
@@ -3200,6 +3208,15 @@ document.addEventListener('click',e=>{
   const dm=e.target.closest('[data-dam]');if(dm){e.stopPropagation();openDam(dm.dataset.dam);return;}
   const bl=e.target.closest('[data-bolge]');if(bl){e.stopPropagation();openBolge(bl.dataset.bolge);return;}
 },true);
+// Üreticilerin resmî site ve sosyal medya bağlantıları (aylık görevle kontrol edilir)
+let BAGLANTI={};
+fetch('data/baglantilar.json',{cache:'no-cache'}).then(r=>r.ok?r.json():null).then(d=>{if(d&&d.baglantilar)BAGLANTI=d.baglantilar;}).catch(()=>{});
+const LINK_TUR=[['web','🌐','Resmî site'],['ig','📷','Instagram'],['fb','📘','Facebook'],['x','𝕏','X'],['yt','▶️','YouTube']];
+function uretLinkleri(dam,kucuk){
+  const b=BAGLANTI[dam];if(!b)return '';
+  const l=LINK_TUR.filter(([k])=>b[k]).map(([k,e,t])=>`<a class="ulink" href="${esc(b[k])}" target="_blank" rel="noopener nofollow">${e} ${kucuk&&k!=='web'?'':t}</a>`);
+  return l.length?`<div class="ulinkler">${l.join('')}</div>`:'';
+}
 Promise.all(['damitimevleri','bolgeler','tadim'].map(f=>fetch('data/'+f+'.json',{cache:'no-cache'}).then(r=>r.ok?r.json():{}).catch(()=>({}))))
   .then(([d,b,t])=>{DAMS=d;BOLGELER=b;TADIM=t;renderAll();hashAc2();});
 function hashAc2(){
@@ -3438,7 +3455,7 @@ const telMaske=d=>(d.length===10?'0':'+')+d.slice(0,3)+' *** ** '+d.slice(-2);
 function telKaydet(t){BULUT.tel=t;if(t)lsYaz('viski_bulut_tel',t);else try{localStorage.removeItem('viski_bulut_tel');}catch(e){}}
 function telPinAl(kok){
   kok=kok||document;const t=telTemiz((kok.querySelector('.telGir')||{}).value),p=String((kok.querySelector('.pinGir')||{}).value||'').trim();
-  if(!/^\d{10,15}$/.test(t)){bulutDurum('⚠️ Telefon numaranı kontrol et (ör. 0532 123 45 67)',true);return null;}
+  if(!/^\d{10,15}$/.test(t)){bulutDurum('⚠️ Telefon numaranı kontrol et (ör. 5556667788)',true);return null;}
   if(!/^\d{4,6}$/.test(p)){bulutDurum('⚠️ PIN 4-6 haneli rakam olmalı',true);return null;}
   return {t,p};
 }
@@ -3478,7 +3495,7 @@ function telPinDegistir(){
   if(!/^\d{4,6}$/.test(p)){bulutDurum('⚠️ PIN 4-6 haneli rakam olmalı',true);return;}
   telBagla(BULUT.tel,p);
 }
-const telGirdileri=`<input class="telGir" type="tel" inputmode="tel" autocomplete="tel" placeholder="Telefon numaran (0532…)" style="flex:1;min-width:170px"><input class="pinGir" type="password" inputmode="numeric" autocomplete="off" maxlength="6" placeholder="PIN (4-6 rakam)" style="width:140px">`;
+const telGirdileri=`<input class="telGir" type="tel" inputmode="tel" autocomplete="tel" placeholder="Telefon numaran (ör. 5556667788)" style="flex:1;min-width:170px"><span class="pinKutu"><input class="pinGir" type="password" inputmode="numeric" autocomplete="off" maxlength="6" placeholder="PIN (4-6 rakam)"><label class="pinGoster" title="PIN'i göster / gizle"><input type="checkbox" class="pinGosterTik"> Göster</label></span>`;
 // Sosyal sayfalarının başındaki giriş kutusu: aynı telefon + PIN girişi
 function sosyalGiris(){
   if(BULUT.kod)return `<div class="sgiris ok">☁️ ${BULUT.tel?'Giriş yapıldı: <b>'+g$(telMaske(BULUT.tel))+'</b>':'Bulut kodunla bağlısın'} · kulüplerin ve gecelerin her cihazda seninle.</div>`;

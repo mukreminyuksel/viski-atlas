@@ -2113,11 +2113,12 @@ const FAMOUS=[
 let openMag=new Set();
 function renderMagazin(){
   const box=document.getElementById('magazinBox');
-  const groups=[['soylu','👑 Soylular & Süper Sosyete'],['unlu','🎬 Ünlüler'],['yazar','✍️ Viski Yazarları & Uzmanları'],['karakter','🎭 Kurgu Karakterleri: Ne İçerdi?']];
+  const groups=[['soylu','👑 Soylular & Süper Sosyete'],['unlu','🎬 Ünlüler'],['yazar','✍️ Viski Yazarları & Uzmanları'],['zengin','💰 Süper Zenginler: Kim Ne İçiyor?'],['karakter','🎭 Kurgu Karakterleri: Ne İçerdi?']];
   const COLLAPSE=5;
   let html='';
   groups.forEach(([g,title])=>{
     const items=FAMOUS.filter(f=>f.g===g);
+    if(!items.length)return;
     html+=`<div class="maghead">${title} <span style="color:var(--muted2);font-weight:400;font-size:13px">(${items.length})</span></div>`;
     if(g==='karakter'){
       const say=k=>items.filter(f=>karTur(f).includes(k)).length;
@@ -2140,6 +2141,7 @@ function renderMagazin(){
       if(picks.length>COLLAPSE)
         html+=`<button class="magmore" data-mag="${esc(f.ad)}">${isOpen?'▴ Daralt':'▾ Tüm listeyi gör ('+picks.length+' şişe)'}</button>`;
       if(f.extra)html+=`<div class="extra">ℹ️ ${f.extra}</div>`;
+      if(f.kaynak)html+=`<div class="extra">🔗 Kaynak: <a href="${esc(f.kaynak)}" target="_blank" rel="noopener">${esc(f.kaynak_ad||'haber')}</a></div>`;
       html+=`</div>`;
     });
     html+=`</div>`;

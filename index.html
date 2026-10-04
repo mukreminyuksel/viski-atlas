@@ -52,6 +52,10 @@ header{padding:26px 0 14px;border-bottom:1px solid var(--line);margin-bottom:18p
 .sk-ust{display:flex;gap:10px;align-items:center}.sk-ad{font-weight:800;font-size:14px;color:var(--txt)}.sk-tr{font-size:12px;color:var(--muted2)}
 .sk-olcu{display:flex;gap:6px;flex-wrap:wrap;margin:8px 0 6px}.sk-olcu span{font-size:11.5px;background:var(--bg2);border:1px solid var(--line);border-radius:6px;padding:1px 6px;color:var(--amber-soft);font-weight:700}
 .sk-txt{font-size:12.5px;color:var(--muted);line-height:1.45}.renk.buyuk{width:26px;height:26px}
+.kardesler{margin-left:auto;align-self:flex-start;display:flex;align-items:center;gap:6px;flex-wrap:wrap;justify-content:flex-end}
+.kardesler small{color:var(--muted);font-weight:600;font-size:11px;text-transform:uppercase;letter-spacing:.4px;margin-right:2px}
+.kardesler .kardes{margin-left:0;align-self:auto}
+@media(max-width:760px){.brand{flex-wrap:wrap!important;gap:10px}.kardesler{margin-left:0;width:100%;justify-content:flex-start}.kardesler small{display:none}}
 .brand .sub{color:var(--muted);font-size:13px;margin-top:2px}
 .stats{display:flex;gap:14px;flex-wrap:wrap;margin-top:18px;align-items:stretch}
 .glass-box{display:flex;align-items:center;gap:14px;background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:12px 18px}
@@ -408,7 +412,7 @@ nav.groups{display:flex;gap:6px;margin:20px 0 10px;background:var(--bg2);border:
     <div style="font-size:34px">🥃</div>
     <div><h1 onclick="location.href='./'" style="cursor:pointer" title="Ana sayfaya dön">Viski Atlası <span style="font-size:13px;color:var(--muted2);font-weight:600;vertical-align:middle">v3.2</span></h1>
       <div class="sub">Bölge → Damıtımevi → Şişe · Uzman & AI tercihleri · Türkiye katmanları · Kişisel koleksiyon</div></div>
-    <a class="kardes" href="https://bira-atlas.pages.dev" target="_blank" rel="noopener" onclick="olay('kardes-site')" title="Kardeş site"><small>Kardeş site</small>🍺 Bira Atlası ↗</a>
+    <div class="kardesler"><small>Kardeş siteler</small><a class="kardes" href="https://bira-atlas.pages.dev" target="_blank" rel="noopener" onclick="olay('kardes-site')">🍺 Bira Atlası ↗</a><a class="kardes" href="https://raki-atlas.pages.dev" target="_blank" rel="noopener" onclick="olay('kardes-site')">🥛 Rakı Atlası ↗</a></div>
   </div>
   <div class="stats">
     <div class="glass-box" data-goto="mylist" style="cursor:pointer"><div class="glass"><div class="fill" id="fill" style="height:0%"></div></div>
@@ -663,7 +667,7 @@ nav.groups{display:flex;gap:6px;margin:20px 0 10px;background:var(--bg2);border:
 </div>
 
   <p class="note">💾 İşaretlemelerin ve fiyat düzenlemelerin bu tarayıcıda otomatik kaydedilir. Fiyatlar 2026 yaklaşık Türkiye perakende referansıdır (70cl), mağaza/kur/duty-free'ye göre değişir. <span id="fiyatDurum"></span> <a href="#" id="resetBtn">↺ Tüm seçimleri sıfırla</a></p>
-  <p class="note" style="margin-top:4px">🍺 Kardeş site: <a href="https://bira-atlas.pages.dev" target="_blank" rel="noopener" style="color:var(--amber2)">Bira Atlası</a> — 1150+ bira, stil rehberi ve Türkiye craft haritası.</p>
+  <p class="note" style="margin-top:4px">Kardeş siteler: 🍺 <a href="https://bira-atlas.pages.dev" target="_blank" rel="noopener" style="color:var(--amber2)">Bira Atlası</a> · 🥛 <a href="https://raki-atlas.pages.dev" target="_blank" rel="noopener" style="color:var(--amber2)">Rakı Atlası</a></p>
 </div>
 
 <script>

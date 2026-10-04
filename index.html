@@ -467,7 +467,7 @@ nav.groups{display:flex;gap:6px;margin:20px 0 10px;background:var(--bg2);border:
   </section>
 
   <section id="view-magazin" class="hidden">
-    <p class="intro">Viski dünyasının dikkat çeken isimleri — soylular, ünlüler ve viski yazarları/uzmanları — ve favori şişeleri. Bir "viski magazini" gibi. Buradaki her şişe kataloğdaki <b>aynı kayda</b> bağlıdır: bir yerde işaretlersen burada da seçili görünür (mükerrer kayıt yok). ✓/★ ile listene ekleyebilirsin.</p>
+    <p class="intro">Viski dünyasının dikkat çeken isimleri — soylular, ünlüler, viski yazarları/uzmanları ve sevdiğimiz kurgu karakterleri — ve favori şişeleri. 📺📖 işaretliler eserde gerçekten geçer, 😄 işaretliler bizim eğlenceli tahminimizdir. Bir "viski magazini" gibi. Buradaki her şişe kataloğdaki <b>aynı kayda</b> bağlıdır: bir yerde işaretlersen burada da seçili görünür (mükerrer kayıt yok). ✓/★ ile listene ekleyebilirsin.</p>
     <div id="magazinBox"></div>
     <p class="note">Bağlar; kraliyet beratları, basına yansımış bilinen tercihler ve marka/elçilik ilişkilerine dayanır — "her gün içiyor" değil, "bu isimle anılan" anlamında.</p>
   </section>
@@ -2011,12 +2011,29 @@ const FAMOUS=[
 {g:"yazar",e:"🎙️",ad:"Mark Gillespie",rol:"WhiskyCast (dünyanın ilk viski podcast’i)",blurb:"2005’ten beri sektörün sesi; bağımsız haber ve inceleme.",picks:["russells-13","redbreast-12","wildturkey-rarebreed"]},
 {g:"yazar",e:"✊",ad:"Becky Paskin",rol:"OurWhisky kurucusu / kritik",blurb:"Sektörde kapsayıcılığın öncüsü; Jim Murray tartışmasını gündeme taşıyan isim.",picks:["clynelish-14","springbank-15","ardbeg-uigeadail"]},
 {g:"yazar",e:"📚",ad:"Dominic Roskrow",rol:"Yazar / Whiskeria editörü",blurb:"Dünya viskisinin (özellikle yeni dünya) hararetli savunucusu.",picks:["kilchoman-machir","amrut-fusion","kavalan-solist"]},
-{g:"yazar",e:"🍂",ad:"John Hansell",rol:"Whisky Advocate kurucusu",blurb:"Amerika’nın önde gelen viski dergisini kurdu; modern Amerikan viski yazarlığının babası.",picks:["buffalotrace","weller-12","blantons"]}
+{g:"yazar",e:"🍂",ad:"John Hansell",rol:"Whisky Advocate kurucusu",blurb:"Amerika’nın önde gelen viski dergisini kurdu; modern Amerikan viski yazarlığının babası.",picks:["buffalotrace","weller-12","blantons"]},
+{"e": "🧔", "ad": "Ron Swanson", "rol": "Parks and Recreation (dizi)", "blurb": "📺 Ekranda: Bıyığı kadar ünlü tek bir aşkı var — Lagavulin 16. Oyuncu Nick Offerman sonradan Lagavulin'le kendi şişelerini bile çıkardı.", "picks": ["lagavulin-16", "lagavulin-11offerman"], "g": "karakter"},
+{"e": "⚓", "ad": "Kaptan Haddock", "rol": "Tenten (çizgi roman)", "blurb": "📖 Sayfada: \"Bin gök gürültüsü!\" Tenten'in huysuz dostunun gözdesi Loch Lomond; şişe yanında olmadan denize açılmaz.", "picks": ["lochlomond-12", "lochlomond-18"], "g": "karakter"},
+{"e": "🌧️", "ad": "Rick Deckard", "rol": "Blade Runner (1982, film)", "blurb": "📺 Ekranda: Yağmurlu Los Angeles gecelerinde kristal Tyrell bardağına Johnnie Walker Black Label koyar.", "picks": ["jw-black"], "g": "karakter"},
+{"e": "🍸", "ad": "James Bond", "rol": "Skyfall (2012, film)", "blurb": "📺 Ekranda: Martini'siyle bilinir ama Skyfall'da Silva'yla 1962 tarihli bir Macallan paylaşır — sinemanın en pahalı yudumlarından.", "picks": ["macallan-sherry18", "macallan-25"], "g": "karakter"},
+{"e": "🔍", "ad": "Sherlock Holmes", "rol": "Conan Doyle'un öyküleri (roman)", "blurb": "📖 Sayfada: Baker Street'te misafirlere \"viski ve soda\" ikram edilir; gazojenden sodalı su eklenir. Viktorya dönemi harmanı tam yerine oturur.", "picks": ["famousgrouse", "jb-rare"], "g": "karakter"},
+{"e": "🪓", "ad": "Jack Torrance", "rol": "The Shining / Cinnet (1980, film)", "blurb": "📺 Ekranda: Overlook Oteli'nin Gold Room barında barmen Lloyd'dan bourbon ister. Sonrasını biliyorsunuz… ölçülü için!", "picks": ["jackdaniels-7", "wildturkey-101"], "g": "karakter"},
+{"e": "🧢", "ad": "Tommy Shelby", "rol": "Peaky Blinders (dizi)", "blurb": "📺 Ekranda: Birmingham'ın en tehlikeli adamının elinde neredeyse her sahnede bir kadeh İrlanda viskisi vardır.", "picks": ["redbreast-12", "redbreast-15"], "g": "karakter"},
+{"e": "🦾", "ad": "Tony Stark", "rol": "Iron Man filmleri", "blurb": "📺 Ekranda: Atölyede de partide de elinde viski kadehiyle dolaşan milyarder dahi. 😄 Bizce rafında Johnnie Walker Blue durur.", "picks": ["jw-blue", "macallan-25"], "g": "karakter"},
+{"e": "🦇", "ad": "Bruce Wayne", "rol": "Batman (DC)", "blurb": "😄 Bizce: Gotham'ın şımarık milyarderi rolünü oynarken partilerde en pahalı şişeyi açar — ama gece işi olduğu için Alfred kadehi hep yarım doldurur.", "picks": ["macallan-sherry30", "macallan-m"], "g": "karakter"},
+{"e": "🗿", "ad": "Martin Mystère", "rol": "Martin Mystère (Bonelli çizgi romanı)", "blurb": "😄 Bizce: Atlantis'ten Tunguska'ya gizemlerin dedektifine, en az kendisi kadar gizemli ve isli bir Islay yakışır: Ardbeg'in dumanında bir antik sır var gibi.", "picks": ["ardbeg-uigeadail", "ardbeg-10"], "g": "karakter"},
+{"e": "👻", "ad": "Dylan Dog", "rol": "Dylan Dog (Bonelli çizgi romanı)", "blurb": "📖 Sayfada: Kâbuslar dedektifi eski bir alkolik ve artık içmiyor! Kadehine viski değil, ancak bir hayalet hikâyesi koyabilirsiniz. 😄 Bizce dostlarına ikram ettiği şişe: Talisker.", "picks": ["talisker-10"], "g": "karakter"},
+{"e": "🍺", "ad": "Frank Gallagher", "rol": "Shameless (dizi)", "blurb": "📺 Ekranda: Chicago'nun en ünlü ayyaşı için marka değil, bulmak önemli: ucuz ne varsa. 😄 Bizce rafındaki şişe: indirimdeki bir harman.", "picks": ["jw-red", "jb-rare", "cuttysark"], "g": "karakter"},
+{"e": "🤠", "ad": "Tex Willer", "rol": "Tex (Bonelli çizgi romanı)", "blurb": "📖 Sayfada: Saloon kapısını iten Tex'in tezgâhta istediği \"bir viski\"dir. 😄 Bizce Batı'nın ruhuna en uygunu bir Amerikan bourbonu.", "picks": ["wildturkey-101", "oldforester-1920"], "g": "karakter"},
+{"e": "🕵️", "ad": "Philip Marlowe", "rol": "Raymond Chandler romanları", "blurb": "📖 Sayfada: Los Angeles'ın yorgun dedektifi, ofisinin çekmecesinde her zaman bir şişe viski saklar.", "picks": ["oldforester-1920", "wildturkey-101"], "g": "karakter"},
+{"e": "🏴", "ad": "Müfettiş John Rebus", "rol": "Ian Rankin romanları", "blurb": "📖 Sayfada: Edinburgh'un huysuz polisi davaları Oxford Bar'da bir kadeh İskoç viskisiyle düşünür.", "picks": ["highlandpark-12", "talisker-10"], "g": "karakter"},
+{"e": "🥃", "ad": "Don Draper", "rol": "Mad Men (dizi)", "blurb": "📺 Ekranda: Reklamcının ofis barında Kanada viskisi (Canadian Club) ve Old Fashioned eksik olmaz. Katalogda Canadian Club yok; 😄 bizce en yakın akrabaları:", "picks": ["crownroyal-harvest", "lot40"], "g": "karakter"},
+{"e": "🧙", "ad": "Rubeus Hagrid", "rol": "Harry Potter (roman)", "blurb": "📖 Sayfada: Büyücü dünyasının \"Ateşviskisi\" (Firewhisky) Üç Süpürge'de içilir. 😄 Bizce Muggle dünyasındaki karşılığı biberli, isli bir ada viskisi.", "picks": ["talisker-10"], "g": "karakter"}
 ];
 let openMag=new Set();
 function renderMagazin(){
   const box=document.getElementById('magazinBox');
-  const groups=[['soylu','👑 Soylular & Süper Sosyete'],['unlu','🎬 Ünlüler'],['yazar','✍️ Viski Yazarları & Uzmanları']];
+  const groups=[['soylu','👑 Soylular & Süper Sosyete'],['unlu','🎬 Ünlüler'],['yazar','✍️ Viski Yazarları & Uzmanları'],['karakter','🎭 Kurgu Karakterleri: Ne İçerdi?']];
   const COLLAPSE=5;
   let html='';
   groups.forEach(([g,title])=>{

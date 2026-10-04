@@ -1,0 +1,225 @@
+{
+ "yasal_not": "Türkiye'de alkollü içkinin internet üzerinden tüketiciye satışı mevzuatla yasaktır: 4250 sayılı Kanun'un 2013'te 6487 sayılı Kanun'la değişen 6. maddesi ve buna dayanan yönetmelikler; ayrıca 22:00–06:00 arası perakende satış yapılamaz. Bu yüzden yalnızca fiziksel mağaza, birahane ve duty-free adresleri veriyoruz. Kaynak: resmigazete.gov.tr (11.06.2013).",
+ "yerler": [
+  {
+   "ad": "Unifree Duty Free – İstanbul Havalimanı",
+   "tur": "duty-free",
+   "site": "ikisi",
+   "sehir": "İstanbul (İstanbul Havalimanı)",
+   "web": "https://www.unifree.com.tr/",
+   "instagram": "https://www.instagram.com/unifreetr/",
+   "not": "Click & Collect: uçuştan 6 saat öncesine kadar ön sipariş, gidiş/geliş katındaki mağazadan teslim",
+   "dogrulama": "curl"
+  },
+  {
+   "ad": "Avolta Duty Free – Sabiha Gökçen (Reserve & Collect)",
+   "tur": "duty-free",
+   "site": "ikisi",
+   "sehir": "İstanbul (Sabiha Gökçen Havalimanı)",
+   "web": "https://istanbul-sabiha.shopdutyfree.com/en/how-does-it-work",
+   "instagram": "",
+   "not": "Havalimanının resmî duty-free bağlantısı; Reserve & Collect ile önceden ayırıp terminalde teslim alma",
+   "dogrulama": "curl"
+  },
+  {
+   "ad": "ATU Duty Free – Antalya Havalimanı",
+   "tur": "duty-free",
+   "site": "ikisi",
+   "sehir": "Antalya (Antalya Havalimanı)",
+   "web": "https://atu.com.tr/locations/turkey/antalya/",
+   "instagram": "https://instagram.com/atudutyfree",
+   "not": "40 satış noktası; alkollü içki dahil uluslararası markalar",
+   "dogrulama": "curl"
+  },
+  {
+   "ad": "ATU Duty Free – İzmir Adnan Menderes Havalimanı",
+   "tur": "duty-free",
+   "site": "ikisi",
+   "sehir": "İzmir (Adnan Menderes Havalimanı)",
+   "web": "https://atu.com.tr/locations/turkey/izmir/",
+   "instagram": "https://instagram.com/atudutyfree",
+   "not": "5 satış noktası; içki, tütün, çikolata",
+   "dogrulama": "curl"
+  },
+  {
+   "ad": "Setur Duty Free (liman, sınır kapısı ve bölge havalimanları)",
+   "tur": "duty-free",
+   "site": "ikisi",
+   "sehir": "Türkiye geneli (Bodrum, Çeşme, Kuşadası limanları; Gaziantep, Samsun, Eskişehir havalimanları; Kapıkule vb.)",
+   "web": "https://www.seturdutyfree.com/magazalarimiz.html",
+   "instagram": "https://www.instagram.com/seturdutyfree/",
+   "not": "Mağaza listesi sayfası; ön sipariş bilgisi bulunamadı",
+   "dogrulama": "curl"
+  },
+  {
+   "ad": "Macrocenter",
+   "tur": "zincir",
+   "site": "ikisi",
+   "sehir": "Türkiye geneli (ağırlıkla İstanbul, Ankara, İzmir, Bodrum)",
+   "web": "https://www.macrocenter.com.tr/magazalarimiz",
+   "instagram": "",
+   "not": "Gurme market; mağazalardaki tekel reyonunda geniş viski ve ithal bira seçkisi. Alkol yalnızca mağazadan alınır.",
+   "dogrulama": "curl"
+  },
+  {
+   "ad": "Migros / MJet / 5M (mağaza bulucu)",
+   "tur": "zincir",
+   "site": "ikisi",
+   "sehir": "Türkiye geneli",
+   "web": "https://www.migroskurumsal.com/magazalarimiz",
+   "instagram": "",
+   "not": "İl/ilçe seçmeli mağaza bulucu; Migros, 5M, MJet ve Macrocenter mağazalarını listeler. Tekel reyonu her mağazada yok.",
+   "dogrulama": "curl"
+  },
+  {
+   "ad": "CarrefourSA",
+   "tur": "zincir",
+   "site": "ikisi",
+   "sehir": "Türkiye geneli",
+   "web": "",
+   "instagram": "https://www.instagram.com/carrefoursa/",
+   "not": "Büyük hipermarketlerde tekel reyonu; yaygın viski ve bira markaları. Resmî site bot koruması nedeniyle doğrulanamadı.",
+   "dogrulama": "curl"
+  },
+  {
+   "ad": "Meyland Exclusive Wine & Spirit Stores",
+   "tur": "butik",
+   "site": "ikisi",
+   "sehir": "Muğla (Bodrum, Marmaris, Fethiye)",
+   "web": "https://www.meyland.com.tr/",
+   "instagram": "https://www.instagram.com/meylandexclusive/",
+   "not": "Premium şarap ve damıtık içki mağazaları; yat ikmali de yapıyor. Bodrum hesabı: @meylandbodrum",
+   "dogrulama": "curl"
+  },
+  {
+   "ad": "Eataly İstanbul (Zorlu Center)",
+   "tur": "zincir",
+   "site": "ikisi",
+   "sehir": "İstanbul (Beşiktaş, Zorlu Center)",
+   "web": "https://www.eataly.com.tr/",
+   "instagram": "",
+   "not": "İtalyan gurme market; à santé gibi yerli craft biraların satış noktası listesinde yer alıyor",
+   "dogrulama": "curl"
+  },
+  {
+   "ad": "à santé Brewery – satış noktaları haritası",
+   "tur": "craft",
+   "site": "bira",
+   "sehir": "Türkiye geneli (İstanbul ağırlıklı; İzmir, Bodrum, Ankara, Antalya)",
+   "web": "https://asantebrewery.com/tr/",
+   "instagram": "https://www.instagram.com/asantebrewery",
+   "not": "Adana'lı craft üreticinin sitesindeki harita; 170'i aşkın tekel, şarküteri ve bottle shop (Perest, Tekelist, La Cave vb.) listeleniyor",
+   "dogrulama": "curl"
+  },
+  {
+   "ad": "The Populist (Bomonti)",
+   "tur": "craft",
+   "site": "bira",
+   "sehir": "İstanbul (Şişli, Bomonti)",
+   "web": "https://www.thepopulist.com.tr/",
+   "instagram": "https://www.instagram.com/thepopulisttr/",
+   "not": "Tarihî Bomonti bira fabrikasında kendi biralarını üreten brewpub",
+   "dogrulama": "curl"
+  },
+  {
+   "ad": "Bosphorus Brewing Company",
+   "tur": "craft",
+   "site": "bira",
+   "sehir": "İstanbul",
+   "web": "https://www.bosphorusbrewingcompany.com",
+   "instagram": "https://www.instagram.com/bbc_ist",
+   "not": "İstanbul'un köklü brewpub'larından; kendi üretimi craft biralar",
+   "dogrulama": "curl"
+  },
+  {
+   "ad": "Bira Fabrikası (Kadıköy)",
+   "tur": "craft",
+   "site": "bira",
+   "sehir": "İstanbul (Kadıköy)",
+   "web": "",
+   "instagram": "https://www.instagram.com/birafabrikasi/",
+   "not": "Kadıköy'ün bilinen craft bira barı; birafabrikasi.com alan adı park edilmiş olduğu için yalnızca Instagram",
+   "dogrulama": "arama"
+  },
+  {
+   "ad": "Madame Prokopp",
+   "tur": "craft",
+   "site": "bira",
+   "sehir": "İzmir (Alsancak)",
+   "web": "https://madameprokopp.com/brews_/",
+   "instagram": "https://www.instagram.com/madameprokopp/",
+   "not": "Feliz Kulpa fıçı biraları dahil yerel craft seçkisi; menü sitede",
+   "dogrulama": "curl"
+  },
+  {
+   "ad": "Rast Bira Bahçesi",
+   "tur": "craft",
+   "site": "bira",
+   "sehir": "İzmir (Karşıyaka, Atakent)",
+   "web": "https://rastbirabahcesi.com/craft/",
+   "instagram": "",
+   "not": "Her ay 10 farklı yerli craft birayı musluğa alıyor",
+   "dogrulama": "curl"
+  },
+  {
+   "ad": "Hops Pub",
+   "tur": "craft",
+   "site": "bira",
+   "sehir": "Ankara (Çankaya, Tunalı)",
+   "web": "https://menulio.com.tr/mekan/hops-pub/",
+   "instagram": "",
+   "not": "Tunalı'da bira evi; menü bağlantısı",
+   "dogrulama": "curl"
+  },
+  {
+   "ad": "Craft Beer Lab",
+   "tur": "craft",
+   "site": "bira",
+   "sehir": "İstanbul (Beşiktaş, Akaretler)",
+   "web": "https://www.timeout.com/istanbul/bars-and-pubs/craft-beer-lab",
+   "instagram": "",
+   "not": "Çok musluklu craft bira barı; bağlantı Time Out tanıtımına",
+   "dogrulama": "curl"
+  },
+  {
+   "ad": "Taproom X",
+   "tur": "craft",
+   "site": "bira",
+   "sehir": "İstanbul (Beyoğlu, Asmalımescit)",
+   "web": "",
+   "instagram": "https://www.instagram.com/taproomx/",
+   "not": "Asmalımescit'te craft bira barı; taproomx.com bot koruması (403) verdiği için yalnızca Instagram",
+   "dogrulama": "arama"
+  },
+  {
+   "ad": "The Whisky Exchange",
+   "tur": "yurtdisi",
+   "site": "viski",
+   "sehir": "Yurt dışı (Londra)",
+   "web": "https://www.thewhiskyexchange.com/",
+   "instagram": "",
+   "not": "Yalnızca fiyat karşılaştırması; Türkiye'ye alkol gönderimi yapmaz. Site bot koruması (403) döndürdü",
+   "dogrulama": "curl"
+  },
+  {
+   "ad": "Master of Malt",
+   "tur": "yurtdisi",
+   "site": "viski",
+   "sehir": "Yurt dışı (İngiltere)",
+   "web": "https://www.masterofmalt.com/",
+   "instagram": "",
+   "not": "Yalnızca fiyat karşılaştırması; Türkiye'ye satış yapmaz. Site güvenlik kontrolü (429) döndürdü",
+   "dogrulama": "curl"
+  },
+  {
+   "ad": "Whisky.de",
+   "tur": "yurtdisi",
+   "site": "viski",
+   "sehir": "Yurt dışı (Almanya)",
+   "web": "https://www.whisky.de/",
+   "instagram": "",
+   "not": "Yalnızca fiyat karşılaştırması; Türkiye'ye satış yapmaz. Site bot koruması (403) döndürdü",
+   "dogrulama": "curl"
+  }
+ ]
+}

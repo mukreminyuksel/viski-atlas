@@ -40,8 +40,9 @@ header{padding:26px 0 14px;border-bottom:1px solid var(--line);margin-bottom:18p
 .magchips{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px}
 @keyframes parla{0%,100%{box-shadow:none}30%{box-shadow:0 0 0 3px var(--amber2),0 0 24px rgba(242,193,78,.45)}}
 .magcard.parla{animation:parla 1.6s ease 2}
-.pinKutu{display:inline-flex;align-items:center;gap:6px}.pinKutu .pinGir{width:130px}
-.pinGoster{display:inline-flex!important;align-items:center;gap:4px;font-size:12px;color:var(--muted);cursor:pointer;white-space:nowrap}
+.gizKutu{display:inline-flex;align-items:center;gap:4px}.gizKutu .pinGir{width:130px}
+.goz{background:var(--bg2);border:1px solid var(--line);border-radius:8px;padding:5px 8px;cursor:pointer;font-size:15px;line-height:1}.goz:hover,.goz.acik{border-color:var(--amber-soft)}
+.kod .goz{margin-left:10px;vertical-align:middle;font-size:14px}.kodMetin{letter-spacing:.5px}
 .ulinkler{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0 4px}
 .ulink{display:inline-flex;align-items:center;gap:4px;padding:4px 10px;border:1px solid var(--line);border-radius:999px;background:var(--bg2);color:var(--amber2);text-decoration:none;font-size:12px;font-weight:700}
 .ulink:hover{border-color:var(--amber-soft)}
@@ -2238,7 +2239,15 @@ function magUygula(){
     c.style.display=ok?'':'none';
   });
 }
-document.addEventListener('change',e=>{if(e.target.classList&&e.target.classList.contains('pinGosterTik')){const i=e.target.closest('.pinKutu').querySelector('.pinGir');i.type=e.target.checked?'text':'password';}});
+// Gizli bilgiler (bulut kodu, PIN): varsayılan gizli, 👁 ile bir anlığına gösterilir
+function kodMaske(){return '••••-••••-••••-•••';}
+function kodGoster(k){return `<span class="kodMetin" data-kod="${g$(k)}">${g$(kodMaske(k))}</span><button type="button" class="goz" data-gozkod title="Kodu göster / gizle">👁</button>`;}
+document.addEventListener('click',e=>{
+  const g=e.target.closest('[data-goz]');
+  if(g){const i=g.parentElement.querySelector('input');const ac=i.type==='password';i.type=ac?'text':'password';g.classList.toggle('acik',ac);g.textContent=ac?'🙈':'👁';return;}
+  const k=e.target.closest('[data-gozkod]');
+  if(k){const m=k.parentElement.querySelector('.kodMetin');const ac=!k.classList.contains('acik');m.textContent=ac?m.dataset.kod:kodMaske(m.dataset.kod);k.classList.toggle('acik',ac);k.textContent=ac?'🙈':'👁';}
+});
 document.addEventListener('input',e=>{if(e.target.id==='magAra'){MAGF.q=e.target.value;magUygula();}});
 document.addEventListener('click',e=>{
   const f=e.target.closest('[data-magf]');
@@ -3560,7 +3569,7 @@ function telPinDegistir(){
   if(!/^\d{4,6}$/.test(p)){bulutDurum('⚠️ PIN 4-6 haneli rakam olmalı',true);return;}
   telBagla(BULUT.tel,p);
 }
-const telGirdileri=`<input class="telGir" type="tel" inputmode="tel" autocomplete="tel" placeholder="Telefon numaran (ör. 5556667788)" style="flex:1;min-width:170px"><span class="pinKutu"><input class="pinGir" type="password" inputmode="numeric" autocomplete="off" maxlength="6" placeholder="PIN (4-6 rakam)"><label class="pinGoster" title="PIN'i göster / gizle"><input type="checkbox" class="pinGosterTik"> Göster</label></span>`;
+const telGirdileri=`<input class="telGir" type="tel" inputmode="tel" autocomplete="tel" placeholder="Telefon numaran (ör. 5556667788)" style="flex:1;min-width:170px"><span class="gizKutu"><input class="pinGir" type="password" inputmode="numeric" autocomplete="off" maxlength="6" placeholder="PIN (4-6 rakam)"><button type="button" class="goz" data-goz title="Göster / gizle">👁</button></span>`;
 // Sosyal sayfalarının başındaki giriş kutusu: aynı telefon + PIN girişi
 function sosyalGiris(){
   if(BULUT.kod)return `<div class="sgiris ok">☁️ ${BULUT.tel?'Giriş yapıldı: <b>'+g$(telMaske(BULUT.tel))+'</b>':'Bulut kodunla bağlısın'} · kulüplerin ve gecelerin her cihazda seninle.</div>`;
@@ -3577,7 +3586,7 @@ function renderBulut(){
     k.innerHTML=`<h3>☁️ Listeni kaybetme</h3>
       <p>Listen şu an <b>sadece bu cihazda</b> duruyor; tarayıcı verisi silinirse ya da cihaz değişirse kaybolur. Bulutta saklarsan sana özel bir kod verilir; aynı kodla telefonda ve bilgisayarda aynı listeyi kullanırsın. Hesap ya da e-posta gerekmez.</p>
       <div class="satir"><button class="eklebtn" style="margin:0" data-bulut="baslat">☁️ Bulutta saklamaya başla</button></div>
-      <div class="satir"><input id="bulutKodGir" placeholder="Başka cihazdaki kodun (ör. kehribar-islay-kadeh-427)" style="flex:1;min-width:220px"><button class="btn" data-bulut="baglan">🔑 Listemi getir</button></div>
+      <div class="satir"><span class="gizKutu" style="flex:1;min-width:220px"><input id="bulutKodGir" type="password" autocomplete="off" spellcheck="false" placeholder="Başka cihazdaki kodun (ör. kehribar-islay-kadeh-427)" style="flex:1;min-width:0"><button type="button" class="goz" data-goz title="Göster / gizle">👁</button></span><button class="btn" data-bulut="baglan">🔑 Listemi getir</button></div>
       <p style="margin-top:12px"><b>📱 Ya da telefon numaran + PIN ile:</b> ilk kez giriyorsan listen bu numara ve PIN'le oluşturulur; başka cihazda aynı numara ve PIN yeterli.</p>
       <div class="satir">${telGirdileri}<button class="btn" data-bulut="tel">📱 Telefonla devam et</button></div>
       <div class="ipucu">🚚 <b>Eski adresten (viski-atlas.netlify.app) mi geliyorsun?</b> Orada bulut kodun ya da telefon + PIN'in varsa aynısını burada gir; listen kendiliğinden taşınır. Bulut kullanmadıysan eski sitede <b>Listem</b> sayfasının altındaki <b>⬇️ Yedek Al</b>, burada aynı yerdeki <b>⬆️ Yedek Yükle</b>.</div>
@@ -3585,7 +3594,7 @@ function renderBulut(){
   }else{
     k.innerHTML=`<h3>☁️ Listen bulutta</h3>
       <p>Her değişiklik otomatik kaydedilir; <b>kulüplerin ve tadım gecelerin de</b> bu kayıtta. Başka cihazda bu kodu girmen (ya da QR'ı okutman) yeterli. <b>Kodu bilen listeni görebilir</b>; bir şifre gibi sakla.</p>
-      <div class="kod">${g$(BULUT.kod)}</div>
+      <div class="kod">${kodGoster(BULUT.kod)}</div>
       <div class="satir"><button class="btn" data-bulut="gonder">📤 Kodu kendine gönder</button><button class="btn" data-bulut="kopyala">📋 Kopyala</button>
         <button class="btn" data-bulut="qr">▦ QR göster</button><button class="btn" data-bulut="cek">🔄 Şimdi eşitle</button><button class="btn" data-bulut="kes">🔌 Bağlantıyı kes</button></div>
       ${BULUT.tel?`<div class="satir" style="margin-top:12px">📱 Telefonla giriş açık: <b>${g$(telMaske(BULUT.tel))}</b> + PIN
@@ -3600,7 +3609,7 @@ function qrYukle(){return window.QRCode?Promise.resolve():(qrSoz=qrSoz||new Prom
 async function bulutQR(){
   try{await qrYukle();}catch(e){alert('QR oluşturulamadı; internet bağlantısını kontrol et.');return;}
   kartAc(`<h3>▦ Listeni başka cihaza taşı</h3><p class="dt-txt" style="margin:8px 0 14px">Diğer cihazın kamerasıyla okut; liste o cihazda açılır.</p>
-    <div id="qrAlan" style="background:#fff;padding:14px;border-radius:12px;display:inline-block"></div><div class="dt-src" style="margin-top:10px">${g$(BULUT.kod)}</div>`,'qr');
+    <div id="qrAlan" style="background:#fff;padding:14px;border-radius:12px;display:inline-block"></div><div class="dt-src kod" style="margin-top:10px">${kodGoster(BULUT.kod)}</div>`,'qr');
   new QRCode(document.getElementById('qrAlan'),{text:bulutLink(BULUT.kod),width:220,height:220});
 }
 document.addEventListener('click',e=>{

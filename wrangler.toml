@@ -1,0 +1,8 @@
+# Cloudflare Pages ayarları: GitHub'a bağlanınca bu dosya okunur, KV deposu otomatik bağlanır.
+name = "viski-atlas"
+pages_build_output_dir = "."
+compatibility_date = "2026-09-01"
+
+[[kv_namespaces]]
+binding = "VERI"
+id = "adddc57af6cf44c1af249cdc57806d14"

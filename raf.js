@@ -144,7 +144,7 @@ function sonuc(id,kullaniciSecti,oy){
   const u=uyum(b),h=state.have.includes(id),t=state.target.includes(id);
   const s=document.getElementById('rafSonuc');
   s.innerHTML=`<div class="raf-aday" style="cursor:default">${typeof thumb==='function'?thumb(b):''}<div><b>${b.ad}</b><br><small>${b.dam||''} · ⭐ ${b.puan||'—'}${oy?` · barkod ${oy} kişi onayladı`:''}</small></div></div>
-    <div class="raf-sat"><div><div class="raf-not">🎯 Damak uyumu</div>${u===null?`<div class="raf-not">Birkaç ${R.birimi} "Denedim/Elimde" işaretleyince hesaplanır.</div>`:`<div class="raf-uyum">%${u}</div><div class="raf-not">${u>=80?'Tam senlik':u>=60?'Büyük ihtimalle seversin':'Senin tarzından biraz uzak'}</div>`}</div>
+    <div class="raf-sat"><div><div class="raf-not">🎯 Damak uyumu</div>${u===null?`<div class="raf-not">Birkaç tanesini "${R.have||'Denedim'}" olarak işaretleyince hesaplanır.</div>`:`<div class="raf-uyum">%${u}</div><div class="raf-not">${u>=80?'Tam senlik':u>=60?'Büyük ihtimalle seversin':'Senin tarzından biraz uzak'}</div>`}</div>
       <div><div class="raf-not">💰 Raftaki fiyat</div><input id="rafFiyat" type="number" inputmode="numeric" placeholder="TL"></div></div>
     <div id="rafFy">${priceOf(b)>0?`<div class="raf-not">Türkiye referans fiyatı: <b>${fmt(priceOf(b))}</b></div>`:''}</div>
     <div id="rafAlt"></div>

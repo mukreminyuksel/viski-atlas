@@ -404,6 +404,7 @@ nav.groups{display:flex;gap:6px;margin:20px 0 10px;background:var(--bg2);border:
   .modal-bg{padding:10px}.modal{padding:18px}
 }
 @media(max-width:760px){.katcols{grid-template-columns:1fr}.listcol{grid-template-columns:1fr}.bottle{flex-wrap:wrap}.bottle .acts{margin-left:auto}}
+.topn{display:flex;gap:6px;align-items:center;flex-wrap:wrap;margin:8px 0;font-size:.85rem;color:var(--muted,#888)}.topn .topn-i{margin-left:auto}
 </style>
 </head>
 <body>
@@ -440,9 +441,9 @@ nav.groups{display:flex;gap:6px;margin:20px 0 10px;background:var(--bg2);border:
   <nav class="tabs hidden" id="subNav">
     <div class="tab active" data-group="kesfet" data-view="explore">📋 Bölge listesi</div>
     <div class="tab" data-group="kesfet" data-view="harita">🌍 Harita</div>
-    <div class="tab" data-group="listeler" data-view="experts">🏆 Uzman Top 50</div>
+    <div class="tab" data-group="listeler" data-view="experts">🏆 Uzman Sıralaması</div>
     <div class="tab" data-group="listeler" data-view="ai">🤖 AI Tercihleri</div>
-    <div class="tab" data-group="listeler" data-view="ncf">❄️ Filtresizler Top 50</div>
+    <div class="tab" data-group="listeler" data-view="ncf">❄️ Filtresizler Sıralaması</div>
     <div class="tab" data-group="listeler" data-view="katman">🇹🇷 Türkiye Katmanları</div>
     <div class="tab" data-group="listeler" data-view="fiyat">📉 Fiyat Hareketleri</div>
     <div class="tab" data-group="listeler" data-view="magazin">✨ Magazin</div>
@@ -487,6 +488,7 @@ nav.groups{display:flex;gap:6px;margin:20px 0 10px;background:var(--bg2);border:
 
   <section id="view-experts" class="hidden">
     <p class="intro">Bu liste tek bir kaynağa değil, <b>geniş bir uzman ve ödül havuzuna</b> dayanır: şişeler birden çok kaynaktaki yüksek puan/ödül yoğunluğuna göre (bir tür matris değerlendirmesiyle) seçilir — <b>Jim Murray</b> (Whisky Bible), <b>Serge Valentin & Angus</b> (Whiskyfun), <b>Ruben Luyten</b> (WhiskyNotes), <b>Charles MacLean</b>, <b>Whisky Advocate</b>, <b>World Whiskies Awards (WWA)</b>, <b>IWSC / San Francisco WSC</b> ve <b>Meleklerin Payı</b> (Dr. Burkay Adalığ). Puana göre en iyi 50; rozetteki etikete gelince hangi uzman/ödülle anıldığını görürsün.</p>
+    <div class="topn" data-for="experts"></div>
     <div id="expertsGrid" class="grid"></div>
     <p class="note">Not: Jim Murray kör tatmadığı ve 2020 tartışmaları nedeniyle eleştirilir; listeler tek damağa dayanır. Şişelerin çoğu bağımsız/nadir olduğundan Türkiye'de zor bulunur.</p>
   </section>
@@ -504,6 +506,7 @@ nav.groups{display:flex;gap:6px;margin:20px 0 10px;background:var(--bg2);border:
 
   <section id="view-ncf" class="hidden">
     <p class="intro"><b>Soğuk filtrasyon (chill-filtering)</b>, viskiyi soğutup bulanıklık yapan yağ asitlerini süzer — ama aromanın bir kısmını da alır. <b>Filtresiz (NCF)</b> şişeler genelde 46%+ alkolde, doğal renkte ve daha dolu/yağlı dokuda olur. Aşağıda kataloğdaki en yüksek puanlı 50 filtresiz şişe. Keşfet sekmesinde "❄️ Sadece Filtresiz" filtresiyle de süzebilirsin.</p>
+    <div class="topn" data-for="ncf"></div>
     <div id="ncfGrid" class="grid"></div>
   </section>
 
@@ -1966,10 +1969,20 @@ function bottleRow(b,rank){
   return el;
 }
 
+
+function topN(){try{return +localStorage.getItem('viski_topn')||50}catch(e){return 50}}
+function topNBar(g,fn,max){
+  const el=document.querySelector('.topn[data-for="'+g+'"]');if(!el)return;
+  const n=topN();
+  el.innerHTML='<span>Göster:</span>'+[50,100,200].map(k=>`<button class="btn ${k===n?'have-on':''}" data-n="${k}">En iyi ${k}</button>`).join('')+`<span class="topn-i">${Math.min(n,max)} / ${max} şişe</span>`;
+  el.onclick=e=>{const b=e.target.closest('[data-n]');if(!b)return;try{localStorage.setItem('viski_topn',b.dataset.n)}catch(_){}fn();};
+}
 function renderExperts(){
   const grid=document.getElementById('expertsGrid');grid.innerHTML='';
-  const list=allBottles().filter(b=>b.uz).sort((a,b)=>b.puan-a.puan).slice(0,50);
-  list.forEach((b,i)=>grid.appendChild(card(b,i+1,b.uz)));
+  const uz=allBottles().filter(b=>b.uz).sort((a,b)=>b.puan-a.puan);
+  const ek=allBottles().filter(b=>!b.uz).sort((a,b)=>b.puan-a.puan);
+  const all=[...uz,...ek];topNBar('experts',renderExperts,all.length);
+  all.slice(0,topN()).forEach((b,i)=>grid.appendChild(card(b,i+1,b.uz||(b.dam+' · '+b.bolge+' · '+b.puan+' puan'))));
 }
 function renderAI(){
   const grid=document.getElementById('aiGrid');grid.innerHTML='';
@@ -1978,8 +1991,9 @@ function renderAI(){
 }
 function renderNCF(){
   const grid=document.getElementById('ncfGrid');grid.innerHTML='';
-  const list=allBottles().filter(b=>b.ncf).sort((a,b)=>b.puan-a.puan).slice(0,50);
-  list.forEach((b,i)=>grid.appendChild(card(b,i+1,b.dam+' · '+b.bolge+' · '+b.abv+'%')));
+  const list=allBottles().filter(b=>b.ncf).sort((a,b)=>b.puan-a.puan);
+  topNBar('ncf',renderNCF,list.length);
+  list.slice(0,topN()).forEach((b,i)=>grid.appendChild(card(b,i+1,b.dam+' · '+b.bolge+' · '+b.abv+'%')));
 }
 function renderKatman(){
   [1,2,3].forEach(k=>{

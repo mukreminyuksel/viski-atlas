@@ -2,19 +2,19 @@
 
 Bu dosya iki sitenin ortak fikir defteridir. Kopyası iki depoda da `docs/ONERILER.md` olarak durur.
 Durum: 💡 fikir · 📌 sırada · 🔨 yapılıyor · ✅ bitti · ❌ vazgeçildi
-Son güncelleme: 4 Ekim 2026
+Son güncelleme: 5 Ekim 2026
 
 ## Önerilen sıra
 
 | # | Öneri | Etki | Emek | Durum |
 |---|---|---|---|---|
-| 1 | 📷 Raf Asistanı (etiket/barkod tanıma) | Çok yüksek: her alışverişte kullanılır | Orta-büyük | 💡 |
+| 1 | 📷 Raf Asistanı (etiket/barkod tanıma) | Çok yüksek: her alışverişte kullanılır | Orta-büyük | ✅ |
 | 2 | 🎭 Kör Tadım Şovu (canlı yarışma modu) | Çok yüksek: sosyal, yayılır | Orta | 💡 |
 | 3 | 📊 Yılın Özeti (Wrapped tarzı) | Yüksek: paylaşılır; aralık ayına yetişmeli | Küçük-orta | 💡 |
 | 4 | 🔀 Netlify'daki eski adresi yeni adrese yönlendirme | Orta | Küçük (kredi yenilenince) | 📌 |
 | 5 | 📜 Resmî lisans listesinin periyodik güncellemesi | Orta | Küçük (listeyi kullanıcı indirir) | 📌 |
 | 6 | 🏬 İstanbul viski butiklerini Nereden Alınır'a ekleme | Orta | Küçük | 📌 |
-| 7 | 🥛 **Rakı Atlası** (üçüncü kardeş site) | Çok yüksek: tamamen yerli, rakipsiz | Büyük | 💡 |
+| 7 | 🥛 **Rakı Atlası** (üçüncü kardeş site) | Çok yüksek: tamamen yerli, rakipsiz | Büyük | ✅ |
 | 8 | 🍷 **Şarap Atlası** (dördüncü kardeş site) | Çok yüksek, en büyük alan (180+ üretici) | Çok büyük | 💡 |
 
 ---

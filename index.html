@@ -3414,6 +3414,7 @@ document.addEventListener('click',e=>{
 /* ===== ORTAK: kullanıcı içeriği için tam HTML kaçırma ===== */
 function g$(s){return String(s??'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');}
 async function api(yol,secenek){
+  if(/github\.io$/.test(location.hostname))throw new Error('Bulut kaydı, tadım geceleri ve kulüpler yedek adreste (github.io) çalışmaz; ana adreste kullanılabilir.');
   const r=await fetch(yol,Object.assign({cache:'no-store',headers:{'content-type':'application/json'}},secenek||{}));
   let v={};try{v=await r.json();}catch(e){}
   if(!r.ok){const e=new Error(v.hata||('Sunucu yanıt vermedi ('+r.status+')'));e.durum=r.status;throw e;}

@@ -31,6 +31,7 @@ Türkçe viski kataloğu ve kişisel koleksiyon uygulaması (statik PWA). Yayın
   - Giriş, captcha, bot koruması ya da yaş doğrulama kapısı olan sayfalar **aşılmaz**; açılmıyorsa atlanır.
   - Türk sitelerini okurken `WebFetch` çalışmaz: `curl -sL -m 25 -A 'Mozilla/5.0' URL` kullan.
   - Türkiye'de alkolün internetten tüketiciye satışı yasaktır: "internetten satın al" bağlantısı verilmez; yalnızca fiziksel mağaza, duty-free ve markanın kendi sitesi.
+- **Kapsam denetimi (ders: Şarap'ta Kayra'nın 15 markasından yalnız 4'ü kataloğa girmişti):** Yeni veri turlarında yalnız tadım sitelerine değil, **resmî lisans listesine ve her üreticinin / Türkiye dağıtıcısının resmî ürün portföyüne** bakılır. Tur öncesi ve sonrası üretici başına katalogdaki ürün sayısı kontrol edilir; az kayıtlı büyük üretici ya da hiç kaydı olmayan lisanslı üretici eksik sayılır.
 - **Commit mesajı:** Türkçe, ne ve neden. Sonuna şu iki satır eklenir (yapay zekâ ile yapılan işlerde):
   ```
   Co-Authored-By: Claude <noreply@anthropic.com>

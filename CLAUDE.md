@@ -15,6 +15,7 @@ Türkçe viski kataloğu ve kişisel koleksiyon uygulaması (statik PWA). Yayın
 - `netlify/` — eski Netlify katmanı (kredi bittiği için kullanılmıyor, yayın Cloudflare'da; silme).
 
 ## Veri dosyaları ve betikler
+- `scripts/denetim.mjs` — işlev denetimi (Playwright): her sekme, arama kutusu, seçim menüsü ve zararsız düğme masaüstü + 390 px mobilde denenir; sayfa hatası, etkisiz arama ve yatay taşma raporlanır (`node scripts/denetim.mjs`, hata varsa çıkış kodu 1). Arayüz değişikliğinden sonra çalıştır; aylık görev de çalıştırır.
 - `data/fiyatlar.json` — fiyat kayıtları (kaynak, güven, tarih). Elle düzenleme; aylık görev `scripts/fiyat-guncelle.mjs` ile yazar (`sec` → araştırılacaklar, `uygula dosya.json` → güvenlik kontrolleriyle yazar; şüpheli değişimleri reddeder).
 - `data/baglantilar.json` — üreticilerin resmî site ve sosyal medya bağlantıları. `scripts/baglanti.mjs` (`sec` / `ekle` / `yok` / `kontrol` / `sil`). Yalnızca **resmî** hesaplar.
 - `data/satis.json` — "Nereden Alınır" (yasal not, zincir, duty-free, butik); `data/topluluk.json` — kulüp, grup, festival, kanallar.

@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <rect x="16" y="16" width="480" height="480" rx="96" fill="#1f160b" stroke="#d9a441" stroke-width="12"/>
+  <defs>
+    <clipPath id="ic">
+      <path d="M196 112 C202 150 214 168 196 196 C172 232 152 262 152 300 C154 350 196 372 256 372 C316 372 358 350 360 300 C360 262 340 232 316 196 C298 168 310 150 316 112 Z"/>
+    </clipPath>
+  </defs>
+  <!-- viski -->
+  <rect x="120" y="262" width="272" height="130" fill="#e3a73a" clip-path="url(#ic)"/>
+  <path d="M152 262 C200 252 312 252 360 262" fill="none" stroke="#f6cf7a" stroke-width="6" clip-path="url(#ic)" opacity=".9"/>
+  <!-- cam gövde -->
+   <path d="M196 112 C202 150 214 168 196 196 C172 232 152 262 152 300 C154 350 196 372 256 372 C316 372 358 350 360 300 C360 262 340 232 316 196 C298 168 310 150 316 112"
+        fill="none" stroke="#f4e8cc" stroke-width="14" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- ağız çizgisi -->
+  <path d="M196 112 L316 112" stroke="#f4e8cc" stroke-width="10" stroke-linecap="round" opacity=".55"/>
+  <!-- kalın ayak -->
+  <path d="M220 370 L228 404 L284 404 L292 370" fill="#f4e8cc"/>
+  <rect x="176" y="402" width="160" height="22" rx="11" fill="#f4e8cc"/>
+  <!-- parıltı -->
+  <path d="M178 238 C170 262 170 290 178 316" fill="none" stroke="#fff" stroke-width="7" stroke-linecap="round" opacity=".35"/>
+</svg>

@@ -10,6 +10,8 @@ Türkçe viski kataloğu ve kişisel koleksiyon uygulaması (statik PWA). Yayın
 - `index.html` — uygulama. `const DATA = [...]` şişe kataloğu **doğrudan bu dosyada** (üretici `dam`, bölge `bolge`, `tl` fiyat, `puan`, `bul` bulunabilirlik vb.); `FAMOUS` magazin; `YEMEKLER` yemek eşleşmesi.
 - `data/` — `damitimevleri.json` (damıtımevi kartları), `bolgeler.json`, `tadim.json`, `konumlar.json`, `gorseller.json` (+ `img/sise/`), `fiyatlar.json`, `baglantilar.json`, `satis.json`, `topluluk.json`.
 - `scripts/gorsel.mjs` — şişe görseli ekleme: `sec | ekle <id> <gorselURL> <sayfaURL> <sahip> | yok <id> | sil <id>`. Yalnızca **resmî üretici sitelerinden**; görsel 160 px yüksekliğinde WebP'ye çevrilir.
+- `puan: 0` = **Puanlanmadı** (kaynaklı eleştirmen puanı yok; uydurma puan verme). Arayüz bunları "Puanlanmadı" gösterir, Uzman listesinden ve ortalamalardan dışlar, sıralamada sona atar. `tur` değerleri: Single Malt, Blend, Blended Malt, Single Pot Still, Bourbon, Rye, Tennessee, Grain, Viski Likörü.
+- Mükerrer şişe birleştirilince eski id `ID_TASI` (index.html) sözlüğüne eklenir; koleksiyon/hedef/not/fiyat ve `#s=` bağlantıları yeni id'ye taşınır.
 - `netlify/` — eski Netlify katmanı (kredi bittiği için kullanılmıyor, yayın Cloudflare'da; silme).
 
 ## Veri dosyaları ve betikler

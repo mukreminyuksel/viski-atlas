@@ -1,7 +1,35 @@
 {
- "guncelleme": "2026-10-03",
+ "guncelleme": "2026-10-11",
  "kur": null,
  "fiyatlar": {
+  "ballantines-10": {
+   "tl": 1800,
+   "tarih": "2026-10-11",
+   "tur": "tr_raf",
+   "guven": "orta",
+   "kaynak": "https://www.karekod.org/blog/migros-viski-fiyatlari/",
+   "not": "Migros raf fiyatı (Eylül 2026), karekod.org listesi — 70 cl",
+   "gecmis": [
+    [
+     "2026-10-11",
+     1800
+    ]
+   ]
+  },
+  "ballantines-7": {
+   "tl": 1700,
+   "tarih": "2026-10-11",
+   "tur": "tr_raf",
+   "guven": "orta",
+   "kaynak": "https://www.karekod.org/blog/migros-viski-fiyatlari/",
+   "not": "Migros raf fiyatı (Eylül 2026), karekod.org listesi — 70 cl",
+   "gecmis": [
+    [
+     "2026-10-11",
+     1700
+    ]
+   ]
+  },
   "ballantines-finest": {
    "tl": 1550,
    "tarih": "2026-10-03",
@@ -16,6 +44,76 @@
     ]
    ]
   },
+  "blackram": {
+   "tl": 1200,
+   "tarih": "2026-10-11",
+   "tur": "tr_raf",
+   "guven": "orta",
+   "kaynak": "https://www.karekod.org/blog/migros-viski-fiyatlari/",
+   "not": "Migros raf fiyatı (Eylül 2026), karekod.org listesi — 70 cl",
+   "gecmis": [
+    [
+     "2026-10-11",
+     1200
+    ]
+   ]
+  },
+  "blackram-bourbon": {
+   "tl": 1300,
+   "tarih": "2026-10-11",
+   "tur": "tr_raf",
+   "guven": "orta",
+   "kaynak": "https://www.karekod.org/blog/migros-viski-fiyatlari/",
+   "not": "Migros raf fiyatı (Eylül 2026), karekod.org listesi — 70 cl",
+   "gecmis": [
+    [
+     "2026-10-11",
+     1300
+    ]
+   ]
+  },
+  "blackram-honey": {
+   "tl": 1150,
+   "tarih": "2026-10-11",
+   "tur": "tr_raf",
+   "guven": "orta",
+   "kaynak": "https://www.karekod.org/blog/migros-viski-fiyatlari/",
+   "not": "Migros raf fiyatı (Eylül 2026), karekod.org listesi — 70 cl",
+   "gecmis": [
+    [
+     "2026-10-11",
+     1150
+    ]
+   ]
+  },
+  "bushmills-original": {
+   "tl": 1600,
+   "tarih": "2026-10-11",
+   "tur": "tr_raf",
+   "guven": "orta",
+   "kaynak": "https://www.karekod.org/blog/migros-viski-fiyatlari/",
+   "not": "Migros raf fiyatı (Eylül 2026), karekod.org listesi — 70 cl",
+   "gecmis": [
+    [
+     "2026-10-11",
+     1600
+    ]
+   ]
+  },
+  "cardhu-15": {
+   "tl": 3700,
+   "tarih": "2026-10-11",
+   "tur": "tr_raf",
+   "guven": "orta",
+   "kaynak": "https://www.karekod.org/blog/migros-viski-fiyatlari/",
+   "not": "Migros raf fiyatı (Eylül 2026), karekod.org listesi — 70 cl",
+   "gecmis": [
+    [
+     "2026-10-11",
+     3700
+    ]
+   ]
+  },
   "chivas-12": {
    "tl": 2100,
    "tarih": "2026-10-03",
@@ -27,6 +125,48 @@
     [
      "2026-10-03",
      2100
+    ]
+   ]
+  },
+  "chivas-smoky": {
+   "tl": 2100,
+   "tarih": "2026-10-11",
+   "tur": "tr_raf",
+   "guven": "orta",
+   "kaynak": "https://www.karekod.org/blog/migros-viski-fiyatlari/",
+   "not": "Migros raf fiyatı (Eylül 2026), karekod.org listesi — 70 cl",
+   "gecmis": [
+    [
+     "2026-10-11",
+     2100
+    ]
+   ]
+  },
+  "chivas-ultis": {
+   "tl": 12500,
+   "tarih": "2026-10-11",
+   "tur": "tr_raf",
+   "guven": "orta",
+   "kaynak": "https://www.karekod.org/blog/migros-viski-fiyatlari/",
+   "not": "Migros raf fiyatı (Eylül 2026), karekod.org listesi — 70 cl",
+   "gecmis": [
+    [
+     "2026-10-11",
+     12500
+    ]
+   ]
+  },
+  "dimple-golden": {
+   "tl": 1650,
+   "tarih": "2026-10-11",
+   "tur": "tr_raf",
+   "guven": "orta",
+   "kaynak": "https://www.karekod.org/blog/migros-viski-fiyatlari/",
+   "not": "Migros raf fiyatı (Eylül 2026), karekod.org listesi — 70 cl",
+   "gecmis": [
+    [
+     "2026-10-11",
+     1650
     ]
    ]
   },
@@ -55,6 +195,244 @@
     [
      "2026-10-03",
      2400
+    ]
+   ]
+  },
+  "gladstoneaxe-black": {
+   "tl": 1950,
+   "tarih": "2026-10-11",
+   "tur": "tr_raf",
+   "guven": "orta",
+   "kaynak": "https://www.karekod.org/blog/migros-viski-fiyatlari/",
+   "not": "Migros raf fiyatı (Eylül 2026), karekod.org listesi — 70 cl",
+   "gecmis": [
+    [
+     "2026-10-11",
+     1950
+    ]
+   ]
+  },
+  "gladstoneaxe-oak": {
+   "tl": 2000,
+   "tarih": "2026-10-11",
+   "tur": "tr_raf",
+   "guven": "orta",
+   "kaynak": "https://www.karekod.org/blog/migros-viski-fiyatlari/",
+   "not": "Migros raf fiyatı (Eylül 2026), karekod.org listesi — 70 cl",
+   "gecmis": [
+    [
+     "2026-10-11",
+     2000
+    ]
+   ]
+  },
+  "glenlivet-caribbean": {
+   "tl": 2800,
+   "tarih": "2026-10-11",
+   "tur": "tr_raf",
+   "guven": "orta",
+   "kaynak": "https://www.karekod.org/blog/migros-viski-fiyatlari/",
+   "not": "Migros raf fiyatı (Eylül 2026), karekod.org listesi — 70 cl",
+   "gecmis": [
+    [
+     "2026-10-11",
+     2800
+    ]
+   ]
+  },
+  "glenrothes-wmc": {
+   "tl": 5250,
+   "tarih": "2026-10-11",
+   "tur": "tr_raf",
+   "guven": "orta",
+   "kaynak": "https://www.karekod.org/blog/migros-viski-fiyatlari/",
+   "not": "Migros raf fiyatı (Eylül 2026), karekod.org listesi — 70 cl",
+   "gecmis": [
+    [
+     "2026-10-11",
+     5250
+    ]
+   ]
+  },
+  "glentalloch": {
+   "tl": 1300,
+   "tarih": "2026-10-11",
+   "tur": "tr_raf",
+   "guven": "orta",
+   "kaynak": "https://www.karekod.org/blog/migros-viski-fiyatlari/",
+   "not": "Migros raf fiyatı (Eylül 2026), karekod.org listesi — 70 cl",
+   "gecmis": [
+    [
+     "2026-10-11",
+     1300
+    ]
+   ]
+  },
+  "glentalloch-12": {
+   "tl": 1750,
+   "tarih": "2026-10-11",
+   "tur": "tr_raf",
+   "guven": "orta",
+   "kaynak": "https://www.karekod.org/blog/migros-viski-fiyatlari/",
+   "not": "Migros raf fiyatı (Eylül 2026), karekod.org listesi — 70 cl",
+   "gecmis": [
+    [
+     "2026-10-11",
+     1750
+    ]
+   ]
+  },
+  "glentalloch-8": {
+   "tl": 1700,
+   "tarih": "2026-10-11",
+   "tur": "tr_raf",
+   "guven": "orta",
+   "kaynak": "https://www.karekod.org/blog/migros-viski-fiyatlari/",
+   "not": "Migros raf fiyatı (Eylül 2026), karekod.org listesi — 70 cl",
+   "gecmis": [
+    [
+     "2026-10-11",
+     1700
+    ]
+   ]
+  },
+  "grants-12": {
+   "tl": 2000,
+   "tarih": "2026-10-11",
+   "tur": "tr_raf",
+   "guven": "orta",
+   "kaynak": "https://www.karekod.org/blog/migros-viski-fiyatlari/",
+   "not": "Migros raf fiyatı (Eylül 2026), karekod.org listesi — 70 cl",
+   "gecmis": [
+    [
+     "2026-10-11",
+     2000
+    ]
+   ]
+  },
+  "grants-25": {
+   "tl": 14650,
+   "tarih": "2026-10-11",
+   "tur": "tr_raf",
+   "guven": "orta",
+   "kaynak": "https://www.karekod.org/blog/migros-viski-fiyatlari/",
+   "not": "Migros raf fiyatı (Eylül 2026), karekod.org listesi — 70 cl",
+   "gecmis": [
+    [
+     "2026-10-11",
+     14650
+    ]
+   ]
+  },
+  "grants-8sherry": {
+   "tl": 1850,
+   "tarih": "2026-10-11",
+   "tur": "tr_raf",
+   "guven": "orta",
+   "kaynak": "https://www.karekod.org/blog/migros-viski-fiyatlari/",
+   "not": "Migros raf fiyatı (Eylül 2026), karekod.org listesi — 70 cl",
+   "gecmis": [
+    [
+     "2026-10-11",
+     1850
+    ]
+   ]
+  },
+  "grants-rumcask": {
+   "tl": 1700,
+   "tarih": "2026-10-11",
+   "tur": "tr_raf",
+   "guven": "orta",
+   "kaynak": "https://www.karekod.org/blog/migros-viski-fiyatlari/",
+   "not": "Migros raf fiyatı (Eylül 2026), karekod.org listesi — 70 cl",
+   "gecmis": [
+    [
+     "2026-10-11",
+     1700
+    ]
+   ]
+  },
+  "grants-smoky": {
+   "tl": 1650,
+   "tarih": "2026-10-11",
+   "tur": "tr_raf",
+   "guven": "orta",
+   "kaynak": "https://www.karekod.org/blog/migros-viski-fiyatlari/",
+   "not": "Migros raf fiyatı (Eylül 2026), karekod.org listesi — 70 cl",
+   "gecmis": [
+    [
+     "2026-10-11",
+     1650
+    ]
+   ]
+  },
+  "highlandqueen": {
+   "tl": 1300,
+   "tarih": "2026-10-11",
+   "tur": "tr_raf",
+   "guven": "orta",
+   "kaynak": "https://www.karekod.org/blog/migros-viski-fiyatlari/",
+   "not": "Migros raf fiyatı (Eylül 2026), karekod.org listesi — 70 cl",
+   "gecmis": [
+    [
+     "2026-10-11",
+     1300
+    ]
+   ]
+  },
+  "highlandqueen-12": {
+   "tl": 1700,
+   "tarih": "2026-10-11",
+   "tur": "tr_raf",
+   "guven": "orta",
+   "kaynak": "https://www.karekod.org/blog/migros-viski-fiyatlari/",
+   "not": "Migros raf fiyatı (Eylül 2026), karekod.org listesi — 70 cl",
+   "gecmis": [
+    [
+     "2026-10-11",
+     1700
+    ]
+   ]
+  },
+  "hyde-3": {
+   "tl": 2150,
+   "tarih": "2026-10-11",
+   "tur": "tr_raf",
+   "guven": "orta",
+   "kaynak": "https://www.karekod.org/blog/migros-viski-fiyatlari/",
+   "not": "Migros raf fiyatı (Eylül 2026), karekod.org listesi — 70 cl",
+   "gecmis": [
+    [
+     "2026-10-11",
+     2150
+    ]
+   ]
+  },
+  "hyde-5": {
+   "tl": 2150,
+   "tarih": "2026-10-11",
+   "tur": "tr_raf",
+   "guven": "orta",
+   "kaynak": "https://www.karekod.org/blog/migros-viski-fiyatlari/",
+   "not": "Migros raf fiyatı (Eylül 2026), karekod.org listesi — 70 cl",
+   "gecmis": [
+    [
+     "2026-10-11",
+     2150
+    ]
+   ]
+  },
+  "hyde-8": {
+   "tl": 2100,
+   "tarih": "2026-10-11",
+   "tur": "tr_raf",
+   "guven": "orta",
+   "kaynak": "https://www.karekod.org/blog/migros-viski-fiyatlari/",
+   "not": "Migros raf fiyatı (Eylül 2026), karekod.org listesi — 70 cl",
+   "gecmis": [
+    [
+     "2026-10-11",
+     2100
     ]
    ]
   },
@@ -100,6 +478,118 @@
     ]
    ]
   },
+  "jd-apple": {
+   "tl": 2050,
+   "tarih": "2026-10-11",
+   "tur": "tr_raf",
+   "guven": "orta",
+   "kaynak": "https://www.karekod.org/blog/migros-viski-fiyatlari/",
+   "not": "Migros raf fiyatı (Eylül 2026), karekod.org listesi — 70 cl",
+   "gecmis": [
+    [
+     "2026-10-11",
+     2050
+    ]
+   ]
+  },
+  "jd-blackberry": {
+   "tl": 2050,
+   "tarih": "2026-10-11",
+   "tur": "tr_raf",
+   "guven": "orta",
+   "kaynak": "https://www.karekod.org/blog/migros-viski-fiyatlari/",
+   "not": "Migros raf fiyatı (Eylül 2026), karekod.org listesi — 70 cl",
+   "gecmis": [
+    [
+     "2026-10-11",
+     2050
+    ]
+   ]
+  },
+  "jd-bondedrye": {
+   "tl": 2950,
+   "tarih": "2026-10-11",
+   "tur": "tr_raf",
+   "guven": "orta",
+   "kaynak": "https://www.karekod.org/blog/migros-viski-fiyatlari/",
+   "not": "Migros raf fiyatı (Eylül 2026), karekod.org listesi — 70 cl",
+   "gecmis": [
+    [
+     "2026-10-11",
+     2950
+    ]
+   ]
+  },
+  "jd-fire": {
+   "tl": 2050,
+   "tarih": "2026-10-11",
+   "tur": "tr_raf",
+   "guven": "orta",
+   "kaynak": "https://www.karekod.org/blog/migros-viski-fiyatlari/",
+   "not": "Migros raf fiyatı (Eylül 2026), karekod.org listesi — 70 cl",
+   "gecmis": [
+    [
+     "2026-10-11",
+     2050
+    ]
+   ]
+  },
+  "jd-honey": {
+   "tl": 2050,
+   "tarih": "2026-10-11",
+   "tur": "tr_raf",
+   "guven": "orta",
+   "kaynak": "https://www.karekod.org/blog/migros-viski-fiyatlari/",
+   "not": "Migros raf fiyatı (Eylül 2026), karekod.org listesi — 70 cl",
+   "gecmis": [
+    [
+     "2026-10-11",
+     2050
+    ]
+   ]
+  },
+  "jd-sinatra": {
+   "tl": 10900,
+   "tarih": "2026-10-11",
+   "tur": "tr_raf",
+   "guven": "orta",
+   "kaynak": "https://www.karekod.org/blog/migros-viski-fiyatlari/",
+   "not": "Migros raf fiyatı (Eylül 2026), karekod.org listesi — 100 cl",
+   "gecmis": [
+    [
+     "2026-10-11",
+     10900
+    ]
+   ]
+  },
+  "jd-triplemash": {
+   "tl": 2950,
+   "tarih": "2026-10-11",
+   "tur": "tr_raf",
+   "guven": "orta",
+   "kaynak": "https://www.karekod.org/blog/migros-viski-fiyatlari/",
+   "not": "Migros raf fiyatı (Eylül 2026), karekod.org listesi — 70 cl",
+   "gecmis": [
+    [
+     "2026-10-11",
+     2950
+    ]
+   ]
+  },
+  "jimbeam-doubleoak": {
+   "tl": 2700,
+   "tarih": "2026-10-11",
+   "tur": "tr_raf",
+   "guven": "orta",
+   "kaynak": "https://www.karekod.org/blog/viski-fiyatlari/",
+   "not": "Migros raf fiyatı (Eylül 2026), karekod.org listesi — 70 cl",
+   "gecmis": [
+    [
+     "2026-10-11",
+     2700
+    ]
+   ]
+  },
   "jimbeam-white": {
    "tl": 1550,
    "tarih": "2026-10-03",
@@ -111,6 +601,34 @@
     [
      "2026-10-03",
      1550
+    ]
+   ]
+  },
+  "jura-bourbon": {
+   "tl": 2250,
+   "tarih": "2026-10-11",
+   "tur": "tr_raf",
+   "guven": "orta",
+   "kaynak": "https://www.karekod.org/blog/migros-viski-fiyatlari/",
+   "not": "Migros raf fiyatı (Eylül 2026), karekod.org listesi — 70 cl",
+   "gecmis": [
+    [
+     "2026-10-11",
+     2250
+    ]
+   ]
+  },
+  "jura-rum": {
+   "tl": 3800,
+   "tarih": "2026-10-11",
+   "tur": "tr_raf",
+   "guven": "orta",
+   "kaynak": "https://www.karekod.org/blog/migros-viski-fiyatlari/",
+   "not": "Migros raf fiyatı (Eylül 2026), karekod.org listesi — 70 cl",
+   "gecmis": [
+    [
+     "2026-10-11",
+     3800
     ]
    ]
   },
@@ -128,6 +646,34 @@
     ]
    ]
   },
+  "jw-blackruby": {
+   "tl": 2000,
+   "tarih": "2026-10-11",
+   "tur": "tr_raf",
+   "guven": "orta",
+   "kaynak": "https://www.karekod.org/blog/migros-viski-fiyatlari/",
+   "not": "Migros raf fiyatı (Eylül 2026), karekod.org listesi — 70 cl",
+   "gecmis": [
+    [
+     "2026-10-11",
+     2000
+    ]
+   ]
+  },
+  "jw-kinggeorge": {
+   "tl": 24000,
+   "tarih": "2026-10-11",
+   "tur": "tr_raf",
+   "guven": "orta",
+   "kaynak": "https://www.karekod.org/blog/migros-viski-fiyatlari/",
+   "not": "Migros raf fiyatı (Eylül 2026), karekod.org listesi — 70 cl",
+   "gecmis": [
+    [
+     "2026-10-11",
+     24000
+    ]
+   ]
+  },
   "jw-red": {
    "tl": 1550,
    "tarih": "2026-10-03",
@@ -138,6 +684,20 @@
    "gecmis": [
     [
      "2026-10-03",
+     1550
+    ]
+   ]
+  },
+  "jw-redsoul": {
+   "tl": 1550,
+   "tarih": "2026-10-11",
+   "tur": "tr_raf",
+   "guven": "orta",
+   "kaynak": "https://www.karekod.org/blog/migros-viski-fiyatlari/",
+   "not": "Migros raf fiyatı (Eylül 2026), karekod.org listesi — 70 cl",
+   "gecmis": [
+    [
+     "2026-10-11",
      1550
     ]
    ]
@@ -156,6 +716,90 @@
     ]
    ]
   },
+  "longjohn": {
+   "tl": 700,
+   "tarih": "2026-10-11",
+   "tur": "tr_raf",
+   "guven": "orta",
+   "kaynak": "https://www.karekod.org/blog/migros-viski-fiyatlari/",
+   "not": "Migros raf fiyatı (Eylül 2026), karekod.org listesi — 70 cl",
+   "gecmis": [
+    [
+     "2026-10-11",
+     700
+    ]
+   ]
+  },
+  "muirheads": {
+   "tl": 1200,
+   "tarih": "2026-10-11",
+   "tur": "tr_raf",
+   "guven": "orta",
+   "kaynak": "https://www.karekod.org/blog/migros-viski-fiyatlari/",
+   "not": "Migros raf fiyatı (Eylül 2026), karekod.org listesi — 70 cl",
+   "gecmis": [
+    [
+     "2026-10-11",
+     1200
+    ]
+   ]
+  },
+  "nikka-tailored": {
+   "tl": 6750,
+   "tarih": "2026-10-11",
+   "tur": "tr_raf",
+   "guven": "orta",
+   "kaynak": "https://www.karekod.org/blog/migros-viski-fiyatlari/",
+   "not": "Migros raf fiyatı (Eylül 2026), karekod.org listesi — 70 cl",
+   "gecmis": [
+    [
+     "2026-10-11",
+     6750
+    ]
+   ]
+  },
+  "passport": {
+   "tl": 700,
+   "tarih": "2026-10-11",
+   "tur": "tr_raf",
+   "guven": "orta",
+   "kaynak": "https://www.karekod.org/blog/migros-viski-fiyatlari/",
+   "not": "Migros raf fiyatı (Eylül 2026), karekod.org listesi — 70 cl",
+   "gecmis": [
+    [
+     "2026-10-11",
+     700
+    ]
+   ]
+  },
+  "royalbrackla-18": {
+   "tl": 9950,
+   "tarih": "2026-10-11",
+   "tur": "tr_raf",
+   "guven": "orta",
+   "kaynak": "https://www.karekod.org/blog/migros-viski-fiyatlari/",
+   "not": "Migros raf fiyatı (Eylül 2026), karekod.org listesi — 70 cl",
+   "gecmis": [
+    [
+     "2026-10-11",
+     9950
+    ]
+   ]
+  },
+  "scarabus": {
+   "tl": 3500,
+   "tarih": "2026-10-11",
+   "tur": "tr_raf",
+   "guven": "orta",
+   "kaynak": "https://www.karekod.org/blog/migros-viski-fiyatlari/",
+   "not": "Migros raf fiyatı (Eylül 2026), karekod.org listesi — 70 cl",
+   "gecmis": [
+    [
+     "2026-10-11",
+     3500
+    ]
+   ]
+  },
   "talisker-10": {
    "tl": 3050,
    "tarih": "2026-10-03",
@@ -167,6 +811,118 @@
     [
      "2026-10-03",
      3050
+    ]
+   ]
+  },
+  "talisker-skye": {
+   "tl": 3550,
+   "tarih": "2026-10-11",
+   "tur": "tr_raf",
+   "guven": "orta",
+   "kaynak": "https://www.karekod.org/blog/migros-viski-fiyatlari/",
+   "not": "Migros raf fiyatı (Eylül 2026), karekod.org listesi — 70 cl",
+   "gecmis": [
+    [
+     "2026-10-11",
+     3550
+    ]
+   ]
+  },
+  "tullibardine-15": {
+   "tl": 4350,
+   "tarih": "2026-10-11",
+   "tur": "tr_raf",
+   "guven": "orta",
+   "kaynak": "https://www.karekod.org/blog/migros-viski-fiyatlari/",
+   "not": "Migros raf fiyatı (Eylül 2026), karekod.org listesi — 70 cl",
+   "gecmis": [
+    [
+     "2026-10-11",
+     4350
+    ]
+   ]
+  },
+  "tullibardine-18": {
+   "tl": 6700,
+   "tarih": "2026-10-11",
+   "tur": "tr_raf",
+   "guven": "orta",
+   "kaynak": "https://www.karekod.org/blog/migros-viski-fiyatlari/",
+   "not": "Migros raf fiyatı (Eylül 2026), karekod.org listesi — 70 cl",
+   "gecmis": [
+    [
+     "2026-10-11",
+     6700
+    ]
+   ]
+  },
+  "tullibardine-228": {
+   "tl": 2500,
+   "tarih": "2026-10-11",
+   "tur": "tr_raf",
+   "guven": "orta",
+   "kaynak": "https://www.karekod.org/blog/migros-viski-fiyatlari/",
+   "not": "Migros raf fiyatı (Eylül 2026), karekod.org listesi — 70 cl",
+   "gecmis": [
+    [
+     "2026-10-11",
+     2500
+    ]
+   ]
+  },
+  "tullibardine-murray": {
+   "tl": 6500,
+   "tarih": "2026-10-11",
+   "tur": "tr_raf",
+   "guven": "orta",
+   "kaynak": "https://www.karekod.org/blog/migros-viski-fiyatlari/",
+   "not": "Migros raf fiyatı (Eylül 2026), karekod.org listesi — 70 cl",
+   "gecmis": [
+    [
+     "2026-10-11",
+     6500
+    ]
+   ]
+  },
+  "tullibardine-sovereign": {
+   "tl": 2500,
+   "tarih": "2026-10-11",
+   "tur": "tr_raf",
+   "guven": "orta",
+   "kaynak": "https://www.karekod.org/blog/migros-viski-fiyatlari/",
+   "not": "Migros raf fiyatı (Eylül 2026), karekod.org listesi — 70 cl",
+   "gecmis": [
+    [
+     "2026-10-11",
+     2500
+    ]
+   ]
+  },
+  "whytemackay": {
+   "tl": 1250,
+   "tarih": "2026-10-11",
+   "tur": "tr_raf",
+   "guven": "orta",
+   "kaynak": "https://www.karekod.org/blog/migros-viski-fiyatlari/",
+   "not": "Migros raf fiyatı (Eylül 2026), karekod.org listesi — 70 cl",
+   "gecmis": [
+    [
+     "2026-10-11",
+     1250
+    ]
+   ]
+  },
+  "woodford-rye": {
+   "tl": 3300,
+   "tarih": "2026-10-11",
+   "tur": "tr_raf",
+   "guven": "orta",
+   "kaynak": "https://www.karekod.org/blog/migros-viski-fiyatlari/",
+   "not": "Migros raf fiyatı (Eylül 2026), karekod.org listesi — 70 cl",
+   "gecmis": [
+    [
+     "2026-10-11",
+     3300
     ]
    ]
   }
@@ -226,41 +982,95 @@
   "ardbeg-10": "2026-10-03",
   "ardbeg-corryvreckan": "2026-10-03",
   "ardbeg-uigeadail": "2026-10-03",
+  "ballantines-10": "2026-10-11",
+  "ballantines-7": "2026-10-11",
   "ballantines-finest": "2026-10-03",
   "bells-original": "2026-10-03",
   "blackandwhite": "2026-10-03",
+  "blackram": "2026-10-11",
+  "blackram-bourbon": "2026-10-11",
+  "blackram-honey": "2026-10-11",
+  "bushmills-original": "2026-10-11",
+  "cardhu-15": "2026-10-11",
   "chivas-12": "2026-10-03",
+  "chivas-smoky": "2026-10-11",
+  "chivas-ultis": "2026-10-11",
   "dewars-12": "2026-10-03",
   "dewars-white": "2026-10-03",
+  "dimple-golden": "2026-10-11",
   "famousgrouse": "2026-10-03",
   "famousgrouse-smoky": "2026-10-03",
   "gentlemanjack": "2026-10-03",
+  "gladstoneaxe-black": "2026-10-11",
+  "gladstoneaxe-oak": "2026-10-11",
   "glenfiddich-12": "2026-10-03",
   "glengrant-18": "2026-10-03",
   "glenlivet-18": "2026-10-03",
+  "glenlivet-caribbean": "2026-10-11",
   "glenlivet-founders": "2026-10-03",
   "glenmorangie-10": "2026-10-03",
   "glenmorangie-signet": "2026-10-03",
   "glenmoray-cabernet": "2026-10-03",
   "glenmoray-classic": "2026-10-03",
+  "glenrothes-wmc": "2026-10-11",
+  "glentalloch": "2026-10-11",
+  "glentalloch-12": "2026-10-11",
+  "glentalloch-8": "2026-10-11",
+  "grants-12": "2026-10-11",
+  "grants-25": "2026-10-11",
+  "grants-8sherry": "2026-10-11",
   "grants-family": "2026-10-03",
+  "grants-rumcask": "2026-10-11",
+  "grants-smoky": "2026-10-11",
+  "highlandqueen": "2026-10-11",
+  "highlandqueen-12": "2026-10-11",
+  "hyde-3": "2026-10-11",
+  "hyde-5": "2026-10-11",
+  "hyde-8": "2026-10-11",
   "jackdaniels-7": "2026-10-03",
   "jameson": "2026-10-03",
   "jameson-blackbarrel": "2026-10-03",
   "jb-rare": "2026-10-03",
+  "jd-apple": "2026-10-11",
+  "jd-blackberry": "2026-10-11",
+  "jd-bondedrye": "2026-10-11",
+  "jd-fire": "2026-10-11",
+  "jd-honey": "2026-10-11",
+  "jd-sinatra": "2026-10-11",
+  "jd-triplemash": "2026-10-11",
+  "jimbeam-doubleoak": "2026-10-11",
   "jimbeam-white": "2026-10-03",
+  "jura-bourbon": "2026-10-11",
+  "jura-rum": "2026-10-11",
   "jw-black": "2026-10-03",
+  "jw-blackruby": "2026-10-11",
   "jw-doubleblack": "2026-10-03",
+  "jw-kinggeorge": "2026-10-11",
   "jw-red": "2026-10-03",
+  "jw-redsoul": "2026-10-11",
   "kavalan-bourbon": "2026-10-03",
   "kavalan-vinho": "2026-10-03",
   "lagavulin-16": "2026-10-03",
+  "longjohn": "2026-10-11",
   "monkeyshoulder": "2026-10-03",
+  "muirheads": "2026-10-11",
+  "nikka-tailored": "2026-10-11",
   "octomore-141": "2026-10-03",
+  "passport": "2026-10-11",
+  "royalbrackla-18": "2026-10-11",
+  "scarabus": "2026-10-11",
   "talisker-10": "2026-10-03",
+  "talisker-skye": "2026-10-11",
   "teachers": "2026-10-03",
+  "tullibardine-15": "2026-10-11",
+  "tullibardine-18": "2026-10-11",
+  "tullibardine-228": "2026-10-11",
+  "tullibardine-murray": "2026-10-11",
+  "tullibardine-sovereign": "2026-10-11",
   "vat69": "2026-10-03",
   "whitehorse": "2026-10-03",
-  "williamlawsons": "2026-10-03"
+  "whytemackay": "2026-10-11",
+  "williamlawsons": "2026-10-03",
+  "woodford-rye": "2026-10-11"
  }
 }

@@ -407,6 +407,67 @@ nav.groups{display:flex;gap:6px;margin:20px 0 10px;background:var(--bg2);border:
 }
 @media(max-width:760px){.katcols{grid-template-columns:1fr}.listcol{grid-template-columns:1fr}.bottle{flex-wrap:wrap}.bottle .acts{margin-left:auto}}
 .topn{display:flex;gap:6px;align-items:center;flex-wrap:wrap;margin:8px 0;font-size:.85rem;color:var(--muted,#888)}.topn .topn-i{margin-left:auto}
+/* ===== Kör Tadım Şovu + Yılın Özeti (kardeş sitelerde ortak) ===== */
+.kor-oneri .mini{cursor:pointer}.kor-oneri:empty{display:none}
+.kor-harf{flex:none;display:inline-grid;place-items:center;width:34px;height:34px;border-radius:10px;background:var(--amber);color:var(--bg);font-weight:900;font-size:17px;margin-right:4px}
+.kor-ust{display:flex;align-items:center;gap:10px;margin-bottom:12px;flex-wrap:wrap}
+.kor-baslik{flex:1;min-width:0;font-size:20px;font-weight:800;color:var(--amber2)}.kor-baslik small{display:block;font-size:12px;color:var(--muted2);font-weight:600}
+.kor-sahne{background:var(--bg);border-radius:16px}
+.kor-sahne:fullscreen,.kor-sahne.kor-tam{position:fixed;inset:0;z-index:2000;overflow:auto;padding:28px 4vw;font-size:1.35em;border-radius:0}
+.kor-sahne:fullscreen .kor-kod,.kor-sahne.kor-tam .kor-kod{font-size:min(16vw,150px)}
+.kor-giris{display:flex;gap:24px;align-items:center;flex-wrap:wrap;background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:18px;margin-bottom:14px}
+.kor-qr{background:#fff;padding:12px;border-radius:12px;line-height:0;min-width:120px;min-height:120px}.kor-qr img,.kor-qr canvas{max-width:100%;height:auto}
+.kor-katil{flex:1;min-width:200px}
+.kor-etiket{font-size:13px;text-transform:uppercase;letter-spacing:1px;color:var(--muted2);font-weight:800}
+.kor-kod{font-size:clamp(48px,11vw,96px);font-weight:900;letter-spacing:6px;color:var(--amber2);line-height:1.05;font-variant-numeric:tabular-nums}
+.kor-adres{font-size:13px;color:var(--muted);word-break:break-all}
+.kor-sayac{font-size:clamp(20px,4vw,34px);font-weight:800;text-align:center;margin:6px 0}.kor-sayac b{color:var(--amber2)}
+.kor-bar{height:12px;border-radius:8px;background:var(--bg2);border:1px solid var(--line);overflow:hidden;margin:6px 0 12px}.kor-bar i{display:block;height:100%;background:linear-gradient(90deg,var(--amber),var(--amber2));transition:width .6s}
+.kor-kisiler{margin-bottom:12px}
+.kor-bardaklar{display:grid;grid-template-columns:repeat(auto-fit,minmax(92px,1fr));gap:10px;margin:12px 0}
+.kor-bardak{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:14px 6px;text-align:center}.kor-bardak span{display:block;font-size:12px;color:var(--muted2);text-transform:uppercase;letter-spacing:1px}.kor-bardak b{font-size:44px;color:var(--amber2);line-height:1.1}
+.kor-gizli{background:var(--panel);border:1px dashed var(--line);border-radius:12px;padding:10px 12px;margin:10px 0;font-size:13px}.kor-gizli summary{cursor:pointer;color:var(--muted)}.kor-gizli .mini{margin-top:6px}
+.kor-perde{text-align:center;margin:16px 0 8px}.kor-perdesatir{display:flex;gap:10px;justify-content:center;align-items:center;flex-wrap:wrap}
+.kor-buyukbtn{font-size:20px!important;padding:14px 30px!important;margin:0!important}
+.kor-pinkutu[hidden]{display:none}.kor-pinkutu input,.gizKutu #korPin{background:var(--bg2);border:1px solid var(--line);color:var(--txt);padding:9px 11px;border-radius:9px;width:150px;font-size:16px;letter-spacing:2px}
+.kor-sahnebaslik{font-size:clamp(22px,4.5vw,36px);font-weight:900;text-align:center;margin:8px 0 12px;color:var(--amber2)}
+.kor-acik{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:14px;margin-bottom:10px}
+.kor-acik.buyuk{border-color:var(--amber);box-shadow:0 0 0 3px rgba(224,168,60,.15);padding:20px;animation:korAcil .7s ease-out}
+@keyframes korAcil{0%{transform:scale(.92);opacity:0}100%{transform:none;opacity:1}}
+.kor-acik-ust{display:flex;gap:12px;align-items:center;margin-bottom:6px}.kor-acik-ust>div:nth-child(2){flex:1}
+.kor-acik-ad{font-size:18px;font-weight:800}.kor-acik.buyuk .kor-acik-ad{font-size:clamp(22px,4.5vw,40px)}
+.kor-acik.buyuk .kor-harf{width:54px;height:54px;font-size:28px}
+.kor-ort{text-align:right}.kor-ort b{display:block;font-size:30px;color:var(--amber2);line-height:1}.kor-acik.buyuk .kor-ort b{font-size:clamp(36px,8vw,64px)}.kor-ort small{font-size:11.5px;color:var(--muted2);white-space:nowrap}
+.kor-tahmin{font-size:13px;color:var(--muted);margin-top:5px;line-height:1.45}.kor-tahmin b{color:var(--txt)}.kor-ok{color:var(--have);font-weight:800}
+.kor-onceki{opacity:.92}
+.kor-oduller{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px;margin:6px 0 14px}
+.kor-odul{background:linear-gradient(160deg,var(--panel2),var(--panel));border:1px solid var(--line);border-radius:14px;padding:14px;font-size:14px;line-height:1.45}
+.kor-odul>span{display:block;font-size:34px}.kor-odul b{display:block;font-size:12px;text-transform:uppercase;letter-spacing:.8px;color:var(--amber2);margin:2px 0}.kor-odul small{display:block;color:var(--muted2);font-size:12px;margin-top:3px}.kor-odul.genis{grid-column:1/-1}
+.kor-sekmeler{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px}
+.kor-sekme{min-width:46px;padding:9px 10px;border-radius:10px;border:1px solid var(--line);background:var(--bg2);color:var(--muted);font-weight:900;font-size:16px;cursor:pointer}
+.kor-sekme.tamam{border-color:var(--have);color:var(--have)}.kor-sekme.on{background:var(--amber);color:var(--bg);border-color:var(--amber)}
+.kor-bardakbaslik{font-size:28px;font-weight:900;color:var(--amber2);margin-bottom:8px}
+.kor-etiket2{display:block;font-size:12.5px;color:var(--muted);margin:12px 0 6px;font-weight:700}.kor-etiket2 b{font-size:22px;color:var(--amber2)}
+.kor-range{width:100%;accent-color:var(--amber);height:30px}.kor-range.bos{opacity:.55}
+.kor-tahminler{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:8px}.kor-tahminler label{display:grid;gap:4px;font-size:12.5px;color:var(--muted)}
+.kor-tahminler select{width:100%;min-width:0;background:var(--bg2);border:1px solid var(--line);color:var(--txt);padding:9px;border-radius:9px}
+.oz-serit{display:flex;gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;padding:4px 2px 12px;scrollbar-width:none;-webkit-overflow-scrolling:touch}.oz-serit::-webkit-scrollbar{display:none}
+.oz-kart{flex:0 0 min(86vw,360px);aspect-ratio:9/16;max-height:72vh;scroll-snap-align:center;border-radius:22px;padding:28px 22px;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;position:relative;overflow:hidden;
+  background:linear-gradient(160deg,var(--panel2),var(--bg2) 60%,var(--bg));border:1px solid var(--line);box-shadow:0 10px 30px rgba(0,0,0,.35)}
+.oz-kart::before{content:"";position:absolute;width:70%;aspect-ratio:1;border-radius:50%;top:-18%;right:-22%;background:var(--amber);opacity:.09;filter:hue-rotate(var(--oz-h,0deg))}
+.oz-kart.oz-tek{flex:none;width:min(100%,420px);aspect-ratio:auto;max-height:none;margin:0 auto}
+.oz-e{font-size:54px;line-height:1.1;margin-bottom:8px}
+.oz-ust{font-size:13px;text-transform:uppercase;letter-spacing:1.4px;color:var(--muted2);font-weight:800}
+.oz-buyuk{font-size:clamp(72px,22vw,112px);font-weight:900;color:var(--amber2);line-height:1;margin:10px 0 6px;font-variant-numeric:tabular-nums}
+.oz-baslik{font-size:clamp(22px,6vw,30px);font-weight:900;color:var(--amber2);margin:12px 0 6px;line-height:1.2;word-break:break-word}
+.oz-alt{font-size:15px;color:var(--txt);line-height:1.5;max-width:300px}.oz-alt small{color:var(--muted)}
+.oz-sayfa{position:absolute;bottom:12px;font-size:11px;color:var(--muted2)}
+.oz-oneriler{display:grid;gap:8px;margin-top:16px;width:100%}.oz-oneriler .btn{white-space:normal;padding:10px}
+.oz-nav{display:flex;align-items:center;justify-content:center;gap:12px;margin:2px 0 10px}.oz-nav .btn{font-size:18px;padding:6px 14px}
+.oz-noktalar{display:flex;gap:6px;flex-wrap:wrap;justify-content:center}.oz-noktalar i{width:8px;height:8px;border-radius:50%;background:var(--line);cursor:pointer}.oz-noktalar i.on{background:var(--amber2)}
+.oz-duyuru{display:flex;align-items:center;gap:10px;flex-wrap:wrap;background:linear-gradient(90deg,rgba(224,168,60,.16),rgba(224,168,60,.05));border:1px solid var(--line);border-radius:12px;padding:9px 12px;margin:0 0 12px;font-size:13.5px}.oz-duyuru span{flex:1;min-width:180px}
+@media(max-width:760px){.kor-giris{padding:14px;gap:14px}.kor-qr{margin:0 auto}.kor-katil{text-align:center}.kor-bardak b{font-size:34px}.kor-acik-ust{flex-wrap:wrap}.kor-acik-ust>div:nth-child(2){flex:1 1 calc(100% - 60px)}.kor-ort{text-align:left;display:flex;align-items:baseline;gap:8px;padding-left:46px}.kor-oduller{grid-template-columns:1fr 1fr}.kor-odul{padding:11px;font-size:13px}.kor-odul>span{font-size:26px}.kor-odul.genis{grid-column:1/-1}}
+/* ===== /Kör Tadım + Yılın Özeti ===== */
 </style>
 </head>
 <body>
@@ -456,7 +517,9 @@ nav.groups{display:flex;gap:6px;margin:20px 0 10px;background:var(--bg2);border:
     <div class="tab" data-group="koleksiyon" data-view="notes">📝 Tadım Notlarım</div>
     <div class="tab" data-group="koleksiyon" data-view="gurme">🎖️ Gurme Seviyem</div>
     <div class="tab" data-group="koleksiyon" data-view="stats">📊 İstatistik</div>
+    <div class="tab" data-group="koleksiyon" data-view="ozet">📊 Yılın Özeti</div>
     <div class="tab" data-group="sosyal" data-view="gece">🥃 Tadım Geceleri</div>
+    <div class="tab" data-group="sosyal" data-view="kor">🎭 Kör Tadım Şovu</div>
     <div class="tab" data-group="sosyal" data-view="kulup">🏛️ Kulüplerim</div>
     <div class="tab" data-group="sosyal" data-view="topluluk">🌐 Topluluk</div>
     <div class="tab" data-group="kaynak" data-view="kaynak">📚 Kaynaklar</div>
@@ -576,6 +639,11 @@ nav.groups{display:flex;gap:6px;margin:20px 0 10px;background:var(--bg2);border:
     <div id="fiyatBox"></div>
   </section>
   <section id="view-gece" class="hidden"><div id="geceKutu"></div></section>
+  <section id="view-kor" class="hidden"><div id="korKutu"></div></section>
+  <section id="view-ozet" class="hidden">
+    <p class="intro">Bu yıl rafına eklediğin ve tadım notu yazdığın şişelerden kaydırmalı bir hikâye: kaç şişe denedin, en çok neyi sevdin, hangi bölgeleri keşfettin. Tamamen bu cihazdaki verinden hesaplanır.</p>
+    <div id="ozetKutu"></div>
+  </section>
   <section id="view-satis" class="hidden">
     <p class="intro">Nereden alınır? Uzman dükkânlar, zincir mağazalar ve havalimanı duty-free'leri. Mağazaların kendi sitelerine ve Instagram hesaplarına bağlantı veriyoruz; fiyat ve stok için mağazaya danışın.</p>
     <div id="satisBox"></div>
@@ -3547,7 +3615,10 @@ function birlestir(a,b){
   const cust={};[...(a.custom||[]),...(b.custom||[])].forEach(c=>{cust[c.id]=c;});
   const qty=Object.assign({},a.qty);Object.entries(b.qty||{}).forEach(([k,v])=>{qty[k]=Math.max(qty[k]||0,v);});
   return {have,target:u(a.target,b.target).filter(x=>!have.includes(x)),prices:Object.assign({},a.prices,b.prices),
-    custom:Object.values(cust),qty,notes:Object.assign({},a.notes,b.notes)};
+    custom:Object.values(cust),qty,notes:Object.assign({},a.notes,b.notes),
+    // Yılın Özeti kayıt tarihleri: iki taraftaki en erken tarih ('' = takip başlamadan önceki kayıt)
+    zaman:(()=>{const z=Object.assign({},a.zaman);Object.entries(b.zaman||{}).forEach(([k,v])=>{if(!(k in z)||v<z[k])z[k]=v;});return z;})(),
+    zamanBas:[a.zamanBas,b.zamanBas].filter(Boolean).sort()[0]};
 }
 let bulutZam=null;
 window.cloudSync=function(){
@@ -4303,6 +4374,503 @@ ozelHash();
 bulutCek();
 if('serviceWorker' in navigator){window.addEventListener('load',()=>{navigator.serviceWorker.register('sw.js').catch(()=>{});});}
 </script>
+<script>/* korOzetJS: Kör Tadım Şovu + Yılın Özeti */
+// Siteye özel uyarlayıcı (Viski Atlası)
+const KS={
+  on:'viski_',site:'Viski Atlası',url:'viski-atlas.pages.dev',emoji:'🥃',birim:'şişe',Birim:'Şişe',haveAd:'Elimde',denedin:'denedin ya da rafına ekledin',
+  ana:'view-explore',kesfet:'explore',bolgeAd:'bölge',
+  renk:['#2b1a08','#120b04','#f2c14e','#f4ead6','#caa052'],
+  notlar:AROMA,
+  tahmin:[
+    {k:'bolge',ad:'Bölge',secenekler:GURME_CATS,deger:b=>regionCat(b)},
+    {k:'yas',ad:'Yaş',secenekler:['Yaşsız (NAS)','12 yıl ve altı','13–17 yıl','18–24 yıl','25 yıl ve üstü'],
+      deger:b=>{const y=parseInt(b.yas,10);if(!y)return b.yas==='NAS'?'Yaşsız (NAS)':'';return y<=12?'12 yıl ve altı':y<=17?'13–17 yıl':y<=24?'18–24 yıl':'25 yıl ve üstü';}}
+  ],
+  alt:b=>b.dam+' · '+b.bolge+(b.yas&&b.yas!=='NAS'?' · '+b.yas+' yıl':''),
+  fiyat:b=>priceOf(b)||0,
+  // Yılın Özeti harcaması: yalnızca kaynaklı (otomatik doğrulanmış, "tahmin" olmayan) fiyat ya da kullanıcının kendi girdiği fiyat
+  kaynakliFiyat:b=>state.prices[b.id]!==undefined?(+state.prices[b.id]||0):(b.tlTarih&&b.tlTur&&b.tlTur!=='tahmin'?b.tl:0),
+  adet:id=>qtyOf(id),
+  gruplar:[{ad:'bölge',e:'🗺️',f:b=>regionCat(b)},{ad:'tür',e:'🥃',f:b=>b.tur}],
+  tatlar:b=>[...flavorsOf(b)],
+  ulke:b=>b.ulke,bolge:b=>b.bolge,
+  gurme:()=>{const s=computeScore(state.have),l=levelOf(s.total);return {e:l.e,t:l.t,puan:s.total};},
+  unlu:yil=>{const ids=new Set(yil.map(b=>b.id));let en=null;FAMOUS.forEach(f=>{const n=(f.picks||[]).filter(x=>ids.has(x)).length;if(n&&(!en||n>en.ortak))en={e:f.e,ad:f.ad,ortak:n};});return en;}
+};
+/* ===== 🎭 KÖR TADIM ŞOVU + 📊 YILIN ÖZETİ — kardeş sitelerde ortak kod (yalnızca üstteki KS uyarlayıcısı siteye özeldir) ===== */
+const KOR_HARF='ABCDEFGH';
+const KOR={kod:null,veri:null,zam:null,pin:'',form:false,secim:[],faz:'',bardak:0,taslak:{},kaydetZam:{},qrKod:null};
+const korEv=()=>lsAl(KS.on+'kor_ev',null);
+const korMisafir=()=>lsAl(KS.on+'kor_misafir',null);
+const korLink=kod=>location.origin+location.pathname+'#kor='+kod;
+const korKodYaz=k=>String(k||'').replace(/^(\d{3})(\d{3})$/,'$1 $2');
+const korNorm=s=>String(s||'').toLocaleLowerCase('tr').normalize('NFD').replace(/[̀-ͯ]/g,'').replace(/ı/g,'i');
+const korRol=()=>{const e=korEv();return e&&e.kod===KOR.kod?'ev':'misafir';};
+const korPid=()=>{const m=korMisafir();return m&&m.kod===KOR.kod?m.pid:'';};
+const korSise=id=>allBottles().find(b=>b.id===id);
+const korTL=n=>n>0?Math.round(n).toLocaleString('tr-TR')+' TL':'—';
+function korGecmisYaz(x){const g=lsAl(KS.on+'kor_gecmis',[]),i=g.findIndex(y=>y.kod===x.kod&&y.rol===x.rol);if(i>=0)g[i]=Object.assign(g[i],x);else g.push(x);lsYaz(KS.on+'kor_gecmis',g.slice(-60));}
+function korOrta(){return document.getElementById('korKutu');}
+
+function renderKor(){
+  const k=korOrta();if(!k)return;
+  if(KOR.kod){korDetay();return;}
+  clearInterval(KOR.zam);KOR.faz='';
+  const ev=korEv(),mi=korMisafir();
+  const devam=[ev?`<div class="mini" data-kor-git="${g$(ev.kod)}"><div><div class="nm">🎬 ${g$(ev.ad||'Kör tadım')}<span class="etiket">👑 sahne ekranı</span></div><div class="meta">Oda ${korKodYaz(ev.kod)} · ${(ev.bardaklar||[]).length} bardak</div></div><span class="price">›</span></div>`:'',
+    mi?`<div class="mini" data-kor-git="${g$(mi.kod)}"><div><div class="nm">📱 ${g$(mi.oda||'Kör tadım')}<span class="etiket">misafir: ${g$(mi.ad)}</span></div><div class="meta">Oda ${korKodYaz(mi.kod)}</div></div><span class="price">›</span></div>`:''].join('');
+  k.innerHTML=`<div class="sbaslik"><h2>🎭 Kör Tadım Şovu</h2>${KOR.form?'':'<button class="eklebtn" data-kor="form">🎬 Şov kur</button>'}</div>
+    ${devam?`<div class="gkart glist"><h3>⏯️ Devam et</h3>${devam}</div>`:''}
+    <div class="gkart"><h3>📱 Odaya katıl</h3><p class="dt-txt" style="color:var(--muted);margin-bottom:8px">Ev sahibinin ekranındaki 6 haneli kodu yaz ya da QR'ı telefonunla okut. Üyelik yok, gerçek ad gerekmez.</p>
+      <div style="display:flex;gap:8px;flex-wrap:wrap"><input id="korKatilKod" inputmode="numeric" maxlength="7" autocomplete="off" placeholder="ör. 482 913" style="flex:1;min-width:140px;max-width:220px;background:var(--bg2);border:1px solid var(--line);color:var(--txt);padding:9px 11px;border-radius:9px;font-size:18px;letter-spacing:2px"><button class="eklebtn" style="margin:0" data-kor="kodgir">Odaya gir</button></div></div>
+    ${KOR.form?korFormHTML():`<div class="gkart"><h3>Nasıl oynanır?</h3><div class="adimlar">
+      <div><span><b>Ev sahibi 2–8 ${KS.birim} seçer:</b> ${KS.birim} adları gizlenir, misafirler yalnızca “Bardak A, B, C…” görür.</span></div>
+      <div><span><b>TV ya da laptop sahne ekranı olur:</b> büyük oda kodu ve QR; kimin oy verdiği canlı görünür.</span></div>
+      <div><span><b>Misafirler telefonla katılır:</b> her bardağa 0–100 puan, tat notları ve ${KS.tahmin.map(a=>a.ad.toLocaleLowerCase('tr')).join(' / ')} tahmini.</span></div>
+      <div><span><b>🥁 Perdeyi aç:</b> bardaklar tek tek açıklanır; gece sonunda en keskin burun, fiyat/lezzet sürprizi ve tat ikizleri.</span></div></div>
+      <p class="dt-txt" style="color:var(--muted2);font-size:12px;margin-top:8px">🔒 Perde açılana kadar kimse başkasının puanını göremez; perdeden sonra da yalnızca ortalamalar görünür. Oda 30 gün sonra kendiliğinden silinir.</p></div>`}`;
+  if(KOR.form)korSecilenCiz();
+}
+function korFormHTML(){
+  const elimde=allBottles().filter(b=>state.have.includes(b.id)).slice(0,24);
+  return `<div class="gkart" id="korForm"><h3>🎬 Yeni kör tadım şovu</h3><div class="gform">
+    <label>Şovun adı<input id="korAd" maxlength="60" placeholder="ör. Cuma kör tadımı"></label>
+    <div class="gbolum">1 · Bardaklar (2–8 ${KS.birim})</div>
+    <label>Katalogdan ara<input id="korSiseAd" autocomplete="off" placeholder="🔍 ${KS.Birim} adı yaz…"></label>
+    <div id="korOneri" class="kor-oneri"></div>
+    ${elimde.length?`<div><div style="font-size:12px;color:var(--muted2);margin-bottom:4px">${g$(KS.haveAd)} listesinden hızlı ekle:</div><div class="gsec">${elimde.map(b=>`<span style="cursor:pointer" data-kor-ekle="${g$(b.id)}">+ ${g$(b.ad)}</span>`).join('')}</div></div>`:''}
+    <div id="korSecilen"></div>
+    <div class="gbolum">2 · Ev sahibi PIN'i</div>
+    <label>Perdeyi yalnızca bu PIN'le açabilirsin (4–8 rakam)<span class="gizKutu"><input id="korPin" class="pinGir" type="password" inputmode="numeric" autocomplete="new-password" maxlength="8" placeholder="PIN"><button type="button" class="goz" data-goz title="Göster / gizle">👁</button></span></label>
+    <p class="dt-txt" style="color:var(--muted2);font-size:12px">PIN sunucuda düz metin değil, yalnızca SHA-256 özetiyle saklanır; bu cihazda da kaydedilmez.</p>
+    <div style="display:flex;gap:8px;flex-wrap:wrap"><button class="eklebtn" style="margin:0" data-kor="olustur">🎭 Odayı aç</button><button class="btn" data-kor="form">Vazgeç</button></div>
+    <div class="durum" id="korDurum" style="font-size:12.5px;color:var(--red)"></div></div></div>`;
+}
+function korSecilenCiz(){
+  const e=document.getElementById('korSecilen');if(!e)return;
+  e.innerHTML=KOR.secim.length?KOR.secim.map((id,i)=>{const b=korSise(id);return b?`<div class="mini"><span class="kor-harf">${KOR_HARF[i]}</span><div style="flex:1;min-width:0"><div class="nm">${g$(b.ad)}</div><div class="meta">${g$(KS.alt(b))}</div></div><button class="btn" data-kor-cikar="${i}" title="Çıkar">✕</button></div>`:'';}).join('')
+    :`<p class="dt-txt" style="color:var(--muted2);font-size:12.5px">Henüz bardak seçmedin. Aramadan ya da listenden ekle; sıra = Bardak A, B, C…</p>`;
+}
+function korOneriCiz(q){
+  const e=document.getElementById('korOneri');if(!e)return;
+  q=korNorm(q).trim();
+  if(q.length<2){e.innerHTML='';return;}
+  const l=allBottles().filter(b=>korNorm(b.ad+' '+KS.alt(b)).includes(q)).slice(0,8);
+  e.innerHTML=l.length?l.map(b=>`<div class="mini" data-kor-ekle="${g$(b.id)}" style="cursor:pointer"><div style="flex:1;min-width:0"><div class="nm">${g$(b.ad)}</div><div class="meta">${g$(KS.alt(b))}</div></div><span class="price">+ Ekle</span></div>`).join('')
+    :`<p class="dt-txt" style="color:var(--muted2);font-size:12.5px">“${g$(q)}” ile eşleşen ${KS.birim} yok.</p>`;
+}
+function korEkle(id){
+  if(KOR.secim.includes(id))return;
+  if(KOR.secim.length>=8){alert('En fazla 8 bardak olabilir.');return;}
+  KOR.secim.push(id);korSecilenCiz();
+  const a=document.getElementById('korSiseAd');if(a){a.value='';korOneriCiz('');}
+}
+async function korOlustur(){
+  const d=document.getElementById('korDurum'),pin=document.getElementById('korPin').value.trim();
+  if(KOR.secim.length<2){d.textContent='En az 2 bardak seç.';return;}
+  if(!/^\d{4,8}$/.test(pin)){d.textContent='PIN 4–8 rakam olmalı.';return;}
+  const ad=document.getElementById('korAd').value.trim()||'Kör Tadım';
+  const bs=KOR.secim.map(korSise).filter(Boolean);
+  try{
+    d.textContent='';olay('kor-olustur');
+    const r=await api('/api/kor',{method:'POST',body:JSON.stringify({islem:'kor-olustur',ad,pin,
+      alanlar:KS.tahmin.map(a=>({k:a.k,ad:a.ad,secenekler:a.secenekler})),
+      bardaklar:bs.map(b=>({ad:b.ad,alt:KS.alt(b),tl:KS.fiyat(b)||0,cevap:Object.fromEntries(KS.tahmin.map(a=>[a.k,a.deger(b)||'']))}))})});
+    lsYaz(KS.on+'kor_ev',{kod:r.kod,ad,bardaklar:bs.map(b=>({id:b.id,ad:b.ad})),t:new Date().toISOString()});
+    korGecmisYaz({kod:r.kod,ad,rol:'ev',t:new Date().toISOString()});
+    KOR.form=false;KOR.secim=[];location.hash='#kor='+r.kod;
+  }catch(e){d.textContent='⚠️ '+e.message;}
+}
+
+async function korYukle(){
+  const kod=KOR.kod,pid=korPid();
+  try{
+    const v=await api('/api/kor?kod='+kod+(pid?'&pid='+pid:''));
+    if(KOR.kod!==kod)return;
+    KOR.veri=v;
+    if(v.ben&&!Object.keys(KOR.taslak).length)KOR.taslak=JSON.parse(JSON.stringify(v.ben.oylar||{}));
+    if(v.final){const r=korRol(),x={kod,ad:v.ad,rol:r,t:(r==='ev'?(korEv()||{}).t:(korMisafir()||{}).t)||v.olusturma,bitti:true};
+      if(v.ben){const s=v.final.keskin.find(y=>y.ad===v.ben.ad);x.burun=s?s.puan:0;x.enCok=v.final.enCok;}
+      korGecmisYaz(x);}
+    korCiz();
+  }catch(e){
+    if(KOR.kod!==kod)return;
+    clearInterval(KOR.zam);KOR.faz='';
+    korOrta().innerHTML=`<div class="gkart"><h3>⚠️ ${g$(e.message)}</h3>${e.durum===404?`<p class="dt-txt" style="color:var(--muted)">Odalar 30 gün sonra kendiliğinden silinir.</p>`:''}<button class="btn" data-kor="liste">‹ Kör tadıma dön</button></div>`;
+    if(e.durum===404){const ev=korEv(),mi=korMisafir();if(ev&&ev.kod===kod)localStorage.removeItem(KS.on+'kor_ev');if(mi&&mi.kod===kod)localStorage.removeItem(KS.on+'kor_misafir');}
+  }
+}
+function korDetay(){
+  if(!KOR.veri||KOR.veri.kod!==KOR.kod){KOR.faz='';korOrta().innerHTML='<div class="gkart">⏳ Oda yükleniyor…</div>';}
+  korYukle();
+  clearInterval(KOR.zam);
+  KOR.zam=setInterval(()=>{const a=document.querySelector('#subNav .tab.active');
+    if(a&&a.dataset.view==='kor'&&KOR.kod&&document.visibilityState==='visible')korYukle();},korRol()==='ev'?5000:8000);
+}
+function korIlerlemeHTML(v){
+  const y=v.toplam?Math.round(v.tamamlayan/v.toplam*100):0;
+  return `<div class="kor-sayac"><b>${v.toplam}</b> kişiden <b>${v.tamamlayan}</b>'${korEk(v.tamamlayan)} oy verdi</div><div class="kor-bar"><i style="width:${y}%"></i></div>`;
+}
+// Türkçe ek: "6'sı", "3'ü", "2'si" …
+function korEk(n){if(!n)return 'ı';const b=n%10,o=Math.floor(n/10)%10;
+  if(b)return {1:'i',2:'si',3:'ü',4:'ü',5:'i',6:'sı',7:'si',8:'i',9:'u'}[b];
+  if(o)return {1:'u',2:'si',3:'u',4:'ı',5:'si',6:'ı',7:'i',8:'i',9:'ı'}[o];return 'ü';}
+function korKisilerHTML(v){
+  return v.katilimcilar.length?`<div class="gsec">${v.katilimcilar.map(k=>`<span${v.ben&&k.ad===v.ben.ad?' style="border-color:var(--amber-soft)"':''}>${g$(k.ad)}${v.ben&&k.ad===v.ben.ad?' (sen)':''} <b style="margin:0 0 0 4px">${k.sayi>=v.n?'✓':k.sayi+'/'+v.n}</b></span>`).join('')}</div>`
+    :`<p class="dt-txt" style="color:var(--muted)">Henüz kimse katılmadı. QR'ı okutun ya da kodu girin.</p>`;
+}
+function korCiz(){
+  const v=KOR.veri,rol=korRol(),k=korOrta();
+  const faz=[v.kod,rol,v.perde,v.acilan,!!v.ben,v.n].join('|');
+  if(faz===KOR.faz){ // yalnızca canlı kısımlar
+    const a=document.getElementById('korIlerleme');if(a)a.innerHTML=korIlerlemeHTML(v);
+    const b=document.getElementById('korKisiler');if(b)b.innerHTML=korKisilerHTML(v);
+    return;
+  }
+  KOR.faz=faz;
+  k.innerHTML=rol==='ev'?korSahneHTML(v):korMisafirHTML(v);
+  if(rol==='ev'&&!v.perde)korQR(v.kod);
+}
+function korUstHTML(v,ek){
+  return `<div class="kor-ust"><button class="btn" data-kor="liste">‹ Çık</button><div class="kor-baslik">🎭 ${g$(v.ad)}<small>Oda ${korKodYaz(v.kod)} · ${v.n} bardak</small></div>${ek||''}</div>`;
+}
+function korSahneHTML(v){
+  const ev=korEv()||{};
+  const tamEkran=`<button class="btn" data-kor="tamekran">⛶ Tam ekran</button>`;
+  if(!v.perde)return `<div class="kor-sahne" id="korSahne">${korUstHTML(v,tamEkran)}
+    <div class="kor-giris"><div class="kor-qr" id="korQR"></div>
+      <div class="kor-katil"><div class="kor-etiket">Telefonla katıl</div><div class="kor-kod">${korKodYaz(v.kod)}</div>
+        <div class="kor-adres">${g$(location.host+location.pathname)} → Sosyal → 🎭 Kör Tadım</div><div class="kor-adres">ya da QR'ı okut</div></div></div>
+    <div id="korIlerleme">${korIlerlemeHTML(v)}</div>
+    <div id="korKisiler" class="kor-kisiler">${korKisilerHTML(v)}</div>
+    <div class="kor-bardaklar">${Array.from({length:v.n},(_,i)=>`<div class="kor-bardak"><span>Bardak</span><b>${KOR_HARF[i]}</b></div>`).join('')}</div>
+    <details class="kor-gizli"><summary>👁 Hangi bardakta ne var? (yalnızca ev sahibi — ekranı misafirlere çevirmeden aç)</summary>
+      ${(ev.bardaklar||[]).map((b,i)=>`<div class="mini"><span class="kor-harf">${KOR_HARF[i]}</span><div class="nm">${g$(b.ad)}</div></div>`).join('')||'<p class="dt-txt">Bu cihazda bardak listesi yok.</p>'}</details>
+    <div class="kor-perde">${korPerdeHTML('🥁 Perdeyi aç')}
+      <p class="dt-txt" style="color:var(--muted2);font-size:12px">Perde açılınca oylama ve katılım kapanır; bardaklar tek tek açıklanır.</p></div></div>`;
+  return `<div class="kor-sahne" id="korSahne">${korUstHTML(v,tamEkran)}${korSonucHTML(v,true)}</div>`;
+}
+function korPinHTML(){
+  return `<span class="gizKutu kor-pinkutu" id="korPinKutu" ${KOR.pin?'':'hidden'}><input id="korPerdePin" class="pinGir" type="password" inputmode="numeric" maxlength="8" autocomplete="off" placeholder="Ev sahibi PIN'i" value="${g$(KOR.pin)}"><button type="button" class="goz" data-goz title="Göster / gizle">👁</button></span>
+    <div class="durum" id="korPerdeDurum" style="font-size:12.5px;color:var(--red)"></div>`;
+}
+function korPerdeHTML(etiket){
+  return `<div class="kor-perdesatir"><button class="eklebtn kor-buyukbtn" data-kor="perde">${etiket}</button>${korPinHTML()}</div>`;
+}
+function korSonucHTML(v,sahne){
+  const ac=v.acilanlar||[],son=ac[ac.length-1],ben=v.ben;
+  const bardak=(x,buyuk)=>{
+    const o=ben&&ben.oylar&&ben.oylar[x.i];
+    const tah=KS.tahmin.filter(a=>x.cevap&&x.cevap[a.k]).map(a=>{
+      const d=(x.dogru&&x.dogru[a.k])||[],benD=o&&o.tahmin&&o.tahmin[a.k];
+      return `<div class="kor-tahmin"><b>${g$(a.ad)}: ${g$(x.cevap[a.k])}</b> — ${d.length?`🎯 ${d.map(g$).join(', ')}`:'kimse bilemedi'} <small>(${d.length}/${(x.tahminEden&&x.tahminEden[a.k])||0} tahmin)</small>${benD?(korNorm(benD)===korNorm(x.cevap[a.k])?' <span class="kor-ok">✓ sen de bildin</span>':` <small>· senin tahminin: ${g$(benD)}</small>`):''}</div>`;}).join('');
+    return `<div class="kor-acik${buyuk?' buyuk':''}"><div class="kor-acik-ust"><span class="kor-harf">${KOR_HARF[x.i]}</span><div style="min-width:0"><div class="kor-acik-ad">${g$(x.ad)}</div><div class="meta">${g$(x.alt||'')}${x.tl?' · ≈ '+korTL(x.tl):''}</div></div>
+      <div class="kor-ort"><b>${x.ort!==null?String(x.ort).replace('.',','):'—'}</b><small>${x.n} oy${x.n>1?` · ${x.min}–${x.max}`:''}</small></div></div>
+      ${o&&typeof o.p==='number'?`<div class="meta">⭐ Senin puanın: <b>${o.p}</b></div>`:''}
+      ${x.notlar&&x.notlar.length?`<div class="aromarow" style="margin:8px 0">${x.notlar.map(([t,c])=>`<span class="aroma on">${g$(t)} ×${c}</span>`).join(' ')}</div>`:''}
+      ${tah}</div>`;
+  };
+  let h='';
+  if(!ac.length)h+=`<div class="gkart"><h3>🥁 Perde açıldı</h3><p class="dt-txt">Oylama kapandı. Ev sahibi ilk bardağı açıklamak üzere…</p></div>`;
+  else{
+    h+=`<div class="kor-sahnebaslik">${v.final?'🏁 Bütün bardaklar açıldı':`🥁 Bardak ${KOR_HARF[son.i]} açıklandı`}</div>`;
+    if(!v.final)h+=bardak(son,true)+(ac.length>1?`<div class="kor-onceki">${ac.slice(0,-1).reverse().map(x=>bardak(x,false)).join('')}</div>`:'');
+  }
+  if(v.final)h+=korFinalHTML(v)+`<div class="kor-onceki">${ac.map(x=>bardak(x,false)).join('')}</div>`;
+  if(sahne){
+    if(!v.final)h+=`<div class="kor-perde">${korPerdeHTML(ac.length?`▶ Sıradaki: Bardak ${KOR_HARF[ac.length]}`:'▶ Bardak A\'yı aç')}</div>`;
+    else h+=`<div class="gkart"><h3>👑 Ev sahibi</h3><div style="display:flex;gap:8px;flex-wrap:wrap"><button class="eklebtn" style="margin:0" data-kor="kart">📸 Gece kartı</button><button class="btn" data-kor="yeni">🎬 Yeni şov</button><button class="btn" data-kor="sil" style="color:var(--red)">🗑️ Odayı sil</button></div>${korPinHTML()}</div>`;
+  }else if(v.final)h+=`<div style="margin:8px 0 14px"><button class="eklebtn" style="margin:0" data-kor="kart">📸 Gece kartı (PNG)</button></div>`;
+  return h;
+}
+function korSirala(v){return (v.acilanlar||[]).filter(x=>x.ort!==null).sort((a,b)=>b.ort-a.ort);}
+function korFinalHTML(v){
+  const f=v.final,ac=v.acilanlar,sira=korSirala(v);
+  const sz=f.surpriz,ad=i=>g$(ac[i].ad);
+  return `<div class="kor-oduller">
+    ${sira.length?`<div class="kor-odul"><span>🥇</span><b>Gecenin birincisi</b>${ad(sira[0].i)} · ${String(sira[0].ort).replace('.',',')}</div>`:''}
+    <div class="kor-odul"><span>🏆</span><b>En keskin burun</b>${f.keskin.length?f.keskin.filter(x=>x.puan===f.keskin[0].puan).map(x=>g$(x.ad)).join(' & ')+` · ${f.keskin[0].puan}/${f.enCok} doğru tahmin`:'Bu gece kimse doğru tahmin edemedi'}</div>
+    <div class="kor-odul"><span>💸</span><b>Fiyat/lezzet sürprizi</b>${sz?`${ad(sz.i)} · ${String(sz.ort).replace('.',',')} puan, ≈ ${korTL(sz.tl)}<small>en pahalı bardak (${ad(sz.pahali.i)}, ≈ ${korTL(sz.pahali.tl)}) ${sz.pahali.ort<sz.ort?'daha düşük puan aldı':'ile başa baş'}</small>`:'Fiyatı bilinen bardaklarda sürpriz yok'}</div>
+    <div class="kor-odul"><span>👯</span><b>Tat ikizleri</b>${f.ikiz?`${g$(f.ikiz.a)} & ${g$(f.ikiz.b)}<small>${f.ikiz.ortak} bardakta ortalama ${String(f.ikiz.fark).replace('.',',')} puan fark</small>`:'En az iki ortak bardak puanlayan çift yok'}</div>
+    ${f.keskin.length>1?`<div class="kor-odul genis"><span>👃</span><b>Burun sıralaması</b>${f.keskin.map((x,j)=>`${j+1}. ${g$(x.ad)} (${x.puan})`).join(' · ')}</div>`:''}
+  </div>
+  ${sira.length?`<table class="sonuc"><tr><th>#</th><th>Bardak</th><th>${KS.Birim}</th><th>Ort.</th><th>Oy</th></tr>${sira.map((x,j)=>`<tr><td>${j+1}</td><td>${KOR_HARF[x.i]}</td><td>${g$(x.ad)}</td><td class="ort">${String(x.ort).replace('.',',')}</td><td>${x.n}</td></tr>`).join('')}</table>`:''}
+  <p class="dt-txt" style="color:var(--muted2);font-size:11.5px;margin:8px 0 12px">🔒 Tek tek puanlar hiç kimseye gösterilmez; yalnızca ortalamalar ve doğru tahmin edenlerin takma adları. Fiyatlar katalogdaki yaklaşık fiyatlardır.</p>`;
+}
+function korMisafirHTML(v){
+  const ben=v.ben;
+  if(v.perde)return `${korUstHTML(v)}${korSonucHTML(v,false)}`;
+  if(!ben)return `${korUstHTML(v)}<div class="gkart"><h3>🙋 Odaya katıl</h3><p class="dt-txt" style="color:var(--muted);margin-bottom:8px">Gerçek adını yazma; bir takma ad yeter. Üyelik yok.</p>
+    <div style="display:flex;gap:8px;flex-wrap:wrap"><input id="korTakmaAd" maxlength="24" placeholder="Takma adın (ör. ${g$(typeof ornekTakma==='function'?ornekTakma():'Gizemli Burun')})" value="${g$(lsAl(KS.on+'takma_ad',''))}" style="flex:1;min-width:170px;background:var(--bg2);border:1px solid var(--line);color:var(--txt);padding:9px 11px;border-radius:9px"><button class="eklebtn" style="margin:0" data-kor="katil">Katıl</button></div>
+    <div class="durum" id="korKatilDurum" style="font-size:12.5px;color:var(--red);margin-top:6px"></div></div>
+    <div class="gkart"><div id="korIlerleme">${korIlerlemeHTML(v)}</div><div id="korKisiler">${korKisilerHTML(v)}</div></div>`;
+  const i=Math.min(KOR.bardak,v.n-1),o=KOR.taslak[i]||{},tamam=j=>KOR.taslak[j]&&typeof KOR.taslak[j].p==='number';
+  return `${korUstHTML(v)}
+    <div class="gkart kor-oyla"><div class="kor-sekmeler">${Array.from({length:v.n},(_,j)=>`<button class="kor-sekme${j===i?' on':''}${tamam(j)?' tamam':''}" data-kor-bardak="${j}">${KOR_HARF[j]}${tamam(j)?' ✓':''}</button>`).join('')}</div>
+      <div class="kor-bardakbaslik">Bardak ${KOR_HARF[i]}</div>
+      <label class="kor-etiket2">Puanın <b id="korPuanYaz">${typeof o.p==='number'?o.p:'–'}</b> / 100</label>
+      <input type="range" min="0" max="100" step="1" id="korPuan" value="${typeof o.p==='number'?o.p:70}" class="kor-range${typeof o.p==='number'?'':' bos'}">
+      <div class="kor-etiket2">Tat notları <small>(en çok 6)</small></div>
+      <div class="aromarow">${KS.notlar.map(t=>`<span class="aroma${(o.notlar||[]).includes(t)?' on':''}" data-kor-not="${g$(t)}">${g$(t)}</span>`).join('')}</div>
+      <div class="kor-etiket2">Tahminin</div>
+      <div class="kor-tahminler">${KS.tahmin.map(a=>`<label>${g$(a.ad)}<select data-kor-tahmin="${a.k}"><option value="">— bilmiyorum —</option>${a.secenekler.map(s=>`<option${(o.tahmin||{})[a.k]===s?' selected':''}>${g$(s)}</option>`).join('')}</select></label>`).join('')}</div>
+      <div style="display:flex;gap:8px;align-items:center;margin-top:12px;flex-wrap:wrap">${i<v.n-1?`<button class="eklebtn" style="margin:0" data-kor-bardak="${i+1}">Bardak ${KOR_HARF[i+1]} ›</button>`:'<span class="dt-txt" style="color:var(--muted)">Son bardak. Perde açılınca sonuçlar burada belirecek.</span>'}<span class="kaydedildi" id="korKaydedildi"></span></div></div>
+    <div class="gkart"><div style="font-size:13px;color:var(--muted);margin-bottom:6px">Sen: <b>${g$(ben.ad)}</b> · <span id="korBenSay">${korBenSay(v)}</span></div><div id="korIlerleme">${korIlerlemeHTML(v)}</div><div id="korKisiler">${korKisilerHTML(v)}</div>
+      <p class="dt-txt" style="color:var(--muted2);font-size:11.5px;margin-top:8px">🔒 Puanların perde açılana kadar kimseye görünmez; sonra da yalnızca ortalamaya katılır.</p></div>`;
+}
+function korBenSay(v){return Array.from({length:v.n},(_,j)=>j).filter(j=>KOR.taslak[j]&&typeof KOR.taslak[j].p==='number').length+'/'+v.n+' bardak puanlandı';}
+function korOyGonder(i){
+  const o=KOR.taslak[i]||{},el=document.getElementById('korKaydedildi');
+  clearTimeout(KOR.kaydetZam[i]);
+  KOR.kaydetZam[i]=setTimeout(async()=>{
+    try{await api('/api/kor',{method:'POST',body:JSON.stringify({islem:'kor-oy',kod:KOR.kod,pid:korPid(),i,p:typeof o.p==='number'?o.p:null,notlar:o.notlar||[],tahmin:o.tahmin||{}})});
+      if(el&&document.body.contains(el)){el.textContent='✓ kaydedildi';setTimeout(()=>{el.textContent='';},1400);}
+      const s=document.querySelector(`.kor-sekme[data-kor-bardak="${i}"]`);if(s&&typeof o.p==='number'){s.classList.add('tamam');s.textContent=KOR_HARF[i]+' ✓';}
+      const bs=document.getElementById('korBenSay');if(bs)bs.textContent=korBenSay(KOR.veri);
+      clearTimeout(KOR.yenileZam);KOR.yenileZam=setTimeout(korYukle,1200);
+    }catch(e){if(el)el.textContent='⚠️ '+e.message;if(/Perde/.test(e.message)){KOR.faz='';korYukle();}}
+  },500);
+}
+async function korQR(kod){
+  const el=document.getElementById('korQR');if(!el)return;
+  try{await qrYukle();}catch(e){el.innerHTML='<div class="dt-txt" style="padding:20px;color:#333">QR yüklenemedi; kodu girin.</div>';return;}
+  if(!document.body.contains(el))return;
+  el.innerHTML='';new QRCode(el,{text:korLink(kod),width:240,height:240,correctLevel:QRCode.CorrectLevel?QRCode.CorrectLevel.M:undefined});
+}
+async function korPerde(){
+  const kutu=document.getElementById('korPinKutu'),inp=document.getElementById('korPerdePin'),d=document.getElementById('korPerdeDurum');
+  const pin=(inp&&inp.value.trim())||KOR.pin;
+  if(!pin){if(kutu){kutu.hidden=false;inp.focus();}if(d)d.textContent='Ev sahibi PIN\'ini yaz, sonra yeniden bas.';return;}
+  if(!KOR.veri.perde&&!confirm('Perde açılsın mı? Oylama ve katılım kapanır.'))return;
+  try{const v=await api('/api/kor',{method:'POST',body:JSON.stringify({islem:'kor-ac',kod:KOR.kod,pin})});
+    KOR.pin=pin;KOR.veri=Object.assign(KOR.veri,v);olay('kor-perde');korCiz();window.scrollTo({top:document.getElementById('korSahne').offsetTop-10,behavior:'smooth'});
+  }catch(e){if(d)d.textContent='⚠️ '+e.message;if(e.durum===403){KOR.pin='';if(kutu)kutu.hidden=false;}}
+}
+async function korSil(){
+  const pin=(document.getElementById('korPerdePin')||{}).value||KOR.pin;
+  if(!pin){const k=document.getElementById('korPinKutu');if(k)k.hidden=false;return;}
+  if(!confirm('Oda ve bütün oylar kalıcı olarak silinsin mi?'))return;
+  try{await api('/api/kor',{method:'POST',body:JSON.stringify({islem:'kor-sil',kod:KOR.kod,pin})});
+    localStorage.removeItem(KS.on+'kor_ev');KOR.pin='';location.hash='#kor';}catch(e){alert(e.message);}
+}
+
+/* ----- paylaşılabilir story kartı (1080×1920 PNG; Web Share API varsa paylaş, yoksa indir) ----- */
+function storyCiz(o){
+  const W=1080,H=1920,c=document.createElement('canvas');c.width=W;c.height=H;const x=c.getContext('2d');
+  const [r1,r2,vurgu,yazi,soluk]=KS.renk;
+  const gr=x.createLinearGradient(0,0,W,H);gr.addColorStop(0,r1);gr.addColorStop(1,r2);x.fillStyle=gr;x.fillRect(0,0,W,H);
+  x.globalAlpha=.08;x.fillStyle=vurgu;x.beginPath();x.arc(W*.85,H*.12,330,0,7);x.fill();x.beginPath();x.arc(W*.1,H*.9,260,0,7);x.fill();x.globalAlpha=1;
+  x.textAlign='center';x.fillStyle=yazi;
+  x.font='120px system-ui,"Apple Color Emoji","Segoe UI Emoji",sans-serif';x.fillText(o.emoji,W/2,250);
+  x.fillStyle=vurgu;x.font='800 76px system-ui,Arial';sigdir(x,o.baslik,W-120,76,800);x.fillText(o.baslik,W/2,380);
+  x.fillStyle=soluk;x.font='600 38px system-ui,Arial';sigdir(x,o.alt,W-140,38,600);x.fillText(o.alt,W/2,445);
+  if(o.buyuk){x.fillStyle=yazi;x.font='900 220px system-ui,Arial';x.fillText(o.buyuk,W/2,700);x.fillStyle=soluk;x.font='600 42px system-ui,Arial';sigdir(x,o.buyukAlt||'',W-140,42,600);x.fillText(o.buyukAlt||'',W/2,770);}
+  let y=o.buyuk?870:560;
+  (o.satirlar||[]).slice(0,6).forEach(s=>{
+    x.fillStyle='rgba(255,255,255,.07)';kutu(x,90,y,W-180,120,26);x.fill();
+    x.textAlign='left';x.font='56px system-ui,"Apple Color Emoji","Segoe UI Emoji",sans-serif';x.fillStyle=yazi;x.fillText(s.e,120,y+80);
+    x.fillStyle=soluk;x.font='600 30px system-ui,Arial';x.fillText(kisalt(x,s.t,W-360),210,y+48);
+    x.fillStyle=yazi;x.font='800 42px system-ui,Arial';x.fillText(kisalt(x,s.v,W-330),210,y+96);
+    y+=140;x.textAlign='center';
+  });
+  x.fillStyle=soluk;x.font='600 34px system-ui,Arial';x.textAlign='center';x.fillText(KS.site+' · '+KS.url,W/2,H-70);
+  return c;
+}
+function sigdir(x,t,mx,boy,kalin){let b=boy;while(b>20&&x.measureText(t).width>mx){b-=2;x.font=kalin+' '+b+'px system-ui,Arial';}}
+function kisalt(x,t,mx){t=String(t||'');if(x.measureText(t).width<=mx)return t;while(t.length>1&&x.measureText(t+'…').width>mx)t=t.slice(0,-1);return t+'…';}
+function kutu(x,a,b,w,h,r){x.beginPath();x.moveTo(a+r,b);x.arcTo(a+w,b,a+w,b+h,r);x.arcTo(a+w,b+h,a,b+h,r);x.arcTo(a,b+h,a,b,r);x.arcTo(a,b,a+w,b,r);x.closePath();}
+function pngPaylas(c,dosya,baslik){
+  c.toBlob(async bl=>{
+    if(!bl)return;
+    try{const f=new File([bl],dosya,{type:'image/png'});
+      if(navigator.canShare&&navigator.canShare({files:[f]})){await navigator.share({files:[f],title:baslik});return;}}catch(e){if(e&&e.name==='AbortError')return;}
+    const u=URL.createObjectURL(bl),a=document.createElement('a');a.href=u;a.download=dosya;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(u),2000);
+  },'image/png');
+}
+function korKart(){
+  const v=KOR.veri;if(!v||!v.final)return;
+  const f=v.final,ac=v.acilanlar,sira=korSirala(v),sat=[];
+  sira.slice(0,3).forEach((x,j)=>sat.push({e:['🥇','🥈','🥉'][j],t:'Bardak '+KOR_HARF[x.i]+' · ort. '+String(x.ort).replace('.',','),v:x.ad}));
+  sat.push({e:'🏆',t:'En keskin burun',v:f.keskin.length?f.keskin.filter(x=>x.puan===f.keskin[0].puan).map(x=>x.ad).join(' & ')+' ('+f.keskin[0].puan+'/'+f.enCok+')':'—'});
+  if(f.surpriz)sat.push({e:'💸',t:'Fiyat/lezzet sürprizi',v:ac[f.surpriz.i].ad});
+  if(f.ikiz)sat.push({e:'👯',t:'Tat ikizleri',v:f.ikiz.a+' & '+f.ikiz.b});
+  const c=storyCiz({emoji:'🎭',baslik:'Kör Tadım Şovu',alt:v.ad+' · '+new Date(v.olusturma).toLocaleDateString('tr-TR',{day:'numeric',month:'long',year:'numeric'}),buyuk:String(v.toplam),buyukAlt:'kişi · '+v.n+' bardak',satirlar:sat});
+  olay('kor-kart');pngPaylas(c,KS.on+'kor-tadim-'+v.kod+'.png','Kör Tadım · '+v.ad);
+}
+
+document.addEventListener('input',e=>{
+  if(e.target.id==='korSiseAd'){korOneriCiz(e.target.value);return;}
+  if(e.target.id==='korPuan'){const i=Math.min(KOR.bardak,KOR.veri.n-1);KOR.taslak[i]=Object.assign({},KOR.taslak[i],{p:+e.target.value});
+    e.target.classList.remove('bos');document.getElementById('korPuanYaz').textContent=e.target.value;korOyGonder(i);}
+});
+document.addEventListener('change',e=>{
+  const t=e.target.closest('[data-kor-tahmin]');if(!t)return;
+  const i=Math.min(KOR.bardak,KOR.veri.n-1),o=Object.assign({},KOR.taslak[i]);o.tahmin=Object.assign({},o.tahmin,{[t.dataset.korTahmin]:t.value});
+  if(!t.value)delete o.tahmin[t.dataset.korTahmin];KOR.taslak[i]=o;korOyGonder(i);
+});
+document.addEventListener('keydown',e=>{
+  if(e.key!=='Enter')return;
+  if(e.target.id==='korKatilKod'){e.preventDefault();document.querySelector('[data-kor="kodgir"]').click();}
+  else if(e.target.id==='korTakmaAd'){e.preventDefault();document.querySelector('[data-kor="katil"]').click();}
+  else if(e.target.id==='korPerdePin'){e.preventDefault();korPerde();}
+  else if(e.target.id==='korSiseAd'){e.preventDefault();const f=document.querySelector('#korOneri [data-kor-ekle]');if(f)korEkle(f.dataset.korEkle);}
+});
+document.addEventListener('click',async e=>{
+  const ek=e.target.closest('[data-kor-ekle]');if(ek){korEkle(ek.dataset.korEkle);return;}
+  const cx=e.target.closest('[data-kor-cikar]');if(cx){KOR.secim.splice(+cx.dataset.korCikar,1);korSecilenCiz();return;}
+  const gt=e.target.closest('[data-kor-git]');if(gt){location.hash='#kor='+gt.dataset.korGit;return;}
+  const bd=e.target.closest('[data-kor-bardak]');if(bd){KOR.bardak=+bd.dataset.korBardak;KOR.faz='';korCiz();const s=document.querySelector('.kor-oyla');if(s)s.scrollIntoView({behavior:'smooth',block:'start'});return;}
+  const nt=e.target.closest('[data-kor-not]');
+  if(nt){const i=Math.min(KOR.bardak,KOR.veri.n-1),o=Object.assign({notlar:[]},KOR.taslak[i]),t=nt.dataset.korNot;
+    o.notlar=o.notlar.includes(t)?o.notlar.filter(x=>x!==t):(o.notlar.length>=6?o.notlar:[...o.notlar,t]);
+    nt.classList.toggle('on',o.notlar.includes(t));KOR.taslak[i]=o;korOyGonder(i);return;}
+  const b=e.target.closest('[data-kor]');if(!b)return;
+  const n=b.dataset.kor;
+  if(n==='form'){KOR.form=!KOR.form;renderKor();if(KOR.form){const f=document.getElementById('korForm');if(f)f.scrollIntoView({behavior:'smooth',block:'start'});}}
+  else if(n==='olustur')korOlustur();
+  else if(n==='kodgir'){const k=(document.getElementById('korKatilKod').value||'').replace(/\D/g,'');if(!/^[1-9]\d{5}$/.test(k)){alert('Oda kodu 6 haneli olmalı.');return;}location.hash='#kor='+k;}
+  else if(n==='liste'){location.hash='#kor';}
+  else if(n==='yeni'){KOR.form=true;location.hash='#kor';}
+  else if(n==='katil'){
+    const ad=document.getElementById('korTakmaAd').value.trim(),d=document.getElementById('korKatilDurum');
+    if(!ad){d.textContent='Bir takma ad yaz.';return;}
+    try{const r=await api('/api/kor',{method:'POST',body:JSON.stringify({islem:'kor-katil',kod:KOR.kod,ad})});
+      lsYaz(KS.on+'takma_ad',ad);lsYaz(KS.on+'kor_misafir',{kod:KOR.kod,pid:r.pid,ad,oda:KOR.veri.ad,t:new Date().toISOString()});
+      korGecmisYaz({kod:KOR.kod,ad:KOR.veri.ad,rol:'misafir',t:new Date().toISOString()});olay('kor-katil');
+      KOR.taslak={};KOR.bardak=0;KOR.faz='';korYukle();}catch(er){d.textContent='⚠️ '+er.message;}
+  }
+  else if(n==='perde')korPerde();
+  else if(n==='sil')korSil();
+  else if(n==='kart')korKart();
+  else if(n==='tamekran'){const s=document.getElementById('korSahne');if(!s)return;
+    if(document.fullscreenElement)document.exitFullscreen().catch(()=>{});else if(s.requestFullscreen)s.requestFullscreen().catch(()=>s.classList.toggle('kor-tam'));else s.classList.toggle('kor-tam');}
+});
+function korHash(){
+  const h=location.hash||'';
+  if(!/^#kor(=|$)/.test(h))return;
+  const m=h.match(/^#kor=(\d{6})/);
+  const yeni=m?m[1]:null;
+  if(yeni!==KOR.kod){KOR.veri=null;KOR.taslak={};KOR.bardak=0;KOR.faz='';}
+  KOR.kod=yeni;
+  const a=document.querySelector('#subNav .tab.active');
+  if(!a||a.dataset.view!=='kor')goTab('kor');else renderKor();
+}
+window.addEventListener('hashchange',korHash);
+
+/* ===== 📊 YILIN ÖZETİ (tamamen istemci tarafı; hiçbir veri sunucuya gitmez) ===== */
+// Kayıt tarihleri: bir kayıt Elimde/Denedim listesine ya da tadım notlarına ilk girdiğinde state.zaman[id]=YYYY-AA-GG.
+// Bu özellikten önce eklenmiş kayıtlar '' (tarihsiz) olarak işaretlenir ve takibin başladığı yılın özetine sayılır.
+function zamanIsle(){
+  const bugun=new Date().toISOString().slice(0,10),ids=[...state.have,...Object.keys(state.notes||{})];
+  let d=false;
+  if(!state.zaman||typeof state.zaman!=='object'){state.zaman={};state.zamanBas=bugun;ids.forEach(id=>{state.zaman[id]='';});d=true;}
+  if(!state.zamanBas){state.zamanBas=bugun;d=true;}
+  ids.forEach(id=>{if(!(id in state.zaman)){state.zaman[id]=bugun;d=true;}});
+  return d;
+}
+try{if(zamanIsle())localStorage.setItem(LS,JSON.stringify(state));}catch(e){}
+{const eskiSave=save;save=function(){try{zamanIsle();}catch(e){}return eskiSave.apply(this,arguments);};}
+
+function ozetVeri(Y){
+  const z=state.zaman||{},basY=+(state.zamanBas||'').slice(0,4)||Y;
+  const yilda=id=>z[id]?+z[id].slice(0,4)===Y:basY===Y;
+  const once=id=>z[id]?+z[id].slice(0,4)<Y:basY<Y;
+  const B=new Map(allBottles().map(b=>[b.id,b]));
+  const idler=[...new Set([...state.have,...Object.keys(state.notes||{})])].filter(id=>B.has(id));
+  const yil=idler.filter(yilda).map(id=>B.get(id)),eski=idler.filter(once).map(id=>B.get(id));
+  const not=id=>(state.notes||{})[id]||{};
+  const notlu=yil.filter(b=>not(b.id).p>0).sort((a,b)=>not(b.id).p-not(a.id).p);
+  const say=(l,f)=>{const c={};l.forEach(b=>{const v=f(b);(Array.isArray(v)?v:[v]).filter(Boolean).forEach(x=>{c[x]=(c[x]||0)+1;});});return Object.entries(c).sort((a,b)=>b[1]-a[1]||a[0].localeCompare(b[0],'tr'));};
+  const gruplar=KS.gruplar.map(g=>({...g,liste:say(yil,g.f)})).filter(g=>g.liste.length);
+  let tat=say(yil,b=>not(b.id).tags||[]),tatKaynak='kendi tadım notlarından';
+  if(!tat.length){tat=say(yil,b=>KS.tatlar(b)||[]);tatKaynak='denediklerinin katalog profilinden';}
+  const eU=new Set(eski.map(KS.ulke)),eB=new Set(eski.map(KS.bolge));
+  const yeniUlke=[...new Set(yil.map(KS.ulke).filter(x=>x&&!eU.has(x)))],yeniBolge=[...new Set(yil.map(KS.bolge).filter(x=>x&&!eB.has(x)))];
+  const elde=yil.filter(b=>state.have.includes(b.id)),fiyatli=elde.filter(b=>KS.kaynakliFiyat(b)>0);
+  const harcama=fiyatli.reduce((s,b)=>s+KS.kaynakliFiyat(b)*(KS.adet?KS.adet(b.id):1),0);
+  // En uzun seri: en az bir yeni kayıt girilen ardışık haftalar
+  const hafta=[...new Set(yil.map(b=>z[b.id]).filter(Boolean).map(t=>Math.floor((Date.parse(t)/864e5+3)/7)))].sort((a,b)=>a-b);
+  let seri=hafta.length?1:0,cur=1;for(let i=1;i<hafta.length;i++){cur=hafta[i]===hafta[i-1]+1?cur+1:1;seri=Math.max(seri,cur);}
+  const yS=String(Y);
+  const geceler=Object.values(lsAl(KS.on+'geceler',{})||{}).filter(g=>g&&String(g.tarih||g.t||'').startsWith(yS));
+  const kor=(lsAl(KS.on+'kor_gecmis',[])||[]).filter(x=>String(x.t||'').startsWith(yS));
+  const burun=kor.filter(x=>typeof x.burun==='number').reduce((s,x)=>s+x.burun,0);
+  return {Y,yil,eski,notlu,gruplar,tat:tat.slice(0,3),tatKaynak,yeniUlke,yeniBolge,elde,fiyatli,harcama,seri,hafta:hafta.length,
+    tarihsiz:yil.filter(b=>!z[b.id]).length,geceler:geceler.length,kor:kor.length,burun,
+    gurme:KS.gurme?KS.gurme():null,pasaport:KS.pasaport?KS.pasaport():null,unlu:KS.unlu?KS.unlu(yil):null,
+    ort:notlu.length?Math.round(notlu.reduce((s,b)=>s+not(b.id).p,0)/notlu.length):0};
+}
+function ozetKartlari(d){
+  const K=[],n=d.yil.length,not=id=>(state.notes||{})[id]||{};
+  K.push({e:KS.emoji,ust:d.Y+' · Yılın Özeti',buyuk:'',alt:(lsAl(KS.on+'takma_ad','')?g$(lsAl(KS.on+'takma_ad',''))+', ':'')+'bu yıl damağın neler yaşadı? Kaydır →'});
+  K.push({e:'🔢',ust:'Bu yıl',buyuk:n,alt:`${KS.birim} ${KS.denedin}${d.notlu.length?` · ${d.notlu.length} tanesine puan verdin`:''}${d.ort?` · ortalama puanın ${d.ort}`:''}`});
+  if(d.notlu.length){const b=d.notlu[0];K.push({e:'⭐',ust:'En çok puan verdiğin',buyuk:not(b.id).p,alt:`<b>${g$(b.ad)}</b><br>${g$(KS.alt(b))}`});}
+  d.gruplar.slice(0,2).forEach(g=>K.push({e:g.e,ust:'Favori '+g.ad,buyuk:'',baslik:g$(g.liste[0][0]),alt:`${g.liste[0][1]} ${KS.birim} · toplam ${g.liste.length} farklı ${g.ad}`}));
+  if(d.tat.length)K.push({e:'👅',ust:'Tat profilin',buyuk:'',baslik:d.tat.map(x=>g$(x[0])).join(' · '),alt:'en sık geçen notlar ('+d.tatKaynak+')'});
+  if(d.yeniUlke.length||d.yeniBolge.length)K.push({e:'🧭',ust:'Keşiflerin',buyuk:d.yeniBolge.length||d.yeniUlke.length,alt:(d.yeniBolge.length?`yeni ${KS.bolgeAd}`:`yeni ülke`)+(d.yeniUlke.length&&d.yeniBolge.length?` · ${d.yeniUlke.length} yeni ülke`:'')+`<br><small>${g$([...d.yeniBolge].slice(0,4).join(', '))}${d.yeniBolge.length>4?'…':''}</small>`});
+  if(d.gurme)K.push({e:d.gurme.e,ust:'Gurme seviyen',buyuk:'',baslik:g$(d.gurme.t),alt:`${d.gurme.puan}/100 gurme puanı`+(d.pasaport?`<br>🛂 ${g$(d.pasaport.ad)}: ${d.pasaport.n}/${d.pasaport.tum}`:'')});
+  if(d.unlu)K.push({e:d.unlu.e||'✨',ust:'Seninle aynı damakta',buyuk:'',baslik:g$(d.unlu.ad),alt:`bu yıl denediklerinden ${d.unlu.ortak} tanesi Magazin sekmesindeki listesinde de var`});
+  if(d.harcama>0)K.push({e:'💰',ust:'Toplam harcama (yaklaşık)',buyuk:'',baslik:'≈ '+korTL(Math.round(d.harcama/100)*100),alt:`yalnızca fiyatı kaynaklı ya da senin girdiğin ${d.fiyatli.length}/${d.elde.length} ${KS.birim} üzerinden; gerçek harcaman farklı olabilir`});
+  if(d.seri>=2)K.push({e:'🔥',ust:'En uzun serin',buyuk:d.seri,alt:'hafta üst üste yeni bir '+KS.birim+' kaydettin'});
+  if(d.geceler||d.kor)K.push({e:'🥂',ust:'Sosyal',buyuk:d.geceler+d.kor,alt:`tadım buluşması${d.kor?` · ${d.kor} kör tadım şovu`:''}${d.burun?` · ${d.burun} doğru tahmin`:''}`});
+  K.push({e:'🎉',ust:'Şerefe!',buyuk:'',baslik:(d.Y+1)+'’de yeni tatlara',alt:'Kartı indirip paylaşabilirsin. Bu özet yalnızca bu cihazdaki verinden hesaplandı.'});
+  return K;
+}
+let OZET_I=0;
+function renderOzet(){
+  const box=document.getElementById('ozetKutu');if(!box)return;
+  const Y=new Date().getFullYear(),d=ozetVeri(Y);
+  if(d.yil.length<3){
+    box.innerHTML=`<div class="oz-kart oz-tek"><div class="oz-e">🌱</div><div class="oz-ust">${Y} · Yılın Özeti</div><div class="oz-baslik">Henüz yeterli veri yok</div>
+      <div class="oz-alt">Bu yıl ${d.yil.length} kayıt var; özet için en az 3 ${KS.birim} gerekiyor. Şunları dene:</div>
+      <div class="oz-oneriler"><button class="btn" data-goto="${KS.kesfet}">🗺️ Katalogda ${KS.birim} işaretle (${g$(KS.haveAd)})</button><button class="btn" data-goto="notes">📝 Tadım notu ve puan ekle</button><button class="btn" data-goto="kor">🎭 Kör tadım şovu kur</button><button class="btn" data-goto="gece">🥂 Bir tadım gecesine katıl</button></div></div>`;
+    return;
+  }
+  const K=ozetKartlari(d);OZET_I=Math.min(OZET_I,K.length-1);
+  box.innerHTML=`<div class="oz-serit" id="ozSerit">${K.map((k,i)=>`<div class="oz-kart" data-i="${i}" style="--oz-h:${(i*37)%360}deg"><div class="oz-e">${k.e}</div><div class="oz-ust">${k.ust}</div>${k.buyuk!==''?`<div class="oz-buyuk">${k.buyuk}</div>`:''}${k.baslik?`<div class="oz-baslik">${k.baslik}</div>`:''}<div class="oz-alt">${k.alt}</div><div class="oz-sayfa">${i+1}/${K.length}</div></div>`).join('')}</div>
+    <div class="oz-nav"><button class="btn" data-oz="geri" aria-label="Önceki">‹</button><div class="oz-noktalar">${K.map((_,i)=>`<i data-oz-git="${i}"></i>`).join('')}</div><button class="btn" data-oz="ileri" aria-label="Sonraki">›</button></div>
+    <div style="text-align:center;margin:6px 0 4px"><button class="eklebtn" style="margin:0" data-oz="kart">📸 Paylaşılabilir kart (PNG)</button></div>
+    <p class="note" style="text-align:center">Bu özet tamamen tarayıcında hesaplanır; sunucuya hiçbir şey gönderilmez.${d.tarihsiz?` ${d.tarihsiz} kayıt, tarih tutulmaya başlamadan önce eklendiği için bu yıla sayıldı.`:''}</p>`;
+  const s=document.getElementById('ozSerit');
+  s.addEventListener('scroll',()=>{clearTimeout(s._z);s._z=setTimeout(ozetNokta,80);},{passive:true});
+  ozetNokta();
+}
+function ozetNokta(){
+  const s=document.getElementById('ozSerit');if(!s)return;
+  const w=s.firstElementChild?s.firstElementChild.getBoundingClientRect().width+14:1;OZET_I=Math.round(s.scrollLeft/w);
+  document.querySelectorAll('.oz-noktalar i').forEach((x,i)=>x.classList.toggle('on',i===OZET_I));
+}
+function ozetGit(i){const s=document.getElementById('ozSerit');if(!s)return;const k=s.children[Math.max(0,Math.min(s.children.length-1,i))];if(k)s.scrollTo({left:k.offsetLeft-s.offsetLeft,behavior:'smooth'});}
+function ozetKart(){
+  const d=ozetVeri(new Date().getFullYear()),sat=[];
+  if(d.notlu.length)sat.push({e:'⭐',t:'En çok puan verdiğin ('+(state.notes[d.notlu[0].id].p)+')',v:d.notlu[0].ad});
+  d.gruplar.slice(0,2).forEach(g=>sat.push({e:g.e,t:'Favori '+g.ad,v:g.liste[0][0]}));
+  if(d.tat.length)sat.push({e:'👅',t:'Tat profilin',v:d.tat.map(x=>x[0]).join(' · ')});
+  if(d.yeniBolge.length)sat.push({e:'🧭',t:'Keşif',v:d.yeniBolge.length+' yeni '+KS.bolgeAd+(d.yeniUlke.length?' · '+d.yeniUlke.length+' yeni ülke':'')});
+  if(d.gurme)sat.push({e:d.gurme.e,t:'Gurme seviyen',v:d.gurme.t+' · '+d.gurme.puan+'/100'});
+  if(d.seri>=2)sat.push({e:'🔥',t:'En uzun seri',v:d.seri+' hafta üst üste'});
+  if(d.unlu)sat.push({e:d.unlu.e||'✨',t:'Seninle aynı damakta',v:d.unlu.ad});
+  const c=storyCiz({emoji:KS.emoji,baslik:d.Y+' Yılın Özeti',alt:KS.site,buyuk:String(d.yil.length),buyukAlt:KS.birim+' '+KS.denedin,satirlar:sat});
+  olay('ozet-kart');pngPaylas(c,KS.on+'yilin-ozeti-'+d.Y+'.png',d.Y+' Yılın Özeti · '+KS.site);
+}
+document.addEventListener('click',e=>{
+  const g=e.target.closest('[data-oz-git]');if(g){ozetGit(+g.dataset.ozGit);return;}
+  const b=e.target.closest('[data-oz]');if(!b)return;
+  const n=b.dataset.oz;
+  if(n==='geri')ozetGit(OZET_I-1);else if(n==='ileri')ozetGit(OZET_I+1);else if(n==='kart')ozetKart();
+  else if(n==='seritkapat'){lsYaz(KS.on+'ozet_serit',new Date().getFullYear());const s=document.getElementById('ozDuyuru');if(s)s.remove();}
+});
+// Aralık ayında ana sayfada küçük duyuru şeridi (kapatılınca o yıl bir daha görünmez)
+function ozetSerit(){
+  const t=new Date();if(t.getMonth()!==11||document.getElementById('ozDuyuru'))return;
+  const Y=t.getFullYear();if(lsAl(KS.on+'ozet_serit',0)===Y)return;
+  const s=document.getElementById(KS.ana);if(!s)return;
+  s.insertAdjacentHTML('afterbegin',`<div class="oz-duyuru" id="ozDuyuru"><span>📊 <b>${Y} Yılın Özetin hazır:</b> bu yıl neler ${KS.denedin}, favorin ne oldu?</span><button class="btn" data-goto="ozet">Göster ›</button><button class="linkbtn" data-oz="seritkapat" title="Kapat" aria-label="Kapat">✕</button></div>`);
+}
+RENDER.kor=renderKor;RENDER.ozet=renderOzet;
+ozetSerit();
+korHash();
+/* /korOzetJS */</script>
 <script data-goatcounter="https://viski-atlas.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 <script>window.RAF={birim:'şişe',birimi:'şişeyi',ornek:'Glenfiddich 12',have:'Elimde var',target:'Hedefim'};</script>
 <script src="raf.js" defer></script>

@@ -2,9 +2,10 @@
 
 export type Depo = {
   get(key: string, opt?: { type?: "json" | "text" }): Promise<any>;
-  setJSON(key: string, value: any): Promise<void>;
+  // ttl: saniye cinsinden ömür (KV expirationTtl); meta: listede anahtarla birlikte dönen küçük özet (KV metadata)
+  setJSON(key: string, value: any, opt?: { ttl?: number; meta?: Record<string, unknown> }): Promise<void>;
   delete(key: string): Promise<void>;
-  list(opt?: { prefix?: string }): Promise<{ blobs: { key: string }[] }>;
+  list(opt?: { prefix?: string }): Promise<{ blobs: { key: string; meta?: any }[] }>;
 };
 
 

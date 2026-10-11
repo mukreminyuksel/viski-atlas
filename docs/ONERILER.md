@@ -9,8 +9,8 @@ Son güncelleme: 5 Ekim 2026
 | # | Öneri | Etki | Emek | Durum |
 |---|---|---|---|---|
 | 1 | 📷 Raf Asistanı (etiket/barkod tanıma) | Çok yüksek: her alışverişte kullanılır | Orta-büyük | ✅ |
-| 2 | 🎭 Kör Tadım Şovu (canlı yarışma modu) | Çok yüksek: sosyal, yayılır | Orta | 💡 |
-| 3 | 📊 Yılın Özeti (Wrapped tarzı) | Yüksek: paylaşılır; aralık ayına yetişmeli | Küçük-orta | 💡 |
+| 2 | 🎭 Kör Tadım Şovu (canlı yarışma modu) | Çok yüksek: sosyal, yayılır | Orta | ✅ |
+| 3 | 📊 Yılın Özeti (Wrapped tarzı) | Yüksek: paylaşılır; aralık ayına yetişmeli | Küçük-orta | ✅ |
 | 4 | 🔀 Netlify'daki eski adresi yeni adrese yönlendirme | Orta | Küçük (kredi yenilenince) | 📌 |
 | 5 | 📜 Resmî lisans listesinin periyodik güncellemesi | Orta | Küçük (listeyi kullanıcı indirir) | 📌 |
 | 6 | 🏬 İstanbul viski butiklerini Nereden Alınır'a ekleme | Orta | Küçük | 📌 |
@@ -35,6 +35,7 @@ Son güncelleme: 5 Ekim 2026
 - İki sitede ortak çalışır.
 
 ## 2. 🎭 Kör Tadım Şovu
+- ✅ **Yapıldı (Ekim 2026):** Sosyal → 🎭 Kör Tadım Şovu; `/api/kor` (KV öneki `kor/`, 30 gün TTL), sahne ekranı + QR, telefonla takma adla katılım, perde ve gece kartı. Kulüp sezonluk sıralaması henüz yok.
 - Mevcut tadım gecesi altyapısının üzerine kurulur (telefon + PIN, KV deposu).
 - **Akış:**
   - Ev sahibi 4–6 şişe seçer; şişeler "Bardak A, B, C…" diye gizlenir.
@@ -51,6 +52,7 @@ Son güncelleme: 5 Ekim 2026
 - Kulüpler için sezonluk "en keskin burun" sıralaması.
 
 ## 3. 📊 Yılın Özeti (Wrapped tarzı)
+- ✅ **Yapıldı (Ekim 2026):** Koleksiyon → 📊 Yılın Özeti; tamamen istemci tarafı kaydırmalı kartlar + story PNG, Aralık'ta ana sayfa şeridi.
 - Aralıkta kaydırmalı bir hikâye:
   - "Bu yıl 37 şişe denedin, en çok Islay."
   - Gurme seviyesindeki ilerleme, en sevilen tat profili.

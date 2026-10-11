@@ -51,20 +51,39 @@ function bardaklariTemizle(g: unknown, alanlar: { k: string }[]) {
   }).filter((b) => b.ad);
 }
 
-async function misafirler(depo: Depo, kod: string) {
+// Cloudflare KV'de list() 60 sn'ye kadar gecikmeli güncellenir; tek başına güvenilirse yeni
+// katılımcılar ve son oylar kaçabilir. Bu yüzden katılımcı kimlikleri ayrıca `<kod>/liste`
+// anahtarında tutulur (okuma–yazma–doğrulama), list() ile birleştirilir ve her kayıt get() ile okunur.
+async function kimlikler(depo: Depo, kod: string): Promise<string[]> {
+  const liste = ((await depo.get(`${kod}/liste`, { type: "json" })) as string[] | null) || [];
   const { blobs } = await depo.list({ prefix: `${kod}/k/` });
-  return blobs;
+  return [...new Set([...liste, ...blobs.map((b) => b.key.slice(`${kod}/k/`.length))])].filter(pidGecerli);
+}
+async function listeyeEkle(depo: Depo, kod: string, pid: string) {
+  for (let d = 0; d < 4; d++) {
+    const liste = ((await depo.get(`${kod}/liste`, { type: "json" })) as string[] | null) || [];
+    if (liste.includes(pid)) return;
+    await sakla(depo, `${kod}/liste`, [...liste, pid]);
+    await new Promise((r) => setTimeout(r, 40 * (d + 1)));
+  }
+}
+async function kisiler(depo: Depo, kod: string): Promise<any[]> {
+  const ids = await kimlikler(depo, kod);
+  return (await Promise.all(ids.map((id) => depo.get(`${kod}/k/${id}`, { type: "json" })))).filter(Boolean) as any[];
+}
+const oySayisi = (k: any) => Object.values(k?.oylar || {}).filter((o: any) => o && typeof o.p === "number").length;
+async function misafirler(depo: Depo, kod: string) {
+  return (await kisiler(depo, kod)).map((k) => ({ key: `${kod}/k/${k.pid}`, meta: { ad: k.ad, s: oySayisi(k) } }));
 }
 
 // Perde açılınca bir kez çalışır: oylama kapandığı için sonuç bir daha değişmez.
 async function sonucHesapla(depo: Depo, kod: string, meta: any) {
-  const { blobs } = await depo.list({ prefix: `${kod}/k/` });
-  const kisiler = (await Promise.all(blobs.map((b) => depo.get(b.key, { type: "json" })))).filter(Boolean) as any[];
+  const kisiler_ = await kisiler(depo, kod);
   const n = meta.bardaklar.length;
   const bardaklar = meta.bardaklar.map((b: any, i: number) => {
     const ps: number[] = [], notSay: Record<string, number> = {}, dogru: Record<string, string[]> = {};
     for (const a of meta.alanlar) if (b.cevap[a.k]) dogru[a.k] = [];
-    for (const k of kisiler) {
+    for (const k of kisiler_) {
       const o = k.oylar?.[i];
       if (!o) continue;
       if (typeof o.p === "number") ps.push(o.p);
@@ -72,7 +91,7 @@ async function sonucHesapla(depo: Depo, kod: string, meta: any) {
       for (const a of meta.alanlar) if (b.cevap[a.k] && o.tahmin?.[a.k] && norm(o.tahmin[a.k]) === norm(b.cevap[a.k])) dogru[a.k].push(k.ad);
     }
     const tahminEden: Record<string, number> = {};
-    for (const a of meta.alanlar) tahminEden[a.k] = kisiler.filter((k) => k.oylar?.[i]?.tahmin?.[a.k]).length;
+    for (const a of meta.alanlar) tahminEden[a.k] = kisiler_.filter((k) => k.oylar?.[i]?.tahmin?.[a.k]).length;
     return {
       ort: ps.length ? Math.round((ps.reduce((x, y) => x + y, 0) / ps.length) * 10) / 10 : null,
       n: ps.length, min: ps.length ? Math.min(...ps) : null, max: ps.length ? Math.max(...ps) : null,
@@ -83,7 +102,7 @@ async function sonucHesapla(depo: Depo, kod: string, meta: any) {
   // 🏆 En keskin burun: her doğru tahmin 1 puan
   let enCok = 0;
   for (const b of meta.bardaklar) enCok += meta.alanlar.filter((a: any) => b.cevap[a.k]).length;
-  const keskin = kisiler.map((k) => {
+  const keskin = kisiler_.map((k) => {
     let puan = 0;
     meta.bardaklar.forEach((b: any, i: number) => {
       for (const a of meta.alanlar) if (b.cevap[a.k] && k.oylar?.[i]?.tahmin?.[a.k] && norm(k.oylar[i].tahmin[a.k]) === norm(b.cevap[a.k])) puan++;
@@ -92,15 +111,15 @@ async function sonucHesapla(depo: Depo, kod: string, meta: any) {
   }).filter((x) => x.puan > 0).sort((x, y) => y.puan - x.puan || x.ad.localeCompare(y.ad, "tr")).slice(0, 5);
   // 👯 Tat ikizleri: en az 2 ortak bardakta puan farkı ortalaması en küçük iki kişi
   let ikiz: { a: string; b: string; fark: number; ortak: number } | null = null;
-  for (let x = 0; x < kisiler.length; x++) for (let y = x + 1; y < kisiler.length; y++) {
+  for (let x = 0; x < kisiler_.length; x++) for (let y = x + 1; y < kisiler_.length; y++) {
     const f: number[] = [];
     for (let i = 0; i < n; i++) {
-      const p = kisiler[x].oylar?.[i]?.p, q = kisiler[y].oylar?.[i]?.p;
+      const p = kisiler_[x].oylar?.[i]?.p, q = kisiler_[y].oylar?.[i]?.p;
       if (typeof p === "number" && typeof q === "number") f.push(Math.abs(p - q));
     }
     if (f.length >= 2) {
       const fark = Math.round((f.reduce((s, v) => s + v, 0) / f.length) * 10) / 10;
-      if (!ikiz || fark < ikiz.fark) ikiz = { a: kisiler[x].ad, b: kisiler[y].ad, fark, ortak: f.length };
+      if (!ikiz || fark < ikiz.fark) ikiz = { a: kisiler_[x].ad, b: kisiler_[y].ad, fark, ortak: f.length };
     }
   }
   // 💸 Fiyat/lezzet sürprizi: fiyatı bilinen bardakların ucuz yarısından ortalaması en yüksek olan,
@@ -115,7 +134,7 @@ async function sonucHesapla(depo: Depo, kod: string, meta: any) {
     if (aday && aday.i !== pahali.i && aday.ort >= ortOrt) surpriz = { i: aday.i, tl: aday.tl, ort: aday.ort, pahali: { i: pahali.i, tl: pahali.tl, ort: pahali.ort } };
   }
   const sonuc = {
-    katilimcilar: kisiler.map((k) => ({ ad: k.ad, sayi: Object.values(k.oylar || {}).filter((o: any) => o && typeof o.p === "number").length })),
+    katilimcilar: kisiler_.map((k) => ({ ad: k.ad, sayi: Object.values(k.oylar || {}).filter((o: any) => o && typeof o.p === "number").length })),
     bardaklar, keskin, enCok, ikiz, surpriz,
   };
   await sakla(depo, `${kod}/sonuc`, sonuc);
@@ -201,6 +220,7 @@ export async function isle(req: Request, depo: Depo): Promise<Response> {
       if (blobs.some((b: any) => norm(b.meta?.ad) === norm(ad))) return hata("Bu takma ad bu odada alınmış; başka bir ad seç");
       const pid = rastgele(10);
       await sakla(depo, `${g.kod}/k/${pid}`, { pid, ad, oylar: {}, katilma: new Date().toISOString() }, { ad, s: 0 });
+      await listeyeEkle(depo, g.kod, pid);
       return json({ pid });
     }
 
@@ -232,7 +252,9 @@ export async function isle(req: Request, depo: Depo): Promise<Response> {
       if (red) return red;
       if (g.islem === "kor-sil") {
         const { blobs } = await depo.list({ prefix: `${g.kod}/` });
-        await Promise.all(blobs.map((b) => depo.delete(b.key)));
+        const anahtarlar = new Set([...blobs.map((b) => b.key), `${g.kod}/meta`, `${g.kod}/liste`, `${g.kod}/sonuc`,
+          ...(await kimlikler(depo, g.kod)).map((id) => `${g.kod}/k/${id}`)]);
+        await Promise.all([...anahtarlar].map((k) => depo.delete(k)));
         return json({ tamam: true });
       }
       const n = meta.bardaklar.length;

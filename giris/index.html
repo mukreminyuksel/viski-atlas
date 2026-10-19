@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Tadım Atlası — Viski, Bira, Rakı, Şarap</title>
+<meta name="description" content="Türkçe içki atlası: viski, bira, rakı ve şarap katalogları, tadım notları, kişisel koleksiyon ve tadım geceleri.">
+<meta name="theme-color" content="#16110a">
+<link rel="icon" type="image/png" href="/favicon-32.png">
+<style>
+:root{--bg:#16110a;--panel:#211a10;--line:#3a2e1a;--txt:#f4e8cc;--muted:#b9a684}
+*{box-sizing:border-box}
+body{margin:0;background:radial-gradient(1200px 600px at 50% -10%,#2a1f10,var(--bg));color:var(--txt);font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;min-height:100vh;display:flex;flex-direction:column}
+main{flex:1;width:100%;max-width:960px;margin:0 auto;padding:48px 16px 24px}
+h1{font-size:clamp(30px,6vw,46px);margin:0 0 8px;letter-spacing:-.5px}
+.alt{color:var(--muted);font-size:17px;margin:0 0 32px;max-width:620px;line-height:1.5}
+.izgara{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px}
+a.kart{display:flex;flex-direction:column;gap:12px;padding:20px;border-radius:18px;background:var(--panel);border:1px solid var(--line);color:inherit;text-decoration:none;transition:transform .15s,border-color .15s}
+a.kart:hover,a.kart:focus-visible{transform:translateY(-3px);border-color:var(--renk)}
+a.kart img{width:64px;height:64px;border-radius:16px}
+a.kart b{font-size:20px;color:var(--renk)}
+a.kart span{color:var(--muted);font-size:14px;line-height:1.45}
+footer{color:var(--muted);font-size:13px;text-align:center;padding:24px 16px 32px;line-height:1.6}
+</style>
+</head>
+<body>
+<main>
+  <h1>Tadım Atlası</h1>
+  <p class="alt">Viski, bira, rakı ve şarap için Türkçe kataloglar, tadım notları, kişisel koleksiyon, kör tadım ve tadım geceleri.</p>
+  <div class="izgara">
+    <a class="kart" style="--renk:#f2c14e" href="https://viski.tadimatlasi.com/"><img src="/giris/viski.png" alt=""><b>Viski Atlası</b><span>Bölgeler, damıtımevleri, 1000+ şişe, uzman sıralamaları.</span></a>
+    <a class="kart" style="--renk:#b9d36a" href="https://bira.tadimatlasi.com/"><img src="/giris/bira.png" alt=""><b>Bira Atlası</b><span>Stil rehberi, Türk craft biraları, dünya klasikleri.</span></a>
+    <a class="kart" style="--renk:#9fd0e6" href="https://raki.tadimatlasi.com/"><img src="/giris/raki.png" alt=""><b>Rakı Atlası</b><span>Rakılar, meze ve sofra rehberi, balık takvimi.</span></a>
+    <a class="kart" style="--renk:#e88aa0" href="https://sarap.tadimatlasi.com/"><img src="/giris/sarap.png" alt=""><b>Şarap Atlası</b><span>Türk ve dünya şarapları, üzüm haritası, sıralamalar.</span></a>
+  </div>
+</main>
+<footer>18 yaşından büyükler içindir. Alkollü içecekleri sorumlu tüketin.<br>Bu site satış yapmaz.</footer>
+</body>
+</html>

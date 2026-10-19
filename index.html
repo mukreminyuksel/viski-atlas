@@ -2,6 +2,46 @@
 <html lang="tr">
 <head>
 <meta charset="UTF-8">
+<script>/* ===== Yeni adres (tadimatlasi.com) ve kayıt taşıma =====
+   Eski adreste (viski-atlas.pages.dev) açılan sayfa, bu tarayıcıdaki kayıtları tek kullanımlık bir
+   kodla sunucuya bırakıp yeni adrese yönlenir; yeni adres kodu okuyup kayıtları birleştirir. */
+(function(){
+  var P='viski',YENI='https://viski.tadimatlasi.com',h=location.hostname,ls;
+  try{ls=window.localStorage;}catch(e){ls=null;}
+  if(h===P+'-atlas.pages.dev'){
+    var git=function(kod){var hs=location.hash.replace(/^#/,'');location.replace(YENI+location.pathname+location.search+(kod?'#tasi='+kod+(hs?'&'+hs:''):(hs?'#'+hs:'')));};
+    var veri={},n=0;
+    if(ls){for(var i=0;i<ls.length;i++){var k=ls.key(i);if(k&&k.indexOf(P+'_')===0){veri[k]=ls.getItem(k);if(k!==P+'_yas')n++;}}}
+    if(!n){git('');return;}
+    document.documentElement.style.visibility='hidden';
+    fetch('/api/tasi',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({veri:veri})})
+      .then(function(r){return r.json();}).then(function(j){git(j.kod||'');}).catch(function(){git('');});
+    setTimeout(function(){git('');},8000);
+    return;
+  }
+  var m=location.hash.match(/(?:^#|&)tasi=([a-z0-9]{24})/);
+  if(!m||!ls)return;
+  var kalan=location.hash.replace(/^#/,'').split('&').filter(function(x){return x.indexOf('tasi=')!==0;}).join('&');
+  history.replaceState(null,'',location.pathname+location.search+(kalan?'#'+kalan:''));
+  document.documentElement.style.visibility='hidden';
+  var bitir=function(){location.reload();};
+  fetch('/api/tasi?kod='+m[1],{cache:'no-store'}).then(function(r){return r.json();}).then(function(j){
+    var v=(j&&j.veri)||{};
+    Object.keys(v).forEach(function(k){
+      if(k.indexOf(P+'_')!==0)return;
+      var eski=ls.getItem(k);
+      if(eski===null){ls.setItem(k,v[k]);return;}
+      try{var a=JSON.parse(eski),b=JSON.parse(v[k]);
+        if(Array.isArray(a)&&Array.isArray(b)){var u=a.slice();b.forEach(function(x){if(u.indexOf(x)<0&&typeof x!=='object')u.push(x);});ls.setItem(k,JSON.stringify(u));}
+        else if(a&&b&&typeof a==='object'&&typeof b==='object'&&!Array.isArray(a)){var o={};Object.keys(b).forEach(function(x){o[x]=b[x];});Object.keys(a).forEach(function(x){o[x]=a[x];});ls.setItem(k,JSON.stringify(o));}
+      }catch(e){}
+    });
+    try{ls.setItem(P+'_tasindi',new Date().toISOString().slice(0,10));}catch(e){}
+    bitir();
+  }).catch(bitir);
+})();
+</script>
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Viski Atlası · Koleksiyon Takibi</title>
 <link rel="manifest" href="manifest.webmanifest">
@@ -476,7 +516,7 @@ nav.groups{display:flex;gap:6px;margin:20px 0 10px;background:var(--bg2);border:
     <div style="display:flex;align-items:center"><svg class="logo-kadeh" viewBox="140 96 232 336" width="34" height="46" aria-label="Glencairn viski kadehi" role="img"><defs><clipPath id="lkC"><path d="M196 112 C202 150 214 168 196 196 C172 232 152 262 152 300 C154 350 196 372 256 372 C316 372 358 350 360 300 C360 262 340 232 316 196 C298 168 310 150 316 112 Z"/></clipPath></defs><rect x="140" y="262" width="232" height="130" fill="#e3a73a" clip-path="url(#lkC)"/><path d="M196 112 C202 150 214 168 196 196 C172 232 152 262 152 300 C154 350 196 372 256 372 C316 372 358 350 360 300 C360 262 340 232 316 196 C298 168 310 150 316 112" fill="none" stroke="#f4e8cc" stroke-width="14" stroke-linecap="round" stroke-linejoin="round"/><path d="M220 370 L228 404 L284 404 L292 370" fill="#f4e8cc"/><rect x="176" y="402" width="160" height="22" rx="11" fill="#f4e8cc"/></svg></div>
     <div><h1 onclick="location.href='./'" style="cursor:pointer" title="Ana sayfaya dön">Viski Atlası <span style="font-size:13px;color:var(--muted2);font-weight:600;vertical-align:middle">v3.2</span></h1>
       <div class="sub">Bölge → Damıtımevi → Şişe · Uzman & AI tercihleri · Türkiye katmanları · Kişisel koleksiyon</div></div>
-    <div class="kardesler"><small>Kardeş siteler</small><a class="kardes" href="https://bira-atlas.pages.dev" target="_blank" rel="noopener" onclick="olay('kardes-site')">🍺 Bira Atlası ↗</a><a class="kardes" href="https://raki-atlas.pages.dev" target="_blank" rel="noopener" onclick="olay('kardes-site')">🥛 Rakı Atlası ↗</a><a class="kardes" href="https://sarap-atlas.pages.dev" target="_blank" rel="noopener" onclick="olay('kardes-site')">🍷 Şarap Atlası ↗</a></div>
+    <div class="kardesler"><small>Kardeş siteler</small><a class="kardes" href="https://bira.tadimatlasi.com" target="_blank" rel="noopener" onclick="olay('kardes-site')">🍺 Bira Atlası ↗</a><a class="kardes" href="https://raki.tadimatlasi.com" target="_blank" rel="noopener" onclick="olay('kardes-site')">🥛 Rakı Atlası ↗</a><a class="kardes" href="https://sarap.tadimatlasi.com" target="_blank" rel="noopener" onclick="olay('kardes-site')">🍷 Şarap Atlası ↗</a></div>
   </div>
   <div class="stats">
     <div class="glass-box" data-goto="mylist" style="cursor:pointer"><div class="glass"><div class="fill" id="fill" style="height:0%"></div></div>
@@ -740,7 +780,7 @@ nav.groups{display:flex;gap:6px;margin:20px 0 10px;background:var(--bg2);border:
 </div>
 
   <p class="note">💾 İşaretlemelerin ve fiyat düzenlemelerin bu tarayıcıda otomatik kaydedilir. Fiyatlar 2026 yaklaşık Türkiye perakende referansıdır (70cl), mağaza/kur/duty-free'ye göre değişir. <span id="fiyatDurum"></span> <a href="#" id="resetBtn">↺ Tüm seçimleri sıfırla</a></p>
-  <p class="note" style="margin-top:4px">Kardeş siteler: 🍺 <a href="https://bira-atlas.pages.dev" target="_blank" rel="noopener" style="color:var(--amber2)">Bira Atlası</a> · 🥛 <a href="https://raki-atlas.pages.dev" target="_blank" rel="noopener" style="color:var(--amber2)">Rakı Atlası</a> · 🍷 <a href="https://sarap-atlas.pages.dev" target="_blank" rel="noopener" style="color:var(--amber2)">Şarap Atlası</a></p>
+  <p class="note" style="margin-top:4px">Kardeş siteler: 🍺 <a href="https://bira.tadimatlasi.com" target="_blank" rel="noopener" style="color:var(--amber2)">Bira Atlası</a> · 🥛 <a href="https://raki.tadimatlasi.com" target="_blank" rel="noopener" style="color:var(--amber2)">Rakı Atlası</a> · 🍷 <a href="https://sarap.tadimatlasi.com" target="_blank" rel="noopener" style="color:var(--amber2)">Şarap Atlası</a></p>
 </div>
 
 <script>
@@ -2977,7 +3017,7 @@ function makeShareCard(){
   // footer
   x.textAlign='center';x.fillStyle='#8a7a5c';x.font='600 24px system-ui,Arial';
   const d=new Date().toLocaleDateString('tr-TR');
-  x.fillText('viski-atlas.pages.dev  ·  '+d,W/2,H-60);
+  x.fillText('viski.tadimatlasi.com  ·  '+d,W/2,H-60);
   c.toBlob(bl=>{const u=URL.createObjectURL(bl);const a=document.createElement('a');a.href=u;a.download='viski-koleksiyonum.png';document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(u),2000);},'image/png');
 }
 
@@ -4377,7 +4417,7 @@ if('serviceWorker' in navigator){window.addEventListener('load',()=>{navigator.s
 <script>/* korOzetJS: Kör Tadım Şovu + Yılın Özeti */
 // Siteye özel uyarlayıcı (Viski Atlası)
 const KS={
-  on:'viski_',site:'Viski Atlası',url:'viski-atlas.pages.dev',emoji:'🥃',birim:'şişe',Birim:'Şişe',haveAd:'Elimde',denedin:'denedin ya da rafına ekledin',
+  on:'viski_',site:'Viski Atlası',url:'viski.tadimatlasi.com',emoji:'🥃',birim:'şişe',Birim:'Şişe',haveAd:'Elimde',denedin:'denedin ya da rafına ekledin',
   ana:'view-explore',kesfet:'explore',bolgeAd:'bölge',
   renk:['#2b1a08','#120b04','#f2c14e','#f4ead6','#caa052'],
   notlar:AROMA,

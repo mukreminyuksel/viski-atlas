@@ -44,6 +44,20 @@
     ]
    ]
   },
+  "blackbottle-10": {
+   "tl": 1500,
+   "tarih": "2026-10-20",
+   "tur": "tr_liste",
+   "guven": "orta",
+   "kaynak": "https://degustasyon.net/black-bottle-10-yillik-iskocya/",
+   "not": "İthalatçı (Maddox) fiyatı, degustasyon.net tadımı Ağustos 2026",
+   "gecmis": [
+    [
+     "2026-10-20",
+     1500
+    ]
+   ]
+  },
   "blackram": {
    "tl": 1200,
    "tarih": "2026-10-11",
@@ -170,6 +184,20 @@
     ]
    ]
   },
+  "english-original": {
+   "tl": 4500,
+   "tarih": "2026-10-20",
+   "tur": "tr_liste",
+   "guven": "orta",
+   "kaynak": "https://degustasyon.net/the-english-original-ingiltere/",
+   "not": "İthalatçı (Bonvivant) fiyatı, degustasyon.net tadımı Temmuz 2026",
+   "gecmis": [
+    [
+     "2026-10-20",
+     4500
+    ]
+   ]
+  },
   "famousgrouse": {
    "tl": 1300,
    "tarih": "2026-10-03",
@@ -181,6 +209,20 @@
     [
      "2026-10-03",
      1300
+    ]
+   ]
+  },
+  "fuyu-blended": {
+   "tl": 3050,
+   "tarih": "2026-10-20",
+   "tur": "tr_liste",
+   "guven": "orta",
+   "kaynak": "https://degustasyon.net/fuyu-japonya/",
+   "not": "İthalatçı (Kavaklıdere) fiyatı, degustasyon.net tadımı Temmuz 2026 — 70 cl",
+   "gecmis": [
+    [
+     "2026-10-20",
+     3050
     ]
    ]
   },
@@ -716,6 +758,34 @@
     ]
    ]
   },
+  "lakes-kairos": {
+   "tl": 7000,
+   "tarih": "2026-10-20",
+   "tur": "tr_liste",
+   "guven": "orta",
+   "kaynak": "https://degustasyon.net/lakes-whiskymakers-edition-kairos-ingiltere/",
+   "not": "İthalatçı (Maddox) fiyatı, degustasyon.net tadımı Temmuz 2026",
+   "gecmis": [
+    [
+     "2026-10-20",
+     7000
+    ]
+   ]
+  },
+  "lakes-resfeber": {
+   "tl": 6700,
+   "tarih": "2026-10-20",
+   "tur": "tr_liste",
+   "guven": "orta",
+   "kaynak": "https://degustasyon.net/lakes-whiskymakers-edition-resfeber-ingiltere/",
+   "not": "İthalatçı (Maddox) fiyatı, degustasyon.net tadımı Ağustos 2026",
+   "gecmis": [
+    [
+     "2026-10-20",
+     6700
+    ]
+   ]
+  },
   "longjohn": {
    "tl": 700,
    "tarih": "2026-10-11",
@@ -1010,6 +1080,7 @@
   "ballantines-finest": "2026-10-03",
   "bells-original": "2026-10-03",
   "blackandwhite": "2026-10-03",
+  "blackbottle-10": "2026-10-20",
   "blackram": "2026-10-11",
   "blackram-bourbon": "2026-10-11",
   "blackram-honey": "2026-10-11",
@@ -1021,8 +1092,10 @@
   "dewars-12": "2026-10-03",
   "dewars-white": "2026-10-03",
   "dimple-golden": "2026-10-11",
+  "english-original": "2026-10-20",
   "famousgrouse": "2026-10-03",
   "famousgrouse-smoky": "2026-10-03",
+  "fuyu-blended": "2026-10-20",
   "gentlemanjack": "2026-10-03",
   "gladstoneaxe-black": "2026-10-11",
   "gladstoneaxe-oak": "2026-10-11",
@@ -1074,6 +1147,8 @@
   "kavalan-bourbon": "2026-10-03",
   "kavalan-vinho": "2026-10-03",
   "lagavulin-16": "2026-10-03",
+  "lakes-kairos": "2026-10-20",
+  "lakes-resfeber": "2026-10-20",
   "longjohn": "2026-10-11",
   "monkeyshoulder": "2026-10-03",
   "muirheads": "2026-10-11",

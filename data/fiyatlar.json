@@ -1,5 +1,5 @@
 {
- "guncelleme": "2026-10-11",
+ "guncelleme": "2026-10-20",
  "kur": null,
  "fiyatlar": {
   "ballantines-10": {
@@ -772,6 +772,21 @@
     ]
    ]
   },
+  "pikecreek-10": {
+   "tl": 2050,
+   "tarih": "2026-10-20",
+   "tur": "tr_raf",
+   "guven": "orta",
+   "kaynak": "https://www.karekod.org/blog/carrefour-alkol-fiyatlari-indirim/",
+   "not": "CarrefourSA raf fiyatı (Ekim 2026), karekod.org listesi — 70 cl",
+   "bul": "kolay",
+   "gecmis": [
+    [
+     "2026-10-20",
+     2050
+    ]
+   ]
+  },
   "royalbrackla-18": {
    "tl": 9950,
    "tarih": "2026-10-11",
@@ -783,6 +798,48 @@
     [
      "2026-10-11",
      9950
+    ]
+   ]
+  },
+  "scapa-10": {
+   "tl": 3600,
+   "tarih": "2026-10-20",
+   "tur": "tr_raf",
+   "guven": "orta",
+   "kaynak": "https://www.karekod.org/blog/carrefour-alkol-fiyatlari-indirim/",
+   "not": "CarrefourSA raf fiyatı (Ekim 2026), karekod.org listesi — 70 cl",
+   "gecmis": [
+    [
+     "2026-10-20",
+     3600
+    ]
+   ]
+  },
+  "scapa-16": {
+   "tl": 7200,
+   "tarih": "2026-10-20",
+   "tur": "tr_raf",
+   "guven": "orta",
+   "kaynak": "https://www.karekod.org/blog/carrefour-alkol-fiyatlari-indirim/",
+   "not": "CarrefourSA raf fiyatı (Ekim 2026), karekod.org listesi — 70 cl",
+   "gecmis": [
+    [
+     "2026-10-20",
+     7200
+    ]
+   ]
+  },
+  "scapa-21": {
+   "tl": 16650,
+   "tarih": "2026-10-20",
+   "tur": "tr_raf",
+   "guven": "orta",
+   "kaynak": "https://www.karekod.org/blog/carrefour-alkol-fiyatlari-indirim/",
+   "not": "CarrefourSA raf fiyatı (Ekim 2026), karekod.org listesi — 70 cl",
+   "gecmis": [
+    [
+     "2026-10-20",
+     16650
     ]
    ]
   },
@@ -912,6 +969,21 @@
     ]
    ]
   },
+  "wisers-deluxe": {
+   "tl": 1650,
+   "tarih": "2026-10-20",
+   "tur": "tr_raf",
+   "guven": "orta",
+   "kaynak": "https://www.karekod.org/blog/carrefour-alkol-fiyatlari-indirim/",
+   "not": "CarrefourSA raf fiyatı (Ekim 2026), karekod.org listesi — 70 cl",
+   "bul": "kolay",
+   "gecmis": [
+    [
+     "2026-10-20",
+     1650
+    ]
+   ]
+  },
   "woodford-rye": {
    "tl": 3300,
    "tarih": "2026-10-11",
@@ -927,56 +999,7 @@
    ]
   }
  },
- "inceleme": [
-  {
-   "id": "ardbeg-10",
-   "onerilen": 7150,
-   "mevcut": 4800,
-   "tur": "tr_liste",
-   "kaynak": "https://www.habergazetesi.com.tr/ardbeg-viski-fiyat",
-   "neden": "düşük güven, büyük değişim"
-  },
-  {
-   "id": "ardbeg-corryvreckan",
-   "onerilen": 9750,
-   "mevcut": 8000,
-   "tur": "tr_liste",
-   "kaynak": "https://www.habergazetesi.com.tr/ardbeg-viski-fiyat",
-   "neden": "düşük güven, büyük değişim"
-  },
-  {
-   "id": "ardbeg-uigeadail",
-   "onerilen": 9350,
-   "mevcut": 7500,
-   "tur": "tr_liste",
-   "kaynak": "https://www.habergazetesi.com.tr/ardbeg-viski-fiyat",
-   "neden": "düşük güven, büyük değişim"
-  },
-  {
-   "id": "grants-family",
-   "onerilen": 1250,
-   "mevcut": 1000,
-   "tur": "tr_liste",
-   "kaynak": "https://www.akademikpersonel.org/viski-fiyatlari/",
-   "neden": "düşük güven, büyük değişim"
-  },
-  {
-   "id": "jw-doubleblack",
-   "onerilen": 2000,
-   "mevcut": 2800,
-   "tur": "tr_liste",
-   "kaynak": "https://www.habergazetesi.com.tr/migros-viski-fiyatlari",
-   "neden": "düşük güven, büyük değişim"
-  },
-  {
-   "id": "monkeyshoulder",
-   "onerilen": 1750,
-   "mevcut": 2800,
-   "tur": "tr_liste",
-   "kaynak": "https://enucuzfiyatlari.com/viski-fiyatlari/",
-   "neden": "düşük güven, büyük değişim"
-  }
- ],
+ "inceleme": [],
  "denendi": {
   "aberlour-abunadh": "2026-10-03",
   "ardbeg-10": "2026-10-03",
@@ -1057,7 +1080,11 @@
   "nikka-tailored": "2026-10-11",
   "octomore-141": "2026-10-03",
   "passport": "2026-10-11",
+  "pikecreek-10": "2026-10-20",
   "royalbrackla-18": "2026-10-11",
+  "scapa-10": "2026-10-20",
+  "scapa-16": "2026-10-20",
+  "scapa-21": "2026-10-20",
   "scarabus": "2026-10-11",
   "talisker-10": "2026-10-03",
   "talisker-skye": "2026-10-11",
@@ -1071,6 +1098,7 @@
   "whitehorse": "2026-10-03",
   "whytemackay": "2026-10-11",
   "williamlawsons": "2026-10-03",
+  "wisers-deluxe": "2026-10-20",
   "woodford-rye": "2026-10-11"
  }
 }

@@ -173,7 +173,11 @@
   },
   "Bellevoye": {
    "web": "https://bellevoye.com/",
-   "kontrol": "2026-10-04"
+   "kontrol": "2026-11-05"
+  },
+  "Ben Nevis": {
+   "web": "https://www.bennevisdistillery.com",
+   "kontrol": "2026-11-05"
   },
   "BenRiach": {
    "web": "https://www.benriachdistillery.com",
@@ -203,6 +207,14 @@
    "fb": "https://www.facebook.com/bimberdistillery",
    "x": "https://x.com/BimberLondon",
    "kontrol": "2026-10-05"
+  },
+  "Black Bottle": {
+   "web": "https://blackbottle.com",
+   "kontrol": "2026-11-05"
+  },
+  "Black Ram": {
+   "web": "https://www.blackramwhisky.com",
+   "kontrol": "2026-11-05"
   },
   "Bladnoch": {
    "web": "https://www.bladnoch.com",
@@ -378,7 +390,7 @@
    "ig": "https://www.instagram.com/cotswoldsdistillery/",
    "fb": "https://www.facebook.com/cotswoldsdistillery",
    "yt": "https://www.youtube.com/channel/UCHcHr9lUPkTFsHYKE84CTLw",
-   "kontrol": "2026-10-04"
+   "kontrol": "2026-11-05"
   },
   "Cragganmore": {
    "web": "https://www.malts.com/en/distilleries/cragganmore",
@@ -477,11 +489,11 @@
    "ig": "https://www.instagram.com/edenmill/",
    "fb": "https://www.facebook.com/edenmillstandrews/",
    "yt": "https://www.youtube.com/@edenmillstandrews",
-   "kontrol": "2026-10-04"
+   "kontrol": "2026-11-05"
   },
   "Edradour": {
    "web": "https://www.edradour.com",
-   "kontrol": "2026-10-04"
+   "kontrol": "2026-11-05"
   },
   "Edrington": {
    "web": "https://www.edrington.com/en",
@@ -491,7 +503,7 @@
    "web": "https://www.ei-sake.jp/",
    "fb": "https://www.facebook.com/Akashi.Kamitaka/",
    "x": "https://twitter.com/akashikamitaka",
-   "kontrol": "2026-10-04"
+   "kontrol": "2026-11-05"
   },
   "Eimverk": {
    "web": "https://www.flokiwhisky.is/",
@@ -503,25 +515,25 @@
    "web": "https://farylochan.dk/",
    "ig": "https://www.instagram.com/farylochan/",
    "fb": "https://www.facebook.com/farylochan/",
-   "kontrol": "2026-10-04"
+   "kontrol": "2026-11-05"
   },
   "Fettercairn": {
    "web": "https://www.fettercairnwhisky.com",
    "ig": "https://www.instagram.com/fettercairnwhisky/",
    "fb": "https://www.facebook.com/fettercairnwhisky/",
-   "kontrol": "2026-10-04"
+   "kontrol": "2026-11-05"
   },
   "FEW Spirits": {
    "web": "https://fewspirits.com",
    "ig": "https://www.instagram.com/fewspirits/",
    "fb": "https://www.facebook.com/fewspirits",
-   "kontrol": "2026-10-04"
+   "kontrol": "2026-11-05"
   },
   "Forty Creek": {
    "web": "https://fortycreekwhisky.com",
    "ig": "https://www.instagram.com/wearefortycreek/",
    "fb": "https://www.facebook.com/FortyCreekWhisky/",
-   "kontrol": "2026-10-04"
+   "kontrol": "2026-11-05"
   },
   "Four Roses": {
    "web": "https://www.fourrosesbourbon.com",
@@ -529,13 +541,13 @@
    "fb": "https://www.facebook.com/fourrosesbourbon",
    "x": "https://x.com/4RosesBourbon",
    "yt": "https://www.youtube.com/c/fourrosesbourbon",
-   "kontrol": "2026-10-04"
+   "kontrol": "2026-11-05"
   },
   "Frey Ranch": {
    "web": "https://freyranch.com",
    "ig": "https://www.instagram.com/freyranchdistillery/",
    "x": "https://x.com/freyranch",
-   "kontrol": "2026-10-04"
+   "kontrol": "2026-11-05"
   },
   "Garrison Brothers": {
    "web": "https://www.garrisonbros.com",
@@ -549,13 +561,13 @@
    "web": "https://www.georgedickel.com",
    "ig": "https://www.instagram.com/georgedickel/",
    "fb": "https://www.facebook.com/GeorgeDickel",
-   "kontrol": "2026-10-04"
+   "kontrol": "2026-11-05"
   },
   "Glen Garioch": {
    "web": "https://www.glengarioch.com",
    "ig": "https://www.instagram.com/glengarioch/",
    "x": "https://twitter.com/glengarioch",
-   "kontrol": "2026-10-04"
+   "kontrol": "2026-11-05"
   },
   "Glen Grant": {
    "web": "https://www.glengrant.com",
@@ -568,17 +580,17 @@
    "fb": "https://www.facebook.com/GlenMorayDistillery/",
    "x": "https://twitter.com/glenmoraydist",
    "yt": "https://www.youtube.com/channel/UCdHhzUmepx_ONjtaGLJl2rw",
-   "kontrol": "2026-10-04"
+   "kontrol": "2026-11-05"
   },
   "Glen Ord": {
    "web": "https://www.malts.com/en/the-singleton",
-   "kontrol": "2026-10-04"
+   "kontrol": "2026-11-05"
   },
   "Glen Scotia": {
    "web": "https://www.glenscotia.com",
    "ig": "https://www.instagram.com/glenscotiamalts/",
    "x": "https://x.com/GlenScotiaMalts",
-   "kontrol": "2026-10-04"
+   "kontrol": "2026-11-05"
   },
   "GlenAllachie": {
    "web": "https://theglenallachie.com",
@@ -586,38 +598,38 @@
    "fb": "https://www.facebook.com/TheGlenAllachie",
    "x": "https://twitter.com/TheGlenAllachie",
    "yt": "https://www.youtube.com/channel/UC9zm5KJ6fk_dXQLNpKHlreA",
-   "kontrol": "2026-10-04"
+   "kontrol": "2026-11-05"
   },
   "Glencadam": {
    "web": "https://www.glencadamwhisky.com",
    "ig": "https://www.instagram.com/glencadamwhisky",
    "fb": "https://www.facebook.com/glencadamdistillery/",
    "yt": "https://www.youtube.com/glencadamwhisky",
-   "kontrol": "2026-10-04"
+   "kontrol": "2026-11-05"
   },
   "Glendalough": {
    "web": "https://www.glendaloughdistillery.com",
    "ig": "https://www.instagram.com/GlendaloughDistillery/",
    "fb": "https://www.facebook.com/GlendaloughDistillery",
    "x": "https://twitter.com/GlendaloughDist",
-   "kontrol": "2026-10-04"
+   "kontrol": "2026-11-05"
   },
   "GlenDronach": {
    "web": "https://www.glendronachdistillery.com",
    "ig": "https://www.instagram.com/theglendronachofficial/",
    "fb": "https://www.facebook.com/TheGlenDronach/",
-   "kontrol": "2026-10-04"
+   "kontrol": "2026-11-05"
   },
   "Glendullan": {
    "web": "https://www.malts.com/en/the-singleton",
-   "kontrol": "2026-10-04"
+   "kontrol": "2026-11-05"
   },
   "Glenfarclas": {
    "web": "https://glenfarclas.com",
    "ig": "https://www.instagram.com/glenfarclasdistillery/",
    "fb": "https://www.facebook.com/GlenfarclasHighlandSingleMaltWhisky",
    "x": "https://twitter.com/glenfarclas",
-   "kontrol": "2026-10-04"
+   "kontrol": "2026-11-05"
   },
   "Glenfiddich": {
    "web": "https://www.glenfiddich.com",
@@ -628,53 +640,53 @@
    "web": "https://www.glenglassaugh.com",
    "fb": "https://www.facebook.com/GlenglassaughDistillery",
    "x": "https://twitter.com/glenglassaugh",
-   "kontrol": "2026-10-04"
+   "kontrol": "2026-11-05"
   },
   "Glengoyne": {
    "web": "https://www.glengoyne.com",
    "ig": "https://www.instagram.com/glengoyne/",
-   "kontrol": "2026-10-04"
+   "kontrol": "2026-11-05"
   },
   "Glengyle": {
    "web": "https://kilkerran.scot",
    "ig": "https://www.instagram.com/kilkerransinglemalt/",
    "fb": "https://www.facebook.com/KilkerranSingleMalt",
    "x": "https://twitter.com/Kilkerran2004",
-   "kontrol": "2026-10-04"
+   "kontrol": "2026-11-05"
   },
   "Glenkinchie": {
    "web": "https://www.malts.com/en/distilleries/glenkinchie",
-   "kontrol": "2026-10-04"
+   "kontrol": "2026-11-05"
   },
   "Glenmorangie": {
    "web": "https://www.glenmorangie.com",
    "ig": "https://www.instagram.com/glenmorangie",
    "fb": "https://www.facebook.com/Glenmorangie",
    "yt": "https://www.youtube.com/user/glenmorangie",
-   "kontrol": "2026-10-04"
+   "kontrol": "2026-11-05"
   },
   "Glenturret": {
    "web": "https://theglenturret.com",
    "ig": "https://www.instagram.com/theglenturretwhisky/",
    "fb": "https://www.facebook.com/theglenturret",
    "x": "https://twitter.com/DrinkGlenturret",
-   "kontrol": "2026-10-04"
+   "kontrol": "2026-11-05"
   },
   "GlenWyvis": {
    "web": "https://www.glenwyvis.com/",
-   "kontrol": "2026-10-04"
+   "kontrol": "2026-11-05"
   },
   "Gordon & MacPhail": {
    "web": "https://www.gordonandmacphail.com",
    "ig": "https://www.instagram.com/gordonandmacphail/",
    "fb": "https://www.facebook.com/gordonandmacphail",
-   "kontrol": "2026-10-04"
+   "kontrol": "2026-11-05"
   },
   "Great Southern": {
    "web": "https://distillery.com.au",
    "ig": "https://www.instagram.com/greatsoutherndistillingco",
    "fb": "https://www.facebook.com/GreatSouthernDistillingCo/",
-   "kontrol": "2026-10-04"
+   "kontrol": "2026-11-05"
   },
   "Haig Club": {
    "web": "https://www.haigclub.com/",
@@ -682,53 +694,53 @@
   },
   "Hakushu (Suntory)": {
    "web": "https://house.suntory.com/hakushu-whisky",
-   "kontrol": "2026-10-04"
+   "kontrol": "2026-11-05"
   },
   "Hankey Bannister": {
    "web": "https://www.hankeybannister.com",
    "ig": "https://www.instagram.com/hankeybannisterwhisky/",
    "fb": "https://www.facebook.com/hankeybannister",
    "yt": "https://www.youtube.com/@hankeybannister",
-   "kontrol": "2026-10-04"
+   "kontrol": "2026-11-05"
   },
   "Heaven Hill": {
    "web": "https://heavenhilldistillery.com",
    "ig": "https://www.instagram.com/heavenhilldistillery/",
    "fb": "https://www.facebook.com/heavenhilldistillery/",
    "x": "https://twitter.com/HeavenHill1935",
-   "kontrol": "2026-10-04"
+   "kontrol": "2026-11-05"
   },
   "Heaven’s Door": {
    "web": "https://www.heavensdoor.com/",
    "ig": "https://www.instagram.com/heavensdoorwhiskey/",
    "fb": "https://www.facebook.com/HeavensDoorWhiskey",
-   "kontrol": "2026-10-04"
+   "kontrol": "2026-11-05"
   },
   "Hellyers Road": {
    "web": "https://hellyersroaddistillery.com.au",
    "ig": "https://www.instagram.com/hellyersroaddistillery",
    "fb": "https://www.facebook.com/hellyersroaddistillery",
    "yt": "https://www.youtube.com/@HellyersRoadDistillery",
-   "kontrol": "2026-10-04"
+   "kontrol": "2026-11-05"
   },
   "Het Anker": {
    "web": "https://www.hetanker.be/",
    "ig": "https://www.instagram.com/hetanker/",
    "fb": "https://www.facebook.com/hetanker",
    "yt": "https://www.youtube.com/@BrouwerijHetAnkerMechelen",
-   "kontrol": "2026-10-04"
+   "kontrol": "2026-11-05"
   },
   "High Coast": {
    "web": "https://www.highcoastwhisky.se",
    "ig": "https://www.instagram.com/highcoastwhisky/",
    "fb": "https://www.facebook.com/highcoastdistillery",
-   "kontrol": "2026-10-04"
+   "kontrol": "2026-11-05"
   },
   "High West": {
    "web": "https://highwest.com",
    "ig": "https://www.instagram.com/drinkhighwest",
    "fb": "https://www.facebook.com/drinkhighwest",
-   "kontrol": "2026-10-04"
+   "kontrol": "2026-11-05"
   },
   "Highland Park": {
    "web": "https://www.highlandparkwhisky.com",
@@ -736,17 +748,21 @@
    "x": "https://twitter.com/highlandpark",
    "kontrol": "2026-10-04"
   },
+  "Highland Queen": {
+   "web": "https://www.highlandqueen.com",
+   "kontrol": "2026-11-05"
+  },
   "Hillrock": {
    "web": "https://www.hillrockdistillery.com/",
    "kontrol": "2026-10-04"
   },
   "Hiram Walker": {
    "web": "https://corby.ca/en/hiram-walker/",
-   "kontrol": "2026-10-04"
+   "kontrol": "2026-11-05"
   },
   "Hochstadter’s": {
    "web": "https://hochstadtersvattedrye.com/",
-   "kontrol": "2026-10-04"
+   "kontrol": "2026-11-05"
   },
   "Holyrood": {
    "web": "https://holyrooddistillery.co.uk/",
@@ -757,15 +773,15 @@
    "ig": "https://www.instagram.com/hyde_irish_whiskey/",
    "fb": "https://www.facebook.com/HYDEWHISKEY/",
    "x": "https://twitter.com/HydeWhiskey",
-   "kontrol": "2026-10-04"
+   "kontrol": "2026-11-05"
   },
   "Ian Macleod": {
    "web": "https://www.ianmacleod.com/",
-   "kontrol": "2026-10-04"
+   "kontrol": "2026-11-05"
   },
   "InchDairnie": {
    "web": "https://www.inchdairniedistillery.com/",
-   "kontrol": "2026-10-04"
+   "kontrol": "2026-11-05"
   },
   "Indri": {
    "web": "https://www.indri.in",
@@ -779,7 +795,7 @@
    "web": "https://www.harrisdistillery.com",
    "ig": "https://www.instagram.com/isleofharrisdistillers",
    "fb": "https://www.facebook.com/isleofharrisdistillers",
-   "kontrol": "2026-10-04"
+   "kontrol": "2026-11-05"
   },
   "J.P. Wiser’s": {
    "web": "https://www.jpwisers.com/",
@@ -791,7 +807,7 @@
    "fb": "https://www.facebook.com/jackdaniels",
    "x": "https://x.com/JackDaniels_US",
    "yt": "https://www.youtube.com/user/JackDaniels",
-   "kontrol": "2026-10-04"
+   "kontrol": "2026-11-05"
   },
   "James Sedgwick": {
    "web": "https://www.threeshipswhisky.co.za",
@@ -813,20 +829,20 @@
    "fb": "https://www.facebook.com/JimBeam",
    "x": "https://x.com/jimbeam",
    "yt": "https://www.youtube.com/@jimbeam",
-   "kontrol": "2026-10-04"
+   "kontrol": "2026-11-05"
   },
   "Johnnie Walker": {
    "web": "https://www.johnniewalker.com",
    "ig": "https://www.instagram.com/johnniewalker",
    "fb": "https://www.facebook.com/johnniewalker",
    "yt": "https://www.youtube.com/user/johnniewalker",
-   "kontrol": "2026-10-04"
+   "kontrol": "2026-11-05"
   },
   "Jura": {
    "web": "https://www.jurawhisky.com",
    "ig": "https://www.instagram.com/jurawhisky/",
    "fb": "https://www.facebook.com/jurawhisky/",
-   "kontrol": "2026-10-04"
+   "kontrol": "2026-11-05"
   },
   "Justerini & Brooks": {
    "web": "https://www.justerinis.com/",
@@ -843,6 +859,13 @@
    "web": "https://kaiyowhisky.com",
    "ig": "https://www.instagram.com/officialkaiyo/",
    "kontrol": "2026-10-04"
+  },
+  "Kamiki": {
+   "web": "https://www.kamikiwhisky.com",
+   "ig": "https://www.instagram.com/kamikispirits/",
+   "fb": "https://www.facebook.com/KamikiWhisky/",
+   "x": "https://twitter.com/KamikiWhisky",
+   "kontrol": "2026-11-05"
   },
   "Kanosuke": {
    "web": "https://kanosuke.com",
@@ -890,6 +913,10 @@
    "fb": "https://www.facebook.com/kyrodistillery",
    "x": "https://twitter.com/kyrodistillery",
    "kontrol": "2026-10-04"
+  },
+  "Label 5": {
+   "web": "https://label-5.com",
+   "kontrol": "2026-11-05"
   },
   "Lagavulin": {
    "web": "https://www.malts.com/en/distilleries/lagavulin",
@@ -1271,6 +1298,10 @@
   "Signatory": {
    "web": "https://www.edradour.com/",
    "kontrol": "2026-10-04"
+  },
+  "Sir Edward's": {
+   "web": "https://www.siredwards.com",
+   "kontrol": "2026-11-05"
   },
   "Slane": {
    "web": "https://www.slaneirishwhiskey.com",
@@ -1692,16 +1723,28 @@
   "Auchroisk": "2026-10-04",
   "Benrinnes": "2026-10-04",
   "Black & White": "2026-10-04",
+  "Carma (bağımsız şişeleyici)": "2026-11-05",
+  "Clan MacGregor": "2026-11-05",
   "Dailuaine": "2026-10-04",
+  "Dimple (Haig)": "2026-11-05",
+  "Fuyu": "2026-11-05",
+  "Gladstone Axe": "2026-11-05",
   "Glann ar Mor": "2026-10-04",
   "Glen Elgin": "2026-10-04",
   "Glen Keith": "2026-10-04",
   "Glen Spey": "2026-10-04",
+  "Glen Talloch": "2026-11-05",
   "Glenlossie": "2026-10-04",
   "Inchgower": "2026-10-04",
+  "John Barr": "2026-11-05",
   "Knockando": "2026-10-04",
   "Linkwood": "2026-10-04",
+  "Long John": "2026-11-05",
   "Mannochmore": "2026-10-04",
+  "Muirhead's": "2026-11-05",
+  "Passport": "2026-11-05",
+  "Scarabus": "2026-11-05",
+  "TEKEL": "2026-11-05",
   "VAT 69": "2026-10-04",
   "White Horse": "2026-10-04"
  }

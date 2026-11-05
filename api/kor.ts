@@ -54,9 +54,11 @@ function bardaklariTemizle(g: unknown, alanlar: { k: string }[]) {
 // Cloudflare KV'de list() 60 sn'ye kadar gecikmeli güncellenir; tek başına güvenilirse yeni
 // katılımcılar ve son oylar kaçabilir. Bu yüzden katılımcı kimlikleri ayrıca `<kod>/liste`
 // anahtarında tutulur (okuma–yazma–doğrulama), list() ile birleştirilir ve her kayıt get() ile okunur.
-async function kimlikler(depo: Depo, kod: string): Promise<string[]> {
+// list() KV'nin ücretsiz planında günde 1000 ile sınırlı: sahne ekranının 5 sn'lik yoklaması onu
+// kullanmaz (yalnız `<kod>/liste`); list() yalnızca sonuç hesaplanırken ve oda silinirken çağrılır.
+async function kimlikler(depo: Depo, kod: string, listeIle = false): Promise<string[]> {
   const liste = ((await depo.get(`${kod}/liste`, { type: "json" })) as string[] | null) || [];
-  const { blobs } = await depo.list({ prefix: `${kod}/k/` });
+  const { blobs } = listeIle ? await depo.list({ prefix: `${kod}/k/` }) : { blobs: [] as { key: string }[] };
   return [...new Set([...liste, ...blobs.map((b) => b.key.slice(`${kod}/k/`.length))])].filter(pidGecerli);
 }
 async function listeyeEkle(depo: Depo, kod: string, pid: string) {
@@ -67,8 +69,8 @@ async function listeyeEkle(depo: Depo, kod: string, pid: string) {
     await new Promise((r) => setTimeout(r, 40 * (d + 1)));
   }
 }
-async function kisiler(depo: Depo, kod: string): Promise<any[]> {
-  const ids = await kimlikler(depo, kod);
+async function kisiler(depo: Depo, kod: string, listeIle = false): Promise<any[]> {
+  const ids = await kimlikler(depo, kod, listeIle);
   return (await Promise.all(ids.map((id) => depo.get(`${kod}/k/${id}`, { type: "json" })))).filter(Boolean) as any[];
 }
 const oySayisi = (k: any) => Object.values(k?.oylar || {}).filter((o: any) => o && typeof o.p === "number").length;
@@ -78,7 +80,7 @@ async function misafirler(depo: Depo, kod: string) {
 
 // Perde açılınca bir kez çalışır: oylama kapandığı için sonuç bir daha değişmez.
 async function sonucHesapla(depo: Depo, kod: string, meta: any) {
-  const kisiler_ = await kisiler(depo, kod);
+  const kisiler_ = await kisiler(depo, kod, true);
   const n = meta.bardaklar.length;
   const bardaklar = meta.bardaklar.map((b: any, i: number) => {
     const ps: number[] = [], notSay: Record<string, number> = {}, dogru: Record<string, string[]> = {};
@@ -253,7 +255,7 @@ export async function isle(req: Request, depo: Depo): Promise<Response> {
       if (g.islem === "kor-sil") {
         const { blobs } = await depo.list({ prefix: `${g.kod}/` });
         const anahtarlar = new Set([...blobs.map((b) => b.key), `${g.kod}/meta`, `${g.kod}/liste`, `${g.kod}/sonuc`,
-          ...(await kimlikler(depo, g.kod)).map((id) => `${g.kod}/k/${id}`)]);
+          ...(await kimlikler(depo, g.kod, true)).map((id) => `${g.kod}/k/${id}`)]);
         await Promise.all([...anahtarlar].map((k) => depo.delete(k)));
         return json({ tamam: true });
       }
